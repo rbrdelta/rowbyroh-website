@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rowbyroh</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: #fefefe;
+            color: #1a1a1a;
+            line-height: 1.4;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem 2rem 3rem 0.5rem;
+            position: relative;
+            border: 1px solid #ddd;
+            margin: 1rem;
+        }
+        
+        /* Legal pad style borders */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: calc(50% - 250px);
+            width: 1px;
+            height: 100%;
+            background: #ff6b6b;
+            opacity: 0.4;
+        }
+        
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: 4rem;
+            left: calc(50% - 250px);
+            width: 60%;
+            height: 1px;
+            background: #b8b8b8;
+            opacity: 0.5;
+        }
+        
+        .covered-note {
+            position: absolute;
+            top: 15%;
+            right: 15%;
+            font-size: 0.8rem;
+            color: #999;
+            font-style: italic;
+            transform: rotate(3deg);
+        }
+        
+        /* Random lines scattered around */
+        .random-line-1 {
+            position: absolute;
+            top: 25%;
+            left: 8%;
+            width: 60px;
+            height: 1px;
+            background: #ddd;
+            opacity: 0.4;
+            transform: rotate(-15deg);
+        }
+        
+        .random-line-2 {
+            position: absolute;
+            bottom: 20%;
+            right: 12%;
+            width: 40px;
+            height: 1px;
+            background: #ddd;
+            opacity: 0.3;
+            transform: rotate(45deg);
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        /* Title Section */
+        .title-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            position: relative;
+        }
+        
+        .title-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 35%;
+            width: 30%;
+            height: 0.5px;
+            background: #a8a8a8;
+            opacity: 0.6;
+        }
+        
+        .title {
+            font-size: 1.2rem;
+            font-weight: normal;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.8rem;
+            color: #777;
+        }
+        
+        .subtitle {
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #1a1a1a;
+            opacity: 1;
+            font-weight: bold;
+        }
+        
+        /* Portfolio Section */
+        .portfolio-section {
+            margin-bottom: 3rem;
+            padding: 0;
+            position: relative;
+        }
+        
+        .portfolio-section::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -20px;
+            width: 30px;
+            height: 1px;
+            background: #ccc;
+            opacity: 0.5;
+            transform: rotate(12deg);
+        }
+        
+        .portfolio-section::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            right: -25px;
+            width: 45px;
+            height: 1px;
+            background: #ddd;
+            opacity: 0.4;
+            transform: rotate(-8deg);
+        }
+        
+        .portfolio-label {
+            position: absolute;
+            top: -1.5rem;
+            right: 0;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.6;
+        }
+        
+        .portfolio-box {
+            background: #fafafa;
+            border: 1px solid #e8e8e8;
+            padding: 3rem 2rem;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .portfolio-box::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 10px;
+            width: 25px;
+            height: 1px;
+            background: #eee;
+            opacity: 0.6;
+            transform: rotate(22deg);
+        }
+        
+        .portfolio-content {
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+            line-height: 1.6;
+        }
+        
+        .status-line {
+            opacity: 0.8;
+        }
+        
+        /* Project Details */
+        .project-details {
+            margin-bottom: 3rem;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            opacity: 0.7;
+            position: relative;
+        }
+        
+        .project-details::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 20%;
+            width: 60%;
+            height: 1px;
+            background: #ddd;
+            opacity: 0.3;
+            transform: rotate(-1deg);
+        }
+        
+        .project-title {
+            font-style: italic;
+            margin-bottom: 0.2rem;
+        }
+        
+        .project-year {
+            margin-bottom: 0.2rem;
+        }
+        
+        .project-tech {
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.7rem;
+        }
+        
+        /* Links Section */
+        .links-section {
+            text-align: left;
+            position: relative;
+            margin-left: -30px;
+            transform: rotate(-0.5deg);
+        }
+        
+        .links-section::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: 30px;
+            width: 35px;
+            height: 1px;
+            background: #ddd;
+            opacity: 0.4;
+            transform: rotate(25deg);
+        }
+        
+        .links-section::after {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            left: -10px;
+            width: 20px;
+            height: 1px;
+            background: #ccc;
+            opacity: 0.5;
+            transform: rotate(-40deg);
+        }
+        
+        .links-section .section-header {
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+            margin-left: 15px;
+        }
+        
+        .links-list {
+            display: flex;
+            flex-direction: row;
+            gap: 1.5rem;
+            position: relative;
+            flex-wrap: wrap;
+        }
+        
+        .link-item {
+            font-size: 0.8rem;
+            text-decoration: none;
+            color: #1a1a1a;
+            transition: opacity 0.2s ease;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .link-item::before {
+            content: '+';
+            margin-right: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .link-item:hover {
+            opacity: 0.6;
+        }
+        
+        /* Maintain weird positioning for individual links but horizontally */
+        .link-item:nth-child(1) {
+            transform: rotate(0.5deg);
+            margin-top: -18px;
+        }
+        
+        .link-item:nth-child(2) {
+            transform: rotate(-0.8deg);
+            margin-top: 25px;
+        }
+        
+        .link-item:nth-child(3) {
+            transform: rotate(0.3deg);
+            margin-top: -40px;
+        }
+        
+        .link-item:nth-child(4) {
+            transform: rotate(-0.4deg);
+            margin-top: 32px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .title {
+                font-size: 1.1rem;
+            }
+            
+            .container {
+                max-width: 100%;
+            }
+            
+            .portfolio-box {
+                min-height: 150px;
+                padding: 2rem 1rem;
+            }
+            
+            .covered-note {
+                top: 10%;
+                right: 10%;
+                font-size: 0.7rem;
+            }
+            
+            body {
+                padding: 2rem 1rem 2rem 0.5rem;
+            }
+            
+            .links-list {
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .title {
+                font-size: 1rem;
+            }
+            
+            .portfolio-box {
+                min-height: 120px;
+                padding: 1.5rem 1rem;
+            }
+            
+            .covered-note {
+                display: none;
+            }
+            
+            .links-list {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+        
+        /* Clean minimal layout */
+        .container > * {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="covered-note">resume</div>
+    <div class="random-line-1"></div>
+    <div class="random-line-2"></div>
+    
+    <div class="container">
+        <!-- Title Section -->
+        <section class="title-section">
+            <h1 class="title">rowbyroh</h1>
+            <div class="subtitle">Builder</div>
+        </section>
+        
+        <!-- Portfolio Section -->
+        <section class="portfolio-section">
+            <div class="portfolio-label">Portfolio</div>
+            <div class="portfolio-box">
+                <div class="portfolio-content">
+                    <div class="status-line">work in progress</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Project Details -->
+        <section class="project-details">
+            <div class="project-title">untitled</div>
+            <div class="project-year">2025</div>
+            <div class="project-tech">Claude & V0</div>
+        </section>
+        
+        <!-- Links Section -->
+        <section class="links-section">
+            <h2 class="section-header">Connect</h2>
+            <div class="links-list">
+                <a href="" class="link-item">📧</a>
+                <a href="" class="link-item">discord</a>
+                <a href="" class="link-item">linkedin</a>
+                <a href="" class="link-item">github</a>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
