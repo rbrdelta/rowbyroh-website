@@ -21,18 +21,27 @@
         <!-- Portfolio Section -->
         <section class="portfolio-section">
             <div class="portfolio-label">Portfolio</div>
-            <div class="portfolio-box">
-                <div class="portfolio-content">
-                    <div class="status-line">work in progress</div>
-                </div>
+            <div class="portfolio-container">
+                <div class="project-title" data-project="classifier">classifier</div>
+                <div class="project-title" data-project="blog">blog</div>
+                <div class="project-title" data-project="research-agent">research agent</div>
             </div>
         </section>
+
+        <!-- Modal containers -->
+        <div id="tooltip" class="tooltip hidden"></div>
+        <div id="modal" class="modal hidden">
+            <div class="modal-content">
+                <button class="modal-close">&times;</button>
+                <div class="modal-body"></div>
+            </div>
+        </div>
         
         <!-- Project Details -->
         <section class="project-details">
             <div class="project-title">untitled</div>
             <div class="project-year">2025</div>
-            <div class="project-tech">Claude & V0</div>
+            <div class="project-tech">Claude & V0 in JavaScript</div>
         </section>
         
         <!-- Links Section -->
@@ -46,5 +55,7 @@
             </div>
         </section>
     </div>
+    <script src="assets/js/projects.js"></script>
+    <script src="assets/js/portfolio.js"></script>
 </body>
 </html>

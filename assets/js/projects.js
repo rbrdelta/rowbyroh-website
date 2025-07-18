@@ -8,7 +8,7 @@ const projects = [
         date: '2025',
         tags: ['TBD'],
         link: '#',
-        color: '#4f46e5' // Indigo
+        color:  '#005A9C' // dodger blue
     },
     {
         id: 'blog',
@@ -19,8 +19,8 @@ const projects = [
         date: '2025',
         tags: ['TBD'],
         link: '#',
-        color: '#7c3aed' // Violet
-    },
+        color:  '#2E8B57' // sea green
+    },    
     {
         id: 'research-agent',
         title: 'research agent',
@@ -30,6 +30,6 @@ const projects = [
         date: '2025',
         tags: ['TBD'],
         link: '#',
-        color: '#2563eb' // Blue
+        color:  '#FF4433' // red-orange
     }
 ];

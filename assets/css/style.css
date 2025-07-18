@@ -120,11 +120,12 @@
         
         /* Portfolio Section */
         .portfolio-section {
-            margin-bottom: 3rem;
+            margin-bottom: 0.5rem;
             padding: 0;
             position: relative;
+            width: 100%;
         }
-        
+
         .portfolio-section::before {
             content: '';
             position: absolute;
@@ -136,7 +137,7 @@
             opacity: 0.5;
             transform: rotate(12deg);
         }
-        
+
         .portfolio-section::after {
             content: '';
             position: absolute;
@@ -148,7 +149,7 @@
             opacity: 0.4;
             transform: rotate(-8deg);
         }
-        
+
         .portfolio-label {
             position: absolute;
             top: -1.5rem;
@@ -158,43 +159,224 @@
             letter-spacing: 0.1em;
             opacity: 0.6;
         }
-        
-        .portfolio-box {
+
+       .portfolio-container {
             background: #fafafa;
             border: 1px solid #e8e8e8;
-            padding: 3rem 2rem;
+            padding: 2rem;
             min-height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
             position: relative;
+            width: calc(100% + 8rem);
+            margin-left: -4rem;
+            margin-right: -4rem;
         }
-        
-        .portfolio-box::before {
-            content: '';
+
+        /* Responsive portfolio width */
+        @media (min-width: 768px) {
+            .portfolio-container {
+                width: calc(100% + 12rem);
+                margin-left: -6rem;
+                margin-right: -6rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .portfolio-container {
+                width: calc(100% + 16rem);
+                margin-left: -8rem;
+                margin-right: -8rem;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .portfolio-container {
+                width: calc(100% + 20rem);
+                margin-left: -10rem;
+                margin-right: -10rem;
+            }
+        }
+
+       /* Portfolio Project Titles */
+        .portfolio-container .project-title {
             position: absolute;
-            top: 20px;
-            left: 10px;
-            width: 25px;
-            height: 1px;
-            background: #eee;
-            opacity: 0.6;
-            transform: rotate(22deg);
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #1a1a1a;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem;
+            border-radius: 4px;
         }
-        
-        .portfolio-content {
+
+        .portfolio-container .project-title:hover {
+            transform: scale(1.05);
+        }
+
+        .portfolio-container .project-title.faded {
+            opacity: 0.3;
+        }
+
+        /* Strategic positioning */
+        .portfolio-container .project-title[data-project="classifier"] {
+            top: 20%;
+            left: 15%;
+        }
+
+        .portfolio-container .project-title[data-project="blog"] {
+            top: 60%;
+            right: 25%;
+        }
+
+        .portfolio-container .project-title[data-project="research-agent"] {
+            top: 35%;
+            left: 50%;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: fixed;
+            background: #1a1a1a;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            max-width: 250px;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .tooltip.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .tooltip h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .tooltip p {
+            margin: 0.3rem 0;
+            line-height: 1.4;
+        }
+
+        .tooltip .tags {
+            margin-top: 0.5rem;
+            font-size: 0.7rem;
+            opacity: 0.8;
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .modal-close:hover {
+            color: #000;
+        }
+
+        .modal h2 {
+            margin: 0 0 1rem 0;
+            color: #1a1a1a;
+        }
+
+        .modal .section {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal .section h3 {
+            margin: 0 0 0.5rem 0;
+            color: #205EA6;
             font-size: 0.9rem;
-            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .modal .section p, .modal .section ul {
+            margin: 0;
             line-height: 1.6;
         }
-        
-        .status-line {
-            opacity: 0.8;
+
+        .modal .section ul {
+            padding-left: 1.2rem;
+        }
+
+        .modal .demo-link {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: #205Ea6;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-top: 1rem;
+            transition: background 0.2s ease;
+        }
+
+        .modal .demo-link:hover {
+            background: #3730a3;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .portfolio-container {
+                min-height: 250px;
+                padding: 3rem 1rem;
+            }
+            
+            .project-title {
+                font-size: 1rem;
+            }
+            
+            .modal-content {
+                padding: 1.5rem;
+                width: 95%;
+            }
         }
         
         /* Project Details */
         .project-details {
+            margin-top: 0.5rem;
             margin-bottom: 3rem;
             font-size: 0.8rem;
             line-height: 1.4;
