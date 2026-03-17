@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chair Roundtable — Session 1 | rowbyroh</title>
+    <meta name="description" content="A fictional roundtable with Thonet, Eames, Wegner, Prouve, Rietveld, and Morrison on first-principles chair design.">
+    <meta property="og:title" content="Chair Roundtable — Session 1">
+    <meta property="og:description" content="Six legendary designers argue about ergonomics, materials, cost, and craft.">
+    <meta property="og:url" content="https://rowbyroh.com/chair-roundtable">
+    <meta property="og:type" content="article">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #fefefe;
+            color: #222;
+            line-height: 1.8;
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 3rem 2rem 4rem;
+        }
+
+        .back-link {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.8rem;
+            color: #999;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .back-link:hover { color: #444; }
+        .back-link::before { content: '\2190  '; }
+
+        h1 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.3rem;
+        }
+
+        .subtitle {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+
+        .premise {
+            font-style: italic;
+            color: #555;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .roster {
+            margin-bottom: 2.5rem;
+        }
+        .roster h2 {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.8rem;
+        }
+        .roster ul {
+            list-style: none;
+            padding: 0;
+        }
+        .roster li {
+            font-size: 0.88rem;
+            margin-bottom: 0.5rem;
+            color: #444;
+        }
+        .roster li strong {
+            color: #222;
+        }
+        .roster li em {
+            color: #888;
+            font-size: 0.82rem;
+        }
+
+        h2.section-title {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        p { margin-bottom: 1.1rem; font-size: 0.92rem; }
+
+        .me {
+            padding-left: 1rem;
+            border-left: 2.5px solid #1a1a1a;
+            margin: 1.2rem 0;
+        }
+        .me .name {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-weight: 700;
+            font-size: 0.78rem;
+            color: #1a1a1a;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .designer {
+            padding-left: 1rem;
+            border-left: 2.5px solid #ccc;
+            margin: 1.2rem 0;
+        }
+        .designer .name {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-weight: 600;
+            font-size: 0.78rem;
+            color: #777;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .designer p, .me p { margin-bottom: 0.6rem; }
+        .designer p:last-child, .me p:last-child { margin-bottom: 0; }
+
+        ol, ul {
+            padding-left: 1.3rem;
+            margin-bottom: 1rem;
+            font-size: 0.92rem;
+        }
+        li { margin-bottom: 0.4rem; }
+
+        .assignment {
+            background: #fafafa;
+            border: 1px solid #e8e8e8;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .assignment h3 {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.8rem;
+        }
+        .assignment ul {
+            list-style: none;
+            padding: 0;
+        }
+        .assignment li {
+            padding-left: 1.2rem;
+            position: relative;
+        }
+        .assignment li::before {
+            content: '\25A1';
+            position: absolute;
+            left: 0;
+            color: #aaa;
+        }
+
+        .questions {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+        }
+        .questions h2 {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.8rem;
+        }
+        .questions li {
+            color: #555;
+            font-size: 0.88rem;
+        }
+
+        .copyright {
+            margin-top: 4rem;
+            font-size: 0.6rem;
+            color: #ccc;
+            text-align: right;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 2rem 1.2rem 3rem; }
+            h1 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-link">rowbyroh.com</a>
+
+    <h1>Chair Roundtable</h1>
+    <div class="subtitle">Session 1</div>
+    <p class="premise">A fictional roundtable with six of history's greatest chair designers. The mission: make quality housing and furniture available to all.</p>
+
+    <div class="roster">
+        <h2>The Table</h2>
+        <ul>
+            <li><strong>Michael Thonet</strong> <em>(1796-1871)</em> — No. 14 bistro chair. Democratic access through industrial elegance.</li>
+            <li><strong>Gerrit Rietveld</strong> <em>(1888-1964)</em> — Red and Blue Chair. A chair is an idea made physical.</li>
+            <li><strong>Charles Eames</strong> <em>(1907-1978)</em> — Shell Chairs, Lounge. The best for the most for the least.</li>
+            <li><strong>Hans Wegner</strong> <em>(1914-2007)</em> — The Chair, Wishbone. Joint as ornament. No back side.</li>
+            <li><strong>Jean Prouve</strong> <em>(1901-1984)</em> — Standard Chair. Form follows force. Constructive logic.</li>
+            <li><strong>Jasper Morrison</strong> <em>(1959-present)</em> — Air Chair, Ply Chair. Super Normal — design that disappears.</li>
+        </ul>
+    </div>
+
+    <!-- WHY THE CHAIR -->
+    <h2 class="section-title">Why the Chair</h2>
+
+    <div class="me">
+        <span class="name">Me</span>
+        <p>Humans have five primary biomechanical modalities — stand, walk, lay, climb, and sit. Each one carries intent. When we sit, it's to eat, converse, relax, read. It's the primary mode of modern life. The chair is the first piece of furniture we touch in most environments. Having a quality chair is the highest leverage opportunity to impact the environment and the lived experience.</p>
+        <p>Quality means thoughtfulness in design, respect for the material, care in the craftsmanship. It's the culmination of intent at every step that results in something that exceeds the monetary value afforded by a price. So — what makes a great chair truly one of a kind?</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Eames</span>
+        <p>You're asking about value, and there are three things people confuse. <strong>Cost</strong> — what the maker pays. <strong>Price</strong> — what the buyer pays. <strong>Value</strong> — what the sitter receives over a lifetime. The goal is to collapse these three toward each other. When they diverge, that's either exploitation or design failure.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Morrison</span>
+        <p>Quality that creates artificial scarcity is not quality — it's marketing. My Air Chair costs little, is everywhere, and works. Satisfaction through rightness, not desire through scarcity.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Thonet</span>
+        <p>Answer me this: are you designing for the approval of other designers, or for the person who comes home exhausted? You cannot do both.</p>
+    </div>
+
+    <!-- ERGONOMICS -->
+    <h2 class="section-title">Ergonomics — Three Critical Angles</h2>
+
+    <div class="designer">
+        <span class="name">Prouve</span>
+        <p>The hip angle is the master variable. Everything cascades from it.</p>
+        <ol>
+            <li><strong>Seat pan tilt</strong> — 0-5&deg; for task, up to 15&deg; for lounge</li>
+            <li><strong>Back angle relative to seat</strong> — 90-95&deg; dining, 100-110&deg; relaxed, beyond that is a recliner</li>
+            <li><strong>Seat height vs. popliteal height</strong> — off by 2cm and there's pressure behind the thighs. The sitter leaves in 20 minutes.</li>
+        </ol>
+    </div>
+
+    <div class="designer">
+        <span class="name">Wegner</span>
+        <p>Engaged hips — thighs slope down, torso-thigh angle around 90-100&deg;. Relaxed hips — the angle opens to 105-120&deg;. You must decide which you're designing for before you cut wood.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Morrison</span>
+        <p>Don't ask how much support to add. Ask: what is the minimum structure that lets the body find its own comfort?</p>
+    </div>
+
+    <!-- LOUNGE VS DINING -->
+    <h2 class="section-title">Lounge vs Dining — The Modern Condition</h2>
+
+    <div class="me">
+        <span class="name">Me</span>
+        <p>I chose lounge first. More people live alone. The coffee table is the primary surface now. The dining table is an office. Whatever I design has to serve both personal and professional life in a digitally engaged world.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Eames</span>
+        <p>Careful. A lounge trying to be a dining chair fails at both. Better to design a system — one shape, different bases.</p>
+    </div>
+
+    <div class="me">
+        <span class="name">Me</span>
+        <p>What about the IKEA Poang? It's a lounge chair that people use for everything — reading, working on a laptop, eating off a side table. It doesn't try to be a dining chair but it functionally replaces one for millions of people.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Morrison</span>
+        <p>The Poang is one of the most important chairs of the last fifty years. Cantilevered flex, ships flat, bent laminated birch. It's Super Normal whether IKEA intended it or not.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Wegner</span>
+        <p>&ldquo;A cushion is not design — a cushion is an apology.&rdquo;</p>
+    </div>
+
+    <!-- MATERIALS -->
+    <h2 class="section-title">Materials — Pine, Structure vs Surface</h2>
+
+    <div class="me">
+        <span class="name">Me</span>
+        <p>I'm starting with pine. Southern yellow pine specifically. It's cheap, forgiving, available everywhere. But pine is a values statement too: access over prestige.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Morrison</span>
+        <p>Pine is a good start — but it dents easily. Every mark tells a story until there are too many stories and the chair just looks neglected. You need to think about what happens at year five.</p>
+    </div>
+
+    <div class="me">
+        <span class="name">Me</span>
+        <p>Agreed. For production I'd move to ash. Durable, generational, takes a beating. Pine is for prototyping and proving the design. Ash is for the chair you hand down.</p>
+    </div>
+
+    <div class="me">
+        <span class="name">Me</span>
+        <p>For the seat: laminate two boards on edge, grain running front to back. Saddle it — about 1/4&Prime; in the back deepening to 3/8&Prime; at the front. Keep the front stretcher for compression strength.</p>
+    </div>
+
+    <p>Surface materials: hemp or cord for woven concave surfaces. Plant-derived polymers as emerging alternatives. Jens Risom separated structure from seating surface — different materials for different jobs.</p>
+
+    <div class="designer">
+        <span class="name">Prouve</span>
+        <p>Good instinct, but a warning: vision without a supply chain is just philosophy. You must be inventor AND supply chain architect.</p>
+    </div>
+
+    <!-- PROTOTYPING -->
+    <h2 class="section-title">Prototyping Under Constraint</h2>
+
+    <div class="me">
+        <span class="name">Me</span>
+        <p>My tools: a Japanese handsaw and a vintage Stanley jack plane. No workbench. I'm in a NYC apartment with a toddler. I work late nights only.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Eames</span>
+        <p>Good. Here's the order. First, <strong>sketch</strong> to discover — 30 seconds, just test if the idea has life. Second, <strong>model</strong> to test — rough, fast, ugly. Third, <strong>engineer</strong> to produce. Never reverse this order. CAD optimizes before you discover.</p>
+        <p>And remember — Frank Gehry built production furniture from cardboard. Easy Edges. Laminate layers with alternating flute directions. Cost of failure is zero.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Prouve</span>
+        <p>Cut a side profile from double-wall cardboard. Make two profiles, connect them with cross pieces at the seat and rail heights. Sit in it. Where it collapses — those are your force concentration points. Reinforce, sit again, find the next failure. It costs nothing. Midnight, living room floor.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Wegner</span>
+        <p>Sketch chair profiles at every restaurant you visit. Note the seat height, where the back makes contact, your foot position. In six months you'll have a pattern library from life.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Morrison</span>
+        <p>&ldquo;Each prototype answers exactly ONE question. If you try to answer five, you learn nothing from the failure. And if you're not embarrassed by how crude it looks, you spent too long on it.&rdquo;</p>
+    </div>
+
+    <!-- ASSIGNMENT -->
+    <h2 class="section-title">The Assignment</h2>
+
+    <div class="me">
+        <span class="name">Me</span>
+        <p>The table gave me homework.</p>
+    </div>
+
+    <div class="assignment">
+        <h3>Build a Seat</h3>
+        <ul>
+            <li>Build a seat (not a full chair) from cardboard</li>
+            <li>Target: 16-18&Prime; wide, 15-17&Prime; deep, 12-15&Prime; high</li>
+            <li>Laminate 3-4 cardboard layers, alternating flute directions</li>
+            <li>Sit test with eyes closed, mark pressure points with pen</li>
+            <li>Get a side-view photograph while seated</li>
+            <li>Note: what did the body tell you?</li>
+        </ul>
+    </div>
+
+    <div class="designer">
+        <span class="name">Prouve</span>
+        <p>A coffee table is 16-18&Prime; high. Your seat must be at or slightly above the table surface — that's 12-15&Prime;. This height is between dining and lounge. It doesn't exist yet.</p>
+    </div>
+
+    <!-- OPEN QUESTIONS -->
+    <div class="questions">
+        <h2>Open Questions</h2>
+        <ul>
+            <li>How does the Poang's cantilevered flex work structurally?</li>
+            <li>Best joints for a stick chair from hardware store lumber?</li>
+            <li>How did Risom's material separation principle evolve?</li>
+            <li>What plant-derived polymers are viable for furniture now?</li>
+            <li>Who works on the "chair you grab 15 times a day"?</li>
+            <li>Minimum viable tool kit for chair component prototyping?</li>
+        </ul>
+    </div>
+
+    <div class="copyright">rowbyroh.com &copy; 2026</div>
+</body>
+</html>
