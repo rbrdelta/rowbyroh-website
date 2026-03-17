@@ -567,9 +567,9 @@ body::after {
 
 /* Long-form document content — editorial */
 .drawer-body .drawer-body-content {
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     line-height: 1.8;
-    color: #2a2a2a;
+    color: #222;
 }
 
 .drawer-body .drawer-body-content p {
@@ -577,9 +577,9 @@ body::after {
 }
 
 .drawer-body .drawer-body-content h3 {
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 700;
-    color: #1a1a1a;
+    color: #111;
     margin-top: 2.2rem;
     margin-bottom: 0.8rem;
 }
@@ -591,8 +591,18 @@ body::after {
 }
 
 .drawer-body .drawer-body-content .voice-me {
-    color: #2a2a2a;
-    font-weight: 500;
+    padding-left: 1rem;
+    border-left: 2px solid #1a1a1a;
+    margin: 1rem 0;
+}
+
+.drawer-body .drawer-body-content .voice-me .designer-name {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    color: #1a1a1a;
+    display: block;
+    margin-bottom: 0.3rem;
 }
 
 .drawer-body .drawer-body-content .voice-designer {

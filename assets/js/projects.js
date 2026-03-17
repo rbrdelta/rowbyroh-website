@@ -39,7 +39,8 @@ const projects = [
 
             + '<h3>Why the Chair</h3>'
 
-            + '<p class="voice-me">Humans have five primary biomechanical modalities — stand, walk, lay, climb, and sit. Of the five, sitting implies intent. To eat, converse, relax, read. It\'s the primary mode of modern life. The chair is the first piece of furniture we touch in most environments we visit. So what makes one truly great?</p>'
+            + '<div class="voice-me"><span class="designer-name">Me</span>'
+            + 'Humans have five primary biomechanical modalities — stand, walk, lay, climb, and sit. Each one carries intent. When we sit, it\'s to eat, converse, relax, read. It\'s the primary mode of modern life. The chair is the first piece of furniture we touch in most environments we visit. So what makes one truly great?</div>'
 
             + '<div class="voice-designer"><span class="designer-name">Eames</span>'
             + 'You\'re asking about value. There are three things people confuse. <strong>Cost</strong> — what the maker pays. <strong>Price</strong> — what the buyer pays. <strong>Value</strong> — what the sitter receives over a lifetime. The goal is to collapse these three toward each other. When they diverge, that\'s either exploitation or design failure.</div>'
@@ -70,7 +71,8 @@ const projects = [
 
             + '<h3>Lounge vs Dining</h3>'
 
-            + '<p class="voice-me">I chose lounge first. More people live alone. The coffee table is the primary surface now. The dining table is an office. Whatever I design has to serve both personal and professional life in a digitally engaged world.</p>'
+            + '<div class="voice-me"><span class="designer-name">Me</span>'
+            + 'I chose lounge first. More people live alone. The coffee table is the primary surface now. The dining table is an office. Whatever I design has to serve both personal and professional life in a digitally engaged world.</div>'
 
             + '<div class="voice-designer"><span class="designer-name">Eames</span>'
             + 'Careful. A lounge trying to be a dining chair fails at both. Better to design a system — one shape, different bases.</div>'
@@ -85,18 +87,27 @@ const projects = [
 
             + '<h3>Materials</h3>'
 
-            + '<p class="voice-me">I\'m starting with pine. Southern yellow pine specifically. It\'s cheap, forgiving, available everywhere. Oak or ash for production eventually — durable, generational. But pine is a values statement: access over prestige.</p>'
+            + '<div class="voice-me"><span class="designer-name">Me</span>'
+            + 'I\'m starting with pine. Southern yellow pine specifically. It\'s cheap, forgiving, available everywhere. But pine is a values statement too: access over prestige.</div>'
+
+            + '<div class="voice-designer"><span class="designer-name">Morrison</span>'
+            + 'Pine is a good start — but it dents easily. Every mark tells a story until there are too many stories and the chair just looks neglected. You need to think about what happens at year five.</div>'
+
+            + '<div class="voice-me"><span class="designer-name">Me</span>'
+            + 'Agreed. For production I\'d move to ash. Durable, generational, takes a beating. Pine is for prototyping and proving the design. Ash is for the chair you hand down.</div>'
 
             + '<div class="voice-designer"><span class="designer-name">Prouve</span>'
             + 'Good instinct, but a warning: vision without a supply chain is just philosophy. You must be inventor AND supply chain architect.</div>'
 
-            + '<p class="voice-me">For the seat: laminate two boards on edge, grain running front to back. Saddle it — about 1/4&Prime; in the back deepening to 3/8&Prime; at the front. Keep the front stretcher for compression strength.</p>'
+            + '<div class="voice-me"><span class="designer-name">Me</span>'
+            + 'For the seat: laminate two boards on edge, grain running front to back. Saddle it — about 1/4&Prime; in the back deepening to 3/8&Prime; at the front. Keep the front stretcher for compression strength.</div>'
 
             + '<hr>'
 
             + '<h3>Prototyping Under Constraint</h3>'
 
-            + '<p class="voice-me">My tools: a Japanese handsaw and a vintage Stanley jack plane. No workbench. I\'m in a NYC apartment with a toddler. I work late nights only.</p>'
+            + '<div class="voice-me"><span class="designer-name">Me</span>'
+            + 'My tools: a Japanese handsaw and a vintage Stanley jack plane. No workbench. I\'m in a NYC apartment with a toddler. I work late nights only.</div>'
 
             + '<div class="voice-designer"><span class="designer-name">Eames</span>'
             + 'Good. Here\'s the order. First, <strong>sketch</strong> to discover — 30 seconds, just test if the idea has life. Second, <strong>model</strong> to test — rough, fast, ugly. Third, <strong>engineer</strong> to produce. Never reverse this order. CAD optimizes before you discover.</div>'
@@ -111,7 +122,8 @@ const projects = [
 
             + '<h3>The Assignment</h3>'
 
-            + '<p class="voice-me">The table gave me homework.</p>'
+            + '<div class="voice-me"><span class="designer-name">Me</span>'
+            + 'The table gave me homework.</div>'
 
             + '<p>Build a <strong>seat</strong> — not a full chair — from cardboard. 16-18&Prime; wide, 15-17&Prime; deep, 12-15&Prime; high. Laminate 3-4 layers with alternating flute directions. Sit test with eyes closed. Mark the pressure points with a pen. Photograph from the side while seated. Then answer: what did the body tell you?</p>'
 
