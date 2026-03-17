@@ -504,8 +504,8 @@ body::after {
     position: fixed;
     top: 0;
     right: 0;
-    width: 480px;
-    max-width: 85vw;
+    width: 640px;
+    max-width: 90vw;
     height: 100%;
     background: #fefefe;
     border-left: 1px solid #ddd;
@@ -565,68 +565,68 @@ body::after {
     margin-bottom: 1.5rem;
 }
 
-/* Long-form document content */
+/* Long-form document content — editorial */
 .drawer-body .drawer-body-content {
-    font-size: 0.85rem;
-    line-height: 1.75;
-    color: #333;
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: #2a2a2a;
 }
 
 .drawer-body .drawer-body-content p {
-    margin-bottom: 1rem;
+    margin-bottom: 1.1rem;
 }
 
 .drawer-body .drawer-body-content h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-top: 2.2rem;
+    margin-bottom: 0.8rem;
+}
+
+.drawer-body .drawer-body-content hr {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 2rem 0;
+}
+
+.drawer-body .drawer-body-content .voice-me {
+    color: #2a2a2a;
+    font-weight: 500;
+}
+
+.drawer-body .drawer-body-content .voice-designer {
+    padding-left: 1rem;
+    border-left: 2px solid #d0d0d0;
+    margin: 1rem 0;
+}
+
+.drawer-body .drawer-body-content .voice-designer .designer-name {
     font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    font-size: 0.9rem;
     font-weight: 600;
-    color: #3d5a80;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-top: 2rem;
-    margin-bottom: 0.6rem;
-    padding-top: 1rem;
-    border-top: 1px solid #eee;
+    font-size: 0.78rem;
+    color: #666;
+    display: block;
+    margin-bottom: 0.3rem;
 }
 
-.drawer-body .drawer-body-content h3:first-child {
-    margin-top: 0;
-    padding-top: 0;
-    border-top: none;
+.drawer-body .drawer-body-content blockquote {
+    font-style: italic;
+    color: #444;
+    margin: 1rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid #ccc;
 }
 
-.drawer-body .drawer-body-content h4 {
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: #555;
-    margin-top: 1.2rem;
-    margin-bottom: 0.4rem;
-}
-
-.drawer-body .drawer-body-content ol {
+.drawer-body .drawer-body-content ol,
+.drawer-body .drawer-body-content ul {
     padding-left: 1.2rem;
     margin-bottom: 1rem;
 }
 
-.drawer-body .drawer-body-content ol li {
-    margin-bottom: 0.3rem;
-}
-
-.drawer-body .drawer-body-content .drawer-premise {
-    font-style: italic;
-    color: #666;
-    border-left: 2px solid #3d5a80;
-    padding-left: 0.8rem;
-    margin-bottom: 1.5rem;
-}
-
-.drawer-body .drawer-body-content .drawer-speaker {
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: #3d5a80;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+.drawer-body .drawer-body-content ol li,
+.drawer-body .drawer-body-content ul li {
+    margin-bottom: 0.4rem;
 }
 
 .drawer-body .drawer-tags {
