@@ -245,7 +245,9 @@ document.addEventListener('DOMContentLoaded', function () {
             escapeHtml(project.about) +
             '</div>';
 
-        if (project.excerpt) {
+        if (project.body) {
+            html += '<div class="drawer-body-content">' + project.body + '</div>';
+        } else if (project.excerpt) {
             html +=
                 '<div class="drawer-excerpt">' +
                 escapeHtml(project.excerpt) +

@@ -504,7 +504,7 @@ body::after {
     position: fixed;
     top: 0;
     right: 0;
-    width: 380px;
+    width: 480px;
     max-width: 85vw;
     height: 100%;
     background: #fefefe;
@@ -563,6 +563,70 @@ body::after {
     line-height: 1.7;
     color: #444;
     margin-bottom: 1.5rem;
+}
+
+/* Long-form document content */
+.drawer-body .drawer-body-content {
+    font-size: 0.85rem;
+    line-height: 1.75;
+    color: #333;
+}
+
+.drawer-body .drawer-body-content p {
+    margin-bottom: 1rem;
+}
+
+.drawer-body .drawer-body-content h3 {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #3d5a80;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 2rem;
+    margin-bottom: 0.6rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.drawer-body .drawer-body-content h3:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+
+.drawer-body .drawer-body-content h4 {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #555;
+    margin-top: 1.2rem;
+    margin-bottom: 0.4rem;
+}
+
+.drawer-body .drawer-body-content ol {
+    padding-left: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.drawer-body .drawer-body-content ol li {
+    margin-bottom: 0.3rem;
+}
+
+.drawer-body .drawer-body-content .drawer-premise {
+    font-style: italic;
+    color: #666;
+    border-left: 2px solid #3d5a80;
+    padding-left: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.drawer-body .drawer-body-content .drawer-speaker {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #3d5a80;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
 .drawer-body .drawer-tags {
