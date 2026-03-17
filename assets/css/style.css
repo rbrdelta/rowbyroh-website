@@ -147,19 +147,21 @@ body::after {
 }
 
 .title {
-    font-size: 1.6rem;
-    font-weight: bold;
-    letter-spacing: 0.12em;
-    margin-bottom: 0.8rem;
-    color: #2e2e2e;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.6rem;
+    color: #1a1a1a;
 }
 
 .subtitle {
-    font-size: 0.8rem;
-    letter-spacing: 0.15em;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #444;
-    font-weight: normal;
+    color: #3d5a80;
+    font-weight: 500;
 }
 
 /* ---- PORTFOLIO SECTION ---- */
@@ -198,11 +200,12 @@ body::after {
     position: absolute;
     top: -1.5rem;
     right: 0;
-    font-size: 0.85rem;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 0.95rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #444;
-    font-weight: bold;
+    letter-spacing: 0.12em;
+    color: #3d5a80;
+    font-weight: 600;
 }
 
 /* Tag filters — inline, annotation-style */
@@ -215,16 +218,16 @@ body::after {
 }
 
 .tag-filter {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
     font-size: 0.8rem;
-    color: #555;
+    color: #3d5a80;
     cursor: pointer;
     letter-spacing: 0.03em;
     transition: color 0.2s ease;
     padding: 0;
     background: none;
     border: none;
-    font-family: 'Courier New', monospace;
-    font-style: italic;
+    font-weight: 400;
 }
 
 .tag-filter::before {
@@ -232,12 +235,12 @@ body::after {
 }
 
 .tag-filter:hover {
-    color: #222;
+    color: #1a1a1a;
 }
 
 .tag-filter.active {
     color: #1a1a1a;
-    font-style: normal;
+    font-weight: 600;
 }
 
 .tag-filter.active::after {
@@ -418,8 +421,9 @@ body::after {
 }
 
 .card-body h2 {
-    font-size: 1.1rem;
-    font-weight: bold;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
     margin-bottom: 0.3rem;
 }
 
@@ -434,12 +438,13 @@ body::after {
 }
 
 .card-body .card-section h3 {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: #aaa;
+    color: #3d5a80;
     margin-bottom: 0.4rem;
-    font-weight: normal;
+    font-weight: 600;
 }
 
 .card-body .card-section ul {
@@ -540,8 +545,9 @@ body::after {
 }
 
 .drawer-body h2 {
-    font-size: 1.1rem;
-    font-weight: bold;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
     margin-bottom: 0.5rem;
 }
 
@@ -680,12 +686,13 @@ body::after {
 }
 
 .links-section .section-header {
-    font-size: 0.85rem;
-    font-weight: bold;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     margin-bottom: 1rem;
-    color: #444;
+    color: #3d5a80;
     margin-left: 15px;
 }
 
@@ -769,7 +776,7 @@ body::after {
     }
 
     .title {
-        font-size: 1.35rem;
+        font-size: 1.8rem;
     }
 
     .container {
@@ -805,7 +812,7 @@ body::after {
 
 @media (max-width: 400px) {
     .title {
-        font-size: 1.15rem;
+        font-size: 1.5rem;
     }
 
     .covered-note {
