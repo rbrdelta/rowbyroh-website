@@ -15,7 +15,7 @@ const projects = [
         date: '2026',
         tags: ['ai', 'mcp', 'pkm', 'developer-tools'],
         link: '#',
-        color: '#7C3AED'
+        color: '#5B21B6'
     },
     {
         id: 'classifier',
@@ -40,13 +40,13 @@ const projects = [
             + '<p><strong>Thonet:</strong> &ldquo;Are you designing for the approval of other designers, or for the person who comes home exhausted? You cannot do both.&rdquo;</p>'
             + '<p><strong>Wegner:</strong> &ldquo;A cushion is not design — a cushion is an apology.&rdquo;</p>'
             + '<p><strong>Morrison:</strong> &ldquo;If you\'re not embarrassed by how crude the prototype looks, you spent too long on it.&rdquo;</p>'
-            + '<p style="margin-top:1.5rem;"><a href="/chair-roundtable" style="color:#1a1a1a; border-bottom:1px solid #999; text-decoration:none; font-size:0.85rem;">Read the full conversation &rarr;</a></p>'
+            + '<p style="margin-top:1.5rem;"><a href="/chair-roundtable.html" target="_blank" rel="noopener" style="color:#1a1a1a; border-bottom:1px solid #999; text-decoration:none; font-size:0.85rem;">Read the full conversation &rarr;</a></p>'
             + '</div>',
         stack: [],
         date: '2026',
         tags: ['design', 'craft', 'first-principles'],
         link: '#',
-        color: '#8B6914'
+        color: '#6B4F10'
     },
     {
         id: 'blog',
@@ -58,7 +58,7 @@ const projects = [
         date: '2025',
         tags: ['writing'],
         link: '#',
-        color: '#2E8B57'
+        color: '#1F6B42'
     },
     {
         id: 'research-agent',

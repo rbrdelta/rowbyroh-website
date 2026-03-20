@@ -85,7 +85,6 @@ document.addEventListener('DOMContentLoaded', function () {
         var title = document.createElement('div');
         title.className = 'item-title';
         title.textContent = project.title;
-        title.style.color = project.color;
         el.appendChild(title);
 
         // Annotation (hover preview)
@@ -165,9 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function openCard(project) {
         var html = '';
         html +=
-            '<h2 style="color:' +
-            escapeAttr(project.color) +
-            '">' +
+            '<h2>' +
             escapeHtml(project.title) +
             '</h2>';
         html +=
@@ -235,9 +232,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var html = '';
         html +=
-            '<h2 style="color:' +
-            escapeAttr(project.color) +
-            '">' +
+            '<h2>' +
             escapeHtml(project.title) +
             '</h2>';
         html +=
@@ -287,9 +282,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function openLightbox(project) {
         var html = '';
         html +=
-            '<h2 style="color:' +
-            escapeAttr(project.color) +
-            '; margin-bottom:1rem;">' +
+            '<h2 style="margin-bottom:1rem;">' +
             escapeHtml(project.title) +
             '</h2>';
 
