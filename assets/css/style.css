@@ -8,8 +8,8 @@ body {
     font-family: 'IBM Plex Mono', monospace;
     background: #fefefe;
     color: #1a1a1a;
-    font-weight: 500;
-    line-height: 1.4;
+    font-weight: 400;
+    line-height: 1.5;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -26,7 +26,7 @@ body::before {
     content: '';
     position: absolute;
     top: 0;
-    left: calc(50% - 250px);
+    left: calc(50% - 328px);
     width: 2px;
     height: 100%;
     background: #e84040;
@@ -38,7 +38,7 @@ body::after {
     content: '';
     position: absolute;
     bottom: 4rem;
-    left: calc(50% - 250px);
+    left: calc(50% - 328px);
     width: 60%;
     height: 1px;
     background: #b8b8b8;
@@ -157,12 +157,22 @@ body::after {
 }
 
 .subtitle {
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    font-size: 0.85rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
     color: #1a1a1a;
-    font-weight: 700;
+    font-weight: 400;
+    line-height: 1.4;
+    max-width: none;
+    margin: 0 auto;
+    white-space: nowrap;
+}
+
+.subtitle .now {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.78rem;
+    color: #555;
+    font-weight: 400;
 }
 
 /* ---- PORTFOLIO SECTION ---- */
@@ -202,11 +212,11 @@ body::after {
     top: -1.5rem;
     right: 0;
     font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    font-size: 0.95rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    color: #1a1a1a;
-    font-weight: 600;
+    color: #888;
+    font-weight: 500;
 }
 
 /* Tag filters — inline, annotation-style */
@@ -220,15 +230,15 @@ body::after {
 
 .tag-filter {
     font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    font-size: 0.85rem;
-    color: #1a1a1a;
+    font-size: 0.75rem;
+    color: #888;
     cursor: pointer;
     letter-spacing: 0.03em;
     transition: color 0.2s ease;
     padding: 0;
     background: none;
     border: none;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .tag-filter::before {
@@ -241,7 +251,7 @@ body::after {
 
 .tag-filter.active {
     color: #1a1a1a;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .tag-filter.active::after {
@@ -257,7 +267,7 @@ body::after {
 }
 
 .portfolio-container {
-    background: rgba(250, 250, 250, 0.65);
+    background: #fafafa;
     border: 1px solid #ccc;
     padding: 2rem 1.5rem;
     min-height: 200px;
@@ -297,13 +307,19 @@ body::after {
     transition: opacity 0.3s ease;
 }
 
-.portfolio-item.faded {
-    opacity: 0.25;
+/* When an item is active, fade all others */
+.portfolio-container.has-active .portfolio-item {
+    opacity: 0.2;
+    transition: opacity 0.15s ease;
+}
+
+.portfolio-container.has-active .portfolio-item.is-active {
+    opacity: 1;
 }
 
 .portfolio-item .item-title {
-    font-size: 1.3rem;
-    font-weight: 700;
+    font-size: 1.2rem;
+    font-weight: 600;
     color: #1a1a1a;
     transition: transform 0.2s ease;
     display: inline-block;
@@ -313,183 +329,51 @@ body::after {
     transform: scale(1.03);
 }
 
-/* Hover annotation — pencil note feel */
-.portfolio-item .annotation {
-    font-size: 0.9rem;
-    color: #1a1a1a;
-    font-style: italic;
-    margin-top: 0.3rem;
-    opacity: 0;
-    transform: translateY(-3px);
-    transition: opacity 0.25s ease, transform 0.25s ease;
-    line-height: 1.3;
-    max-width: 220px;
-}
 
-.portfolio-item:hover .annotation {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Inline unfold (link type) */
-.portfolio-item .inline-detail {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s ease, opacity 0.3s ease, margin 0.3s ease;
-    opacity: 0;
-    font-size: 0.8rem;
-    line-height: 1.5;
-    margin-top: 0;
-}
-
-.portfolio-item .inline-detail.open {
-    max-height: 200px;
-    opacity: 1;
-    margin-top: 0.5rem;
-}
-
-.portfolio-item .inline-detail p {
-    margin-bottom: 0.4rem;
-    color: #1a1a1a;
-}
-
-.portfolio-item .inline-detail a {
-    color: #1a1a1a;
-    text-decoration: none;
-    border-bottom: 1px solid #ccc;
-    font-size: 0.75rem;
-}
-
-.portfolio-item .inline-detail a:hover {
-    border-color: #1a1a1a;
-}
-
-/* ---- EXPANDING CARD (tool type) ---- */
-.card-overlay {
+/* ---- PROJECT TOOLTIP ---- */
+.project-tooltip {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(254, 254, 254, 0.85);
-    z-index: 2000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.3s ease;
-}
-
-.card-overlay.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.card-overlay-content {
-    background: #fff;
-    border: 1px solid #ddd;
-    padding: 2.5rem 2rem 2rem;
-    max-width: 560px;
-    width: 90%;
-    max-height: 80vh;
-    overflow-y: auto;
-    position: relative;
-    transform: scale(0.85);
-    opacity: 0;
-    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
-                opacity 0.25s ease;
-    font-size: 1rem;
-    line-height: 1.6;
-}
-
-.card-overlay:not(.hidden) .card-overlay-content {
-    transform: scale(1);
-    opacity: 1;
-}
-
-.card-close {
-    position: absolute;
-    top: 0.8rem;
-    right: 1rem;
-    background: none;
-    border: none;
-    font-size: 1.3rem;
+    background: #ffffff;
+    border: 1px solid #ccc;
+    padding: 1rem 1.2rem;
+    width: 280px;
+    max-width: 80vw;
+    z-index: 9999;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     cursor: pointer;
-    color: #1a1a1a;
-    transition: color 0.2s;
 }
 
-.card-close:hover {
-    color: #1a1a1a;
-}
-
-.card-body h2 {
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-bottom: 0.3rem;
-}
-
-.card-body .card-about {
-    color: #1a1a1a;
-    margin-bottom: 1.5rem;
-    font-style: italic;
-}
-
-.card-body .card-section {
-    margin-bottom: 1.2rem;
-}
-
-.card-body .card-section h3 {
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #1a1a1a;
-    margin-bottom: 0.4rem;
+.tooltip-title {
+    font-size: 1.2rem;
     font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.6rem;
 }
 
-.card-body .card-section ul {
+.tooltip-highlights {
     list-style: none;
     padding: 0;
+    margin: 0 0 0.8rem;
 }
 
-.card-body .card-section ul li {
-    padding: 0.2rem 0;
+.tooltip-highlights li {
+    padding: 0.15rem 0;
     padding-left: 1rem;
     position: relative;
+    font-size: 0.78rem;
+    color: #1a1a1a;
 }
 
-.card-body .card-section ul li::before {
+.tooltip-highlights li::before {
     content: '\2014';
     position: absolute;
     left: 0;
-    color: #1a1a1a;
+    color: #888;
 }
 
-.card-body .card-stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-}
-
-.card-body .card-stack span {
-    font-size: 0.7rem;
-    padding: 0.15rem 0.5rem;
-    background: #f5f5f5;
-    border: 1px solid #ddd;
-    color: #1a1a1a;
-}
-
-.card-body .card-tags {
-    font-size: 0.7rem;
-    color: #1a1a1a;
-    margin-top: 1rem;
-}
-
-.card-body .card-link {
-    display: inline-block;
-    margin-top: 1rem;
+.tooltip-link {
     font-size: 0.75rem;
     color: #1a1a1a;
     text-decoration: none;
@@ -497,235 +381,14 @@ body::after {
     transition: border-color 0.2s;
 }
 
-.card-body .card-link:hover {
+.tooltip-link:hover {
     border-color: #1a1a1a;
 }
 
-/* ---- DRAWER (document type) ---- */
-.drawer {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 640px;
-    max-width: 90vw;
-    height: 100%;
-    background: #fefefe;
-    border-left: 1px solid #ddd;
-    z-index: 2000;
-    transform: translateX(100%);
-    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-                box-shadow 0.35s ease;
-    box-shadow: -4px 0 20px rgba(0, 0, 0, 0);
-}
-
-.drawer:not(.hidden) {
-    transform: translateX(0);
-    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.08);
-}
-
-.drawer-content {
-    padding: 2.5rem 2rem;
-    height: 100%;
-    overflow-y: auto;
-    position: relative;
-}
-
-.drawer-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: none;
-    border: none;
-    font-size: 1.3rem;
-    cursor: pointer;
-    color: #1a1a1a;
-    transition: color 0.2s;
-}
-
-.drawer-close:hover {
-    color: #1a1a1a;
-}
-
-.drawer-body h2 {
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-.drawer-body .drawer-about {
-    color: #1a1a1a;
-    font-style: italic;
-    font-size: 0.95rem;
-    margin-bottom: 1.5rem;
-}
-
-.drawer-body .drawer-excerpt {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: #1a1a1a;
-    margin-bottom: 1.5rem;
-}
-
-/* Long-form document content — editorial */
-.drawer-body .drawer-body-content {
-    font-size: 1rem;
-    line-height: 1.8;
-    color: #1a1a1a;
-}
-
-.drawer-body .drawer-body-content p {
-    margin-bottom: 1.1rem;
-}
-
-.drawer-body .drawer-body-content h3 {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: #111;
-    margin-top: 2.2rem;
-    margin-bottom: 0.8rem;
-}
-
-.drawer-body .drawer-body-content hr {
-    border: none;
-    border-top: 1px solid #e0e0e0;
-    margin: 2rem 0;
-}
-
-.drawer-body .drawer-body-content .voice-me {
-    padding-left: 1rem;
-    border-left: 2px solid #1a1a1a;
-    margin: 1rem 0;
-}
-
-.drawer-body .drawer-body-content .voice-me .designer-name {
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    font-weight: 700;
-    font-size: 0.78rem;
-    color: #1a1a1a;
-    display: block;
-    margin-bottom: 0.3rem;
-}
-
-.drawer-body .drawer-body-content .voice-designer {
-    padding-left: 1rem;
-    border-left: 2px solid #d0d0d0;
-    margin: 1rem 0;
-}
-
-.drawer-body .drawer-body-content .voice-designer .designer-name {
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    font-weight: 600;
-    font-size: 0.78rem;
-    color: #1a1a1a;
-    display: block;
-    margin-bottom: 0.3rem;
-}
-
-.drawer-body .drawer-body-content blockquote {
-    font-style: italic;
-    color: #1a1a1a;
-    margin: 1rem 0;
-    padding-left: 1rem;
-    border-left: 2px solid #ccc;
-}
-
-.drawer-body .drawer-body-content ol,
-.drawer-body .drawer-body-content ul {
-    padding-left: 1.2rem;
-    margin-bottom: 1rem;
-}
-
-.drawer-body .drawer-body-content ol li,
-.drawer-body .drawer-body-content ul li {
-    margin-bottom: 0.4rem;
-}
-
-.drawer-body .drawer-tags {
-    font-size: 0.7rem;
-    color: #1a1a1a;
-    margin-top: 1.5rem;
-}
-
-.drawer-body .drawer-link {
-    font-size: 0.75rem;
-    color: #1a1a1a;
-    text-decoration: none;
-    border-bottom: 1px solid #ccc;
-}
-
-.drawer-body .drawer-link:hover {
-    border-color: #1a1a1a;
-}
-
-/* Drawer backdrop */
-.drawer-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(254, 254, 254, 0.6);
-    z-index: 1999;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-}
-
-.drawer-backdrop.visible {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-/* ---- LIGHTBOX (visual type) ---- */
-.lightbox {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(10, 10, 10, 0.92);
-    z-index: 2000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.3s ease;
-}
-
-.lightbox.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.lightbox-close {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
+.tooltip-soon {
+    font-size: 0.72rem;
     color: #888;
-    z-index: 10;
-}
-
-.lightbox-close:hover {
-    color: #fff;
-}
-
-.lightbox-body {
-    max-width: 90vw;
-    max-height: 80vh;
-    text-align: center;
-    color: #ccc;
-    font-size: 0.85rem;
-    font-family: 'IBM Plex Mono', monospace;
-}
-
-.lightbox-body img {
-    max-width: 100%;
-    max-height: 75vh;
-    object-fit: contain;
+    font-style: italic;
 }
 
 /* ---- LINKS SECTION ---- */
@@ -763,12 +426,12 @@ body::after {
 
 .links-section .section-header {
     font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
+    font-size: 0.8rem;
+    font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     margin-bottom: 1rem;
-    color: #1a1a1a;
+    color: #888;
     margin-left: 15px;
 }
 
@@ -783,8 +446,9 @@ body::after {
 .link-item {
     font-size: 0.8rem;
     text-decoration: none;
-    color: #1a1a1a;
-    transition: opacity 0.2s ease;
+    color: #888;
+    font-weight: 400;
+    transition: color 0.2s ease;
     display: flex;
     align-items: center;
     position: relative;
@@ -793,11 +457,17 @@ body::after {
 .link-item::before {
     content: '+';
     margin-right: 0.5rem;
-    font-weight: bold;
+    font-weight: 500;
+    color: #888;
+    transition: color 0.2s ease;
 }
 
 .link-item:hover {
-    opacity: 0.6;
+    color: #1a1a1a;
+}
+
+.link-item:hover::before {
+    color: #1a1a1a;
 }
 
 .link-item:nth-child(1) {
@@ -855,6 +525,11 @@ body::after {
         font-size: 1.8rem;
     }
 
+    .subtitle {
+        white-space: normal;
+        font-size: 0.75rem;
+    }
+
     .container {
         max-width: 100%;
     }
@@ -878,11 +553,6 @@ body::after {
 
     .links-list {
         gap: 1rem;
-    }
-
-    .drawer {
-        width: 100%;
-        max-width: 100%;
     }
 }
 

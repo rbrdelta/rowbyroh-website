@@ -19,7 +19,7 @@
             font-family: 'IBM Plex Mono', monospace;
             background: #fefefe;
             color: #1a1a1a;
-            font-weight: 500;
+            font-weight: 400;
             line-height: 1.8;
             max-width: 680px;
             margin: 0 auto;
@@ -28,13 +28,14 @@
 
         .back-link {
             font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 0.8rem;
-            color: #1a1a1a;
+            font-size: 0.75rem;
+            color: #888;
             text-decoration: none;
             display: inline-block;
             margin-bottom: 2rem;
+            font-weight: 400;
         }
-        .back-link:hover { color: #000; }
+        .back-link:hover { color: #1a1a1a; }
         .back-link::before { content: '\2190  '; }
 
         h1 {
@@ -45,17 +46,19 @@
             margin-bottom: 0.3rem;
         }
 
-        .subtitle {
+        .page-subtitle {
             font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 0.85rem;
-            color: #1a1a1a;
+            font-size: 0.78rem;
+            color: #888;
             margin-bottom: 0.5rem;
+            font-weight: 400;
         }
 
         .premise {
             font-style: italic;
-            color: #1a1a1a;
-            font-size: 0.92rem;
+            color: #555;
+            font-size: 0.88rem;
+            font-weight: 400;
             margin-bottom: 2rem;
             padding-bottom: 1.5rem;
             border-bottom: 1px solid #e0e0e0;
@@ -66,9 +69,11 @@
         }
         .roster h2 {
             font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #1a1a1a;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
             margin-bottom: 0.8rem;
         }
         .roster ul {
@@ -76,55 +81,58 @@
             padding: 0;
         }
         .roster li {
-            font-size: 0.95rem;
+            font-size: 0.88rem;
             margin-bottom: 0.5rem;
             color: #1a1a1a;
+            font-weight: 400;
         }
         .roster li strong {
-            color: #1a1a1a;
+            font-weight: 600;
         }
         .roster li em {
-            color: #1a1a1a;
-            font-size: 0.9rem;
+            color: #888;
+            font-size: 0.82rem;
         }
 
-        h2.section-title {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #111;
-            margin-top: 3rem;
-            margin-bottom: 1rem;
-            padding-top: 2rem;
-            border-top: 1px solid #e0e0e0;
+        /* Stage directions — narrative voice */
+        .stage {
+            font-style: italic;
+            color: #888;
+            font-size: 0.88rem;
+            margin: 1.8rem 0 1.2rem;
+            font-weight: 400;
         }
 
-        p { margin-bottom: 1.1rem; font-size: 1rem; }
+        p { margin-bottom: 1rem; font-size: 0.92rem; font-weight: 400; }
 
         .me {
             padding-left: 1rem;
-            border-left: 2.5px solid #1a1a1a;
-            margin: 1.2rem 0;
+            border-left: 2px solid #1a1a1a;
+            margin: 1.4rem 0;
         }
         .me .name {
             font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-weight: 700;
-            font-size: 0.78rem;
+            font-weight: 600;
+            font-size: 0.72rem;
             color: #1a1a1a;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             display: block;
             margin-bottom: 0.25rem;
         }
 
         .designer {
             padding-left: 1rem;
-            border-left: 2.5px solid #ccc;
-            margin: 1.2rem 0;
+            border-left: 2px solid #ddd;
+            margin: 1.4rem 0;
         }
         .designer .name {
             font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-weight: 600;
-            font-size: 0.78rem;
-            color: #1a1a1a;
+            font-weight: 500;
+            font-size: 0.72rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             display: block;
             margin-bottom: 0.25rem;
         }
@@ -135,7 +143,7 @@
         ol, ul {
             padding-left: 1.3rem;
             margin-bottom: 1rem;
-            font-size: 0.95rem;
+            font-size: 0.88rem;
         }
         li { margin-bottom: 0.4rem; }
 
@@ -147,14 +155,17 @@
         }
         .assignment h3 {
             font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #1a1a1a;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             margin-bottom: 0.8rem;
         }
         .assignment ul {
             list-style: none;
             padding: 0;
+            font-size: 0.88rem;
         }
         .assignment li {
             padding-left: 1.2rem;
@@ -164,7 +175,7 @@
             content: '\25A1';
             position: absolute;
             left: 0;
-            color: #1a1a1a;
+            color: #888;
         }
 
         .questions {
@@ -174,20 +185,22 @@
         }
         .questions h2 {
             font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #1a1a1a;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
             margin-bottom: 0.8rem;
         }
         .questions li {
             color: #1a1a1a;
-            font-size: 0.95rem;
+            font-size: 0.88rem;
         }
 
         .copyright {
             margin-top: 4rem;
             font-size: 0.6rem;
-            color: #555;
+            color: #888;
             text-align: right;
         }
 
@@ -201,192 +214,327 @@
     <a href="/" class="back-link">rowbyroh.com</a>
 
     <h1>Chair Roundtable</h1>
-    <div class="subtitle">Session 1</div>
+    <div class="page-subtitle">Session 1</div>
     <p class="premise">A fictional roundtable with six of history's greatest chair designers. The mission: make quality housing and furniture available to all.</p>
 
     <div class="roster">
         <h2>The Table</h2>
         <ul>
-            <li><strong>Michael Thonet</strong> <em>(1796-1871)</em> — No. 14 bistro chair. Democratic access through industrial elegance.</li>
-            <li><strong>Gerrit Rietveld</strong> <em>(1888-1964)</em> — Red and Blue Chair. A chair is an idea made physical.</li>
-            <li><strong>Charles Eames</strong> <em>(1907-1978)</em> — Shell Chairs, Lounge. The best for the most for the least.</li>
-            <li><strong>Hans Wegner</strong> <em>(1914-2007)</em> — The Chair, Wishbone. Joint as ornament. No back side.</li>
-            <li><strong>Jean Prouve</strong> <em>(1901-1984)</em> — Standard Chair. Form follows force. Constructive logic.</li>
-            <li><strong>Jasper Morrison</strong> <em>(1959-present)</em> — Air Chair, Ply Chair. Super Normal — design that disappears.</li>
+            <li><strong>Michael Thonet</strong> <em>(1796&ndash;1871)</em> &mdash; No. 14 bistro chair. Democratic access through industrial elegance.</li>
+            <li><strong>Gerrit Rietveld</strong> <em>(1888&ndash;1964)</em> &mdash; Red and Blue Chair. A chair is an idea made physical.</li>
+            <li><strong>Charles Eames</strong> <em>(1907&ndash;1978)</em> &mdash; Shell Chairs, Lounge. The best for the most for the least.</li>
+            <li><strong>Hans Wegner</strong> <em>(1914&ndash;2007)</em> &mdash; The Chair, Wishbone. Joint as ornament. No back side.</li>
+            <li><strong>Jean Prouv&eacute;</strong> <em>(1901&ndash;1984)</em> &mdash; Standard Chair. Form follows force. Constructive logic.</li>
+            <li><strong>Jasper Morrison</strong> <em>(1959&ndash;present)</em> &mdash; Air Chair, Ply Chair. Super Normal &mdash; design that disappears.</li>
         </ul>
     </div>
 
-    <!-- WHY THE CHAIR -->
-    <h2 class="section-title">Why the Chair</h2>
+    <!-- TRANSCRIPT -->
 
-    <div class="me">
-        <span class="name">Me</span>
-        <p>Humans have five primary biomechanical modalities — stand, walk, lay, climb, and sit. Each one carries intent. When we sit, it's to eat, converse, relax, read. It's the primary mode of modern life. The chair is the first piece of furniture we touch in most environments. Having a quality chair is the highest leverage opportunity to impact the environment and the lived experience.</p>
-        <p>Quality means thoughtfulness in design, respect for the material, care in the craftsmanship. It's the culmination of intent at every step that results in something that exceeds the monetary value afforded by a price. So — what makes a great chair truly one of a kind?</p>
-    </div>
-
-    <div class="designer">
-        <span class="name">Eames</span>
-        <p>You're asking about value, and there are three things people confuse. <strong>Cost</strong> — what the maker pays. <strong>Price</strong> — what the buyer pays. <strong>Value</strong> — what the sitter receives over a lifetime. The goal is to collapse these three toward each other. When they diverge, that's either exploitation or design failure.</p>
-    </div>
-
-    <div class="designer">
-        <span class="name">Morrison</span>
-        <p>Quality that creates artificial scarcity is not quality — it's marketing. My Air Chair costs little, is everywhere, and works. Satisfaction through rightness, not desire through scarcity.</p>
-    </div>
+    <p class="stage">The six designers settle into their chairs. Thonet straightens. Morrison leans back. Wegner runs his thumb along the edge of the table, feeling the joint.</p>
 
     <div class="designer">
         <span class="name">Thonet</span>
-        <p>Answer me this: are you designing for the approval of other designers, or for the person who comes home exhausted? You cannot do both.</p>
-    </div>
-
-    <!-- ERGONOMICS -->
-    <h2 class="section-title">Ergonomics — Three Critical Angles</h2>
-
-    <div class="designer">
-        <span class="name">Prouve</span>
-        <p>The hip angle is the master variable. Everything cascades from it.</p>
-        <ol>
-            <li><strong>Seat pan tilt</strong> — 0-5&deg; for task, up to 15&deg; for lounge</li>
-            <li><strong>Back angle relative to seat</strong> — 90-95&deg; dining, 100-110&deg; relaxed, beyond that is a recliner</li>
-            <li><strong>Seat height vs. popliteal height</strong> — off by 2cm and there's pressure behind the thighs. The sitter leaves in 20 minutes.</li>
-        </ol>
-    </div>
-
-    <div class="designer">
-        <span class="name">Wegner</span>
-        <p>Engaged hips — thighs slope down, torso-thigh angle around 90-100&deg;. Relaxed hips — the angle opens to 105-120&deg;. You must decide which you're designing for before you cut wood.</p>
+        <p>You say sitting implies intent &mdash; to eat, converse, relax, read. This is exactly right, and it is why I spent my life on the chair and not the bed. The bed receives you passively. The chair collaborates with your purpose. And your definition of quality &mdash; &ldquo;the culmination of intent at every step&rdquo; &mdash; I could not have said it better. This is what my No. 14 is. Every decision in that chair was intentional, and every intention was toward the same end: more people sitting well.</p>
     </div>
 
     <div class="designer">
         <span class="name">Morrison</span>
-        <p>Don't ask how much support to add. Ask: what is the minimum structure that lets the body find its own comfort?</p>
-    </div>
-
-    <!-- LOUNGE VS DINING -->
-    <h2 class="section-title">Lounge vs Dining — The Modern Condition</h2>
-
-    <div class="me">
-        <span class="name">Me</span>
-        <p>I chose lounge first. More people live alone. The coffee table is the primary surface now. The dining table is an office. Whatever I design has to serve both personal and professional life in a digitally engaged world.</p>
+        <p>I want to pull on something you said &mdash; that quality &ldquo;exceeds the average standard of living in a way that draws more demand than is possible to create sufficient supply.&rdquo; Be careful here. That sounds dangerously close to luxury positioning. The best chair doesn&rsquo;t create desire through scarcity. It creates satisfaction through rightness. My Air Chair costs very little. You can buy it anywhere. Nobody photographs it for magazines. And it is one of the most successful chairs ever made, because it works &mdash; indoors, outdoors, stacked, forgotten, rained on, sat in for hours. Quality that creates artificial scarcity is not quality. It&rsquo;s marketing.</p>
     </div>
 
     <div class="designer">
         <span class="name">Eames</span>
-        <p>Careful. A lounge trying to be a dining chair fails at both. Better to design a system — one shape, different bases.</p>
+        <p>I think you&rsquo;re both right, but I hear something important in what our friend said &mdash; &ldquo;long term thinking about the meaning of value and cost.&rdquo; Ray and I lived inside that question. Cost is what the maker pays. Price is what the buyer pays. Value is what the sitter receives over a lifetime. These three numbers should be as close together as possible. When cost and price diverge wildly, someone is being exploited &mdash; either the maker or the buyer. When price and value diverge, the design has failed. Your job, if you want to make chairs for everyone, is to collapse those three numbers toward each other.</p>
+    </div>
+
+    <p class="stage">Now, Hans Wegner leans forward:</p>
+
+    <div class="designer">
+        <span class="name">Wegner</span>
+        <p>You speak beautifully about intent and thoughtfulness. But I notice you said nothing about the body. You listed the purposes of sitting &mdash; eating, conversing, relaxing, reading &mdash; and each of those demands a different posture. The dining chair tips you slightly forward. The reading chair supports a recline. The conversational chair must allow you to shift, turn, gesture. Before you design anything, I need to know: which of these sitting purposes will you design for first, and can you describe what the body is actually doing in that posture? Not the mind&rsquo;s intent &mdash; the spine&rsquo;s position, the hip angle, where the weight falls.</p>
     </div>
 
     <div class="me">
         <span class="name">Me</span>
-        <p>What about the IKEA Poang? It's a lounge chair that people use for everything — reading, working on a laptop, eating off a side table. It doesn't try to be a dining chair but it functionally replaces one for millions of people.</p>
+        <p>I have never really studied ergonomics &mdash; but if I were to break it down, it would start with the relationship between the hips and the feet. The hips have to be engaged, feet firmly on the ground for a dining chair or a meeting chair. The hips would relax and feet position can elevate, be supported by a secondary bar or be cross legged if this is a chaise or a lounge chair. That&rsquo;s the start, then I would think about posture, lumbar support, thoracic support or not, and how much of the neck and the head are supported or not.</p>
+    </div>
+
+    <p class="stage">Wegner nods slowly.</p>
+
+    <div class="designer">
+        <span class="name">Wegner</span>
+        <p>You have good instincts. You started at the foundation &mdash; the hip-foot relationship &mdash; and worked upward. This is correct. Most beginners start with the back, because that is where they feel pain. But pain in the back is almost always caused by failure at the seat. The seat is the foundation of everything.</p>
+        <p>Your distinction between engaged hips and relaxed hips &mdash; this is the fundamental fork in all chair design. I would sharpen it further: when the hips are engaged, the thighs slope downward from hip to knee. The seat height is at or just above knee height. The angle between torso and thigh is roughly 90 to 100 degrees. This is your dining chair, your work chair. When the hips relax, that angle opens &mdash; 105, 110, 120 degrees &mdash; and the seat drops below the knee. This is your lounge. Every decision that follows &mdash; back angle, lumbar depth, armrest height &mdash; cascades from that single angle at the hip.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Prouv&eacute;</span>
+        <p>Wegner is being poetic. Let me give you the engineering. There are three critical angles in any chair, and if you learn these, you can analyze every chair you ever sit in:</p>
+        <p>First, the seat angle &mdash; the tilt of the seat pan itself, typically 0 to 5 degrees for a task chair, up to 15 degrees for a lounge. Second, the back angle relative to the seat &mdash; 90 to 95 degrees for dining, 100 to 110 for relaxed sitting, beyond that you are designing a recliner. Third, and this is the one most makers ignore &mdash; the seat height relative to the popliteal height, which is the distance from the floor to the crease behind the knee. Get this wrong by even two centimeters and the sitter will feel pressure behind their thighs, blood flow will be restricted, and they will stand up within twenty minutes without knowing why.</p>
+        <p>This is constructive logic applied to the body: you must know the forces, and in a chair, the body&rsquo;s weight is the force.</p>
     </div>
 
     <div class="designer">
         <span class="name">Morrison</span>
-        <p>The Poang is one of the most important chairs of the last fifty years. Cantilevered flex, ships flat, bent laminated birch. It's Super Normal whether IKEA intended it or not.</p>
+        <p>I want to add something neither of them said. You mentioned lumbar support, thoracic support, head support &mdash; and you framed it as a spectrum of &ldquo;how much.&rdquo; This is the right instinct, but I would reverse the question. Do not ask &ldquo;how much support should I add?&rdquo; Ask instead: &ldquo;what is the minimum structure that allows the body to find its own comfort?&rdquo;</p>
+        <p>The human body is not static. We shift, we lean, we cross and uncross. A chair that dictates a single posture &mdash; no matter how ergonomically perfect that posture is &mdash; becomes a prison within thirty minutes. The best chairs give you a range of comfortable positions. My Ply Chair has almost no lumbar support in the traditional sense. What it has is a subtle curve and a slight flex in the plywood that lets you move within it. People sit in it for hours without thinking about it. That is the test.</p>
+    </div>
+
+    <p class="stage">Charles Eames taps the table:</p>
+
+    <div class="designer">
+        <span class="name">Eames</span>
+        <p>You said you haven&rsquo;t studied ergonomics, but you just reasoned your way to the hip-foot foundation on your own, which tells me you think from observation, not from textbooks. Good &mdash; Ray and I worked the same way. So here is my question for you, and it is a practical one: you now know that the hip angle is the master variable. A dining chair and a lounge chair are essentially two different machines for two different hip angles. If your mission is to make chairs available to everyone, and you had to choose just ONE of those two to start with &mdash; the upright or the reclined &mdash; which do you build first, and why?</p>
+        <p>Think about where the greatest unmet need is. Think about which one teaches you more as a maker. Think about which one people will actually use every day.</p>
+    </div>
+
+    <div class="me">
+        <span class="name">Me</span>
+        <p>I lean towards the lounge chair. From a practical cost consideration I know that&rsquo;s not correct. But the lounge chair is more valuable. Psychologically, people want a place to sit, so they can &ldquo;be at home&rdquo;. Eating is more specific and doesn&rsquo;t give you the same psychological sense of rest or comfort. A lounge can be versatile &mdash; you can relax, eat, work, add a cushion to change the seating angle and support profile. I think there&rsquo;s a reason why the IKEA Po&auml;ng chair is everywhere.</p>
+    </div>
+
+    <p class="stage">Eames smiles.</p>
+
+    <div class="designer">
+        <span class="name">Eames</span>
+        <p>You just did something interesting &mdash; you gave your answer, then immediately told us why it was wrong, then argued yourself back into it. That instinct to question your own reasoning in real time is valuable. Don&rsquo;t lose it.</p>
+        <p>But I must push back. You say the lounge chair is more versatile &mdash; that you can relax, eat, work from it. Have you tried to eat dinner at a proper table from a lounge chair? The hip angle is wrong. Your arms reach upward instead of forward. You hunch. You compensate. A lounge chair that tries to be a dining chair is a lounge chair that fails at both. Ray and I learned this the hard way &mdash; versatility is not the same as universality. Our shell chair succeeded because we didn&rsquo;t make one shape do everything. We made one shape accept different bases that changed its purpose.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Morrison</span>
+        <p>But I think there is something correct in your instinct, even if the reasoning needs refining. You mentioned the Po&auml;ng chair. Study it carefully &mdash; it is one of the most important chairs of the last fifty years and almost no designer will admit it. It is affordable. It is comfortable for long periods because the cantilevered frame has natural flex &mdash; the whole chair breathes with you. It ships flat. It is made from bent laminated birch, which Thonet here would appreciate. And nobody calls it beautiful. Nobody puts it in a magazine. It simply works, in millions of homes, across decades. That is Super Normal whether IKEA intended it or not.</p>
+        <p>The question is &mdash; why does the design world ignore it while celebrating chairs that cost fifty times more and serve people fifty times less?</p>
+    </div>
+
+    <p class="stage">Thonet leans forward:</p>
+
+    <div class="designer">
+        <span class="name">Thonet</span>
+        <p>Because I know this problem intimately. My No. 14 was the Po&auml;ng of the nineteenth century. It was everywhere &mdash; in every caf&eacute; from Vienna to Buenos Aires. And for exactly that reason, tastemakers dismissed it. When something is truly accessible, the elite must reject it to maintain distinction. This is not a design problem. It is a social problem. And you must decide early: are you designing for the approval of other designers, or for the person who comes home exhausted and needs somewhere good to sit? You cannot do both. I chose. Morrison chose. Eames chose. You must choose.</p>
+    </div>
+
+    <p class="stage">Wegner sets down his coffee:</p>
+
+    <div class="designer">
+        <span class="name">Wegner</span>
+        <p>Your instinct toward the lounge is noted, and we will return to it. But I want to challenge something you said that troubles me. You said you could &ldquo;add a cushion to change the seating angle and support profile.&rdquo; This concerns me deeply. A cushion is not design &mdash; a cushion is an apology. It says the chair did not do its job, so here is a soft thing to hide the failure. Every great chair I have made works with the body directly. The wood itself curves where the body curves. The seat pan is shaped, not padded over. If your chair needs a cushion to be comfortable, your chair is not finished.</p>
+        <p>So let me ask you this: forget the lounge versus dining question for a moment. Think about a single piece of wood &mdash; a plank. If you were to shape that plank into a seat that a person could sit on comfortably for one hour with no cushion and no upholstery, what would you do to it? How would you shape it? Think about what the body is pressing against and where the pressure must go.</p>
+    </div>
+
+    <div class="me">
+        <span class="name">Me</span>
+        <p>Very interesting comments &mdash; I think some modern day context is helpful. Today more people live alone and are less connected than ever. A person&rsquo;s home or apartment is more likely to have a coffee table as a do-it-all surface than a traditional dining table. Dining tables have become makeshift office stations. Just like mid century blurred the lines between outside and inside, today a design must serve the personal and the professional in a digitally engaged world. I love a Sam Maloof chair &mdash; but no one is buying that or an Eames lounger for functionality. It&rsquo;s an investment piece.</p>
+        <p>I bring this up as a transition to the question about a wooden seat. I would argue wood is not the best surface for modern chairs &mdash; even the famous JP501 or 503 had upholstered seats or woven cane strips. That said, you can create a saddle that allows the glutes and hamstrings to move in a supported fashion within the seat. For a meal, that might suffice. For a three-four hour focus session, I&rsquo;m not as sure. Jens Risom got this right &mdash; he separated the structure from the seating surfaces, and designed with different materials accordingly.</p>
+    </div>
+
+    <p class="stage">A long pause. The designers exchange glances. Morrison is nodding. Wegner&rsquo;s expression is complex &mdash; challenged but not displeased. Rietveld, who has been quiet, stirs.</p>
+
+    <div class="designer">
+        <span class="name">Wegner</span>
+        <p>You have courage to disagree with me at my own table. Good. And you are not entirely wrong &mdash; I notice you referenced the Jens Risom chair, which uses a webbed strap seat on a wood frame. Risom was Danish, trained in the same tradition I was, and he made that chair in 1942 from surplus parachute webbing because that was what was available. So even his separation of structure from surface was born from constraint, not theory.</p>
+        <p>But I will concede your larger point partially. I shaped wood seats because I understood wood. You must design with what you understand. If you do not yet have a relationship with wood &mdash; if you have not spent hours with a spokeshave learning where the grain wants to go &mdash; then wood as a seating surface will fight you. Start with what you can control.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Rietveld</span>
+        <p>I have been listening carefully, and I want to address something none of my colleagues have raised. You described the modern condition &mdash; people living alone, coffee tables replacing dining tables, the blurring of work and rest. You are describing a spatial crisis, not a furniture crisis. The chair you need to design does not exist yet because the room it belongs in does not exist yet.</p>
+        <p>Mid-century designers like Eames could assume a living room, a dining room, a bedroom &mdash; distinct spaces for distinct purposes. You cannot assume this. Your chair must define its own territory within an undifferentiated space. It must say &ldquo;here is where you rest&rdquo; or &ldquo;here is where you focus&rdquo; without walls to help it. This is what I meant when I said a chair is a spatial proposition. You are not just designing an object. You are designing a zone within a room.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Morrison</span>
+        <p>Rietveld is right, and this is rare for me to say. But I want to ground his abstraction in something practical. You mentioned the Maloof rocker and the Eames lounge as investment pieces &mdash; things people buy for status, not function. This is the trap of the design market.</p>
+        <p>But consider what happens in the real world. The most-used chair in most apartments is not the expensive one. It is the cheap one near the desk. It is the one by the kitchen counter. It is the one people actually grab without thinking. If you want to serve the person living alone in a studio, do not design them a beautiful lounge they will arrange a room around. Design the chair they reach for fifteen times a day without noticing. That is the hardest brief in furniture, and almost nobody is working on it.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Prouv&eacute;</span>
+        <p>And this is where I return to your point about separating structure from surface. You are correct &mdash; Risom understood this, I understood this. My Standard Chair uses a steel frame with a wooden seat and back. The steel handles the forces. The wood handles the body. Each material does what it does best.</p>
+        <p>But I want to push you further. You said wood may not be the best surface for modern chairs. Fine. Then tell me &mdash; what is? You have rejected one material. Now you must commit to another. And when you choose, you must answer three questions about it: How does it feel against skin after one hour? How does it age after ten years? And can you afford to put it on ten thousand chairs?</p>
+    </div>
+
+    <p class="stage">Prouv&eacute; holds your gaze. Those three questions &mdash; comfort at one hour, aging at ten years, cost at ten thousand units. What material are you reaching for, and how does it answer all three?</p>
+
+    <div class="me">
+        <span class="name">Me</span>
+        <p>I didn&rsquo;t reject wood. I questioned the assumption that it&rsquo;s the best material for a seat. To answer Mr Wegner&rsquo;s question directly &mdash; I have been working with wood for over ten years. For species, I would choose a durable, cheap, forgiving tree like pine. It is easier to shape, harder in actual density (especially southern yellow pine), and pretty lightweight comparatively. I&rsquo;d laminate two boards on edge, grain facing front to back since it&rsquo;s hard to find one board large enough for an adult seat. I would saddle the seat with about 1/4&Prime; depth at the back to 3/8&Prime; in the front so there&rsquo;s a slight forward lean. I would not keep a separator between the legs to open up more possibilities for range of motions.</p>
+        <p>To answer the actual material selection question, I would turn to biodegradable materials like hemp or cord that can be woven to reproduce tactile concave surfaces. Or there are emerging materials like plant-derived polymers that may provide as much structural rigidity as carbon fiber without the environmental hazards. Today&rsquo;s chairs are all some combination of modern polymers &mdash; I would challenge that notion to provide more lasting, reusable materials.</p>
+    </div>
+
+    <p class="stage">Wegner sits back. For the first time, he looks genuinely pleased.</p>
+
+    <div class="designer">
+        <span class="name">Wegner</span>
+        <p>Ten years with wood and you did not say so when I asked? You let me lecture you about spokeshaves while you already know where the grain goes. I respect the humility, but do not hide your experience at this table &mdash; it changes how we teach you.</p>
+        <p>Now, your seat. Laminating two boards on edge with grain running front to back &mdash; this is sound. You get a wider panel without a single board, and the grain orientation resists the downward bowing force from the sitter&rsquo;s weight. Good structural thinking. Your saddle depth is conservative &mdash; a quarter inch to three-eighths &mdash; which tells me you understand that a saddle is a suggestion, not a bucket. Too deep and you trap the sitter. Too shallow and you have done nothing.</p>
+        <p>But I question your choice to eliminate the separator between the legs. You mean no front stretcher rail? The front rail is not just structural &mdash; it prevents the front legs from splaying under lateral load when someone shifts their weight or pushes back from a table. If you remove it, you must compensate elsewhere. How?</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Prouv&eacute;</span>
+        <p>I want to address the material answer because you surprised me. You did not name a single existing commercial material. You reached for hemp, woven cord, plant-derived polymers &mdash; materials that are emerging or traditional but not standard in production furniture. This tells me you are thinking about where the industry should go rather than where it is. I admire this.</p>
+        <p>But I must warn you from experience. I spent years fighting with manufacturers who refused to use my sheet steel methods because the tooling was unfamiliar. Vision without a supply chain is just philosophy. Hemp cord &mdash; who is spinning it at furniture grade? Plant-based polymers &mdash; who is molding them at the tolerances you need for a structural seat? You must be an inventor and a supply chain architect if you want to bring a new material to ten thousand chairs.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Morrison</span>
+        <p>I want to come back to the pine. Everyone at this table has overlooked what you said, but I caught it. You chose pine &mdash; cheap, available, forgiving. Not walnut. Not oak. Not teak. This is the most important design decision you have made in this entire conversation, and you made it almost casually.</p>
+        <p>Pine says everything about your values. It says you are not designing for a showroom. It says you want the material cost low enough that the retail price stays accessible. It says you are willing to sacrifice the prestige of a hardwood for the reach of a softwood. Thonet did this with beech &mdash; it was the cheap wood of Central Europe, and he made it iconic. You could do the same with southern yellow pine if you respect it enough to let it be what it is rather than staining it to look like something more expensive.</p>
+        <p>But I have a concern. Pine dents. Pine scratches. Pine shows every mark. In ten years, a pine chair will look used. Is this acceptable to you, or is it a problem? Because your answer reveals whether you are designing for the photograph or for the life.</p>
+    </div>
+
+    <p class="stage">Thonet clears his throat:</p>
+
+    <div class="designer">
+        <span class="name">Thonet</span>
+        <p>We have been talking about materials and ergonomics and the modern condition, and this is all important. But I want to return to the beginning &mdash; to making chairs available to all. You have ten years of woodworking. You know pine. You are thinking about woven surfaces and biodegradable materials. You clearly have both craft and conscience.</p>
+        <p>So now the most practical question any of us will ask you tonight: how do you intend to actually produce these chairs? One at a time in your own workshop? In batches with a small team? Through a manufacturer? Each path constrains your design in completely different ways. A hand-built chair can have complex joinery. A batch-produced chair needs jigs and repeatable processes. A manufactured chair must be designed for machines you may not own. Which path are you choosing, and how does that choice change the chair you just described to us?</p>
+    </div>
+
+    <div class="me">
+        <span class="name">Me</span>
+        <p>I don&rsquo;t want to remove the front stretcher. It is critical to have an undercarriage that can make the chair stronger over time with compression. The shape depends on the brief and situation (H shaped, staggered, etc). I simply said I want to get rid of the seam in the seat that makes the saddle a &ldquo;w&rdquo; instead of a &ldquo;u&rdquo;. Hope that clarifies.</p>
+        <p>Pine is the cheaper alternative. For mass produced quality pieces, I may lean towards Oak or Ash. Workable, extremely durable, can last for generations if handled, built and cared for properly. This production question is what I am wrestling with most &mdash; I live in a small NY apartment, limited space, tooling and time. I don&rsquo;t have the luxury of building a Windsor shoe from scratch or teaching myself greenwood techniques. So I would need to understand how to use everyday common materials from a hardware store lumber to make a stick chair, or how I can use mixed media &mdash; bent steel tubes at the local factory to test.</p>
+        <p>And that gets at my major question &mdash; how do you prototype? Is it by sketching? Making scaled models. Using CAD?</p>
+    </div>
+
+    <p class="stage">The table comes alive. This is the question they&rsquo;ve all been waiting for.</p>
+
+    <div class="designer">
+        <span class="name">Eames</span>
+        <p>Finally. You have arrived at the real work. Everyone wants to talk about philosophy and materials &mdash; Ray and I wanted to talk about process. And I will tell you exactly how we did it.</p>
+        <p>We did all three and we did them in a specific order. First, we sketched &mdash; not to make beautiful drawings, but to think with our hands. A sketch is a conversation with yourself. It takes thirty seconds and it tells you whether an idea has life in it or not. We filled thousands of pages with sketches that went nowhere, and that was the point. Second, we built models &mdash; rough, fast, ugly models. Our plywood splints started as shapes draped over a plaster cast of a leg. No precision. Just does this curve feel right against the body? Third, and only third, did we engineer for production.</p>
+        <p>The order matters. If you start with CAD, you are optimizing before you have discovered. If you start with a finished prototype, you have invested too much to abandon a bad idea. Sketch to discover. Model to test. Engineer to produce.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Prouv&eacute;</span>
+        <p>Eames is right about the sequence but I want to address your actual constraint, because it is mine too. I did not start in a factory. I started in a metalworking shop in Nancy with a few tools and my hands. Your small apartment in New York is not a limitation &mdash; it is a forcing function.</p>
+        <p>You cannot build a full chair in that space, so do not try. Build components. Build one joint. Build one leg assembly. Build the seat and nothing else. Test each piece independently. A chair is an assembly of relationships &mdash; you do not need to build the whole thing to learn whether the seat-to-leg connection works. Take your pine or your oak, cut two pieces, and join them at the angle you intend for the back leg to meet the seat. Sit force on it. Does it flex? Does it hold? Does it feel right in your hand? You can do this on a workbench that fits in a closet.</p>
     </div>
 
     <div class="designer">
         <span class="name">Wegner</span>
-        <p>&ldquo;A cushion is not design — a cushion is an apology.&rdquo;</p>
-    </div>
-
-    <!-- MATERIALS -->
-    <h2 class="section-title">Materials — Pine, Structure vs Surface</h2>
-
-    <div class="me">
-        <span class="name">Me</span>
-        <p>I'm starting with pine. Southern yellow pine specifically. It's cheap, forgiving, available everywhere. But pine is a values statement too: access over prestige.</p>
+        <p>I made more than five hundred chairs and I will tell you my secret. I never began with a complete design. I began with a joint and a feeling. I would hold two pieces of wood together at an angle and ask &mdash; does this transition want to be sharp or does it want to flow? Then I would carve just that transition, that one moment where the pieces meet. Sometimes a whole chair grew from a single joint that felt right.</p>
+        <p>Your constraint is real &mdash; space, tools, time &mdash; but a joint needs only a saw, a chisel, and a piece of scrap wood. Start there.</p>
+        <p>What I will caution against is CAD as a starting point. CAD is seductive because it looks finished. You rotate the model, you render it, you believe you have designed a chair. You have not. You have designed a picture of a chair. Until your hands have felt the angle, until you have sat your weight on a joint, until you have heard wood creak under load &mdash; you do not yet know what you have. Use CAD later to communicate with a manufacturer. But in the beginning, think with wood, not with screens.</p>
     </div>
 
     <div class="designer">
         <span class="name">Morrison</span>
-        <p>Pine is a good start — but it dents easily. Every mark tells a story until there are too many stories and the chair just looks neglected. You need to think about what happens at year five.</p>
+        <p>I am going to disagree with Wegner, partially. For someone in a small apartment with limited shop access, CAD has one enormous advantage that none of my colleagues are acknowledging: you can iterate without consuming material. You can design forty seat profiles in an evening and compare them side by side. You can test proportions at full scale on a screen before you commit a single board. The danger Wegner describes is real &mdash; do not mistake the render for the reality &mdash; but the solution is discipline, not avoidance. Use CAD for exploration, then build the three or four most promising options as physical prototypes. Do not build all forty.</p>
+        <p>And to your question about everyday materials from a hardware store &mdash; this is exactly right. Your first prototypes should cost almost nothing. Construction lumber pine. Dowels instead of turned spindles. Off-the-shelf steel tube from a metal supplier if you want to test a hybrid frame. The prototype is not the product. The prototype is a question made physical. Does this angle work? Does this height feel right? Does this flex pattern support the lower back? Each prototype should answer exactly one question. If you are trying to answer five questions with one prototype, you will learn nothing when it fails, because you will not know which question produced the failure.</p>
+    </div>
+
+    <p class="stage">Morrison pauses, then looks at you directly.</p>
+
+    <div class="designer">
+        <span class="name">Morrison</span>
+        <p>You said you live in a small apartment and that limits your tooling and space. I understand this well &mdash; I designed my first chairs in a London flat that was not much bigger. But let me ask you something specific. Given your constraints, what tools do you actually have access to right now? And separately, is there a maker space, a shared shop, a local fabricator within reach? Because the answer changes everything about how we advise you on your first prototype. A man with a table saw and a drill press has a different path than a man with a hand saw and a workbench. Tell us what you are working with and we will tell you what to build first.</p>
     </div>
 
     <div class="me">
         <span class="name">Me</span>
-        <p>Agreed. For production I'd move to oak or ash. Durable, generational, takes a beating. Pine is for prototyping and proving the design. Oak or ash is for the chair you hand down.</p>
+        <p>I have a Japanese handsaw and a vintage Stanley jack plane. But I don&rsquo;t have a workbench or a holding solution. There is a shop I can pay for, but it is pricey. It has everything &mdash; chop saw, jointer, planer, drill press, table saw, dado stack, lathes, etc. Haven&rsquo;t researched metal fabricators in my area.</p>
+        <p>The other constraint is time &mdash; I have a little one so there&rsquo;s very little disposable time other than late at night when the shop is not open. So a lot of this can&rsquo;t be prototyping. It has to be more design, sketch, tape, glue type deal. I have fabric and project colored paper things so I can produce with cardboard and others.</p>
     </div>
 
-    <div class="me">
-        <span class="name">Me</span>
-        <p>For the seat: laminate two boards on edge, grain running front to back. Saddle it — about 1/4&Prime; in the back deepening to 3/8&Prime; at the front. Keep the front stretcher for compression strength.</p>
-    </div>
+    <p class="stage">The energy at the table shifts. The designers lean in &mdash; this is a constraint problem now, and constraint is where design actually happens.</p>
 
-    <div class="me">
-        <span class="name">Me</span>
-        <p>For the seating surface itself — hemp or cord for woven concave surfaces. Plant-derived polymers as emerging alternatives. Challenge the polymer default. Jens Risom separated structure from seating surface — different materials for different jobs.</p>
+    <div class="designer">
+        <span class="name">Eames</span>
+        <p>Now we are talking. You just described the exact conditions under which the best design happens. You have a Japanese saw, a jack plane, no bench, a toddler asleep in the next room, and cardboard. This is magnificent.</p>
+        <p>Do you know what Ray and I had when we started molding plywood in our apartment on Strathmore Drive? An oven, some wood scraps, and a homemade press we called the Kazam! machine. The Eames leg splint &mdash; which led to every molded plywood chair we ever made &mdash; was prototyped in a one-bedroom apartment. Your constraints are not obstacles to your mission. They are your design brief.</p>
+        <p>Cardboard is an extraordinary prototyping material and you should not think of it as a compromise. It bends. It folds. It holds shape when laminated. You can build a full-scale chair from corrugated cardboard in an evening, sit in it, feel the angles, adjust with scissors and tape, and iterate again the next night. Frank Gehry built an entire furniture line from cardboard &mdash; the Easy Edges series &mdash; and those were production pieces, not prototypes. At your stage, cardboard is better than wood because the cost of failure is zero. You can build and destroy five versions in the time it would take to make one joint in oak.</p>
     </div>
 
     <div class="designer">
-        <span class="name">Prouve</span>
-        <p>Good instinct, but a warning: vision without a supply chain is just philosophy. You must be inventor AND supply chain architect.</p>
+        <span class="name">Prouv&eacute;</span>
+        <p>Listen to Eames about cardboard. But I want to give you a specific method because you need structure, not just encouragement.</p>
+        <p>Build what I call a force skeleton. Take heavy corrugated cardboard &mdash; double wall if you can find it &mdash; and cut the side profile of your chair. Just the side view. One piece. The back leg flowing up into the back, the seat connecting to the front leg. Cut two of these profiles and connect them with cross pieces at the seat depth and at the rail heights. You now have a three-dimensional frame that you can sit in.</p>
+        <p>It will flex. It will lean. It will probably collapse the first time. Good. Where it collapses is the lesson. That failure point is telling you where the forces concentrate. Reinforce that point, sit again, find the next failure. You are reverse-engineering the structure through destruction. This costs you nothing but cardboard and tape, and you can do it at midnight on your living room floor while the baby sleeps.</p>
     </div>
 
-    <!-- PROTOTYPING -->
-    <h2 class="section-title">Prototyping Under Constraint</h2>
+    <div class="designer">
+        <span class="name">Wegner</span>
+        <p>I want to speak to the time constraint specifically, because I raised my children while designing chairs and I know what it costs. Here is what I learned: the work does not stop when you leave the workshop.</p>
+        <p>Carry a small notebook. When you sit in a chair at a restaurant, sketch the profile from the side. Just the outline &mdash; thirty seconds. Note the seat height with your hand span. Note where your back makes contact and where it does not. Note whether your feet are flat or reaching. In six months you will have a library of chair profiles drawn from life, and you will begin to see the patterns &mdash; which proportions recur in the chairs that feel good, which angles fail. This is study that requires no tools, no shop, no space. Only attention. And it is the most valuable research you can do.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Morrison</span>
+        <p>Everyone is giving you methods and they are all sound. But I want to name something nobody has said yet. You are in the most important phase of this entire journey and it does not look like progress. It looks like sketching on scrap paper and bending cardboard and reading this conversation late at night. There is no chair yet. There is no product. There is no prototype a visitor would recognize as furniture.</p>
+        <p>This phase &mdash; where you are absorbing principles, training your eye, failing with cheap materials, and refining your instincts &mdash; this is where the actual design happens. Everything after this is execution. Do not rush past it because you feel pressure to produce something tangible. Morrison&rsquo;s first rule of prototyping: if you are not embarrassed by how crude it looks, you spent too long on it.</p>
+    </div>
+
+    <p class="stage">Thonet, who has been listening quietly, speaks last.</p>
+
+    <div class="designer">
+        <span class="name">Thonet</span>
+        <p>Your situation reminds me of my own beginning. I started bending wood in a small workshop in Boppard &mdash; no factory, no investors, just glue and heat and stubbornness. It took me fifteen years before the No. 14 existed. I am not telling you to wait fifteen years. I am telling you that the path from your apartment floor to ten thousand chairs is long, and every step on it teaches you something you cannot skip.</p>
+        <p>But we have talked enough for now about process. I want to return to the chair itself. You told us earlier that you would choose a lounge as your first chair. You have described your material instincts &mdash; pine for prototyping, oak or ash for production, woven or bio-based surfaces for the seat. You have told us about the modern person living alone, the coffee table as the center of life, the blurring of work and rest. You have cardboard and a Japanese saw and late nights.</p>
+        <p>So here is your assignment from this table. Before our next session, build one thing. Not a chair &mdash; a seat. Just the seat. From cardboard, from scrap wood, from whatever you have. Make it the size and shape you believe is correct for the person you described &mdash; the one living alone, working from the couch, eating at the coffee table. Bring it back to us and tell us what you learned when you sat on it. We will know from your description whether you are ready for the next step.</p>
+        <p>Will you accept this assignment?</p>
+    </div>
 
     <div class="me">
         <span class="name">Me</span>
-        <p>My tools: a Japanese handsaw and a vintage Stanley jack plane. No workbench. I'm in a NYC apartment with a toddler. I work late nights only.</p>
+        <p>Let&rsquo;s do it.</p>
+    </div>
+
+    <p class="stage">Thonet stands, places both hands flat on the table.</p>
+
+    <div class="designer">
+        <span class="name">Thonet</span>
+        <p>Good. Then we are agreed. Let me be specific about what we want from you. Do not overthink this. The seat should be roughly 16 to 18 inches wide, 15 to 17 inches deep. These are not rules &mdash; they are starting points based on the average human pelvis. If you are building for yourself first, measure from the outside of one hip to the other while seated and add two inches. That is your width.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Prouv&eacute;</span>
+        <p>And decide the height before you cut anything. You said this person sits at a coffee table. A standard coffee table is 16 to 18 inches high. If the seat is at the same height as the table surface, eating and working become impossible. If the seat is lower, you are reaching up to your coffee and your laptop, which destroys the shoulders within an hour. So your seat height should be at or just slightly above the table surface &mdash; meaning you are designing a low seat, somewhere between 12 and 15 inches off the ground. This is not a dining chair. This is not a standard lounge. This is something in between, and that is precisely why it does not exist yet.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Morrison</span>
+        <p>Laminate your cardboard. Single-wall corrugated is too weak for a seat test. Glue three or four layers together with the flute directions alternating &mdash; one running left to right, the next front to back. This gives you a rigid panel that can support your weight for long enough to learn something. If it collapses, that is data. Use packing tape for speed. White glue for anything you want to keep overnight.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Wegner</span>
+        <p>And when you sit on it &mdash; close your eyes. Do not look at what you built. Feel it. Where does the pressure concentrate? Where do you want to shift but cannot? Where does the edge bite into the back of your thigh? Open your eyes and mark those points with a pen. Those marks are your second iteration.</p>
     </div>
 
     <div class="designer">
         <span class="name">Eames</span>
-        <p>Good. Here's the order. First, <strong>sketch</strong> to discover — 30 seconds, just test if the idea has life. Second, <strong>model</strong> to test — rough, fast, ugly. Third, <strong>engineer</strong> to produce. Never reverse this order. CAD optimizes before you discover.</p>
-        <p>And remember — Frank Gehry built production furniture from cardboard. Easy Edges. Laminate layers with alternating flute directions. Cost of failure is zero.</p>
+        <p>One last thing. Take a photograph from the side while you are sitting on it. Have your wife take it if you can. You will not be able to assess your own posture from inside the experience. The photograph shows you what the chair is actually doing to your body versus what you think it is doing. Bring the photo and the marked-up seat back to this table and we will read it together.</p>
     </div>
 
-    <div class="designer">
-        <span class="name">Prouve</span>
-        <p>Cut a side profile from double-wall cardboard. Make two profiles, connect them with cross pieces at the seat and rail heights. Sit in it. Where it collapses — those are your force concentration points. Reinforce, sit again, find the next failure. It costs nothing. Midnight, living room floor.</p>
-    </div>
-
-    <div class="designer">
-        <span class="name">Wegner</span>
-        <p>Sketch chair profiles at every restaurant you visit. Note the seat height, where the back makes contact, your foot position. In six months you'll have a pattern library from life.</p>
-    </div>
-
-    <div class="designer">
-        <span class="name">Morrison</span>
-        <p>&ldquo;Each prototype answers exactly ONE question. If you try to answer five, you learn nothing from the failure. And if you're not embarrassed by how crude it looks, you spent too long on it.&rdquo;</p>
-    </div>
+    <p class="stage">The designers push their chairs back. Morrison gives a small nod. Wegner is already thinking about your joint problem. Prouv&eacute; is calculating your load angles. Rietveld, quiet all evening, is wondering what spatial idea this strange low seat will embody. The table will be here when you return.</p>
 
     <!-- ASSIGNMENT -->
-    <h2 class="section-title">The Assignment</h2>
-
-    <div class="me">
-        <span class="name">Me</span>
-        <p>The table gave me homework.</p>
-    </div>
-
     <div class="assignment">
-        <h3>Build a Seat</h3>
+        <h3>The Assignment</h3>
         <ul>
             <li>Build a seat (not a full chair) from cardboard</li>
-            <li>Target: 16-18&Prime; wide, 15-17&Prime; deep, 12-15&Prime; high</li>
-            <li>Laminate 3-4 cardboard layers, alternating flute directions</li>
+            <li>Target: 16&ndash;18&Prime; wide, 15&ndash;17&Prime; deep, 12&ndash;15&Prime; high</li>
+            <li>Laminate 3&ndash;4 cardboard layers, alternating flute directions</li>
             <li>Sit test with eyes closed, mark pressure points with pen</li>
             <li>Get a side-view photograph while seated</li>
             <li>Note: what did the body tell you?</li>
         </ul>
     </div>
 
-    <div class="designer">
-        <span class="name">Prouve</span>
-        <p>A coffee table is 16-18&Prime; high. Your seat must be at or slightly above the table surface — that's 12-15&Prime;. This height is between dining and lounge. It doesn't exist yet.</p>
-    </div>
-
     <!-- OPEN QUESTIONS -->
     <div class="questions">
         <h2>Open Questions</h2>
         <ul>
-            <li>How does the Poang's cantilevered flex work structurally?</li>
+            <li>How does the Po&auml;ng&rsquo;s cantilevered flex work structurally?</li>
             <li>Best joints for a stick chair from hardware store lumber?</li>
-            <li>How did Risom's material separation principle evolve?</li>
+            <li>How did Risom&rsquo;s material separation principle evolve?</li>
             <li>What plant-derived polymers are viable for furniture now?</li>
-            <li>Who works on the "chair you grab 15 times a day"?</li>
+            <li>Who works on the &ldquo;chair you grab 15 times a day&rdquo;?</li>
             <li>Minimum viable tool kit for chair component prototyping?</li>
         </ul>
     </div>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obsidian MCP Server | rowbyroh</title>
+    <meta name="description" content="An MCP server bridging Claude AI with an Obsidian knowledge vault. 7 tools, idempotent pipelines, AI classification.">
+    <meta property="og:title" content="Obsidian MCP Server">
+    <meta property="og:description" content="Bridging Claude AI with an Obsidian knowledge vault — note creation, search, linking, AI classification, and incremental sync.">
+    <meta property="og:url" content="https://rowbyroh.com/obsidian-mcp">
+    <meta property="og:type" content="article">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background: #fefefe;
+            color: #1a1a1a;
+            font-weight: 400;
+            line-height: 1.8;
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 3rem 2rem 4rem;
+        }
+
+        .back-link {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.75rem;
+            color: #888;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+        .back-link:hover { color: #1a1a1a; }
+        .back-link::before { content: '\2190  '; }
+
+        h1 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.3rem;
+        }
+
+        .page-subtitle {
+            font-size: 0.88rem;
+            color: #555;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-intro {
+            font-size: 0.88rem;
+            color: #555;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e0e0e0;
+            line-height: 1.7;
+        }
+
+        h2 {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-top: 2.5rem;
+            margin-bottom: 0.8rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            font-size: 0.92rem;
+        }
+
+        .label {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.4rem;
+        }
+
+        .highlight-box {
+            background: #fafafa;
+            border: 1px solid #e8e8e8;
+            padding: 1.2rem 1.5rem;
+            margin: 1rem 0 1.5rem;
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlight-box li {
+            font-size: 0.85rem;
+            padding: 0.25rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .highlight-box li::before {
+            content: '\2014';
+            position: absolute;
+            left: 0;
+            color: #888;
+        }
+
+        .tool-list {
+            margin: 1rem 0;
+        }
+
+        .tool-item {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.88rem;
+        }
+
+        .tool-item:last-child {
+            border-bottom: none;
+        }
+
+        .tool-name {
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .tool-desc {
+            color: #555;
+            font-size: 0.82rem;
+            font-weight: 400;
+        }
+
+        code {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.82rem;
+            background: #f5f5f5;
+            padding: 0.1rem 0.35rem;
+            border: 1px solid #e8e8e8;
+        }
+
+        .architecture {
+            margin: 1.5rem 0;
+            padding: 1.2rem 1.5rem;
+            border-left: 2px solid #ddd;
+        }
+
+        .architecture p {
+            font-size: 0.85rem;
+            margin-bottom: 0.6rem;
+            color: #555;
+        }
+
+        .architecture p:last-child {
+            margin-bottom: 0;
+        }
+
+        .stack-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin: 0.5rem 0 1.5rem;
+        }
+
+        .stack-list span {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.5rem;
+            background: #f5f5f5;
+            border: 1px solid #e8e8e8;
+            color: #555;
+            font-weight: 400;
+        }
+
+        .copyright {
+            margin-top: 4rem;
+            font-size: 0.6rem;
+            color: #888;
+            text-align: right;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 2rem 1.2rem 3rem; }
+            h1 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-link">rowbyroh.com</a>
+
+    <h1>Obsidian MCP Server</h1>
+    <div class="page-subtitle">Bridging Claude AI with a personal knowledge vault</div>
+    <p class="page-intro">An MCP server that gives Claude direct read/write access to an Obsidian vault. 7 tools, 4 dependencies, idempotent pipelines, AI classification. Built to make 270+ conversations and growing actually searchable and interconnected.</p>
+
+    <h2>The Problem</h2>
+
+    <p>Conversations with Claude are disposable by default. Every session starts from zero. I had hundreds of conversations across Claude.ai, Claude Desktop, and Notion that contained real decisions, technical reasoning, and project context. None of it was connected. None of it was searchable from inside a new session.</p>
+
+    <p>The MCP protocol lets Claude call tools directly. So I built a server that turns an Obsidian vault into Claude's long-term memory.</p>
+
+    <h2>The Tools</h2>
+
+    <div class="tool-list">
+        <div class="tool-item">
+            <span class="tool-name">create_note</span>
+            <span class="tool-desc"> &mdash; create notes with YAML frontmatter, tags, links</span>
+        </div>
+        <div class="tool-item">
+            <span class="tool-name">read_note</span>
+            <span class="tool-desc"> &mdash; read any note by path, returns full content</span>
+        </div>
+        <div class="tool-item">
+            <span class="tool-name">search_notes</span>
+            <span class="tool-desc"> &mdash; full-text search across the vault</span>
+        </div>
+        <div class="tool-item">
+            <span class="tool-name">link_notes</span>
+            <span class="tool-desc"> &mdash; create bidirectional [[wikilinks]] between notes</span>
+        </div>
+        <div class="tool-item">
+            <span class="tool-name">get_backlinks</span>
+            <span class="tool-desc"> &mdash; find all notes that reference a given note</span>
+        </div>
+        <div class="tool-item">
+            <span class="tool-name">process_daily_note</span>
+            <span class="tool-desc"> &mdash; atomize daily notes into linked individual notes</span>
+        </div>
+        <div class="tool-item">
+            <span class="tool-name">screenshot</span>
+            <span class="tool-desc"> &mdash; capture screen via PowerShell for visual verification</span>
+        </div>
+    </div>
+
+    <h2>Claude.ai API Sync</h2>
+
+    <p>The first pipeline problem: getting conversations out of Claude.ai and into Obsidian. Claude.ai has no export API, but the session cookie provides access to a conversation list endpoint.</p>
+
+    <p>The sync is incremental. It fetches the conversation index, compares timestamps against what's already in the vault, and only processes new or updated conversations. A typical sync makes one API call. Full rescan is available but rarely needed.</p>
+
+    <div class="highlight-box">
+        <ul>
+            <li>Incremental by default &mdash; compares server timestamps to local frontmatter</li>
+            <li>Dry-run mode for previewing changes before any writes</li>
+            <li>Idempotent &mdash; re-running skips existing by <code>source_id</code>, <code>--overwrite</code> to update</li>
+            <li>Generates YAML frontmatter with source attribution and sync metadata</li>
+        </ul>
+    </div>
+
+    <h2>Import Pipeline</h2>
+
+    <p>Before the API sync existed, I needed to import a bulk export of 260+ conversations. The parser handles Claude.ai's JSON export format, extracting conversations into individual markdown notes with proper frontmatter.</p>
+
+    <p>The key design decision: idempotency via <code>source_id</code>. Every imported note gets a unique identifier in its frontmatter. Re-running the import skips anything that already exists. This means the pipeline is safe to run repeatedly without creating duplicates, and <code>--overwrite</code> lets you selectively update.</p>
+
+    <h2>AI Classification</h2>
+
+    <p>Notes need tags to be useful, but manually tagging 270+ notes is not realistic. The classification system uses the Anthropic API (Claude Haiku for cost efficiency) to read note content and assign tags from a controlled vocabulary.</p>
+
+    <div class="architecture">
+        <p>The system has a two-tier fallback: AI classification first, heuristic matching second. If the API call fails or returns low confidence, keyword-based heuristics assign tags instead. This means classification works offline and degrades gracefully.</p>
+        <p>Tags are written to frontmatter, not inline. Obsidian indexes frontmatter tags natively, so they appear in the tag pane and are searchable without plugins.</p>
+    </div>
+
+    <h2>Notion Sync</h2>
+
+    <p>Not everything lives in Claude conversations. Project specs, meeting notes, and reference docs were in Notion. The Notion sync uses the official API with an integration token to pull pages incrementally.</p>
+
+    <p>Like the Claude.ai sync, it detects updated pages by comparing <code>last_edited_time</code> against local frontmatter. Notion's block-based content model gets flattened into clean markdown. Rich content (databases, embeds) is handled gracefully &mdash; what can be represented in markdown is, what can't is noted.</p>
+
+    <h2>Dev/Prod Pipeline</h2>
+
+    <p>Every change is tested in a dev vault before touching production. The dev vault is a structural mirror of prod with test fixtures. The promote pipeline runs: build, test against dev, test against prod.</p>
+
+    <div class="architecture">
+        <p><code>npm test</code> &mdash; runs against dev vault</p>
+        <p><code>npm run test:prod</code> &mdash; runs against prod vault</p>
+        <p><code>npm run promote</code> &mdash; full pipeline: build + test dev + test prod</p>
+    </div>
+
+    <p>This exists because I broke prod once by shipping a tool that worked in dev but made assumptions about vault structure that didn't hold. The two-vault system catches that class of bug.</p>
+
+    <h2>Stack</h2>
+
+    <div class="label">Built with</div>
+    <div class="stack-list">
+        <span>TypeScript</span>
+        <span>MCP SDK</span>
+        <span>Anthropic API</span>
+        <span>Node.js</span>
+        <span>Notion API</span>
+    </div>
+
+    <div class="label">Numbers</div>
+    <div class="highlight-box">
+        <ul>
+            <li>7 tools, 4 runtime dependencies</li>
+            <li>270+ conversations imported, zero duplicates</li>
+            <li>Incremental sync typically makes 1 API call</li>
+            <li>Dev + prod vault separation with automated promote</li>
+        </ul>
+    </div>
+
+    <div class="copyright">rowbyroh.com &copy; 2026</div>
+</body>
+</html>
