@@ -2,14 +2,26 @@ const projects = [
     {
         id: 'obsidian-mcp',
         title: 'obsidian mcp',
-        about: 'MCP server bridging Claude with an Obsidian knowledge vault',
+        about: '672 notes, 14 taxonomy dimensions, 2,599 auto-generated wikilinks',
         highlights: [
-            '7 tools, 4 dependencies',
-            'AI classification with heuristic fallback',
-            'Idempotent sync from Claude.ai and Notion'
+            '4 import pipelines — Claude.ai, Notion, Apple Notes',
+            '14-dimension taxonomy — 10 domains, 4 modes',
+            '2,599 wikilinks across 503 interconnected notes'
         ],
         tags: ['ai', 'mcp', 'pkm', 'developer-tools'],
         link: '/obsidian-mcp.html'
+    },
+    {
+        id: 'agentic-stack',
+        title: 'agentic stack',
+        about: 'Four-layer system architecture for building with AI — stateful sessions, not stateless prompts',
+        highlights: [
+            '4 layers — shared state, data pipelines, surfaces, session roles',
+            '6 personas that prime sessions with role + context',
+            '672 notes in a linked, classified vault'
+        ],
+        tags: ['ai', 'systems', 'architecture'],
+        link: '/agentic-stack.html'
     },
     {
         id: 'classifier',

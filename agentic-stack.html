@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic Stack | rowbyroh</title>
+    <meta name="description" content="How I build with AI. A four-layer system architecture for agentic development — infrastructure first, automation last.">
+    <meta property="og:title" content="Agentic Stack">
+    <meta property="og:description" content="A four-layer system architecture for agentic development — infrastructure first, automation last.">
+    <meta property="og:url" content="https://rowbyroh.com/agentic-stack">
+    <meta property="og:type" content="article">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background: #fefefe;
+            color: #1a1a1a;
+            font-weight: 400;
+            line-height: 1.8;
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 3rem 2rem 4rem;
+        }
+
+        .back-link {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.75rem;
+            color: #888;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+        .back-link:hover { color: #1a1a1a; }
+        .back-link::before { content: '\2190  '; }
+
+        h1 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.3rem;
+        }
+
+        .page-subtitle {
+            font-size: 0.88rem;
+            color: #555;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .page-intro {
+            font-size: 0.88rem;
+            color: #555;
+            font-weight: 400;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e0e0e0;
+            line-height: 1.7;
+        }
+
+        /* ---- DIAGRAM ---- */
+        .stack-diagram {
+            width: 100%;
+            margin: 0 0 3rem;
+        }
+
+        .layer {
+            position: relative;
+            border: 1px solid #ccc;
+            margin-bottom: -1px;
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .layer:hover {
+            background: #f8f8f8;
+        }
+
+        .layer.is-active {
+            background: #f5f5f0;
+            border-color: #999;
+            z-index: 2;
+        }
+
+        .layer-header {
+            display: flex;
+            align-items: baseline;
+            padding: 1.2rem 1.5rem 0.4rem;
+            gap: 1rem;
+        }
+
+        .layer-id {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #888;
+            font-weight: 500;
+            min-width: 2rem;
+        }
+
+        .layer-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .layer-principle {
+            font-size: 0.78rem;
+            color: #555;
+            font-style: italic;
+            margin-left: auto;
+        }
+
+        .layer-body {
+            padding: 0 1.5rem 1.2rem;
+            padding-left: calc(1.5rem + 2.2rem);
+        }
+
+        .layer-components {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem 1.2rem;
+            list-style: none;
+        }
+
+        .layer-components li {
+            font-size: 0.85rem;
+            color: #1a1a1a;
+            position: relative;
+            padding-left: 0.9rem;
+        }
+
+        .layer-components li::before {
+            content: '\2014';
+            position: absolute;
+            left: -0.2rem;
+            color: #bbb;
+            font-size: 0.75rem;
+        }
+
+        .component-status {
+            font-size: 0.72rem;
+            color: #888;
+            font-weight: 400;
+        }
+
+        /* ---- DETAIL PANEL ---- */
+        .layer-detail {
+            display: none;
+            padding: 1rem 1.5rem 1.5rem;
+            padding-left: calc(1.5rem + 2.2rem);
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.85rem;
+            line-height: 1.7;
+        }
+
+        .layer.is-active .layer-detail {
+            display: block;
+        }
+
+        .detail-section {
+            margin-bottom: 1rem;
+        }
+
+        .detail-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-label {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #888;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .detail-text {
+            color: #333;
+        }
+
+        .detail-text code {
+            background: #f0f0f0;
+            padding: 0.1rem 0.35rem;
+            font-size: 0.74rem;
+            border: 1px solid #e0e0e0;
+        }
+
+        /* ---- CONNECTORS ---- */
+        .connector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 28px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .connector-line {
+            width: 1px;
+            height: 100%;
+            background: #ccc;
+        }
+
+        .connector-label {
+            position: absolute;
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.68rem;
+            color: #999;
+            letter-spacing: 0.06em;
+            background: #fefefe;
+            padding: 0 0.5rem;
+        }
+
+        /* ---- PHILOSOPHY ---- */
+        .philosophy {
+            margin: 3rem 0 2.5rem;
+        }
+
+        .philosophy h2 {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #888;
+            font-weight: 500;
+            margin-bottom: 1.2rem;
+        }
+
+        .principles {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem 2rem;
+        }
+
+        .principles li {
+            font-size: 0.82rem;
+            line-height: 1.6;
+        }
+
+        .principle-name {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.15rem;
+        }
+
+        .principle-desc {
+            color: #555;
+            font-size: 0.75rem;
+        }
+
+        /* ---- STATS ---- */
+        .stats-row {
+            display: flex;
+            gap: 2rem;
+            margin: 2.5rem 0;
+            padding: 1.2rem 0;
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #888;
+            font-weight: 500;
+        }
+
+        /* ---- COLOPHON ---- */
+        .colophon {
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e8e8e8;
+            line-height: 1.6;
+        }
+
+        .colophon a {
+            color: #555;
+            text-decoration: none;
+            border-bottom: 1px solid #ccc;
+        }
+        .colophon a:hover {
+            color: #1a1a1a;
+            border-color: #1a1a1a;
+        }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 600px) {
+            body {
+                padding: 2rem 1rem 3rem;
+            }
+
+            h1 { font-size: 1.4rem; }
+
+            .layer-header {
+                flex-wrap: wrap;
+                padding: 1rem 1rem 0.3rem;
+                gap: 0.3rem 0.8rem;
+            }
+
+            .layer-principle {
+                margin-left: 0;
+                flex-basis: 100%;
+                padding-left: 3rem;
+            }
+
+            .layer-body {
+                padding: 0 1rem 1rem;
+                padding-left: calc(1rem + 2.5rem);
+            }
+
+            .layer-detail {
+                padding: 0.8rem 1rem 1.2rem;
+                padding-left: calc(1rem + 2.5rem);
+            }
+
+            .layer-components {
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+
+            .principles {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-row {
+                flex-wrap: wrap;
+                gap: 1rem 2rem;
+            }
+
+            .connector-label {
+                font-size: 0.55rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-link">rowbyroh</a>
+    <h1>Agentic Stack</h1>
+    <p class="page-subtitle">How I build with AI. Infrastructure first, automation last.</p>
+    <p class="page-intro">AI sessions are stateless by default. Every conversation starts from zero — no memory of what was decided yesterday, no access to the notes you took last month, no awareness of your other projects. This is the system I built to fix that. Four layers, from shared state at the bottom to session roles at the top, each one solving a specific problem in the chain from "raw data scattered across platforms" to "Claude already knows what I'm working on."</p>
+
+    <!-- ---- STACK DIAGRAM ---- -->
+    <div class="stack-diagram">
+
+        <!-- L4: Session Roles -->
+        <div class="layer" data-layer="4">
+            <div class="layer-header">
+                <span class="layer-id">L4</span>
+                <span class="layer-name">Session Roles</span>
+                <span class="layer-principle">make the machine meet you where you are</span>
+            </div>
+            <div class="layer-body">
+                <ul class="layer-components">
+                    <li>/pm <span class="component-status">live</span></li>
+                    <li>/content <span class="component-status">live</span></li>
+                    <li>/architect <span class="component-status">live</span></li>
+                    <li>/research <span class="component-status">live</span></li>
+                    <li>/analyst <span class="component-status">live</span></li>
+                    <li>/designer <span class="component-status">live</span></li>
+                </ul>
+            </div>
+            <div class="layer-detail">
+                <div class="detail-section">
+                    <div class="detail-label">What</div>
+                    <div class="detail-text">Reusable personas that prime each session with a role, behavioral expectations, and automatic context retrieval. Not chatbots — operational modes. Each one reads the vault, understands the current state, and starts from where the last session left off.</div>
+                </div>
+                <div class="detail-section">
+                    <div class="detail-label">Why this layer exists</div>
+                    <div class="detail-text">Without it, every session starts cold. You re-explain your goals, your constraints, your preferences. Session roles eliminate that tax. <code>/pm</code> already knows your ventures, time constraints, and decision frameworks. <code>/designer</code> already knows your font is IBM Plex Mono and you don't use gradients.</div>
+                </div>
+                <div class="detail-section">
+                    <div class="detail-label">Design decision</div>
+                    <div class="detail-text">Personas are slash commands (markdown files), not system prompts or fine-tunes. They're version-controlled, portable, and editable. Each one references the layers below it — they compose, not duplicate.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="connector">
+            <div class="connector-line"></div>
+            <span class="connector-label">primes session on surface</span>
+        </div>
+
+        <!-- L3: Surfaces -->
+        <div class="layer" data-layer="3">
+            <div class="layer-header">
+                <span class="layer-id">L3</span>
+                <span class="layer-name">Surfaces</span>
+                <span class="layer-principle">right tool for the right mode of thinking</span>
+            </div>
+            <div class="layer-body">
+                <ul class="layer-components">
+                    <li>Claude Code <span class="component-status">primary</span></li>
+                    <li>Claude Desktop <span class="component-status">secondary</span></li>
+                    <li>Claude.ai <span class="component-status">tertiary</span></li>
+                    <li>Remote Control <span class="component-status">emerging</span></li>
+                    <li>Obsidian Mobile <span class="component-status">read/edit</span></li>
+                </ul>
+            </div>
+            <div class="layer-detail">
+                <div class="detail-section">
+                    <div class="detail-label">What</div>
+                    <div class="detail-text">Each surface serves a different cognitive mode. Code is for building — execution, iteration, shipping. Desktop is for planning — strategy, MCP tools, thinking out loud. Web is for quick lookups. Mobile is for reviewing and capturing on the go.</div>
+                </div>
+                <div class="detail-section">
+                    <div class="detail-label">Key constraint</div>
+                    <div class="detail-text">Surfaces don't share context natively. A decision made on Desktop is invisible to Code unless it flows through the vault. This is the problem the entire stack is designed to solve.</div>
+                </div>
+                <div class="detail-section">
+                    <div class="detail-label">Evolution</div>
+                    <div class="detail-text">Code is becoming the primary surface for everything, especially with remote control from mobile. The stack is consolidating around Code as the execution hub, with the vault as the shared memory layer.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="connector">
+            <div class="connector-line"></div>
+            <span class="connector-label">reads and writes via pipelines</span>
+        </div>
+
+        <!-- L2: Data Pipelines -->
+        <div class="layer" data-layer="2">
+            <div class="layer-header">
+                <span class="layer-id">L2</span>
+                <span class="layer-name">Data Pipelines</span>
+                <span class="layer-principle">every conversation is an asset, not ephemera</span>
+            </div>
+            <div class="layer-body">
+                <ul class="layer-components">
+                    <li>Claude.ai sync <span class="component-status">cron 8h</span></li>
+                    <li>Notion sync <span class="component-status">incremental</span></li>
+                    <li>Apple Notes sync <span class="component-status">semi-auto</span></li>
+                    <li>/learnings <span class="component-status">live</span></li>
+                    <li>/digest <span class="component-status">live</span></li>
+                </ul>
+            </div>
+            <div class="layer-detail">
+                <div class="detail-section">
+                    <div class="detail-label">What</div>
+                    <div class="detail-text">Importers and sync tools that pull conversations, notes, and insights from external sources into the vault. All idempotent — re-running skips what's already imported. All incremental — only fetching what changed.</div>
+                </div>
+                <div class="detail-section">
+                    <div class="detail-label">Why this matters</div>
+                    <div class="detail-text">Without pipelines, conversations die when the session ends. With them, every insight, decision, and exploration becomes searchable, linkable, and available to future sessions. The <code>/learnings</code> skill captures session insights in real-time. <code>/digest</code> promotes the best ones into standing instructions.</div>
+                </div>
+                <div class="detail-section">
+                    <div class="detail-label">Architecture</div>
+                    <div class="detail-text">TypeScript importers share common patterns: <code>source_id</code> for dedup, index files for incremental tracking, dry-run mode for preview. Dev vault for testing, prod vault for real data. One pattern, multiple sources.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="connector">
+            <div class="connector-line"></div>
+            <span class="connector-label">imports into shared state</span>
+        </div>
+
+        <!-- L1: Shared State -->
+        <div class="layer" data-layer="1">
+            <div class="layer-header">
+                <span class="layer-id">L1</span>
+                <span class="layer-name">Shared State</span>
+                <span class="layer-principle">the vault is the shared brain</span>
+            </div>
+            <div class="layer-body">
+                <ul class="layer-components">
+                    <li>Obsidian Vault <span class="component-status">672 notes</span></li>
+                    <li>MCP Server <span class="component-status">7 tools</span></li>
+                    <li>NorthStar.md <span class="component-status">identity</span></li>
+                    <li>CLAUDE.md <span class="component-status">instructions</span></li>
+                    <li>Memory System <span class="component-status">per-project</span></li>
+                    <li>Learnings.md <span class="component-status">cross-session</span></li>
+                </ul>
+            </div>
+            <div class="layer-detail">
+                <div class="detail-section">
+                    <div class="detail-label">What</div>
+                    <div class="detail-text">The foundation everything else depends on. An Obsidian vault containing every conversation, note, and document — searchable, linked, and tagged. An MCP server exposing 7 tools for creating, reading, searching, and linking notes. Configuration files that tell every surface who I am and how to work with me.</div>
+                </div>
+                <div class="detail-section">
+                    <div class="detail-label">Core insight</div>
+                    <div class="detail-text">AI sessions are stateless by default. The vault makes them stateful. When a new session starts, it doesn't ask "what are you working on?" — it reads NorthStar.md and already knows. When two surfaces need to share context, it flows through the vault, not through copy-paste.</div>
+                </div>
+                <div class="detail-section">
+                    <div class="detail-label">Organization</div>
+                    <div class="detail-text">Tags and links, not folders. Folder structure is minimal routing for imports. Classification and taxonomy emerge organically from the full body of work — not imposed top-down.</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ---- PHILOSOPHY ---- -->
+    <div class="philosophy">
+        <h2>Design Principles</h2>
+        <ul class="principles">
+            <li>
+                <span class="principle-name">Infrastructure compounds</span>
+                <span class="principle-desc">Long-term systems that reduce friction beat one-off optimizations. Build the vault before building the workflows.</span>
+            </li>
+            <li>
+                <span class="principle-name">Primitives before automation</span>
+                <span class="principle-desc">Get the data model right. Get the tools right. Automation is the last layer, not the first.</span>
+            </li>
+            <li>
+                <span class="principle-name">Stateful over stateless</span>
+                <span class="principle-desc">Every session should know what happened before it. Zero re-explanation tax.</span>
+            </li>
+            <li>
+                <span class="principle-name">Compose, don't duplicate</span>
+                <span class="principle-desc">Personas reference the vault. Pipelines share patterns. Each layer builds on the ones below.</span>
+            </li>
+            <li>
+                <span class="principle-name">Explain the why</span>
+                <span class="principle-desc">Every architectural decision has a rationale. If it can't be explained, it shouldn't be built.</span>
+            </li>
+            <li>
+                <span class="principle-name">Think with me, not for me</span>
+                <span class="principle-desc">AI surfaces alternatives, challenges assumptions, and educates. It doesn't just execute.</span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="stats-row">
+        <div class="stat">
+            <span class="stat-value">4</span>
+            <span class="stat-label">Layers</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">3</span>
+            <span class="stat-label">Surfaces</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">6</span>
+            <span class="stat-label">Personas</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">7</span>
+            <span class="stat-label">MCP Tools</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">672</span>
+            <span class="stat-label">Notes in Vault</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">2,599</span>
+            <span class="stat-label">Wikilinks</span>
+        </div>
+    </div>
+
+    <!-- ---- COLOPHON ---- -->
+    <div class="colophon">
+        This page documents a living system. The stack evolves as the work demands it — not the other way around.
+        Built with <a href="/obsidian-mcp">Obsidian MCP Server</a>, Claude Code, and too many late nights in a Brooklyn apartment.
+    </div>
+
+    <script>
+        // Toggle layer detail on click
+        document.querySelectorAll('.layer').forEach(layer => {
+            layer.addEventListener('click', () => {
+                const wasActive = layer.classList.contains('is-active');
+                // Close all
+                document.querySelectorAll('.layer').forEach(l => l.classList.remove('is-active'));
+                // Toggle clicked
+                if (!wasActive) {
+                    layer.classList.add('is-active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
