@@ -218,42 +218,25 @@
             padding: 0 0.5rem;
         }
 
-        /* ---- PHILOSOPHY ---- */
+        /* ---- TENETS LINK ---- */
         .philosophy {
             margin: 3rem 0 2.5rem;
         }
 
-        .philosophy h2 {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: #888;
-            font-weight: 500;
-            margin-bottom: 1.2rem;
-        }
-
-        .principles {
-            list-style: none;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.2rem 2rem;
-        }
-
-        .principles li {
-            font-size: 0.82rem;
-            line-height: 1.6;
-        }
-
-        .principle-name {
-            font-weight: 600;
-            display: block;
-            margin-bottom: 0.15rem;
-        }
-
-        .principle-desc {
+        .tenets-link {
+            font-size: 0.85rem;
             color: #555;
-            font-size: 0.75rem;
+        }
+
+        .tenets-link a {
+            color: #1a1a1a;
+            text-decoration: none;
+            border-bottom: 1px solid #ccc;
+            font-weight: 600;
+        }
+
+        .tenets-link a:hover {
+            border-color: #1a1a1a;
         }
 
         /* ---- STATS ---- */
@@ -338,10 +321,6 @@
             .layer-components {
                 flex-direction: column;
                 gap: 0.25rem;
-            }
-
-            .principles {
-                grid-template-columns: 1fr;
             }
 
             .stats-row {
@@ -511,35 +490,9 @@
 
     </div>
 
-    <!-- ---- PHILOSOPHY ---- -->
+    <!-- ---- TENETS LINK ---- -->
     <div class="philosophy">
-        <h2>Design Principles</h2>
-        <ul class="principles">
-            <li>
-                <span class="principle-name">Infrastructure compounds</span>
-                <span class="principle-desc">Long-term systems that reduce friction beat one-off optimizations. Build the vault before building the workflows.</span>
-            </li>
-            <li>
-                <span class="principle-name">Primitives before automation</span>
-                <span class="principle-desc">Get the data model right. Get the tools right. Automation is the last layer, not the first.</span>
-            </li>
-            <li>
-                <span class="principle-name">Stateful over stateless</span>
-                <span class="principle-desc">Every session should know what happened before it. Zero re-explanation tax.</span>
-            </li>
-            <li>
-                <span class="principle-name">Compose, don't duplicate</span>
-                <span class="principle-desc">Personas reference the vault. Pipelines share patterns. Each layer builds on the ones below.</span>
-            </li>
-            <li>
-                <span class="principle-name">Explain the why</span>
-                <span class="principle-desc">Every architectural decision has a rationale. If it can't be explained, it shouldn't be built.</span>
-            </li>
-            <li>
-                <span class="principle-name">Think with me, not for me</span>
-                <span class="principle-desc">AI surfaces alternatives, challenges assumptions, and educates. It doesn't just execute.</span>
-            </li>
-        </ul>
+        <p class="tenets-link">Built on <a href="/about">7 operating tenets</a> — the decision framework behind every layer.</p>
     </div>
 
     <div class="stats-row">

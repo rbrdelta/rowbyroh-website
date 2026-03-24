@@ -26,6 +26,7 @@ Personal portfolio site. Static HTML/CSS on Vercel (auto-deploy from GitHub main
 | `chair-roundtable.html` | Live — full transcript |
 | `obsidian-mcp.html` | Live — narrative + technical deep dive |
 | `agentic-stack.html` | Live — system architecture diagram |
+| `about.html` | Live — operating tenets, mission (placeholder) |
 | classifier, research-agent, blog | Pending — "coming soon" |
 
 ## Project Data

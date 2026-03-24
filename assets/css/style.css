@@ -490,6 +490,11 @@ body::after {
     margin-top: 32px;
 }
 
+.link-item:nth-child(5) {
+    transform: rotate(0.6deg);
+    margin-top: -12px;
+}
+
 /* ---- RESPONSIVE ---- */
 @media (min-width: 768px) {
     .portfolio-container {
