@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Analysis | rowbyroh</title>
+    <meta name="description" content="Applying Modern Portfolio Theory, Monte Carlo simulation, and Bayesian updating to personal portfolio management. Systems thinking meets quantitative finance.">
+    <meta property="og:title" content="Portfolio Analysis">
+    <meta property="og:description" content="MPT, Monte Carlo simulation, and Bayesian decision frameworks applied to a real portfolio. Concentration risk, efficient frontiers, and probabilistic thinking.">
+    <meta property="og:url" content="https://rowbyroh.com/portfolio-analysis">
+    <meta property="og:type" content="article">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background: #fefefe;
+            color: #1a1a1a;
+            font-weight: 400;
+            line-height: 1.8;
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 3rem 2rem 4rem;
+        }
+
+        .back-link {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.75rem;
+            color: #888;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+        .back-link:hover { color: #1a1a1a; }
+        .back-link::before { content: '\2190  '; }
+
+        h1 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.3rem;
+        }
+
+        .page-subtitle {
+            font-size: 0.88rem;
+            color: #555;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-intro {
+            font-size: 0.88rem;
+            color: #555;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e0e0e0;
+            line-height: 1.7;
+        }
+
+        h2 {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-top: 2.5rem;
+            margin-bottom: 0.8rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            font-size: 0.92rem;
+        }
+
+        .label {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.4rem;
+        }
+
+        .highlight-box {
+            background: #fafafa;
+            border: 1px solid #e8e8e8;
+            padding: 1.2rem 1.5rem;
+            margin: 1rem 0 1.5rem;
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlight-box li {
+            font-size: 0.85rem;
+            padding: 0.25rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .highlight-box li::before {
+            content: '\2014';
+            position: absolute;
+            left: 0;
+            color: #888;
+        }
+
+        .architecture {
+            margin: 1.5rem 0;
+            padding: 1.2rem 1.5rem;
+            border-left: 2px solid #ddd;
+        }
+
+        .architecture p {
+            font-size: 0.85rem;
+            margin-bottom: 0.6rem;
+            color: #555;
+        }
+
+        .architecture p:last-child {
+            margin-bottom: 0;
+        }
+
+        code {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.82rem;
+            background: #f5f5f5;
+            padding: 0.1rem 0.35rem;
+            border: 1px solid #e8e8e8;
+        }
+
+        .formula {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.82rem;
+            background: #fafafa;
+            border: 1px solid #e8e8e8;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0 1.5rem;
+            line-height: 1.9;
+            color: #555;
+        }
+
+        .formula .var {
+            color: #1a1a1a;
+            font-weight: 500;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0 1.5rem;
+            font-size: 0.82rem;
+        }
+
+        th {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-weight: 500;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #888;
+            text-align: left;
+            padding: 0.5rem 0.8rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        td {
+            padding: 0.4rem 0.8rem;
+            border-bottom: 1px solid #f0f0f0;
+            color: #1a1a1a;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .stack-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin: 0.5rem 0 1.5rem;
+        }
+
+        .stack-list span {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.5rem;
+            background: #f5f5f5;
+            border: 1px solid #e8e8e8;
+            color: #555;
+            font-weight: 400;
+        }
+
+        .copyright {
+            margin-top: 4rem;
+            font-size: 0.6rem;
+            color: #888;
+            text-align: right;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 2rem 1.2rem 3rem; }
+            h1 { font-size: 1.4rem; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 0.3rem 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-link">rowbyroh.com</a>
+
+    <h1>Portfolio Analysis</h1>
+    <div class="page-subtitle">Quantitative finance applied to personal portfolio management</div>
+    <p class="page-intro">A concentrated personal portfolio analyzed through Modern Portfolio Theory, Monte Carlo simulation, and a Bayesian updating framework for ongoing decision-making. The goal: maximize long-term upside while constraining annual losses, using the same mathematical rigor typically reserved for institutional portfolios.</p>
+
+    <h2>The Problem</h2>
+
+    <p>The portfolio had grown significantly over five years &mdash; strong returns driven by early conviction in a few positions. But conviction had created extreme concentration. One position represented over 60% of total value. The next largest sector block pushed effective exposure past 90% in correlated assets.</p>
+
+    <p>Gut feel said "it's working, don't touch it." The math said something different.</p>
+
+    <div class="highlight-box">
+        <div class="label">Concentration at a glance</div>
+        <ul>
+            <li>Largest single position: 66% of portfolio value</li>
+            <li>Top 3 holdings: 95% of portfolio value</li>
+            <li>HHI concentration score: 8,221 &mdash; anything above 2,500 is "concentrated"</li>
+            <li>Zero exposure to healthcare, consumer staples, utilities, fixed income, international developed markets</li>
+        </ul>
+    </div>
+
+    <p>The Herfindahl-Hirschman Index (HHI) sums the squares of each position's portfolio weight. A fully diversified 20-stock portfolio scores around 500. A portfolio with one dominant position scores in the thousands. At 8,221, this wasn't a portfolio &mdash; it was a leveraged bet with decorative diversification.</p>
+
+    <h2>Prior Work</h2>
+
+    <p>This wasn't the first time I'd done this analysis. A financial modeling capstone project had covered the full Modern Portfolio Theory toolkit: efficient frontier construction, Sharpe ratio optimization, CAPM regression, and Monte Carlo simulation. That project used a two-asset portfolio (total bond index + S&P 500 index) to demonstrate the math.</p>
+
+    <div class="highlight-box">
+        <div class="label">Capstone findings on a two-asset portfolio</div>
+        <ul>
+            <li>Optimal allocation: ~68% bonds / ~32% equities &mdash; maximized Sharpe ratio at 0.48</li>
+            <li>The optimal mix returned less than pure equities but with dramatically less risk</li>
+            <li>Monte Carlo projection on $5M: optimal mix range of $273K vs. single-stock range of $2.9M</li>
+            <li>Risk-adjusted returns matter more than raw returns &mdash; the math is unambiguous</li>
+        </ul>
+    </div>
+
+    <p>The capstone proved the theory. Now the question was whether I'd apply my own conclusions to my own money &mdash; or keep doing what felt good.</p>
+
+    <h2>Methodology</h2>
+
+    <p>The analysis has three layers, each building on the last. Correlation analysis reveals hidden concentration. Monte Carlo simulation quantifies the range of outcomes. The Bayesian framework turns a one-time analysis into a decision system that improves over time.</p>
+
+    <h2>Layer 1: Correlation and Covariance</h2>
+
+    <p>Position sizing alone doesn't capture risk. Two stocks at 10% each could behave like one 20% position if they're highly correlated. The semiconductor holdings in this portfolio &mdash; spread across chip designers, foundries, and equipment makers &mdash; looked diversified by company but moved together in practice.</p>
+
+    <div class="architecture">
+        <p>Correlation matrix: for <em>n</em> holdings, compute pairwise Pearson correlations from historical returns. A 19-stock portfolio produces 171 unique pairs. Visualize as a heatmap to identify clusters of co-movement.</p>
+        <p>Covariance matrix: same structure, but captures magnitude of co-movement, not just direction. This feeds directly into portfolio variance calculation and efficient frontier optimization.</p>
+    </div>
+
+    <p>The "diversified" 10% of the portfolio that wasn't the dominant position was itself 62% semiconductors. In a tech downturn, the non-concentrated portion would correlate with the concentrated portion. Effective diversification was near zero.</p>
+
+    <h2>Layer 2: Monte Carlo Simulation</h2>
+
+    <p>Historical averages tell you the expected outcome. Monte Carlo tells you the range of outcomes and how likely each one is. The simulation generates thousands of possible portfolio paths by sampling from the historical return distributions of each holding, respecting the correlations between them.</p>
+
+    <div class="formula">
+        <span class="var">Objective:</span> maximize E[5-year portfolio return]<br>
+        <span class="var">Constraint:</span> P(annual loss &gt; 20%) &lt; 10%<br>
+        <span class="var">Simulations:</span> 10,000 scenarios over 5-year horizon<br>
+        <span class="var">Output:</span> worst case, mean, best case, 95% confidence interval
+    </div>
+
+    <p>The constraint is the important part. Unconstrained optimization just tells you to concentrate in the highest-returning asset &mdash; which is exactly the current portfolio. Adding the loss constraint forces the optimizer to find allocations where the upside remains high but the downside is bounded. The portfolio that maximizes expected return <em>while keeping annual losses under 20% with 90% probability</em> looks very different from the portfolio that just maximizes return.</p>
+
+    <h2>Layer 3: Bayesian Updating</h2>
+
+    <p>A one-time optimization is a snapshot. Markets change. Companies change. The analysis that's correct in January may be wrong by June. The Bayesian framework turns static analysis into a living decision system.</p>
+
+    <p>For each holding, define a hypothesis: "This company will compound at X% annually over the next five years." Assign a prior probability based on historical data, current fundamentals, and competitive position. Then update that probability as new evidence arrives.</p>
+
+    <div class="highlight-box">
+        <div class="label">Bayesian update cycle</div>
+        <ul>
+            <li>Prior: initial probability estimate based on historical performance + forward analysis</li>
+            <li>Evidence: quarterly earnings, competitive developments, regulatory changes</li>
+            <li>Posterior: updated probability incorporating new evidence via Bayes' theorem</li>
+            <li>Decision: posterior crosses threshold &rarr; adjust position size</li>
+            <li>Next prior: yesterday's posterior becomes today's prior</li>
+        </ul>
+    </div>
+
+    <h2>Update Frequency</h2>
+
+    <p>How often to update matters. Too frequent and you're reacting to noise. Too infrequent and you miss regime changes. The statistically sound answer for a five-year investment horizon: quarterly, with event-driven overrides.</p>
+
+    <div class="architecture">
+        <p>Daily and weekly price movements are 80&ndash;90% noise. Monthly returns are still majority noise. Quarterly earnings are high-signal &mdash; actual business performance, not market sentiment.</p>
+        <p>20 quarterly updates over a five-year horizon provides enough data points to learn from while preventing overreaction to short-term volatility.</p>
+    </div>
+
+    <p>Event-driven overrides trigger for material developments: major acquisitions, regulatory actions, competitive disruptions, management changes. Not for analyst upgrades, daily price swings, or general market movements. The discipline of ignoring noise is as important as the discipline of responding to signal.</p>
+
+    <table>
+        <tr>
+            <th>Update trigger</th>
+            <th>Signal quality</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>Quarterly earnings</td>
+            <td>High</td>
+            <td>Full Bayesian update on all holdings</td>
+        </tr>
+        <tr>
+            <td>Material event</td>
+            <td>High</td>
+            <td>Override update on affected holding</td>
+        </tr>
+        <tr>
+            <td>Analyst rating change</td>
+            <td>Low</td>
+            <td>Ignore</td>
+        </tr>
+        <tr>
+            <td>Daily price movement</td>
+            <td>Noise</td>
+            <td>Ignore</td>
+        </tr>
+    </table>
+
+    <h2>What It Revealed</h2>
+
+    <p>The analysis confirmed what the HHI score suggested: the portfolio was dramatically off the efficient frontier. High returns had masked high risk. The expected return was strong, but the tail risk &mdash; the probability of catastrophic annual loss &mdash; was far outside the acceptable constraint.</p>
+
+    <p>The rebalancing path was clear: reduce the dominant position from 66% to under 10%. Diversify across uncorrelated sectors. Add fixed income exposure. The optimizer showed that expected returns dropped modestly while downside risk dropped dramatically &mdash; a favorable trade at any reasonable risk preference.</p>
+
+    <div class="highlight-box">
+        <div class="label">Key findings</div>
+        <ul>
+            <li>Portfolio Sharpe ratio improved significantly after rebalancing toward the efficient frontier</li>
+            <li>Adding negatively correlated assets (bonds, defensive sectors) reduced portfolio volatility more than proportionally</li>
+            <li>The "diversified" semiconductor holdings were 0.7+ correlated &mdash; effective diversification was illusory</li>
+            <li>Bayesian framework revealed that quarterly updating with event overrides is optimal for a 5-year horizon</li>
+        </ul>
+    </div>
+
+    <h2>The System, Not the Answer</h2>
+
+    <p>The specific allocations matter less than the framework. Markets shift. Correlations change. New opportunities appear. What persists is the decision system: quantify concentration, simulate outcomes under constraints, update beliefs with evidence, act on thresholds rather than feelings.</p>
+
+    <p>The capstone project proved the math works in theory. This analysis proved I'd actually use it on my own capital. The Bayesian framework means I don't need to be right once &mdash; I need a system that gets less wrong over time.</p>
+
+    <h2>Stack</h2>
+
+    <div class="label">Methods</div>
+    <div class="stack-list">
+        <span>Modern Portfolio Theory</span>
+        <span>Monte Carlo Simulation</span>
+        <span>Bayesian Inference</span>
+        <span>Efficient Frontier</span>
+        <span>CAPM</span>
+    </div>
+
+    <div class="label">Tools</div>
+    <div class="stack-list">
+        <span>Python</span>
+        <span>NumPy</span>
+        <span>SciPy</span>
+        <span>pandas</span>
+        <span>Excel</span>
+    </div>
+
+    <div class="copyright">rowbyroh.com &copy; 2026</div>
+</body>
+</html>

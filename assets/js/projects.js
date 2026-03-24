@@ -24,6 +24,18 @@ const projects = [
         link: '/agentic-stack.html'
     },
     {
+        id: 'portfolio-analysis',
+        title: 'portfolio analysis',
+        about: 'MPT, Monte Carlo simulation, and Bayesian updating applied to a real portfolio',
+        highlights: [
+            'Concentration risk quantified — HHI 8,221 on a 19-position portfolio',
+            'Constraint-based optimization — maximize upside, cap annual loss at 20%',
+            'Bayesian framework — quarterly updates with event-driven overrides'
+        ],
+        tags: ['finance', 'quantitative', 'systems'],
+        link: '/portfolio-analysis.html'
+    },
+    {
         id: 'classifier',
         title: 'classifier',
         about: 'AI-powered document classification pipeline',

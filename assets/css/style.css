@@ -167,12 +167,18 @@ body::after {
     white-space: nowrap;
 }
 
-.subtitle .now {
+.subtitle .now-link {
     display: block;
     margin-top: 0.5rem;
     font-size: 0.78rem;
     color: #555;
-    font-weight: 400;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.subtitle .now-link:hover {
+    color: #1a1a1a;
 }
 
 /* ---- PORTFOLIO SECTION ---- */
@@ -488,11 +494,6 @@ body::after {
 .link-item:nth-child(4) {
     transform: rotate(-0.4deg);
     margin-top: 32px;
-}
-
-.link-item:nth-child(5) {
-    transform: rotate(0.6deg);
-    margin-top: -12px;
 }
 
 /* ---- RESPONSIVE ---- */

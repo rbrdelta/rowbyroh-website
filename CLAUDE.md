@@ -27,6 +27,7 @@ Personal portfolio site. Static HTML/CSS on Vercel (auto-deploy from GitHub main
 | `obsidian-mcp.html` | Live — narrative + technical deep dive |
 | `agentic-stack.html` | Live — system architecture diagram |
 | `about.html` | Live — operating tenets, mission (placeholder) |
+| `portfolio-analysis.html` | Live — quantitative finance case study |
 | classifier, research-agent, blog | Pending — "coming soon" |
 
 ## Project Data
