@@ -411,8 +411,7 @@ body::after {
     color: #1a1a1a;
     font-weight: 600;
     margin-bottom: 0.6rem;
-    margin-left: -4rem;
-    padding-left: 1rem;
+    margin-left: -0.5rem;
 }
 
 .writing-container {
@@ -675,10 +674,6 @@ body::after {
         margin-left: -6rem;
         margin-right: -6rem;
     }
-    .writing-label {
-        margin-left: -6rem;
-        padding-left: 1rem;
-    }
 }
 
 @media (min-width: 1024px) {
@@ -691,10 +686,6 @@ body::after {
     .portfolio-container {
         grid-template-columns: repeat(3, 1fr);
     }
-    .writing-label {
-        margin-left: -8rem;
-        padding-left: 1rem;
-    }
 }
 
 @media (min-width: 1200px) {
@@ -703,10 +694,6 @@ body::after {
         width: calc(100% + 20rem);
         margin-left: -10rem;
         margin-right: -10rem;
-    }
-    .writing-label {
-        margin-left: -10rem;
-        padding-left: 1rem;
     }
 }
 
@@ -744,7 +731,6 @@ body::after {
 
     .writing-label {
         margin-left: 0;
-        padding-left: 0;
     }
 
     .writing-container {
