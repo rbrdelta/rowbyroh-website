@@ -12,77 +12,31 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/project.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'IBM Plex Mono', monospace;
-            background: #fefefe;
-            color: #1a1a1a;
-            font-weight: 400;
-            line-height: 1.8;
-            max-width: 680px;
-            margin: 0 auto;
-            padding: 3rem 2rem 4rem;
+        .tool-list {
+            margin: 1rem 0;
         }
 
-        .back-link {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 0.75rem;
-            color: #888;
-            text-decoration: none;
-            display: inline-block;
-            margin-bottom: 2rem;
-            font-weight: 400;
-        }
-        .back-link:hover { color: #1a1a1a; }
-        .back-link::before { content: '\2190  '; }
-
-        h1 {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 0.3rem;
-        }
-
-        .page-subtitle {
+        .tool-item {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #f0f0f0;
             font-size: 0.88rem;
-            color: #555;
-            font-weight: 400;
-            margin-bottom: 0.5rem;
         }
 
-        .page-intro {
-            font-size: 0.88rem;
-            color: #555;
-            font-weight: 400;
-            margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid #e0e0e0;
-            line-height: 1.7;
+        .tool-item:last-child {
+            border-bottom: none;
         }
 
-        h2 {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 1rem;
+        .tool-name {
             font-weight: 600;
-            color: #1a1a1a;
-            margin-top: 2.5rem;
-            margin-bottom: 0.8rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #e0e0e0;
+            font-size: 0.85rem;
         }
 
-        h2:first-of-type {
-            margin-top: 0;
-            padding-top: 0;
-            border-top: none;
-        }
-
-        p {
-            margin-bottom: 1rem;
-            font-size: 0.92rem;
+        .tool-desc {
+            color: #555;
+            font-size: 0.82rem;
+            font-weight: 400;
         }
 
         .label {
@@ -121,55 +75,6 @@
             color: #888;
         }
 
-        .tool-list {
-            margin: 1rem 0;
-        }
-
-        .tool-item {
-            padding: 0.6rem 0;
-            border-bottom: 1px solid #f0f0f0;
-            font-size: 0.88rem;
-        }
-
-        .tool-item:last-child {
-            border-bottom: none;
-        }
-
-        .tool-name {
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
-
-        .tool-desc {
-            color: #555;
-            font-size: 0.82rem;
-            font-weight: 400;
-        }
-
-        code {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.82rem;
-            background: #f5f5f5;
-            padding: 0.1rem 0.35rem;
-            border: 1px solid #e8e8e8;
-        }
-
-        .architecture {
-            margin: 1.5rem 0;
-            padding: 1.2rem 1.5rem;
-            border-left: 2px solid #ddd;
-        }
-
-        .architecture p {
-            font-size: 0.85rem;
-            margin-bottom: 0.6rem;
-            color: #555;
-        }
-
-        .architecture p:last-child {
-            margin-bottom: 0;
-        }
-
         .stack-list {
             display: flex;
             flex-wrap: wrap;
@@ -192,11 +97,6 @@
             color: #888;
             text-align: right;
         }
-
-        @media (max-width: 600px) {
-            body { padding: 2rem 1.2rem 3rem; }
-            h1 { font-size: 1.4rem; }
-        }
     </style>
 </head>
 <body>
@@ -204,7 +104,26 @@
 
     <h1>Obsidian MCP Server</h1>
     <div class="page-subtitle">Bridging Claude AI with a personal knowledge vault</div>
-    <p class="page-intro">An MCP server that gives Claude direct read/write access to an Obsidian vault. 672 notes across 4 sources, classified into a 14-dimension taxonomy, connected by 2,599 auto-generated wikilinks. Built to make years of thinking searchable and traversable from inside any Claude session.</p>
+    <p class="page-intro">An MCP server that gives Claude direct read/write access to an Obsidian vault. Built to make years of thinking searchable and traversable from inside any Claude session.</p>
+
+    <div class="stat-strip">
+        <div class="stat">
+            <span class="stat-value">672</span>
+            <span class="stat-label">notes</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">4</span>
+            <span class="stat-label">sources</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">14</span>
+            <span class="stat-label">taxonomy dimensions</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">2,599</span>
+            <span class="stat-label">auto-generated links</span>
+        </div>
+    </div>
 
     <h2>The Problem</h2>
 
@@ -251,7 +170,9 @@
 
     <p>So I opened DevTools. The claude.ai frontend makes authenticated requests to internal endpoints using a <code>sessionKey</code> cookie. Two endpoints do everything: <code>/chat_conversations_v2</code> returns a paginated index of conversations sorted by <code>updated_at</code>, and <code>/chat_conversations/{uuid}</code> returns the full message tree for a single conversation. Neither is documented. Both could break any time Anthropic changes their frontend.</p>
 
-    <p>That fragility is a conscious tradeoff. The alternative was no sync at all, or a manual export workflow that doesn't scale past the first time. The session cookie expires every few days and requires re-extraction from the browser &mdash; there's a helper script for that, but it's still manual. A cron job runs the sync every 8 hours while WSL is active, and a session-start hook alerts when the key has expired or sync is stale. It's a brittle hack held together with timestamp checks and error handling, and it's synced 274 conversations without losing one.</p>
+    <div class="pull-quote">That fragility is a conscious tradeoff. The alternative was no sync at all.</div>
+
+    <p>The session cookie expires every few days and requires re-extraction from the browser &mdash; there's a helper script for that, but it's still manual. A cron job runs the sync every 8 hours while WSL is active, and a session-start hook alerts when the key has expired or sync is stale. It's a brittle hack held together with timestamp checks and error handling, and it's synced 274 conversations without losing one.</p>
 
     <div class="highlight-box">
         <div class="label">The undocumented API contract</div>
@@ -270,6 +191,13 @@
 
     <p>The key design decision: idempotency as a shared invariant. Every pipeline can be re-run safely. <code>source_id</code> prevents duplicates. Incremental modes mean a typical sync makes 1 API call. And every pipeline has a <code>--dry-run</code> flag, because the first time you run something that writes 274 files is not the time to discover a bug.</p>
 
+    <div class="flow-diagram">Claude.ai ──→ API sync ──→ markdown + frontmatter ──→ vault
+Notion     ──→ API sync ──→ markdown + frontmatter ──→ vault
+Notion     ──→ export   ──→ markdown + frontmatter ──→ vault
+Apple Notes──→ Shortcut ──→ iCloud ──→ importer    ──→ vault
+
+shared: source_id dedup │ --dry-run │ dev → prod</div>
+
     <h2>Two-Axis Taxonomy</h2>
 
     <p>Flat tags don't scale. When 95% of notes are tagged "ai" and 89% are tagged "career," the tags tell you nothing. The vault needed a classification system that could differentiate a resume optimization conversation from a freight logistics brainstorm from a baby sleep tracker.</p>
@@ -287,9 +215,7 @@
 
     <p>Classification uses scored keyword matching with title weighting. Title keywords count 3x. Longer notes require higher scores to qualify for a domain, preventing verbose documents from matching everything. Each note is capped at 3 domains and 2 modes &mdash; enough to capture cross-cutting themes, constrained enough to stay meaningful.</p>
 
-    <div class="architecture">
-        <p>The scoring threshold scales with note length: short notes (&lt;500 words) need 1 keyword hit, medium notes need 2, long notes (&gt;2,000 words) need 3. This means a 30-word Apple Note titled "Baby Sleep" correctly tags as <code>domain/family</code>, while a 27,000-word PKM conversation doesn't tag as every domain just because it mentions each topic once.</p>
-    </div>
+    <div class="pull-quote">The scoring threshold scales with note length. A 30-word Apple Note titled "Baby Sleep" correctly tags as domain/family. A 27,000-word PKM conversation doesn't tag as every domain just because it mentions each topic once.</div>
 
     <h2>Link Graph</h2>
 
@@ -315,10 +241,13 @@
 
     <p>The Shortcut times out after ~50 notes. Covering a 278-note library means running it multiple times with different sort orders (by date created, date modified, title) to ensure full coverage. iCloud doesn't sync files eagerly &mdash; they appear as cloud-only placeholders until you open the folder in Windows Explorer to trigger download. The importer detects unreadable placeholders and skips them rather than failing.</p>
 
-    <div class="architecture">
-        <p>Incremental sync via MD5 content hashing. A JSON index maps each note's sanitized title to its content hash. Re-running only processes notes whose content has changed. The Shortcut exports tags as inline <code>#hashtags</code> in the note body, not structured metadata &mdash; the parser extracts them from both locations.</p>
-        <p>Privacy guardrail: notes tagged <code>#confidential</code> are never written to the vault. The importer checks both the metadata field and the note body (because the Shortcut puts tags inline), deletes the export file, and logs the skip. This caught 62 notes that had been imported before the body-level check existed &mdash; all retroactively purged.</p>
-    </div>
+    <div class="flow-diagram">iPhone Shortcut (50 notes/batch)
+  ↓
+iCloud Drive (cloud → local sync, needs manual trigger)
+  ↓
+Node.js importer (MD5 dedup, #confidential filter)
+  ↓
+Vault (217 notes, incremental)</div>
 
     <h2>Notion Sync</h2>
 
@@ -328,15 +257,14 @@
 
     <h2>Dev/Prod Pipeline</h2>
 
+    <div class="pull-quote">This exists because I broke prod once by shipping a tool that worked in dev but made assumptions about vault structure that didn't hold.</div>
+
     <p>Every change is tested in a dev vault before touching production. The dev vault is a structural mirror of prod with test fixtures. The promote pipeline runs: build, test against dev, test against prod.</p>
 
-    <div class="architecture">
-        <p><code>npm test</code> &mdash; runs against dev vault</p>
-        <p><code>npm run test:prod</code> &mdash; runs against prod vault</p>
-        <p><code>npm run promote</code> &mdash; full pipeline: build + test dev + test prod</p>
-    </div>
-
-    <p>This exists because I broke prod once by shipping a tool that worked in dev but made assumptions about vault structure that didn't hold. The two-vault system catches that class of bug.</p>
+    <div class="flow-diagram">npm run promote
+  = build
+  + npm test        (dev vault)
+  + npm run test:prod (prod vault)</div>
 
     <h2>Stack</h2>
 
@@ -349,18 +277,6 @@
         <span>Notion API</span>
         <span>iCloud Drive</span>
         <span>iOS Shortcuts</span>
-    </div>
-
-    <div class="label">Numbers</div>
-    <div class="highlight-box">
-        <ul>
-            <li>672 notes from 4 sources &mdash; 274 Claude conversations, 217 Apple Notes, 181 Notion pages</li>
-            <li>14 taxonomy dimensions &mdash; 10 domain tags, 4 mode tags</li>
-            <li>2,599 auto-generated wikilinks across 503 notes</li>
-            <li>65 notes in detected series with prev/next navigation</li>
-            <li>364 multi-domain notes &mdash; cross-cutting classification, not single-label</li>
-            <li>7 MCP tools, 4 import pipelines, 13 automated tests, 0 duplicates</li>
-        </ul>
     </div>
 
     <div class="copyright">rowbyroh.com &copy; 2026</div>
