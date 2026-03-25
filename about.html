@@ -56,30 +56,6 @@
             line-height: 1.7;
         }
 
-        /* ---- MISSION ---- */
-        .mission {
-            margin-bottom: 3rem;
-        }
-
-        .mission h2 {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: #888;
-            font-weight: 500;
-            margin-bottom: 1.2rem;
-        }
-
-        .mission-placeholder {
-            font-size: 0.85rem;
-            color: #888;
-            font-style: italic;
-            padding: 2rem 0;
-            border: 1px dashed #ddd;
-            text-align: center;
-        }
-
         /* ---- TENETS ---- */
         .tenets {
             margin-bottom: 3rem;
@@ -93,6 +69,17 @@
             color: #888;
             font-weight: 500;
             margin-bottom: 0.4rem;
+        }
+
+        .tenets h2::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 2px;
+            background: #e84040;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+            opacity: 0.7;
         }
 
         .tenets-intro {
@@ -177,12 +164,6 @@
     <a href="/" class="back-link">rowbyroh</a>
     <h1>About</h1>
     <p class="page-subtitle">Product leader. Builder. Father. Maker. Brooklyn.</p>
-
-    <!-- ---- MISSION ---- -->
-    <div class="mission">
-        <h2>Mission &amp; Purpose</h2>
-        <div class="mission-placeholder">Coming soon.</div>
-    </div>
 
     <!-- ---- TENETS ---- -->
     <div class="tenets">

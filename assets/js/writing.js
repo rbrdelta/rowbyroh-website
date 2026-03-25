@@ -17,15 +17,29 @@
             });
     }
 
-    // Homepage: render latest N published posts into #writing-list
+    // Homepage: render featured post + upcoming teasers into #writing-list
     function renderHomepage(posts) {
         var container = document.getElementById('writing-list');
         if (!container) return;
 
         var published = posts.filter(function (p) { return p.published; });
-        var latest = published.slice(0, 3);
+        var upcoming = posts.filter(function (p) { return !p.published; });
 
-        latest.forEach(function (post) {
+        // Featured: latest published post with excerpt
+        if (published.length > 0) {
+            var feat = published[0];
+            var featEl = document.createElement('a');
+            featEl.href = feat.url;
+            featEl.className = 'writing-featured';
+            featEl.innerHTML =
+                '<span class="writing-featured-date">' + escapeHtml(feat.date) + '</span>' +
+                '<span class="writing-featured-title">' + escapeHtml(feat.title) + '</span>' +
+                '<span class="writing-featured-desc">' + escapeHtml(feat.description) + '</span>';
+            container.appendChild(featEl);
+        }
+
+        // Remaining published
+        published.slice(1, 3).forEach(function (post) {
             var a = document.createElement('a');
             a.href = post.url;
             a.className = 'writing-entry';
@@ -34,6 +48,24 @@
                 '<span class="writing-title">' + escapeHtml(post.title) + '</span>';
             container.appendChild(a);
         });
+
+        // Upcoming teasers
+        if (upcoming.length > 0) {
+            var upEl = document.createElement('div');
+            upEl.className = 'writing-upcoming';
+            var label = document.createElement('span');
+            label.className = 'writing-upcoming-label';
+            label.textContent = 'in progress';
+            upEl.appendChild(label);
+
+            upcoming.slice(0, 3).forEach(function (post) {
+                var item = document.createElement('span');
+                item.className = 'writing-upcoming-item';
+                item.textContent = post.title;
+                upEl.appendChild(item);
+            });
+            container.appendChild(upEl);
+        }
     }
 
     // Writing index: render full post list + upcoming into containers
@@ -51,7 +83,6 @@
             li.innerHTML =
                 '<span class="post-date">' + escapeHtml(post.date) + '</span>' +
                 '<a href="' + escapeHtml(post.url) + '" class="post-title">' + escapeHtml(post.title) + '</a>' +
-                '<span class="post-desc">' + escapeHtml(post.description) + '</span>' +
                 '<span class="post-tag">' + post.tags.map(function (t) { return escapeHtml(t.replace(/-/g, ' ')); }).join(' / ') + '</span>';
             listEl.appendChild(li);
         });

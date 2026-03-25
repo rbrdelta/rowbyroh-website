@@ -12,79 +12,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/project.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'IBM Plex Mono', monospace;
-            background: #fefefe;
-            color: #1a1a1a;
-            font-weight: 400;
-            line-height: 1.8;
-            max-width: 680px;
-            margin: 0 auto;
-            padding: 3rem 2rem 4rem;
-        }
-
-        .back-link {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 0.75rem;
-            color: #888;
-            text-decoration: none;
-            display: inline-block;
-            margin-bottom: 2rem;
-            font-weight: 400;
-        }
-        .back-link:hover { color: #1a1a1a; }
-        .back-link::before { content: '\2190  '; }
-
-        h1 {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 0.3rem;
-        }
-
-        .page-subtitle {
-            font-size: 0.88rem;
-            color: #555;
-            font-weight: 400;
-            margin-bottom: 0.5rem;
-        }
-
-        .page-intro {
-            font-size: 0.88rem;
-            color: #555;
-            font-weight: 400;
-            margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid #e0e0e0;
-            line-height: 1.7;
-        }
-
-        h2 {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-top: 2.5rem;
-            margin-bottom: 0.8rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #e0e0e0;
-        }
-
-        h2:first-of-type {
-            margin-top: 0;
-            padding-top: 0;
-            border-top: none;
-        }
-
-        p {
-            margin-bottom: 1rem;
-            font-size: 0.92rem;
-        }
-
         .label {
             font-family: 'IBM Plex Sans', system-ui, sans-serif;
             font-size: 0.7rem;
@@ -119,30 +48,6 @@
             position: absolute;
             left: 0;
             color: #888;
-        }
-
-        .architecture {
-            margin: 1.5rem 0;
-            padding: 1.2rem 1.5rem;
-            border-left: 2px solid #ddd;
-        }
-
-        .architecture p {
-            font-size: 0.85rem;
-            margin-bottom: 0.6rem;
-            color: #555;
-        }
-
-        .architecture p:last-child {
-            margin-bottom: 0;
-        }
-
-        code {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.82rem;
-            background: #f5f5f5;
-            padding: 0.1rem 0.35rem;
-            border: 1px solid #e8e8e8;
         }
 
         .formula {
@@ -214,8 +119,6 @@
         }
 
         @media (max-width: 600px) {
-            body { padding: 2rem 1.2rem 3rem; }
-            h1 { font-size: 1.4rem; }
             table { font-size: 0.75rem; }
             th, td { padding: 0.3rem 0.5rem; }
         }
@@ -226,7 +129,26 @@
 
     <h1>Portfolio Analysis</h1>
     <div class="page-subtitle">Quantitative finance applied to personal portfolio management</div>
-    <p class="page-intro">A concentrated personal portfolio analyzed through Modern Portfolio Theory, Monte Carlo simulation, and a Bayesian updating framework for ongoing decision-making. The goal: maximize long-term upside while constraining annual losses, using the same mathematical rigor typically reserved for institutional portfolios.</p>
+    <p class="page-intro">A concentrated personal portfolio analyzed through Modern Portfolio Theory, Monte Carlo simulation, and a Bayesian updating framework. The goal: maximize long-term upside while constraining annual losses, using the same rigor typically reserved for institutional portfolios.</p>
+
+    <div class="stat-strip">
+        <div class="stat">
+            <span class="stat-value">8,221</span>
+            <span class="stat-label">HHI concentration</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">66%</span>
+            <span class="stat-label">largest position</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">19</span>
+            <span class="stat-label">holdings</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">10K</span>
+            <span class="stat-label">simulations</span>
+        </div>
+    </div>
 
     <h2>The Problem</h2>
 
@@ -244,11 +166,13 @@
         </ul>
     </div>
 
-    <p>The Herfindahl-Hirschman Index (HHI) sums the squares of each position's portfolio weight. A fully diversified 20-stock portfolio scores around 500. A portfolio with one dominant position scores in the thousands. At 8,221, this wasn't a portfolio &mdash; it was a leveraged bet with decorative diversification.</p>
+    <div class="pull-quote">It wasn't a portfolio &mdash; it was a leveraged bet with decorative diversification.</div>
+
+    <p>The Herfindahl-Hirschman Index (HHI) sums the squares of each position's portfolio weight. A fully diversified 20-stock portfolio scores around 500. A portfolio with one dominant position scores in the thousands.</p>
 
     <h2>Prior Work</h2>
 
-    <p>This wasn't the first time I'd done this analysis. A financial modeling capstone project had covered the full Modern Portfolio Theory toolkit: efficient frontier construction, Sharpe ratio optimization, CAPM regression, and Monte Carlo simulation. That project used a two-asset portfolio (total bond index + S&P 500 index) to demonstrate the math.</p>
+    <p>This wasn't the first time I'd done this analysis. A financial modeling capstone project had covered the full Modern Portfolio Theory toolkit: efficient frontier construction, Sharpe ratio optimization, CAPM regression, and Monte Carlo simulation. That project used a two-asset portfolio (total bond index + S&amp;P 500 index) to demonstrate the math.</p>
 
     <div class="highlight-box">
         <div class="label">Capstone findings on a two-asset portfolio</div>
@@ -270,10 +194,10 @@
 
     <p>Position sizing alone doesn't capture risk. Two stocks at 10% each could behave like one 20% position if they're highly correlated. The semiconductor holdings in this portfolio &mdash; spread across chip designers, foundries, and equipment makers &mdash; looked diversified by company but moved together in practice.</p>
 
-    <div class="architecture">
-        <p>Correlation matrix: for <em>n</em> holdings, compute pairwise Pearson correlations from historical returns. A 19-stock portfolio produces 171 unique pairs. Visualize as a heatmap to identify clusters of co-movement.</p>
-        <p>Covariance matrix: same structure, but captures magnitude of co-movement, not just direction. This feeds directly into portfolio variance calculation and efficient frontier optimization.</p>
-    </div>
+    <div class="flow-diagram">Correlation matrix: n holdings → 171 unique pairs
+Covariance matrix: magnitude of co-movement
+  → feeds portfolio variance calculation
+  → feeds efficient frontier optimization</div>
 
     <p>The "diversified" 10% of the portfolio that wasn't the dominant position was itself 62% semiconductors. In a tech downturn, the non-concentrated portion would correlate with the concentrated portion. Effective diversification was near zero.</p>
 
@@ -288,7 +212,7 @@
         <span class="var">Output:</span> worst case, mean, best case, 95% confidence interval
     </div>
 
-    <p>The constraint is the important part. Unconstrained optimization just tells you to concentrate in the highest-returning asset &mdash; which is exactly the current portfolio. Adding the loss constraint forces the optimizer to find allocations where the upside remains high but the downside is bounded. The portfolio that maximizes expected return <em>while keeping annual losses under 20% with 90% probability</em> looks very different from the portfolio that just maximizes return.</p>
+    <p>The constraint is the important part. Unconstrained optimization just tells you to concentrate in the highest-returning asset &mdash; which is exactly the current portfolio. Adding the loss constraint forces the optimizer to find allocations where the upside remains high but the downside is bounded.</p>
 
     <h2>Layer 3: Bayesian Updating</h2>
 
@@ -296,27 +220,19 @@
 
     <p>For each holding, define a hypothesis: "This company will compound at X% annually over the next five years." Assign a prior probability based on historical data, current fundamentals, and competitive position. Then update that probability as new evidence arrives.</p>
 
-    <div class="highlight-box">
-        <div class="label">Bayesian update cycle</div>
-        <ul>
-            <li>Prior: initial probability estimate based on historical performance + forward analysis</li>
-            <li>Evidence: quarterly earnings, competitive developments, regulatory changes</li>
-            <li>Posterior: updated probability incorporating new evidence via Bayes' theorem</li>
-            <li>Decision: posterior crosses threshold &rarr; adjust position size</li>
-            <li>Next prior: yesterday's posterior becomes today's prior</li>
-        </ul>
-    </div>
+    <div class="flow-diagram">Prior (historical + forward analysis)
+  ↓ quarterly earnings, competitive shifts, regulatory changes
+Posterior (updated via Bayes' theorem)
+  ↓ crosses threshold?
+Decision: adjust position size
+  ↓
+Next prior = yesterday's posterior</div>
 
     <h2>Update Frequency</h2>
 
     <p>How often to update matters. Too frequent and you're reacting to noise. Too infrequent and you miss regime changes. The statistically sound answer for a five-year investment horizon: quarterly, with event-driven overrides.</p>
 
-    <div class="architecture">
-        <p>Daily and weekly price movements are 80&ndash;90% noise. Monthly returns are still majority noise. Quarterly earnings are high-signal &mdash; actual business performance, not market sentiment.</p>
-        <p>20 quarterly updates over a five-year horizon provides enough data points to learn from while preventing overreaction to short-term volatility.</p>
-    </div>
-
-    <p>Event-driven overrides trigger for material developments: major acquisitions, regulatory actions, competitive disruptions, management changes. Not for analyst upgrades, daily price swings, or general market movements. The discipline of ignoring noise is as important as the discipline of responding to signal.</p>
+    <p>Daily and weekly price movements are 80&ndash;90% noise. Monthly returns are still majority noise. Quarterly earnings are high-signal. 20 quarterly updates over a five-year horizon provides enough data points while preventing overreaction.</p>
 
     <table>
         <tr>
@@ -366,7 +282,7 @@
 
     <p>The specific allocations matter less than the framework. Markets shift. Correlations change. New opportunities appear. What persists is the decision system: quantify concentration, simulate outcomes under constraints, update beliefs with evidence, act on thresholds rather than feelings.</p>
 
-    <p>The capstone project proved the math works in theory. This analysis proved I'd actually use it on my own capital. The Bayesian framework means I don't need to be right once &mdash; I need a system that gets less wrong over time.</p>
+    <div class="pull-quote">The capstone proved the math works in theory. This analysis proved I'd actually use it on my own capital. The Bayesian framework means I don't need to be right once &mdash; I need a system that gets less wrong over time.</div>
 
     <h2>Stack</h2>
 

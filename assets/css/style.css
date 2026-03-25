@@ -131,8 +131,8 @@ body::after {
 /* ---- TITLE SECTION ---- */
 .title-section {
     text-align: center;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
     position: relative;
 }
 
@@ -149,10 +149,10 @@ body::after {
 
 .title {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 2.2rem;
+    font-size: 1.6rem;
     font-weight: 700;
     letter-spacing: 0.06em;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.4rem;
     color: #1a1a1a;
 }
 
@@ -183,7 +183,7 @@ body::after {
 
 /* ---- PORTFOLIO SECTION ---- */
 .portfolio-section {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     padding: 0;
     position: relative;
     width: 100%;
@@ -214,15 +214,14 @@ body::after {
 }
 
 .portfolio-label {
-    position: absolute;
-    top: -1.5rem;
-    right: 0;
     font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    color: #555;
-    font-weight: 500;
+    color: #1a1a1a;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    text-align: right;
 }
 
 /* Tag filters — inline, annotation-style */
@@ -273,9 +272,9 @@ body::after {
 }
 
 .portfolio-container {
-    background: #fafafa;
-    border: 1px solid #555;
-    padding: 2rem 1.5rem;
+    background: #f8f8f6;
+    border: 1px solid #ccc;
+    padding: 1.5rem 2.5rem;
     min-height: 200px;
     position: relative;
     width: calc(100% + 8rem);
@@ -283,26 +282,8 @@ body::after {
     margin-right: -4rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.8rem 1.2rem;
+    gap: 1rem 1.5rem;
     align-items: start;
-}
-
-/* Site colophon — self-referential meta-note */
-.site-colophon {
-    font-size: 0.65rem;
-    color: #555;
-    font-style: italic;
-    text-align: right;
-    padding-top: 1rem;
-    margin-top: 0.5rem;
-    border-top: 1px solid #e8e8e8;
-    grid-column: 1 / -1;
-    transform: rotate(-0.3deg);
-    transition: color 0.2s ease;
-}
-
-.site-colophon:hover {
-    color: #1a1a1a;
 }
 
 /* ---- PORTFOLIO ITEMS ---- */
@@ -324,7 +305,7 @@ body::after {
 }
 
 .portfolio-item .item-title {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
     color: #1a1a1a;
     transition: transform 0.2s ease;
@@ -419,25 +400,87 @@ body::after {
     margin-bottom: 2rem;
     margin-top: 1rem;
     position: relative;
+    width: 100%;
 }
 
 .writing-label {
     font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    color: #555;
-    font-weight: 500;
+    color: #1a1a1a;
+    font-weight: 600;
     margin-bottom: 0.6rem;
-    text-align: right;
+    margin-left: -4rem;
+    padding-left: 1rem;
+}
+
+.writing-container {
+    background: #fffef5;
+    border: 1px solid #e8e0c8;
+    width: calc(100% + 8rem);
+    margin-left: -4rem;
+    margin-right: -4rem;
+    padding: 1.5rem 2.5rem 1.2rem;
 }
 
 .writing-list {
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
+    gap: 0;
 }
 
+/* Featured post — latest published */
+.writing-featured {
+    display: block;
+    text-decoration: none;
+    padding: 0.8rem 0;
+    margin-bottom: 0.6rem;
+    border-bottom: 1px solid #e0e0e0;
+    transition: opacity 0.2s ease;
+}
+
+.writing-featured:hover {
+    opacity: 0.7;
+}
+
+.writing-featured-date {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 0.65rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.writing-featured-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.writing-featured-title::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 2px;
+    background: #e84040;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    opacity: 0.7;
+}
+
+.writing-featured-desc {
+    font-size: 0.85rem;
+    color: #333;
+    line-height: 1.6;
+    display: block;
+}
+
+/* Regular writing entries */
 .writing-entry {
     display: flex;
     align-items: baseline;
@@ -454,12 +497,13 @@ body::after {
 .writing-entry::before {
     content: '';
     display: inline-block;
-    width: 6px;
-    height: 1px;
-    background: #888;
+    width: 8px;
+    height: 2px;
+    background: #e84040;
     flex-shrink: 0;
     vertical-align: middle;
     margin-top: 0.1rem;
+    opacity: 0.7;
 }
 
 .writing-date {
@@ -468,7 +512,6 @@ body::after {
     color: #888;
     letter-spacing: 0.02em;
     flex-shrink: 0;
-    min-width: auto;
 }
 
 .writing-title {
@@ -478,9 +521,43 @@ body::after {
     line-height: 1.3;
 }
 
+/* Upcoming teasers */
+.writing-upcoming {
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid #f0f0f0;
+}
+
+.writing-upcoming-label {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 0.65rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+.writing-upcoming-item {
+    display: block;
+    font-size: 0.78rem;
+    color: #888;
+    padding: 0.15rem 0;
+}
+
+.writing-upcoming-item::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 1px;
+    background: #ccc;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+
 .writing-more {
     display: inline-block;
-    margin-top: 0.4rem;
+    margin-top: 0.6rem;
     font-size: 0.72rem;
     color: #888;
     text-decoration: none;
@@ -526,12 +603,12 @@ body::after {
 
 .links-section .section-header {
     font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     margin-bottom: 1rem;
-    color: #555;
+    color: #1a1a1a;
     margin-left: 15px;
 }
 
@@ -546,7 +623,7 @@ body::after {
 .link-item {
     font-size: 0.8rem;
     text-decoration: none;
-    color: #888;
+    color: #555;
     font-weight: 400;
     transition: color 0.2s ease;
     display: flex;
@@ -558,7 +635,7 @@ body::after {
     content: '+';
     margin-right: 0.5rem;
     font-weight: 500;
-    color: #888;
+    color: #555;
     transition: color 0.2s ease;
 }
 
@@ -592,27 +669,44 @@ body::after {
 
 /* ---- RESPONSIVE ---- */
 @media (min-width: 768px) {
-    .portfolio-container {
+    .portfolio-container,
+    .writing-container {
         width: calc(100% + 12rem);
         margin-left: -6rem;
         margin-right: -6rem;
     }
+    .writing-label {
+        margin-left: -6rem;
+        padding-left: 1rem;
+    }
 }
 
 @media (min-width: 1024px) {
-    .portfolio-container {
+    .portfolio-container,
+    .writing-container {
         width: calc(100% + 16rem);
         margin-left: -8rem;
         margin-right: -8rem;
+    }
+    .portfolio-container {
         grid-template-columns: repeat(3, 1fr);
+    }
+    .writing-label {
+        margin-left: -8rem;
+        padding-left: 1rem;
     }
 }
 
 @media (min-width: 1200px) {
-    .portfolio-container {
+    .portfolio-container,
+    .writing-container {
         width: calc(100% + 20rem);
         margin-left: -10rem;
         margin-right: -10rem;
+    }
+    .writing-label {
+        margin-left: -10rem;
+        padding-left: 1rem;
     }
 }
 
@@ -627,7 +721,7 @@ body::after {
     }
 
     .title {
-        font-size: 1.8rem;
+        font-size: 1.3rem;
     }
 
     .subtitle {
@@ -646,6 +740,18 @@ body::after {
         min-height: auto;
         padding: 1.5rem 1rem;
         grid-template-columns: 1fr;
+    }
+
+    .writing-label {
+        margin-left: 0;
+        padding-left: 0;
+    }
+
+    .writing-container {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        padding: 1.2rem 1rem 0.8rem;
     }
 
     .covered-note {

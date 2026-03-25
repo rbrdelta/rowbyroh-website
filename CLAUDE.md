@@ -14,14 +14,41 @@ Personal portfolio site. Static HTML/CSS on Vercel (auto-deploy from GitHub main
 
 Page-level evaluation. Every page and section should be checked against these before shipping.
 
-| Dimension | FAIL | MEETS |
-|-----------|------|-------|
-| **Hierarchy** | Sections have no clear order of importance. Everything feels the same weight, or one section dominates while others are afterthoughts. | Clear hierarchy of impact and intention. Not equal — proportional. The most important thing reads as most important. |
-| **Progression** | Page is flat — same density, same tone, top to bottom. | The page has a rhythm. Sections transition. There's a visual arc that pulls you through. |
-| **Anchors** | Blocks of undifferentiated text. Eyes have nowhere to land. | Key numbers, terms, or concepts are visually distinct. But only where the content earns it — don't fabricate anchors for the sake of popping something up. Sometimes quiet is right. |
-| **Density** | Information spread thin (one fact per screen) or crammed (wall of text). | Density matches purpose. Lists are tight. Narratives breathe. Content speaks for itself where it can. |
-| **Mobile Parity** | Desktop design breaks on mobile. Elements disappear, overflow, or become invisible. | Mobile is intentional, not just smaller. Key information accessible. Red line visible. Nothing cut off. |
-| **Identity** | Could be any site. Generic. | Feels like it was made by someone who prototypes with napkins. Organic, not over-designed. No single element defines it — the whole composition does. |
+### Proportionality Model
+
+Proportionality is not just sizing. Seven signals determine how important a section *feels*:
+
+| Signal | What it controls | Example imbalance |
+|--------|-----------------|-------------------|
+| **Space** | Vertical/horizontal footprint | One section is 5x taller than its peer |
+| **Style** | Background, borders, containers | One section has a gray box + border; its peer has nothing |
+| **Contrast** | Font size, weight, color | 1.2rem bold vs 0.82rem regular — reads as parent/child, not peers |
+| **Interaction** | Hover states, filters, clickable elements | One section has tag filters + tooltips + hover; its peer is static text |
+| **Scannability** | Grid vs list vs paragraph; density | Grid of 7 items in 3 columns vs a single line |
+| **Boundaries** | Whether the section breaks the content frame (e.g., extends past the red line) | Breaking the frame = "I'm primary." Staying within = "I'm secondary." Peer sections must share the same spatial claim. |
+| **Furniture** | Metadata, colophons, labels, decorative elements inside the section | Extra elements add visual mass even when they're not content |
+
+**The test:** For any two sections at the same hierarchy level, compare across all seven signals. If one section dominates on 4+ signals, they are not proportional — regardless of whether their heights are similar.
+
+**Header budget:** The header (title + subtitle + nav) should be the loudest element on first load but occupy no more than 15-20% of the visible page. Loud = weight + position, not size. If the header dominates the viewport, shrink it.
+
+**Section tiers:**
+- **Primary** (Portfolio, Writing): Break the content frame. Comparable style weight. A visitor identifies both within 3 seconds of scrolling. Each has its own material identity (Portfolio = gallery frame on neutral, Writing = legal pad yellow).
+- **Tertiary** (Connect, copyright): Contained within the frame. Clearly lighter. No competition with primary sections.
+
+**Navigation controls** (tag filters, search): These are site-level tools, not section features. If a filter system exists, it should govern all primary content, not privilege one section. (Current: tags are Portfolio-only. Future: unified tag system above both sections.)
+
+### Dimension Checklist
+
+| Dimension | FAIL | MEETS | EXCEEDS |
+|-----------|------|-------|---------|
+| **Hierarchy** | One section dominates on 4+ proportionality signals vs its peer. Primary sections aren't identifiable within 3 seconds of scrolling. A section that should be tertiary competes visually with primary content. | Clear tier separation. Primary sections share comparable weight across all 7 signals — not identical treatment, but equivalent presence. Tertiary sections are obviously lighter. | — |
+| **Progression** | Page is flat — same density, same tone, top to bottom. | The page has a rhythm. Sections transition. There's a visual arc that pulls you through. | — |
+| **Anchors** | Blocks of undifferentiated text. Eyes have nowhere to land. | Key numbers, terms, or concepts are visually distinct. But only where the content earns it — don't fabricate anchors for the sake of popping something up. Sometimes quiet is right. When selecting content for pull quotes or callouts, defer to the /draft rubric's Highlight dimension — elevate what's specific and load-bearing, not what sounds good. | — |
+| **Density** | Information spread thin (one fact per screen) or crammed (wall of text). | Density matches purpose. Lists are tight. Narratives breathe. Content speaks for itself where it can. | — |
+| **Mobile Parity** | Desktop design breaks on mobile. Elements disappear, overflow, or become invisible. | Mobile is intentional, not just smaller. Key information accessible. Red line visible. Nothing cut off. | — |
+| **Identity** | Could be any site. Generic. | Feels like it was made by someone who prototypes with napkins. Organic, not over-designed. No single element defines it — the whole composition does. | — |
+| **Break Convention** | Follows UX best practices by default, even when it produces a generic result. Defaults to safe, predictable patterns. | Identifies and follows conventions that serve the goal. | Intentionally breaks a convention to achieve something the convention couldn't. The break is purposeful and earns its place — it's not random, it's a discovery. Test boundaries. If it accomplishes what we want in a way a cookie-cutter solution couldn't, it exceeds. |
 
 ## Standalone Page Template
 

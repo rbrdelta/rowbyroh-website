@@ -63,11 +63,8 @@ document.addEventListener('DOMContentLoaded', function () {
         el.className = 'portfolio-item';
         el.dataset.project = project.id;
 
-        var rotation = (Math.random() - 0.5) * 4;
-        var tx = (Math.random() - 0.5) * 16;
-        var ty = (Math.random() - 0.5) * 10;
-        el.style.transform =
-            'rotate(' + rotation + 'deg) translate(' + tx + 'px, ' + ty + 'px)';
+        var rotation = (Math.random() - 0.5) * 2;
+        el.style.transform = 'rotate(' + rotation + 'deg)';
 
         var title = document.createElement('div');
         title.className = 'item-title';
@@ -78,11 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
         items.push(el);
     });
 
-    // Site colophon
-    var colophon = document.createElement('div');
-    colophon.className = 'site-colophon';
-    colophon.textContent = 'this site \u2014 vanilla js, deployed on vercel \u2014 2025';
-    container.appendChild(colophon);
+    // rowbyroh.com is itself a portfolio item — listed in projects.js, not as a colophon
 
     // ---- Create tooltip element once, append to body ----
     tooltip = document.createElement('div');
