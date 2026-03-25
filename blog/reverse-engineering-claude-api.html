@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>When You're Blocked, Keep Digging | rowbyroh</title>
+    <meta name="description" content="No API exists for your own Claude.ai conversations. So we reverse-engineered the web client and found something better than waiting.">
+    <meta property="og:title" content="When You're Blocked, Keep Digging">
+    <meta property="og:description" content="No API exists for your own Claude.ai conversations. So we reverse-engineered the web client and found something better than waiting.">
+    <meta property="og:url" content="https://rowbyroh.com/blog/reverse-engineering-claude-api">
+    <meta property="og:type" content="article">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/writing.css">
+</head>
+<body class="writing-page">
+    <a href="/writing.html" class="back-link">Writing</a>
+
+    <div class="post-header">
+        <div class="post-meta">March 2026</div>
+        <h1>When You're Blocked, Keep Digging</h1>
+        <p class="post-subtitle">No API exists for your own Claude.ai conversations. So we reverse-engineered the web client and found something better than waiting.</p>
+    </div>
+
+    <article>
+
+    <p>Every time I start a new conversation with Claude, it knows what the last one decided. Not because of memory — because of infrastructure I built underneath it. Four pipelines feed a 672-note Obsidian vault connected to Claude via MCP. Zero re-explanation tax.</p>
+
+    <p>The Claude.ai pipeline is the interesting one. There's no API.</p>
+
+    <h2>The constraint</h2>
+
+    <p>Anthropic offers a data export — emails you a zip. One-time dump. No incremental sync, no webhook, no programmatic access to your own conversations.</p>
+
+    <p>I needed these conversations flowing into the vault continuously. 274 of them. Business decisions, system architecture, financial models, a decade of freight expertise — all processed through an AI thinking partner. Not something I was going to re-export manually every week.</p>
+
+    <p>So I sat down with Claude and we started mapping the problem. Not jumping to code — just understanding what we had to work with. Claude Code can access local files and APIs but can't reach into the claude.ai web experience directly. Desktop conversations sync to the vault through MCP, but web and mobile are isolated — different surfaces, different access models. Instead of seeing that as a limitation, we asked: what's actually unique about the web client?</p>
+
+    <p>It's a browser app. It makes API calls. And those calls are visible.</p>
+
+    <p>Claude opened DevTools on the web client and started tracing the network requests. Two endpoints surfaced:</p>
+
+    <pre><code>GET /api/organizations/{org_id}/chat_conversations_v2
+GET /api/organizations/{org_id}/chat_conversations/{uuid}</code></pre>
+
+    <p>The first returns conversation metadata — titles, UUIDs, timestamps. The second returns full content: every message with roles, timestamps, content arrays. Auth is a session cookie you can pull from DevTools in five seconds.</p>
+
+    <p>Internal endpoints. Implementation details, not a contract. They can change tomorrow. But today, they return your data.</p>
+
+    <h2>The sync</h2>
+
+    <p>Claude built the sync engine to be incremental. One API call per run — the list returns recent conversations first, compare each <code>updated_at</code> against what's in the vault, only fetch what's changed. Each conversation becomes an Obsidian note with full frontmatter and complete message structure preserved.</p>
+
+    <h2>What breaks</h2>
+
+    <p>Session key expires unpredictably. Sometimes days, sometimes hours. I grab a fresh one from DevTools and update the env var — 30 seconds, but it's a human dependency. Response format is undocumented. If Anthropic changes how fields are nested, the parser breaks and we fix it.</p>
+
+    <p>Every run is a bet that today's response shape matches yesterday's.</p>
+
+    <h2>What I learned</h2>
+
+    <p>I explored in the dark with Claude and stumbled upon a marginally better solution than a zip file upload. But through the process, I learned something about how to build when the ground is unstable.</p>
+
+    <p>Because I couldn't trust the transport, I had to isolate the fragility. Each of the four pipelines is idempotent — same output format, same frontmatter structure, regardless of source. The downstream systems — taxonomy, link graph, MCP search — don't know or care where notes came from. The processing layer is where value compounds. The transport layer is designed to be swappable.</p>
+
+    <p>This one connection can be swapped out like a fuse if Anthropic ships an API. Everything downstream stays. The constraint forced the separation of concerns that made the whole system extensible.</p>
+
+    </article>
+
+    <div id="post-nav" class="post-nav"></div>
+
+    <div class="post-footer">
+        <p>Built with Claude. Source: <a href="/obsidian-mcp.html">Obsidian MCP Server</a> project page.</p>
+        <p style="margin-top: 0.5rem;"><a href="/writing.html">More writing</a></p>
+    </div>
+
+    <script src="/assets/js/writing.js"></script>
+</body>
+</html>

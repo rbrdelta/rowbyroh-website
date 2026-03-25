@@ -1,0 +1,42 @@
+[
+    {
+        "title": "When You're Blocked, Keep Digging",
+        "date": "Mar 2026",
+        "url": "/blog/reverse-engineering-claude-api.html",
+        "description": "Reverse-engineering Claude.ai's undocumented endpoints to sync 274 conversations into a personal knowledge vault.",
+        "tags": ["ai-infrastructure", "constraint-engineering"],
+        "published": true
+    },
+    {
+        "title": "Infrastructure Beats Convenience: Vault vs. Memory",
+        "date": "",
+        "url": "/blog/vault-vs-memory.html",
+        "description": "Why I built a 672-note vault instead of relying on Claude's built-in memory.",
+        "tags": ["pkm", "knowledge-systems"],
+        "published": false
+    },
+    {
+        "title": "Why Outcomes-Based AI Pricing Kills the Market Maker",
+        "date": "",
+        "url": "/blog/ai-pricing-market-maker.html",
+        "description": "The pricing model you choose determines what kind of economy forms around your product.",
+        "tags": ["ai-economics", "market-design"],
+        "published": false
+    },
+    {
+        "title": "672 Notes, 14 Dimensions, Zero Re-Explanation Tax",
+        "date": "",
+        "url": "/blog/ai-native-knowledge-system.html",
+        "description": "Building a knowledge system that eliminates cross-surface amnesia between AI sessions.",
+        "tags": ["pkm", "ai-infrastructure"],
+        "published": false
+    },
+    {
+        "title": "Deadweight: A Decade of Freight Expertise in One Afternoon",
+        "date": "",
+        "url": "/blog/deadweight.html",
+        "description": "Claude wrote the code. I wrote the knowledge. $977-$1,352 in savings on 8 sample shipments.",
+        "tags": ["freight", "domain-expertise"],
+        "published": false
+    }
+]

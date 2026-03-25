@@ -61,7 +61,7 @@ const projects = [
         about: 'Thinking out loud about building with AI and product craft',
         highlights: ['Coming soon'],
         tags: ['writing'],
-        link: ''
+        link: '/writing.html'
     },
     {
         id: 'research-agent',

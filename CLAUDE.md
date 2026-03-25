@@ -28,7 +28,9 @@ Personal portfolio site. Static HTML/CSS on Vercel (auto-deploy from GitHub main
 | `agentic-stack.html` | Live — system architecture diagram |
 | `about.html` | Live — operating tenets, mission (placeholder) |
 | `portfolio-analysis.html` | Live — quantitative finance case study |
-| classifier, research-agent, blog | Pending — "coming soon" |
+| `writing.html` | Live — blog index page |
+| `blog/reverse-engineering-claude-api.html` | Live — first blog post |
+| classifier, research-agent | Pending — "coming soon" |
 
 ## Project Data
 
