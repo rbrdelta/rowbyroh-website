@@ -17,7 +17,7 @@ body {
     align-items: center;
     padding: 3rem 2rem 3rem 0.5rem;
     position: relative;
-    border: 1px solid #ddd;
+    border: 1px solid #333;
     margin: 1rem;
 }
 
@@ -221,7 +221,7 @@ body::after {
     font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    color: #888;
+    color: #555;
     font-weight: 500;
 }
 
@@ -274,7 +274,7 @@ body::after {
 
 .portfolio-container {
     background: #fafafa;
-    border: 1px solid #ccc;
+    border: 1px solid #555;
     padding: 2rem 1.5rem;
     min-height: 200px;
     position: relative;
@@ -329,6 +329,23 @@ body::after {
     color: #1a1a1a;
     transition: transform 0.2s ease;
     display: inline-block;
+}
+
+.portfolio-item .item-title::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 2px;
+    background: #e84040;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    opacity: 0.7;
+    transition: opacity 0.2s ease, width 0.2s ease;
+}
+
+.portfolio-item:hover .item-title::before {
+    opacity: 1;
+    width: 12px;
 }
 
 .portfolio-item:hover .item-title {
@@ -409,7 +426,7 @@ body::after {
     font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    color: #888;
+    color: #555;
     font-weight: 500;
     margin-bottom: 0.8rem;
     text-align: right;
@@ -504,7 +521,7 @@ body::after {
     text-transform: uppercase;
     letter-spacing: 0.12em;
     margin-bottom: 1rem;
-    color: #888;
+    color: #555;
     margin-left: 15px;
 }
 
@@ -591,7 +608,12 @@ body::after {
 
 @media (max-width: 600px) {
     body {
-        padding: 2rem 1rem 2rem 0.5rem;
+        padding: 2rem 1rem 2rem 1.5rem;
+    }
+
+    /* Red line — hug the left content edge on mobile */
+    body::before {
+        left: 0.5rem;
     }
 
     .title {
@@ -608,6 +630,9 @@ body::after {
     }
 
     .portfolio-container {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
         min-height: auto;
         padding: 1.5rem 1rem;
         grid-template-columns: 1fr;
