@@ -63,6 +63,28 @@
             line-height: 1.7;
         }
 
+        /* ---- NARRATIVE ---- */
+        .narrative-section {
+            margin-bottom: 3rem;
+        }
+
+        .narrative {
+            font-size: 0.88rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .narrative strong {
+            font-weight: 600;
+        }
+
+        .narrative code {
+            background: #f0f0f0;
+            padding: 0.1rem 0.35rem;
+            font-size: 0.8rem;
+            border: 1px solid #e0e0e0;
+        }
+
         /* ---- SECTION HEADERS ---- */
         h2 {
             font-size: 1.1rem;
@@ -365,6 +387,35 @@
     <h1>Agentic Stack</h1>
     <p class="page-subtitle">How I build with AI. Infrastructure first, automation last.</p>
     <p class="page-intro">AI sessions are stateless by default. Every conversation starts from zero. This is the system I built to fix that — shared state at the bottom, session roles at the top, each layer solving a specific problem in the chain from scattered data to "Claude already knows what I'm working on."</p>
+
+    <!-- ---- CASE STUDY NARRATIVE ---- -->
+    <div class="narrative-section">
+        <h2>Why I Built This</h2>
+
+        <p class="narrative">I was running five ventures and a day job out of 10-15 hours a week. Every Claude session started with me re-explaining who I am, what I'm building, and what we decided last time. That's not a minor inconvenience — it's a compounding tax. The more I build, the more context each session needs, and the less of my 15% actually goes to building.</p>
+
+        <p class="narrative">The first instinct was to use Claude's built-in memory. It handles "who is Daniel" well enough. But it can't tell you what phase the PKM project is in, what the last architecture decision was, or which of three financial models we picked for the composter business. Memory is a summary. I needed a system of record.</p>
+
+        <h2>What I Tried and Rejected</h2>
+
+        <p class="narrative"><strong>Folder-based organization.</strong> Started here. Ended up with a category debate every time I saved a note. A freight conversation that touches career planning — where does it go? Tags and links replaced folders entirely. The vault uses a flat structure with a 14-dimension taxonomy and 2,599 auto-generated wikilinks.</p>
+
+        <p class="narrative"><strong>Single-surface approach.</strong> Claude Code can do everything, so why not keep everything there? Because different cognitive modes need different tools. Strategic planning works better on Desktop with Cowork. Quick lookups work better on the web. The system had to be surface-agnostic, which meant the shared state layer (L1) had to exist independently of any surface.</p>
+
+        <p class="narrative"><strong>Automation first.</strong> The temptation was to build scheduled pipelines immediately. But the data model wasn't right yet. I spent weeks on vault structure, taxonomy design, and MCP tools before writing a single cron job. Getting the primitives right meant the automation layer, when it came, was trivial to build. The reverse order would have automated a bad foundation.</p>
+
+        <h2>What Surprised Me</h2>
+
+        <p class="narrative"><strong>The value chain emerged, it wasn't designed.</strong> I built <code>/architect</code> for gap assessments and <code>/pm</code> for prioritization as separate tools. After a few sessions I noticed they naturally produced artifacts the other consumed — architect handoff notes became PM inputs. The sequential pipeline (<code>/architect</code> &#8594; <code>/pm</code> &#8594; <code>/program</code> &#8594; build) wasn't planned. It was discovered.</p>
+
+        <p class="narrative"><strong>Feedback loops matter more than any individual skill.</strong> <code>/debrief</code> — the skill that writes session learnings back to NorthStar, CLAUDE.md, and the backlog — is the single most important component. Without it, every session is an island. With it, every session makes every future session better. The system compounds because the write-back layer exists.</p>
+
+        <p class="narrative"><strong>Slash commands beat every alternative.</strong> I evaluated fine-tuning, system prompts, and custom GPT-style configurations. Slash commands (markdown files in <code>~/.claude/commands/</code>) won because they're version-controlled, editable in any text editor, and compose with the layers below them. No vendor lock-in. No configuration UI. Just files.</p>
+
+        <h2>What I'd Do Differently</h2>
+
+        <p class="narrative">Build the <code>/debrief</code> feedback loop earlier. I ran dozens of sessions before formalizing the write-back mechanism. Every one of those sessions produced learnings that were trapped in conversation history instead of flowing into the system. The compounding only starts when the loop closes.</p>
+    </div>
 
     <!-- ---- SKILL COMPOSITION GRAPH ---- -->
     <div class="graph-section">
