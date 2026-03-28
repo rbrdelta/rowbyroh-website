@@ -63,335 +63,199 @@
             line-height: 1.7;
         }
 
-        /* ---- DIAGRAM ---- */
-        .stack-diagram {
-            width: 100%;
-            margin: 0 0 3rem;
+        /* ---- SECTION HEADERS ---- */
+        h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
         }
 
-        .layer {
-            position: relative;
-            border: 1px solid #ccc;
-            margin-bottom: -1px;
-            cursor: pointer;
-            transition: background 0.15s ease;
-        }
-
-        .layer:hover {
-            background: #f8f8f8;
-        }
-
-        .layer.is-active {
-            background: #f5f5f0;
-            border-color: #999;
-            z-index: 2;
-        }
-
-        .layer-header {
-            display: flex;
-            align-items: baseline;
-            padding: 1.2rem 1.5rem 0.4rem;
-            gap: 1rem;
-        }
-
-        .layer-id {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: #888;
-            font-weight: 500;
-            min-width: 2rem;
-        }
-
-        .layer-id::before {
+        h2::before {
             content: '';
             display: inline-block;
-            width: 8px;
+            width: 12px;
             height: 2px;
             background: #e84040;
-            margin-right: 0.4rem;
+            margin-right: 0.6rem;
             vertical-align: middle;
             opacity: 0.7;
         }
 
-        .layer-name {
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .layer-principle {
-            font-size: 0.78rem;
+        .section-intro {
+            font-size: 0.82rem;
             color: #555;
-            font-style: italic;
-            margin-left: auto;
-        }
-
-        .layer-body {
-            padding: 0 1.5rem 1.2rem;
-            padding-left: calc(1.5rem + 2.2rem);
-        }
-
-        .layer-components {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem 1.2rem;
-            list-style: none;
-        }
-
-        .layer-components li {
-            font-size: 0.85rem;
-            color: #1a1a1a;
-            position: relative;
-            padding-left: 0.9rem;
-        }
-
-        .layer-components li::before {
-            content: '\2014';
-            position: absolute;
-            left: -0.2rem;
-            color: #bbb;
-            font-size: 0.75rem;
-        }
-
-        .component-status {
-            font-size: 0.72rem;
-            color: #888;
-            font-weight: 400;
-        }
-
-        /* ---- DETAIL PANEL ---- */
-        .layer-detail {
-            display: none;
-            padding: 1rem 1.5rem 1.5rem;
-            padding-left: calc(1.5rem + 2.2rem);
-            border-top: 1px solid #e0e0e0;
-            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
             line-height: 1.7;
         }
 
-        .layer.is-active .layer-detail {
+        /* ---- SKILL GRAPH ---- */
+        .graph-section {
+            margin: 0 0 3rem;
+        }
+
+        .graph-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-graph {
+            width: 100%;
+            height: auto;
             display: block;
         }
 
-        .detail-section {
-            margin-bottom: 1rem;
-        }
-
-        .detail-section:last-child {
-            margin-bottom: 0;
-        }
-
-        .detail-label {
+        .skill-graph .zone-sep { stroke: #eee; stroke-width: 0.5; }
+        .skill-graph .zone-label {
             font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #888;
+            font-size: 10px;
             font-weight: 500;
-            margin-bottom: 0.3rem;
+            fill: #bbb;
+            letter-spacing: 1.5px;
         }
 
-        .detail-text {
-            color: #333;
+        .skill-graph .nt {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12.5px;
+            fill: #1a1a1a;
+            cursor: pointer;
+            transition: fill 0.15s;
+        }
+        .skill-graph .nt-p { font-size: 14px; font-weight: 600; }
+        .skill-graph .nt-s { font-size: 11px; fill: #666; }
+
+        .skill-graph .nd {
+            transition: fill 0.15s;
+            pointer-events: none;
         }
 
-        .detail-text code {
+        .skill-graph .el { stroke: #ccc; stroke-width: 1; fill: none; transition: stroke 0.15s, stroke-width 0.15s; }
+        .skill-graph .el-r { stroke: #ddd; stroke-width: 0.75; stroke-dasharray: 3 3; fill: none; transition: stroke 0.15s; }
+        .skill-graph .el-f { stroke: #ccc; stroke-width: 1; fill: none; transition: stroke 0.15s; }
+
+        /* Hover: fade everything, then light up connections */
+        .skill-graph.hov .nt { fill: #ccc; }
+        .skill-graph.hov .nt-s { fill: #ddd; }
+        .skill-graph.hov .nd { fill: #ddd; }
+        .skill-graph.hov .el, .skill-graph.hov .el-r, .skill-graph.hov .el-f { stroke: #f0f0f0; }
+
+        .skill-graph.hov .nt.lit { fill: #1a1a1a; }
+        .skill-graph.hov .nt-s.lit { fill: #555; }
+        .skill-graph.hov .nd.lit { fill: #e84040; }
+        .skill-graph.hov .el.lit, .skill-graph.hov .el-r.lit, .skill-graph.hov .el-f.lit {
+            stroke: #e84040; stroke-width: 1.5;
+        }
+
+        /* ---- LEGEND ---- */
+        .graph-legend {
+            display: flex;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.72rem;
+            color: #888;
+        }
+
+        .legend-line {
+            width: 24px;
+            height: 0;
+            border-top: 1.5px solid #999;
+        }
+
+        .legend-line.dashed {
+            border-top-style: dashed;
+            border-top-color: #bbb;
+        }
+
+        .legend-arrow {
+            width: 0;
+            height: 0;
+            border-left: 4px solid #999;
+            border-top: 2.5px solid transparent;
+            border-bottom: 2.5px solid transparent;
+            margin-left: -2px;
+        }
+
+        /* ---- PRINCIPLES ---- */
+        .graph-principles {
+            margin-top: 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .gp { margin-bottom: 0.6rem; font-size: 0.82rem; line-height: 1.6; }
+        .gp strong { font-weight: 600; }
+        .gp span { color: #555; }
+        .gp code {
             background: #f0f0f0;
             padding: 0.1rem 0.35rem;
             font-size: 0.74rem;
             border: 1px solid #e0e0e0;
         }
 
-        /* ---- CONNECTORS ---- */
-        .connector {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 28px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .connector-line {
-            width: 1px;
-            height: 100%;
-            background: #ccc;
-        }
-
-        .connector-label {
-            position: absolute;
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 0.68rem;
-            color: #999;
-            letter-spacing: 0.06em;
-            background: #fefefe;
-            padding: 0 0.5rem;
-        }
-
-        /* ---- COMPOSITION SECTION ---- */
-        .composition {
+        /* ---- STACK TABLE ---- */
+        .stack-section {
             margin: 3rem 0;
         }
 
-        .composition-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-        }
-
-        .composition-subtitle {
+        .stack-table {
+            width: 100%;
+            border-collapse: collapse;
             font-size: 0.82rem;
-            color: #555;
-            margin-bottom: 2rem;
-            line-height: 1.7;
+            margin-top: 1rem;
         }
 
-        .flow-chain {
-            display: flex;
-            align-items: flex-start;
-            gap: 0;
-            margin: 1.5rem 0;
-            flex-wrap: wrap;
-        }
-
-        .flow-node {
-            text-align: center;
-            min-width: 90px;
-        }
-
-        .flow-node-name {
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: #1a1a1a;
-        }
-
-        .flow-node-role {
-            font-size: 0.68rem;
+        .stack-table th {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
             color: #888;
-            font-weight: 400;
+            font-weight: 500;
+            text-align: left;
+            padding: 0.5rem 0.8rem;
+            border-bottom: 1px solid #ccc;
         }
 
-        .flow-arrow {
-            display: flex;
-            align-items: center;
-            padding: 0 0.5rem;
-            padding-top: 0.15rem;
-            color: #ccc;
-            font-size: 0.85rem;
+        .stack-table td {
+            padding: 0.7rem 0.8rem;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+            line-height: 1.5;
         }
 
-        .composition-block {
-            border: 1px solid #e0e0e0;
-            padding: 1.2rem 1.5rem;
-            margin-bottom: 1rem;
-            cursor: pointer;
-            transition: background 0.15s ease;
+        .stack-table tr:last-child td {
+            border-bottom: none;
         }
 
-        .composition-block:hover {
-            background: #f8f8f8;
+        .stack-table .layer-id {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #888;
+            font-weight: 500;
+            white-space: nowrap;
         }
 
-        .composition-block.is-active {
-            background: #f5f5f0;
-            border-color: #999;
-        }
-
-        .composition-block-header {
-            display: flex;
-            align-items: baseline;
-            gap: 0.8rem;
-        }
-
-        .composition-block-name {
-            font-size: 0.92rem;
+        .stack-table .layer-name {
             font-weight: 600;
+            white-space: nowrap;
         }
 
-        .composition-block-desc {
+        .stack-table .layer-desc {
+            color: #555;
+        }
+
+        .stack-table .layer-contains {
+            color: #555;
             font-size: 0.78rem;
-            color: #555;
-            font-style: italic;
-        }
-
-        .composition-block-detail {
-            display: none;
-            margin-top: 0.8rem;
-            padding-top: 0.8rem;
-            border-top: 1px solid #e0e0e0;
-            font-size: 0.85rem;
-            line-height: 1.7;
-            color: #333;
-        }
-
-        .composition-block.is-active .composition-block-detail {
-            display: block;
-        }
-
-        .feedback-list {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.3rem 1rem;
-            margin-top: 0.4rem;
-        }
-
-        .feedback-list li {
-            font-size: 0.8rem;
-            color: #555;
-            position: relative;
-            padding-left: 0.8rem;
-        }
-
-        .feedback-list li::before {
-            content: '\2192';
-            position: absolute;
-            left: -0.1rem;
-            color: #ccc;
-            font-size: 0.7rem;
-        }
-
-        .lateral-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .lateral-item {
-            font-size: 0.8rem;
-        }
-
-        .lateral-item-name {
-            font-weight: 600;
-        }
-
-        .lateral-item-feeds {
-            color: #888;
-            font-size: 0.72rem;
-        }
-
-        @media (max-width: 600px) {
-            .flow-chain {
-                gap: 0.3rem;
-            }
-            .flow-node {
-                min-width: 70px;
-            }
-            .flow-node-name {
-                font-size: 0.78rem;
-            }
-            .flow-arrow {
-                padding: 0 0.2rem;
-                font-size: 0.75rem;
-            }
-            .composition-block {
-                padding: 1rem;
-            }
-            .lateral-grid {
-                grid-template-columns: 1fr 1fr;
-            }
         }
 
         /* ---- TENETS LINK ---- */
@@ -472,31 +336,13 @@
 
             h1 { font-size: 1.4rem; }
 
-            .layer-header {
-                flex-wrap: wrap;
-                padding: 1rem 1rem 0.3rem;
-                gap: 0.3rem 0.8rem;
-            }
+            .skill-graph .nt { font-size: 9px; }
+            .skill-graph .nt-p { font-size: 10.5px; }
+            .skill-graph .nt-s { font-size: 7.5px; }
+            .skill-graph .zone-label { font-size: 7px; }
 
-            .layer-principle {
-                margin-left: 0;
-                flex-basis: 100%;
-                padding-left: 3rem;
-            }
-
-            .layer-body {
-                padding: 0 1rem 1rem;
-                padding-left: calc(1rem + 2.5rem);
-            }
-
-            .layer-detail {
-                padding: 0.8rem 1rem 1.2rem;
-                padding-left: calc(1rem + 2.5rem);
-            }
-
-            .layer-components {
-                flex-direction: column;
-                gap: 0.25rem;
+            .graph-legend {
+                gap: 1rem;
             }
 
             .stats-row {
@@ -504,8 +350,12 @@
                 gap: 1rem 2rem;
             }
 
-            .connector-label {
-                font-size: 0.55rem;
+            .stack-table {
+                font-size: 0.75rem;
+            }
+
+            .stack-table .layer-contains {
+                font-size: 0.7rem;
             }
         }
     </style>
@@ -514,156 +364,232 @@
     <a href="/" class="back-link">rowbyroh</a>
     <h1>Agentic Stack</h1>
     <p class="page-subtitle">How I build with AI. Infrastructure first, automation last.</p>
-    <p class="page-intro">AI sessions are stateless by default. Every conversation starts from zero — no memory of what was decided yesterday, no access to the notes you took last month, no awareness of your other projects. This is the system I built to fix that. Four layers, from shared state at the bottom to session roles at the top, each one solving a specific problem in the chain from "raw data scattered across platforms" to "Claude already knows what I'm working on."</p>
+    <p class="page-intro">AI sessions are stateless by default. Every conversation starts from zero. This is the system I built to fix that — shared state at the bottom, session roles at the top, each layer solving a specific problem in the chain from scattered data to "Claude already knows what I'm working on."</p>
 
-    <!-- ---- STACK DIAGRAM ---- -->
-    <div class="stack-diagram">
+    <!-- ---- SKILL COMPOSITION GRAPH ---- -->
+    <div class="graph-section">
+        <h2>How Skills Compose</h2>
+        <p class="section-intro">Skills form a pipeline, not a flat menu. Each one produces artifacts the next one consumes. Hover any node to trace its connections.</p>
 
-        <!-- L4: Session Roles -->
-        <div class="layer" data-layer="4">
-            <div class="layer-header">
-                <span class="layer-id">L4</span>
-                <span class="layer-name">Session Roles</span>
-                <span class="layer-principle">make the machine meet you where you are</span>
+        <!-- Legend -->
+        <div class="graph-legend">
+            <div class="legend-item">
+                <span class="legend-line"></span><span class="legend-arrow"></span>
+                Pipeline flow
             </div>
-            <div class="layer-body">
-                <ul class="layer-components">
-                    <li>/pm <span class="component-status">live</span></li>
-                    <li>/content <span class="component-status">live</span></li>
-                    <li>/architect <span class="component-status">live</span></li>
-                    <li>/research <span class="component-status">live</span></li>
-                    <li>/analyst <span class="component-status">live</span></li>
-                    <li>/designer <span class="component-status">live</span></li>
-                </ul>
+            <div class="legend-item">
+                <span class="legend-line"></span>
+                Lateral feed
             </div>
-            <div class="layer-detail">
-                <div class="detail-section">
-                    <div class="detail-label">What</div>
-                    <div class="detail-text">Reusable personas that prime each session with a role, behavioral expectations, and automatic context retrieval. Not chatbots — operational modes. Each one reads the vault, understands the current state, and starts from where the last session left off.</div>
-                </div>
-                <div class="detail-section">
-                    <div class="detail-label">Why this layer exists</div>
-                    <div class="detail-text">Without it, every session starts cold. You re-explain your goals, your constraints, your preferences. Session roles eliminate that tax. <code>/pm</code> already knows your ventures, time constraints, and decision frameworks. <code>/designer</code> already knows your font is IBM Plex Mono and you don't use gradients.</div>
-                </div>
-                <div class="detail-section">
-                    <div class="detail-label">Design decision</div>
-                    <div class="detail-text">Personas are slash commands (markdown files), not system prompts or fine-tunes. They're version-controlled, portable, and editable. Each one references the layers below it — they compose, not duplicate.</div>
-                </div>
+            <div class="legend-item">
+                <span class="legend-line"></span>
+                Feedback write
+            </div>
+            <div class="legend-item">
+                <span class="legend-line dashed"></span>
+                State read
             </div>
         </div>
 
-        <div class="connector">
-            <div class="connector-line"></div>
-            <span class="connector-label">primes session on surface</span>
+        <div class="graph-container">
+            <svg id="graph-a" class="skill-graph" viewBox="0 0 800 560" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="ah" viewBox="0 0 10 8" refX="8" refY="4" markerWidth="6" markerHeight="5" orient="auto"><path d="M1,1 L8,4 L1,7" fill="none" stroke="#ccc" stroke-width="1.2" stroke-linecap="round"/></marker>
+                    <marker id="ah-lit" viewBox="0 0 10 8" refX="8" refY="4" markerWidth="6" markerHeight="5" orient="auto"><path d="M1,1 L8,4 L1,7" fill="none" stroke="#e84040" stroke-width="1.2" stroke-linecap="round"/></marker>
+                </defs>
+
+                <!-- Zone separators (4 equal zones of 140px each) -->
+                <line class="zone-sep" x1="0" y1="140" x2="800" y2="140"/>
+                <line class="zone-sep" x1="0" y1="280" x2="800" y2="280"/>
+                <line class="zone-sep" x1="0" y1="420" x2="800" y2="420"/>
+
+                <!-- Zone labels -->
+                <text class="zone-label" x="16" y="30">PIPELINE</text>
+                <text class="zone-label" x="16" y="168">LATERAL</text>
+                <text class="zone-label" x="16" y="310">WRAPPERS + UTILITIES</text>
+                <text class="zone-label" x="16" y="448">SHARED STATE</text>
+
+                <!-- === EDGES (behind nodes) === -->
+
+                <!-- Pipeline arrows -->
+                <line class="el" data-from="architect" data-to="pm" x1="195" y1="76" x2="305" y2="76" marker-end="url(#ah)"/>
+                <line class="el" data-from="pm" data-to="program" x1="350" y1="76" x2="505" y2="76" marker-end="url(#ah)"/>
+                <line class="el" data-from="program" data-to="build" x1="590" y1="76" x2="695" y2="76" marker-end="url(#ah)"/>
+
+                <!-- Lateral feeds (supporting → pipeline) -->
+                <line class="el" data-from="research" data-to="architect" x1="85" y1="208" x2="115" y2="92"/>
+                <line class="el" data-from="research" data-to="pm" x1="95" y1="208" x2="305" y2="92"/>
+                <line class="el" data-from="analyst" data-to="pm" x1="215" y1="208" x2="308" y2="92"/>
+                <line class="el" data-from="content" data-to="draft" x1="368" y1="220" x2="410" y2="220"/>
+
+                <!-- Feedback: build → debrief → shared state -->
+                <line class="el-f" data-from="build" data-to="debrief" x1="710" y1="92" x2="698" y2="346"/>
+                <line class="el-f" data-from="debrief" data-to="northstar" x1="686" y1="372" x2="68" y2="488"/>
+                <line class="el-f" data-from="debrief" data-to="claudemd" x1="688" y1="372" x2="192" y2="488"/>
+                <line class="el-f" data-from="debrief" data-to="backlog" x1="690" y1="372" x2="318" y2="488"/>
+                <line class="el-f" data-from="debrief" data-to="learnings-md" x1="692" y1="372" x2="438" y2="488"/>
+                <line class="el-f" data-from="debrief" data-to="content-pipe" x1="694" y1="372" x2="568" y2="488"/>
+                <line class="el-f" data-from="debrief" data-to="action-list" x1="696" y1="372" x2="700" y2="488"/>
+
+                <!-- Reads: shared state → skills (dotted) -->
+                <line class="el-r" data-from="backlog" data-to="pm" x1="314" y1="488" x2="312" y2="92"/>
+                <line class="el-r" data-from="backlog" data-to="program" x1="318" y1="488" x2="512" y2="92"/>
+                <line class="el-r" data-from="content-pipe" data-to="content" x1="556" y1="488" x2="312" y2="230"/>
+
+                <!-- Utility writes -->
+                <line class="el" data-from="learnings-skill" data-to="learnings-md" x1="298" y1="366" x2="435" y2="488"/>
+                <line class="el" data-from="digest" data-to="claudemd" x1="410" y1="366" x2="192" y2="488"/>
+
+                <!-- === NODES === -->
+
+                <!-- Pipeline (y=76) -->
+                <g class="node" data-id="architect">
+                    <circle class="nd" cx="110" cy="76" r="4" fill="#1a1a1a"/>
+                    <text class="nt nt-p" x="120" y="82">/architect</text>
+                </g>
+                <g class="node" data-id="pm">
+                    <circle class="nd" cx="310" cy="76" r="4" fill="#1a1a1a"/>
+                    <text class="nt nt-p" x="320" y="82">/pm</text>
+                </g>
+                <g class="node" data-id="program">
+                    <circle class="nd" cx="510" cy="76" r="4" fill="#1a1a1a"/>
+                    <text class="nt nt-p" x="520" y="82">/program</text>
+                </g>
+                <g class="node" data-id="build">
+                    <circle class="nd" cx="700" cy="76" r="4" fill="#1a1a1a"/>
+                    <text class="nt nt-p" x="710" y="82">build</text>
+                </g>
+
+                <!-- Lateral (y=220) -->
+                <g class="node" data-id="research">
+                    <circle class="nd" cx="65" cy="220" r="3" fill="#888"/>
+                    <text class="nt" x="74" y="226">/research</text>
+                </g>
+                <g class="node" data-id="analyst">
+                    <circle class="nd" cx="185" cy="220" r="3" fill="#888"/>
+                    <text class="nt" x="194" y="226">/analyst</text>
+                </g>
+                <g class="node" data-id="content">
+                    <circle class="nd" cx="305" cy="220" r="3" fill="#888"/>
+                    <text class="nt" x="314" y="226">/content</text>
+                </g>
+                <g class="node" data-id="draft">
+                    <circle class="nd" cx="415" cy="220" r="3" fill="#888"/>
+                    <text class="nt" x="424" y="226">/draft</text>
+                </g>
+                <g class="node" data-id="designer">
+                    <circle class="nd" cx="525" cy="220" r="3" fill="#888"/>
+                    <text class="nt" x="534" y="226">/designer</text>
+                </g>
+                <g class="node" data-id="maestro">
+                    <circle class="nd" cx="640" cy="220" r="3" fill="#888"/>
+                    <text class="nt" x="649" y="226">/maestro</text>
+                </g>
+                <g class="node" data-id="study">
+                    <circle class="nd" cx="740" cy="220" r="3" fill="#888"/>
+                    <text class="nt" x="749" y="226">/study</text>
+                </g>
+
+                <!-- Wrappers + utilities (y=356) -->
+                <g class="node" data-id="sprint">
+                    <circle class="nd" cx="100" cy="356" r="3" fill="#888"/>
+                    <text class="nt" x="109" y="362">/sprint</text>
+                </g>
+                <g class="node" data-id="learnings-skill">
+                    <circle class="nd" cx="260" cy="356" r="3" fill="#888"/>
+                    <text class="nt" x="269" y="362">/learnings</text>
+                </g>
+                <g class="node" data-id="digest">
+                    <circle class="nd" cx="400" cy="356" r="3" fill="#888"/>
+                    <text class="nt" x="409" y="362">/digest</text>
+                </g>
+                <g class="node" data-id="sync-skill">
+                    <circle class="nd" cx="530" cy="356" r="3" fill="#888"/>
+                    <text class="nt" x="539" y="362">/sync</text>
+                </g>
+                <g class="node" data-id="debrief">
+                    <circle class="nd" cx="690" cy="356" r="3" fill="#888"/>
+                    <text class="nt" x="699" y="362">/debrief</text>
+                </g>
+
+                <!-- Shared state (y=496) -->
+                <g class="node" data-id="northstar">
+                    <circle class="nd" cx="60" cy="496" r="2.5" fill="#bbb"/>
+                    <text class="nt nt-s" x="69" y="501">NorthStar</text>
+                </g>
+                <g class="node" data-id="claudemd">
+                    <circle class="nd" cx="185" cy="496" r="2.5" fill="#bbb"/>
+                    <text class="nt nt-s" x="194" y="501">CLAUDE.md</text>
+                </g>
+                <g class="node" data-id="backlog">
+                    <circle class="nd" cx="310" cy="496" r="2.5" fill="#bbb"/>
+                    <text class="nt nt-s" x="319" y="501">Backlog</text>
+                </g>
+                <g class="node" data-id="learnings-md">
+                    <circle class="nd" cx="430" cy="496" r="2.5" fill="#bbb"/>
+                    <text class="nt nt-s" x="439" y="501">Learnings</text>
+                </g>
+                <g class="node" data-id="content-pipe">
+                    <circle class="nd" cx="560" cy="496" r="2.5" fill="#bbb"/>
+                    <text class="nt nt-s" x="569" y="501">Content Pipeline</text>
+                </g>
+                <g class="node" data-id="action-list">
+                    <circle class="nd" cx="695" cy="496" r="2.5" fill="#bbb"/>
+                    <text class="nt nt-s" x="704" y="501">Action List</text>
+                </g>
+            </svg>
         </div>
 
-        <!-- L3: Surfaces -->
-        <div class="layer" data-layer="3">
-            <div class="layer-header">
-                <span class="layer-id">L3</span>
-                <span class="layer-name">Surfaces</span>
-                <span class="layer-principle">right tool for the right mode of thinking</span>
-            </div>
-            <div class="layer-body">
-                <ul class="layer-components">
-                    <li>Claude Code <span class="component-status">primary</span></li>
-                    <li>Claude Desktop <span class="component-status">secondary</span></li>
-                    <li>Claude.ai <span class="component-status">tertiary</span></li>
-                    <li>Remote Control <span class="component-status">emerging</span></li>
-                    <li>Obsidian Mobile <span class="component-status">read/edit</span></li>
-                </ul>
-            </div>
-            <div class="layer-detail">
-                <div class="detail-section">
-                    <div class="detail-label">What</div>
-                    <div class="detail-text">Each surface serves a different cognitive mode. Code is for building — execution, iteration, shipping. Desktop is for planning — strategy, MCP tools, thinking out loud. Web is for quick lookups. Mobile is for reviewing and capturing on the go.</div>
-                </div>
-                <div class="detail-section">
-                    <div class="detail-label">Key constraint</div>
-                    <div class="detail-text">Surfaces don't share context natively. A decision made on Desktop is invisible to Code unless it flows through the vault. This is the problem the entire stack is designed to solve.</div>
-                </div>
-                <div class="detail-section">
-                    <div class="detail-label">Evolution</div>
-                    <div class="detail-text">Code is becoming the primary surface for everything, especially with remote control from mobile. The stack is consolidating around Code as the execution hub, with the vault as the shared memory layer.</div>
-                </div>
-            </div>
+        <!-- Design Principles -->
+        <div class="graph-principles">
+            <div class="gp"><strong>Compose through shared state.</strong> <span>Skills reference artifacts, not each other. <code>/program</code> reads Architect Handoffs — it doesn't call <code>/architect</code>.</span></div>
+            <div class="gp"><strong>Every skill writes back.</strong> <span>A skill that only reads is a dead end. The feedback loop through <code>/debrief</code> is what makes the system compound.</span></div>
+            <div class="gp"><strong>Sequential spine, lateral plugins.</strong> <span>The value chain is sequential. Everything else plugs in from the side. Adding a new role doesn't change the pipeline.</span></div>
+            <div class="gp"><strong>Wrappers are orthogonal.</strong> <span><code>/sprint</code> and <code>/debrief</code> wrap any session regardless of which role is active.</span></div>
         </div>
+    </div>
 
-        <div class="connector">
-            <div class="connector-line"></div>
-            <span class="connector-label">reads and writes via pipelines</span>
-        </div>
+    <!-- ---- STACK LAYERS ---- -->
+    <div class="stack-section">
+        <h2>The Stack</h2>
+        <p class="section-intro">Four layers, bottom-up. Each one solves a specific problem in the chain from scattered data to persistent, context-aware sessions.</p>
 
-        <!-- L2: Data Pipelines -->
-        <div class="layer" data-layer="2">
-            <div class="layer-header">
-                <span class="layer-id">L2</span>
-                <span class="layer-name">Data Pipelines</span>
-                <span class="layer-principle">every conversation is an asset, not ephemera</span>
-            </div>
-            <div class="layer-body">
-                <ul class="layer-components">
-                    <li>Claude.ai sync <span class="component-status">cron 8h</span></li>
-                    <li>Notion sync <span class="component-status">incremental</span></li>
-                    <li>Apple Notes sync <span class="component-status">semi-auto</span></li>
-                    <li>/learnings <span class="component-status">live</span></li>
-                    <li>/digest <span class="component-status">live</span></li>
-                </ul>
-            </div>
-            <div class="layer-detail">
-                <div class="detail-section">
-                    <div class="detail-label">What</div>
-                    <div class="detail-text">Importers and sync tools that pull conversations, notes, and insights from external sources into the vault. All idempotent — re-running skips what's already imported. All incremental — only fetching what changed.</div>
-                </div>
-                <div class="detail-section">
-                    <div class="detail-label">Why this matters</div>
-                    <div class="detail-text">Without pipelines, conversations die when the session ends. With them, every insight, decision, and exploration becomes searchable, linkable, and available to future sessions. The <code>/learnings</code> skill captures session insights in real-time. <code>/digest</code> promotes the best ones into standing instructions.</div>
-                </div>
-                <div class="detail-section">
-                    <div class="detail-label">Architecture</div>
-                    <div class="detail-text">TypeScript importers share common patterns: <code>source_id</code> for dedup, index files for incremental tracking, dry-run mode for preview. Dev vault for testing, prod vault for real data. One pattern, multiple sources.</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="connector">
-            <div class="connector-line"></div>
-            <span class="connector-label">imports into shared state</span>
-        </div>
-
-        <!-- L1: Shared State -->
-        <div class="layer" data-layer="1">
-            <div class="layer-header">
-                <span class="layer-id">L1</span>
-                <span class="layer-name">Shared State</span>
-                <span class="layer-principle">the vault is the shared brain</span>
-            </div>
-            <div class="layer-body">
-                <ul class="layer-components">
-                    <li>Obsidian Vault <span class="component-status">672 notes</span></li>
-                    <li>MCP Server <span class="component-status">7 tools</span></li>
-                    <li>NorthStar.md <span class="component-status">identity</span></li>
-                    <li>CLAUDE.md <span class="component-status">instructions</span></li>
-                    <li>Memory System <span class="component-status">per-project</span></li>
-                    <li>Learnings.md <span class="component-status">cross-session</span></li>
-                </ul>
-            </div>
-            <div class="layer-detail">
-                <div class="detail-section">
-                    <div class="detail-label">What</div>
-                    <div class="detail-text">The foundation everything else depends on. An Obsidian vault containing every conversation, note, and document — searchable, linked, and tagged. An MCP server exposing 7 tools for creating, reading, searching, and linking notes. Configuration files that tell every surface who I am and how to work with me.</div>
-                </div>
-                <div class="detail-section">
-                    <div class="detail-label">Core insight</div>
-                    <div class="detail-text">AI sessions are stateless by default. The vault makes them stateful. When a new session starts, it doesn't ask "what are you working on?" — it reads NorthStar.md and already knows. When two surfaces need to share context, it flows through the vault, not through copy-paste.</div>
-                </div>
-                <div class="detail-section">
-                    <div class="detail-label">Organization</div>
-                    <div class="detail-text">Tags and links, not folders. Folder structure is minimal routing for imports. Classification and taxonomy emerge organically from the full body of work — not imposed top-down.</div>
-                </div>
-            </div>
-        </div>
-
+        <table class="stack-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Layer</th>
+                    <th>What it solves</th>
+                    <th>Contains</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="layer-id">L4</td>
+                    <td class="layer-name">Session Roles</td>
+                    <td class="layer-desc">Every session starts cold without context. Roles prime Claude with behavior, constraints, and automatic state retrieval.</td>
+                    <td class="layer-contains">15 slash commands — pipeline, lateral, wrappers, utilities</td>
+                </tr>
+                <tr>
+                    <td class="layer-id">L3</td>
+                    <td class="layer-name">Surfaces</td>
+                    <td class="layer-desc">Different cognitive modes need different tools. Code for building, Desktop for planning, Mobile for reviewing.</td>
+                    <td class="layer-contains">Claude Code, Desktop, Web, Remote Control, Obsidian Mobile</td>
+                </tr>
+                <tr>
+                    <td class="layer-id">L2</td>
+                    <td class="layer-name">Data Pipelines</td>
+                    <td class="layer-desc">Conversations die when sessions end. Pipelines make every insight searchable and available to future sessions.</td>
+                    <td class="layer-contains">Claude.ai sync, Notion sync, Apple Notes sync</td>
+                </tr>
+                <tr>
+                    <td class="layer-id">L1</td>
+                    <td class="layer-name">Shared State</td>
+                    <td class="layer-desc">Surfaces don't share context natively. The vault is the shared brain that makes everything else stateful.</td>
+                    <td class="layer-contains">Obsidian vault, MCP server (7 tools), NorthStar, CLAUDE.md, Memory</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <!-- ---- TENETS LINK ---- -->
@@ -677,12 +603,12 @@
             <span class="stat-label">Layers</span>
         </div>
         <div class="stat">
-            <span class="stat-value">3</span>
+            <span class="stat-value">5</span>
             <span class="stat-label">Surfaces</span>
         </div>
         <div class="stat">
-            <span class="stat-value">6</span>
-            <span class="stat-label">Personas</span>
+            <span class="stat-value">15</span>
+            <span class="stat-label">Skills</span>
         </div>
         <div class="stat">
             <span class="stat-value">7</span>
@@ -705,18 +631,51 @@
     </div>
 
     <script>
-        // Toggle layer detail on click
-        document.querySelectorAll('.layer').forEach(layer => {
-            layer.addEventListener('click', () => {
-                const wasActive = layer.classList.contains('is-active');
-                // Close all
-                document.querySelectorAll('.layer').forEach(l => l.classList.remove('is-active'));
-                // Toggle clicked
-                if (!wasActive) {
-                    layer.classList.add('is-active');
-                }
+        // Hover-to-trace on skill graph
+        function setupGraph(svg) {
+            if (!svg) return;
+            const nodes = svg.querySelectorAll('.node');
+            const edges = svg.querySelectorAll('.el, .el-r, .el-f');
+
+            nodes.forEach(node => {
+                node.addEventListener('mouseenter', () => {
+                    const id = node.dataset.id;
+                    svg.classList.add('hov');
+
+                    // Light up the hovered node
+                    node.querySelectorAll('.nt, .nt-p, .nt-s').forEach(t => t.classList.add('lit'));
+                    node.querySelectorAll('.nd').forEach(d => d.classList.add('lit'));
+
+                    // Light up connected edges and their endpoint nodes
+                    edges.forEach(edge => {
+                        if (edge.dataset.from === id || edge.dataset.to === id) {
+                            edge.classList.add('lit');
+                            if (edge.hasAttribute('marker-end')) {
+                                edge.setAttribute('marker-end', 'url(#ah-lit)');
+                            }
+                            const otherId = edge.dataset.from === id ? edge.dataset.to : edge.dataset.from;
+                            const otherNode = svg.querySelector(`.node[data-id="${otherId}"]`);
+                            if (otherNode) {
+                                otherNode.querySelectorAll('.nt, .nt-p, .nt-s').forEach(t => t.classList.add('lit'));
+                                otherNode.querySelectorAll('.nd').forEach(d => d.classList.add('lit'));
+                            }
+                        }
+                    });
+                });
+
+                node.addEventListener('mouseleave', () => {
+                    svg.classList.remove('hov');
+                    svg.querySelectorAll('.lit').forEach(el => el.classList.remove('lit'));
+                    edges.forEach(edge => {
+                        if (edge.hasAttribute('marker-end')) {
+                            edge.setAttribute('marker-end', 'url(#ah)');
+                        }
+                    });
+                });
             });
-        });
+        }
+
+        setupGraph(document.getElementById('graph-a'));
     </script>
 </body>
 </html>
