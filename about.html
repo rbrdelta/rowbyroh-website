@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | rowbyroh</title>
-    <meta name="description" content="Operating tenets. How I make decisions — when two paths diverge, these break the tie.">
+    <meta name="description" content="I've never been able to keep up with my own ideas. This is the record of my practice.">
     <meta property="og:title" content="About | rowbyroh">
-    <meta property="og:description" content="Operating tenets. How I make decisions — when two paths diverge, these break the tie.">
+    <meta property="og:description" content="I've never been able to keep up with my own ideas. This is the record of my practice.">
     <meta property="og:url" content="https://rowbyroh.com/about">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,9 +56,32 @@
             line-height: 1.7;
         }
 
+        /* ---- NARRATIVE ---- */
+        .narrative {
+            margin-bottom: 3rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .narrative p {
+            font-size: 0.88rem;
+            line-height: 1.85;
+            margin-bottom: 1.2rem;
+            color: #1a1a1a;
+        }
+
+        .narrative p:last-child {
+            margin-bottom: 0;
+        }
+
+        .narrative p.closing {
+            margin-top: 2rem;
+            font-weight: 500;
+        }
+
         /* ---- TENETS ---- */
         .tenets {
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .tenets h2 {
@@ -83,9 +106,9 @@
         }
 
         .tenets-intro {
-            font-size: 0.82rem;
-            color: #555;
-            margin-bottom: 1.5rem;
+            font-size: 0.78rem;
+            color: #888;
+            margin-bottom: 1rem;
         }
 
         .tenet-list {
@@ -93,37 +116,34 @@
         }
 
         .tenet-item {
-            padding: 1.2rem 0;
-            border-bottom: 1px solid #f0f0f0;
+            padding: 0.35rem 0;
+            border-bottom: none;
         }
 
         .tenet-item:first-child {
-            border-top: 1px solid #e0e0e0;
+            border-top: none;
         }
 
         .tenet-item:last-child {
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: none;
         }
 
         .tenet-number {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 0.65rem;
-            color: #888;
-            letter-spacing: 0.1em;
-            font-weight: 500;
+            display: none;
         }
 
         .tenet-name {
-            font-size: 1rem;
+            font-size: 0.82rem;
             font-weight: 600;
-            display: block;
-            margin: 0.2rem 0 0.3rem;
+            display: inline;
+            margin-right: 0.3rem;
         }
 
         .tenet-desc {
-            font-size: 0.82rem;
-            color: #555;
-            line-height: 1.7;
+            font-size: 0.75rem;
+            color: #888;
+            display: inline;
+            line-height: 1.5;
         }
 
         /* ---- COLOPHON ---- */
@@ -154,8 +174,16 @@
 
             h1 { font-size: 1.4rem; }
 
+            .narrative p {
+                font-size: 0.84rem;
+            }
+
             .tenet-name {
-                font-size: 0.92rem;
+                font-size: 0.84rem;
+            }
+
+            .tenet-desc {
+                font-size: 0.75rem;
             }
         }
     </style>
@@ -165,6 +193,21 @@
     <h1>About</h1>
     <p class="page-subtitle">Product leader. Builder. Father. Maker. Brooklyn.</p>
 
+    <!-- ---- NARRATIVE ---- -->
+    <div class="narrative">
+        <p>I've never been able to keep up with my own ideas. I'd think through an entire system — the architecture, the edge cases, the second-order effects — and by the time I sat down to build, three other ideas would rush in.</p>
+
+        <p>The technological waves of my adult life — social media, smartphones, crypto — didn't help me express what I wanted. I studied architecture and construction. I built furniture. The problems I was drawn to lived in the physical world — how buildings shape communities, how a chair changes a room, how personal mobility empowers exploration and openness beyond your virtual world.</p>
+
+        <p>I was skeptical when GPT launched. Marvelous technology, but the world's obsession with chatbots missed the point. Then I read about a small model maker that built the best coding agent, and you could tell the difference. Claude didn't talk at you — it thought with you. And that thinking collaboration gave me trust to share years of thoughts and experiences across global logistics, construction, product strategy, and furniture design.</p>
+
+        <p>The constraint has always been the brief — making coffee tables out of cardboard, duct-taping tabletop mockups onto the wall. Now the constraint is how well I can describe what I envision and clearly orchestrate the model to embody how I work — and evaluate not based on appearances, but in the way it brings value to others.</p>
+
+        <p>I'm energized to take part in this change. How my two-year-old will one day say, "Do you remember that OG LLM Claude? So outdated, but so thoughtful."</p>
+
+        <p class="closing">This is the record of my practice.</p>
+    </div>
+
     <!-- ---- TENETS ---- -->
     <div class="tenets">
         <h2>Operating Tenets</h2>
@@ -172,37 +215,37 @@
         <ol class="tenet-list">
             <li class="tenet-item">
                 <span class="tenet-number">01</span>
-                <span class="tenet-name">Build from zero</span>
+                <span class="tenet-name">Build from zero.</span>
                 <span class="tenet-desc">Identify the core primitives and build lasting, extensible foundations.</span>
             </li>
             <li class="tenet-item">
                 <span class="tenet-number">02</span>
-                <span class="tenet-name">The constraint is the brief</span>
+                <span class="tenet-name">The constraint is the brief.</span>
                 <span class="tenet-desc">It breeds creativity and truly unique solutions.</span>
             </li>
             <li class="tenet-item">
                 <span class="tenet-number">03</span>
-                <span class="tenet-name">Intention as cornerstone</span>
+                <span class="tenet-name">Intention as cornerstone.</span>
                 <span class="tenet-desc">The reason is the most important element of any decision.</span>
             </li>
             <li class="tenet-item">
                 <span class="tenet-number">04</span>
-                <span class="tenet-name">Simplicity is timeless</span>
+                <span class="tenet-name">Simplicity is timeless.</span>
                 <span class="tenet-desc">Strip away complexity until the solution feels like it's always existed.</span>
             </li>
             <li class="tenet-item">
                 <span class="tenet-number">05</span>
-                <span class="tenet-name">Narrative over information</span>
+                <span class="tenet-name">Narrative over information.</span>
                 <span class="tenet-desc">Learn through anecdotes and find the cause and effect.</span>
             </li>
             <li class="tenet-item">
                 <span class="tenet-number">06</span>
-                <span class="tenet-name">Leave the system better</span>
+                <span class="tenet-name">Leave the system better.</span>
                 <span class="tenet-desc">Think beyond the transaction. Every interaction should compound value — upstream, downstream, and for everyone in the chain.</span>
             </li>
             <li class="tenet-item">
                 <span class="tenet-number">07</span>
-                <span class="tenet-name">Respect and empower users</span>
+                <span class="tenet-name">Respect and empower users.</span>
                 <span class="tenet-desc">Build to increase human agency and opportunity.</span>
             </li>
         </ol>

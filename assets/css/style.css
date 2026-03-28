@@ -224,13 +224,18 @@ body::after {
     text-align: right;
 }
 
+/* ---- TAG SECTION ---- */
+.tag-section {
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
 /* Tag filters — inline, annotation-style */
 .tag-filters {
-    grid-column: 1 / -1;
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
-    margin-bottom: 0.3rem;
+    justify-content: center;
 }
 
 .tag-filter {
@@ -265,8 +270,14 @@ body::after {
     opacity: 0.5;
 }
 
-/* Filtered-out state for portfolio items */
+/* Filtered-out state for portfolio and writing items */
 .portfolio-item.filtered-out {
+    opacity: 0.12;
+    pointer-events: none;
+}
+
+.writing-featured.filtered-out,
+.writing-entry.filtered-out {
     opacity: 0.12;
     pointer-events: none;
 }

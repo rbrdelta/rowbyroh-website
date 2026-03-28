@@ -8,7 +8,7 @@ const projects = [
             '14-dimension taxonomy — 10 domains, 4 modes',
             '2,599 wikilinks across 503 interconnected notes'
         ],
-        tags: ['ai', 'mcp', 'pkm', 'developer-tools'],
+        tags: ['systems', 'infrastructure'],
         link: '/obsidian-mcp.html'
     },
     {
@@ -20,7 +20,7 @@ const projects = [
             '6 personas that prime sessions with role + context',
             '672 notes in a linked, classified vault'
         ],
-        tags: ['ai', 'systems', 'architecture'],
+        tags: ['systems', 'infrastructure'],
         link: '/agentic-stack.html'
     },
     {
@@ -32,16 +32,8 @@ const projects = [
             'Constraint-based optimization — maximize upside, cap annual loss at 20%',
             'Bayesian framework — quarterly updates with event-driven overrides'
         ],
-        tags: ['finance', 'quantitative', 'systems'],
+        tags: ['quantitative', 'systems'],
         link: '/portfolio-analysis.html'
-    },
-    {
-        id: 'classifier',
-        title: 'classifier',
-        about: 'AI-powered document classification pipeline',
-        highlights: ['TBD'],
-        tags: ['ai', 'automation'],
-        link: ''
     },
     {
         id: 'chair-roundtable',
@@ -52,23 +44,7 @@ const projects = [
             'Ergonomics, materials, cost, and craft',
             'Applied to real constraints: NYC apartment, toddler, Japanese handsaw'
         ],
-        tags: ['design', 'craft', 'first-principles'],
+        tags: ['craft'],
         link: '/chair-roundtable.html'
-    },
-    {
-        id: 'blog',
-        title: 'blog',
-        about: 'Thinking out loud about building with AI and product craft',
-        highlights: ['Coming soon'],
-        tags: ['writing'],
-        link: '/writing.html'
-    },
-    {
-        id: 'research-agent',
-        title: 'research agent',
-        about: 'Contextualize Claude chat history into a searchable knowledge base',
-        highlights: ['Conversation parsing', 'Auto-tagging', 'Semantic search'],
-        tags: ['ai', 'research'],
-        link: ''
     }
 ];

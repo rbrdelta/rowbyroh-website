@@ -17,7 +17,7 @@
 
         body {
             font-family: 'IBM Plex Mono', monospace;
-            background: #fefefe;
+            background: #f8f8f6;
             color: #1a1a1a;
             font-weight: 400;
             line-height: 1.8;
@@ -227,6 +227,171 @@
             letter-spacing: 0.06em;
             background: #fefefe;
             padding: 0 0.5rem;
+        }
+
+        /* ---- COMPOSITION SECTION ---- */
+        .composition {
+            margin: 3rem 0;
+        }
+
+        .composition-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .composition-subtitle {
+            font-size: 0.82rem;
+            color: #555;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .flow-chain {
+            display: flex;
+            align-items: flex-start;
+            gap: 0;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .flow-node {
+            text-align: center;
+            min-width: 90px;
+        }
+
+        .flow-node-name {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .flow-node-role {
+            font-size: 0.68rem;
+            color: #888;
+            font-weight: 400;
+        }
+
+        .flow-arrow {
+            display: flex;
+            align-items: center;
+            padding: 0 0.5rem;
+            padding-top: 0.15rem;
+            color: #ccc;
+            font-size: 0.85rem;
+        }
+
+        .composition-block {
+            border: 1px solid #e0e0e0;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .composition-block:hover {
+            background: #f8f8f8;
+        }
+
+        .composition-block.is-active {
+            background: #f5f5f0;
+            border-color: #999;
+        }
+
+        .composition-block-header {
+            display: flex;
+            align-items: baseline;
+            gap: 0.8rem;
+        }
+
+        .composition-block-name {
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .composition-block-desc {
+            font-size: 0.78rem;
+            color: #555;
+            font-style: italic;
+        }
+
+        .composition-block-detail {
+            display: none;
+            margin-top: 0.8rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            color: #333;
+        }
+
+        .composition-block.is-active .composition-block-detail {
+            display: block;
+        }
+
+        .feedback-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem 1rem;
+            margin-top: 0.4rem;
+        }
+
+        .feedback-list li {
+            font-size: 0.8rem;
+            color: #555;
+            position: relative;
+            padding-left: 0.8rem;
+        }
+
+        .feedback-list li::before {
+            content: '\2192';
+            position: absolute;
+            left: -0.1rem;
+            color: #ccc;
+            font-size: 0.7rem;
+        }
+
+        .lateral-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .lateral-item {
+            font-size: 0.8rem;
+        }
+
+        .lateral-item-name {
+            font-weight: 600;
+        }
+
+        .lateral-item-feeds {
+            color: #888;
+            font-size: 0.72rem;
+        }
+
+        @media (max-width: 600px) {
+            .flow-chain {
+                gap: 0.3rem;
+            }
+            .flow-node {
+                min-width: 70px;
+            }
+            .flow-node-name {
+                font-size: 0.78rem;
+            }
+            .flow-arrow {
+                padding: 0 0.2rem;
+                font-size: 0.75rem;
+            }
+            .composition-block {
+                padding: 1rem;
+            }
+            .lateral-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         /* ---- TENETS LINK ---- */

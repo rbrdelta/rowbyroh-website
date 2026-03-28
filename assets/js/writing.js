@@ -31,6 +31,7 @@
             var featEl = document.createElement('a');
             featEl.href = feat.url;
             featEl.className = 'writing-featured';
+            featEl.dataset.tags = feat.tags.join(',');
             featEl.innerHTML =
                 '<span class="writing-featured-date">' + escapeHtml(feat.date) + '</span>' +
                 '<span class="writing-featured-title">' + escapeHtml(feat.title) + '</span>' +
@@ -43,6 +44,7 @@
             var a = document.createElement('a');
             a.href = post.url;
             a.className = 'writing-entry';
+            a.dataset.tags = post.tags.join(',');
             a.innerHTML =
                 '<span class="writing-date">' + escapeHtml(post.date) + '</span>' +
                 '<span class="writing-title">' + escapeHtml(post.title) + '</span>';
@@ -80,6 +82,7 @@
         published.forEach(function (post) {
             var li = document.createElement('li');
             li.className = 'post-entry';
+            li.dataset.tags = post.tags.join(',');
             li.innerHTML =
                 '<span class="post-date">' + escapeHtml(post.date) + '</span>' +
                 '<a href="' + escapeHtml(post.url) + '" class="post-title">' + escapeHtml(post.title) + '</a>' +

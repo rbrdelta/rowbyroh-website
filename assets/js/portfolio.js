@@ -8,37 +8,32 @@ document.addEventListener('DOMContentLoaded', function () {
     var tooltip = null;
     var activeItem = null;
 
-    // ---- TAG FILTERS ----
+    // ---- UNIFIED TAG FILTERS ----
 
-    var allTags = [];
-    projects.forEach(function (p) {
-        p.tags.forEach(function (t) {
-            if (allTags.indexOf(t) === -1) allTags.push(t);
-        });
-    });
+    var tagButtons = document.querySelectorAll('.tag-filter');
 
-    var tagFiltersEl = document.createElement('div');
-    tagFiltersEl.className = 'tag-filters';
-
-    allTags.forEach(function (tag) {
-        var btn = document.createElement('button');
-        btn.className = 'tag-filter';
-        btn.textContent = tag;
-        btn.dataset.tag = tag;
+    tagButtons.forEach(function (btn) {
         btn.addEventListener('click', function (e) {
             e.stopPropagation();
+            var tag = btn.dataset.tag;
+
             if (activeTag === tag) {
+                // Deselect
                 activeTag = null;
                 btn.classList.remove('active');
                 items.forEach(function (item) {
                     item.classList.remove('filtered-out');
                 });
-            } else {
-                activeTag = tag;
-                document.querySelectorAll('.tag-filter').forEach(function (b) {
-                    b.classList.remove('active');
+                document.querySelectorAll('[data-tags]').forEach(function (el) {
+                    el.classList.remove('filtered-out');
                 });
+            } else {
+                // Select new tag
+                activeTag = tag;
+                tagButtons.forEach(function (b) { b.classList.remove('active'); });
                 btn.classList.add('active');
+
+                // Filter portfolio items
                 items.forEach(function (item) {
                     var project = projects.find(function (p) {
                         return p.id === item.dataset.project;
@@ -49,12 +44,19 @@ document.addEventListener('DOMContentLoaded', function () {
                         item.classList.add('filtered-out');
                     }
                 });
+
+                // Filter writing items
+                document.querySelectorAll('[data-tags]').forEach(function (el) {
+                    var tags = el.dataset.tags.split(',');
+                    if (tags.indexOf(tag) !== -1) {
+                        el.classList.remove('filtered-out');
+                    } else {
+                        el.classList.add('filtered-out');
+                    }
+                });
             }
         });
-        tagFiltersEl.appendChild(btn);
     });
-
-    container.appendChild(tagFiltersEl);
 
     // ---- BUILD PORTFOLIO ITEMS ----
 
@@ -74,8 +76,6 @@ document.addEventListener('DOMContentLoaded', function () {
         container.appendChild(el);
         items.push(el);
     });
-
-    // rowbyroh.com is itself a portfolio item — listed in projects.js, not as a colophon
 
     // ---- Create tooltip element once, append to body ----
     tooltip = document.createElement('div');
@@ -107,18 +107,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     items.forEach(function (item) {
         item.addEventListener('mouseenter', function () {
-            // Fade others via container class
             container.classList.add('has-active');
             item.classList.add('is-active');
-
             showTooltip(item);
         });
 
         item.addEventListener('mouseleave', function (e) {
-            // Check if we moved to the tooltip
             var related = e.relatedTarget;
             if (tooltip.contains(related)) return;
-
             hideTooltip();
         });
 
@@ -160,19 +156,16 @@ document.addEventListener('DOMContentLoaded', function () {
         tooltip.innerHTML = html;
         tooltip.style.display = 'block';
 
-        // Position overlapping the item — no gap
         var rect = item.getBoundingClientRect();
         var tooltipWidth = 280;
         var left = rect.left;
         var top = rect.top;
 
-        // Keep on screen horizontally
         if (left + tooltipWidth > window.innerWidth - 16) {
             left = window.innerWidth - tooltipWidth - 16;
         }
         if (left < 16) left = 16;
 
-        // If it would go off bottom, show above
         tooltip.style.left = left + 'px';
         tooltip.style.top = top + 'px';
 
