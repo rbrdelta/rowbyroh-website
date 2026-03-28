@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deadweight: A Decade of Freight Expertise in One Afternoon | rowbyroh</title>
+    <meta name="description" content="Claude wrote the code. I wrote the knowledge. $977-$1,352 in savings on 8 sample shipments.">
+    <meta property="og:title" content="Deadweight: A Decade of Freight Expertise in One Afternoon">
+    <meta property="og:description" content="Claude wrote the code. I wrote the knowledge. $977-$1,352 in savings on 8 sample shipments.">
+    <meta property="og:url" content="https://rowbyroh.com/blog/deadweight">
+    <meta property="og:type" content="article">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/writing.css">
+</head>
+<body class="writing-page">
+    <a href="/writing.html" class="back-link">Writing</a>
+
+    <div class="post-header">
+        <div class="post-meta">March 2026</div>
+        <h1>Deadweight: A Decade of Freight Expertise in One Afternoon</h1>
+        <p class="post-subtitle">Claude wrote the code. I wrote the knowledge. $977-$1,352 in savings on 8 sample shipments.</p>
+    </div>
+
+    <article>
+
+    <p>I spent ten years in global freight — ocean carrier, Fortune 500 negotiations, $100M+ in revenue, $350M in contracts. I know how carriers pad invoices. I know which accessorial charges are real and which are negotiating leverage. I know that the fuel surcharge threshold XPO Logistics uses is different from the one ODFL uses, and both are different from what's published.</p>
+
+    <p>I built a tool that does what I do — audits freight invoices for overcharges — in one afternoon, in one Claude Code session. It found $977-$1,352 in savings on 8 sample shipments. It's called <a href="https://github.com/rbrdelta/deadweight">Deadweight</a>.</p>
+
+    <h2>The name</h2>
+
+    <p>Deadweight tonnage (DWT) is the measure of how much weight a vessel can carry. It's the most fundamental metric in ocean freight. It's also, literally, dead weight — the thing you're paying to move but shouldn't be.</p>
+
+    <p>The tool cuts dead weight from freight spend. The name writes itself.</p>
+
+    <h2>What it does</h2>
+
+    <p>Feed it a freight invoice (CSV or PDF). It parses every line item using Claude's API (Haiku — fast and cheap). Then six analyzers run:</p>
+
+    <div class="highlight-box">
+        <ul>
+            <li><strong>Fuel surcharge validation</strong> — compares against DOE diesel benchmarks and carrier-specific thresholds</li>
+            <li><strong>Accessorial charge audit</strong> — checks 30+ charge types against published maximums</li>
+            <li><strong>Rate benchmarking</strong> — compares lane rates to market data</li>
+            <li><strong>Duplicate detection</strong> — catches double-billed shipments</li>
+            <li><strong>Arithmetic verification</strong> — recalculates totals, checks unit math</li>
+            <li><strong>Carrier intelligence</strong> — fires carrier-specific rules (XPO's dim weight conversion, ODFL's cubic capacity charges, FedEx's address correction patterns)</li>
+        </ul>
+    </div>
+
+    <p>Output: a branded 8-page PDF report with executive summary, findings ranked by savings, and shipment-level detail.</p>
+
+    <h2>The design decisions</h2>
+
+    <p><strong>Python, not TypeScript.</strong> My default stack is TypeScript. But this is data analysis — Pandas, PDF generation, Claude SDK. Python is the right tool.</p>
+
+    <p><strong>CLI-first, no UI.</strong> The instinct is to build a web app. A dashboard. A client portal. I rejected all of it. The SaaS model is obsolete for this use case. Most of what a web UI would do can be solved agentically — auto-draft the client email, attach the report, schedule the follow-up. The tool is a pipeline, not a product.</p>
+
+    <p><strong>Extensible data model.</strong> Pydantic models with <code>extra="allow"</code>. The initial version handles LTL and truckload. The data model accepts ocean, air, parcel — any freight mode — without code changes. I'm not prescribing the schema; I'm letting it grow as the use cases arrive.</p>
+
+    <p><strong>No benchmarks are static.</strong> Fuel surcharges change weekly. Accessorial limits change quarterly. Lane rates shift with the market. The architecture separates benchmark data from analysis logic so the data can be updated — eventually automatically via DOE's API — without touching the code.</p>
+
+    <h2>Why this isn't "I used AI to code faster"</h2>
+
+    <p>Anyone can prompt Claude to write a Python script. The tool works because of what went into the prompt: a decade of knowing which charges to check, which carriers use which tactics, which thresholds are real and which are bluffs.</p>
+
+    <p>The carrier intelligence rules in this tool aren't from research. They're from sitting across the table from XPO's pricing team. From running rate negotiations at a global ocean carrier. From managing $350M in freight contracts and knowing that the published tariff is never the real tariff.</p>
+
+    <p>Claude wrote the code. I wrote the knowledge.</p>
+
+    <h2>The numbers</h2>
+
+    <div class="highlight-box">
+        <ul>
+            <li>22 findings on 8 sample shipments</li>
+            <li>$977-$1,352 identified savings (4.9%-6.8% of total spend)</li>
+            <li>11 carriers in the intelligence database</li>
+            <li>30+ accessorial charge caps</li>
+            <li>8 NJ-origin lane benchmarks</li>
+            <li>Built in 1 Claude Code session</li>
+        </ul>
+    </div>
+
+    <h2>What's next</h2>
+
+    <p>Real invoices. The sample data validates the pipeline. Now I need to run actual carrier invoices from actual shippers and see where the analysis holds up and where my benchmarks are off. The tool is the minimum viable version of a service — one that packages freight domain expertise into an automated audit that most shippers can't do themselves because they don't know what to look for.</p>
+
+    <h2>The principle</h2>
+
+    <p>Domain expertise is the moat. AI is the amplifier. The combination of deep industry knowledge and AI tooling produces something neither can alone — a tool that knows <em>what</em> to look for (human expertise) and can look at <em>everything</em> simultaneously (AI scale). The question isn't whether AI will automate freight auditing. It's whether the people building the tools understand freight deeply enough to know which charges matter.</p>
+
+    </article>
+
+    <div id="post-nav" class="post-nav"></div>
+
+    <div class="post-footer">
+        <p>Built with Claude. Source: <a href="https://github.com/rbrdelta/deadweight">github.com/rbrdelta/deadweight</a></p>
+        <p style="margin-top: 0.5rem;"><a href="/writing.html">More writing</a></p>
+    </div>
+
+    <script src="/assets/js/writing.js"></script>
+</body>
+</html>

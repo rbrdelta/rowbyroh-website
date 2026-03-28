@@ -9,34 +9,34 @@
     },
     {
         "title": "Infrastructure Beats Convenience: Vault vs. Memory",
-        "date": "",
+        "date": "Mar 2026",
         "url": "/blog/vault-vs-memory.html",
         "description": "Why I built a 672-note vault instead of relying on Claude's built-in memory.",
         "tags": ["infrastructure", "systems"],
-        "published": false
+        "published": true
     },
     {
         "title": "Why Outcomes-Based AI Pricing Kills the Market Maker",
-        "date": "",
+        "date": "Mar 2026",
         "url": "/blog/ai-pricing-market-maker.html",
         "description": "The pricing model you choose determines what kind of economy forms around your product.",
         "tags": ["quantitative"],
-        "published": false
+        "published": true
     },
     {
         "title": "672 Notes, 14 Dimensions, Zero Re-Explanation Tax",
-        "date": "",
+        "date": "Mar 2026",
         "url": "/blog/ai-native-knowledge-system.html",
         "description": "Building a knowledge system that eliminates cross-surface amnesia between AI sessions.",
         "tags": ["systems", "infrastructure"],
-        "published": false
+        "published": true
     },
     {
         "title": "Deadweight: A Decade of Freight Expertise in One Afternoon",
-        "date": "",
+        "date": "Mar 2026",
         "url": "/blog/deadweight.html",
         "description": "Claude wrote the code. I wrote the knowledge. $977-$1,352 in savings on 8 sample shipments.",
         "tags": ["freight"],
-        "published": false
+        "published": true
     }
 ]
