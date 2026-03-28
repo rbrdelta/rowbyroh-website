@@ -8,28 +8,20 @@
         "published": true
     },
     {
-        "title": "Infrastructure Beats Convenience: Vault vs. Memory",
+        "title": "Infrastructure Beats Convenience",
         "date": "Mar 2026",
         "url": "/blog/vault-vs-memory.html",
-        "description": "Why I built a 672-note vault instead of relying on Claude's built-in memory.",
+        "description": "AI tools are stateless by default. Memory helps. Infrastructure fixes it. Here's what I learned building the layer underneath.",
         "tags": ["infrastructure", "systems"],
         "published": true
     },
     {
         "title": "Why Outcomes-Based AI Pricing Kills the Market Maker",
-        "date": "Mar 2026",
+        "date": "",
         "url": "/blog/ai-pricing-market-maker.html",
         "description": "The pricing model you choose determines what kind of economy forms around your product.",
         "tags": ["quantitative"],
-        "published": true
-    },
-    {
-        "title": "672 Notes, 14 Dimensions, Zero Re-Explanation Tax",
-        "date": "Mar 2026",
-        "url": "/blog/ai-native-knowledge-system.html",
-        "description": "Building a knowledge system that eliminates cross-surface amnesia between AI sessions.",
-        "tags": ["systems", "infrastructure"],
-        "published": true
+        "published": false
     },
     {
         "title": "Deadweight: A Decade of Freight Expertise in One Afternoon",
