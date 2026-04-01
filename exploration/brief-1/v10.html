@@ -1,0 +1,540 @@
+<!-- Brief 1 / Version 10: Full rubric optimization — everything tuned, convention broken where it earns its place -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brief 1 — v10 | rowbyroh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-mono: 'IBM Plex Mono', monospace;
+            --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+            --weight-title: 700;
+            --weight-heading: 600;
+            --weight-label: 500;
+            --weight-body: 400;
+            --size-h1: 2.2rem;
+            --size-h2: 1.05rem;
+            --size-body: 0.88rem;
+            --size-label: 0.6rem;
+            --size-stat: 2.5rem;
+            --color-text: #1a1a1a;
+            --color-secondary: #555;
+            --color-tertiary: #999;
+            --color-bg: #faf9f5;
+            --color-surface: #f4f3ef;
+            --color-warm: #fffef5;
+            --color-accent: #e84040;
+            --color-border: #e0ddd5;
+            --max-width: 680px;
+            --line-height: 1.8;
+            --section-gap: 4rem;
+            --pull-quote-size: 1.35rem;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-mono);
+            background: var(--color-bg);
+            color: var(--color-text);
+            font-weight: var(--weight-body);
+            line-height: var(--line-height);
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 3rem 2rem 4rem;
+            position: relative;
+        }
+
+        /* Legal pad margin line — the identity anchor */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: max(0px, calc(50% - 340px - 20px));
+            width: 2px;
+            height: 100%;
+            background: var(--color-accent);
+            opacity: 0.35;
+            box-shadow: 4px 0 0 0 rgba(232, 64, 64, 0.2);
+        }
+
+        .version-label {
+            font-family: var(--font-sans);
+            font-size: 0.6rem;
+            color: var(--color-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        /* HEADER: Loud by weight and position, not by size.
+           Budget: ~15-20% of viewport on first load. */
+        .header {
+            margin-bottom: 3.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .header h1 {
+            font-family: var(--font-mono);
+            font-size: var(--size-h1);
+            font-weight: var(--weight-title);
+            color: var(--color-text);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .header .tagline {
+            font-size: 0.72rem;
+            color: var(--color-tertiary);
+            font-weight: var(--weight-body);
+        }
+
+        /* SECTION HEADERS: uppercase + marker = scannable landmarks */
+        h2 {
+            font-family: var(--font-sans);
+            font-size: var(--size-h2);
+            font-weight: var(--weight-heading);
+            color: var(--color-text);
+            margin-top: var(--section-gap);
+            margin-bottom: 1.2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-border);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 2px;
+            background: var(--color-accent);
+            margin-right: 0.6rem;
+            vertical-align: middle;
+            opacity: 0.8;
+        }
+
+        h2:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+        /* PROJECT CARD: Breaks frame left. Primary section — claims space.
+           Convention break: the red accent border on left merges with the
+           legal pad margin line, making the card feel like it was written
+           in the margin of the page. */
+        .project-card {
+            background: var(--color-surface);
+            padding: 1.5rem 1.5rem 1.5rem 2.5rem;
+            margin-bottom: 2.5rem;
+            margin-left: -2rem;
+            margin-right: -1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            border-left: 3px solid var(--color-accent);
+            box-shadow: 1px 2px 8px rgba(0,0,0,0.04);
+            position: relative;
+        }
+
+        /* Convention break: a subtle annotation floats outside the card,
+           like a margin note on a legal pad */
+        .project-card::after {
+            content: 'featured';
+            position: absolute;
+            top: 0.5rem;
+            right: -0.5rem;
+            font-family: var(--font-sans);
+            font-size: 0.5rem;
+            color: var(--color-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transform: rotate(90deg);
+            transform-origin: top right;
+        }
+
+        .project-card .project-info { flex: 1; }
+
+        .project-card .project-name {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            font-weight: var(--weight-title);
+            margin-bottom: 0.2rem;
+        }
+
+        .project-card .project-desc {
+            font-size: 0.78rem;
+            color: var(--color-secondary);
+        }
+
+        .project-card .project-tags {
+            display: flex;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+            flex-shrink: 0;
+            align-self: center;
+        }
+
+        .project-card .project-tags span {
+            font-family: var(--font-sans);
+            font-size: var(--size-label);
+            padding: 0.08rem 0.35rem;
+            background: rgba(0,0,0,0.04);
+            color: var(--color-tertiary);
+        }
+
+        /* STAT STRIP: Full-width breakout. Dramatic anchors.
+           The 2x2 grid is scannable. Numbers are the loudest
+           content-level element on the page. */
+        .stat-strip {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem 3rem;
+            padding: 2.5rem 2rem;
+            margin: 0 -2rem 3rem -2rem;
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .stat { display: flex; flex-direction: column; }
+
+        .stat-value {
+            font-family: var(--font-mono);
+            font-size: var(--size-stat);
+            font-weight: var(--weight-title);
+            color: var(--color-text);
+            line-height: 1.0;
+        }
+
+        .stat-label {
+            font-family: var(--font-sans);
+            font-size: var(--size-label);
+            color: var(--color-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-top: 0.25rem;
+        }
+
+        /* BODY TEXT: Generous line-height. Narratives breathe.
+           Density matches purpose. */
+        p {
+            font-size: var(--size-body);
+            margin-bottom: 1.4rem;
+            line-height: 1.9;
+        }
+
+        /* PULL QUOTE: Breaks frame right. The warm background
+           creates a material identity (legal pad yellow).
+           Convention break: the quote is set as a standalone
+           block that extends past the reading column — it
+           interrupts the flow intentionally, demanding you
+           read it as a thesis statement, not a decoration. */
+        .pull-quote {
+            font-size: var(--pull-quote-size);
+            font-weight: var(--weight-heading);
+            color: var(--color-text);
+            line-height: 1.4;
+            padding: 2.5rem 2rem 2.5rem 1.5rem;
+            margin: 3.5rem 0 3.5rem -1rem;
+            margin-right: -2rem;
+            border-left: 3px solid var(--color-accent);
+            background: var(--color-warm);
+            position: relative;
+        }
+
+        /* Convention break: the attribution sits below the quote
+           but pushed to the right edge — like someone signed
+           a napkin sketch. */
+        .pull-quote .attribution {
+            display: block;
+            font-family: var(--font-sans);
+            font-size: 0.55rem;
+            font-weight: var(--weight-body);
+            color: var(--color-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            text-align: right;
+            margin-top: 1rem;
+        }
+
+        /* FLOW DIAGRAM: Breaks frame left. Labeled for scannability. */
+        .diagram-wrapper { margin: 1.5rem 0; }
+
+        .diagram-label {
+            font-family: var(--font-sans);
+            font-size: var(--size-label);
+            color: var(--color-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.4rem;
+        }
+
+        .flow-diagram {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            line-height: 1.5;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            padding: 1.2rem 1.2rem 1.2rem 2rem;
+            margin-left: -2rem;
+            overflow-x: auto;
+            white-space: pre;
+            color: var(--color-text);
+        }
+
+        /* DIALOGUE: Asymmetric layout.
+           Convention break: host (Daniel) entries are flush-left
+           and break past the normal margin. Designer responses
+           are indented. This creates a visual conversation topology
+           where position carries meaning — the host reaches out,
+           the designer responds from within. */
+        .dialogue-entry {
+            padding-left: 2rem;
+            border-left: 2px solid var(--color-border);
+            margin: 1.4rem 0;
+        }
+        .dialogue-entry.host {
+            border-left: 3px solid var(--color-text);
+            padding-left: 1rem;
+            margin-left: -1rem;
+        }
+        .dialogue-entry .name {
+            font-family: var(--font-sans);
+            font-weight: var(--weight-body);
+            font-size: 0.62rem;
+            color: var(--color-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+        .dialogue-entry.host .name {
+            font-weight: var(--weight-title);
+            color: var(--color-text);
+            font-size: 0.68rem;
+        }
+        .dialogue-entry p { margin-bottom: 0.4rem; font-size: 0.88rem; line-height: 1.7; }
+        .dialogue-entry p:last-child { margin-bottom: 0; }
+
+        /* BLOG ENTRY: Grid-based, date column fixed.
+           Convention break: the red dash is not decorative —
+           it's a list-level version of the section marker,
+           creating vertical rhythm that connects to the h2
+           markers above. */
+        .blog-entry {
+            display: grid;
+            grid-template-columns: 4rem 10px 1fr;
+            align-items: baseline;
+            gap: 0.5rem;
+            margin: 0.8rem 0;
+        }
+        .blog-entry .blog-date {
+            font-family: var(--font-sans);
+            font-size: var(--size-label);
+            color: var(--color-tertiary);
+            white-space: nowrap;
+            text-align: right;
+        }
+        .blog-entry .blog-dash {
+            width: 10px;
+            height: 2px;
+            background: var(--color-accent);
+            opacity: 0.7;
+            align-self: center;
+        }
+        .blog-entry .blog-title {
+            font-size: var(--size-body);
+            font-weight: var(--weight-body);
+            color: var(--color-text);
+        }
+
+        /* CONNECT: Tertiary section. Clearly lighter than everything above.
+           Contained within the frame. */
+        .connect-list { display: flex; gap: 1.5rem; }
+
+        .connect-link {
+            font-size: var(--size-body);
+            color: var(--color-text);
+            text-decoration: none;
+            border-bottom: 1px solid #ccc;
+            transition: border-color 0.2s;
+        }
+        .connect-link:hover { border-color: var(--color-text); }
+
+        /* NAPKIN AESTHETIC: Scattered decorative lines.
+           These should feel placed, not designed. */
+        .deco-line {
+            position: absolute;
+            height: 1px;
+            background: #ddd;
+            opacity: 0.25;
+        }
+        .deco-line-1 { top: 10%; right: -3%; width: 70px; transform: rotate(-8deg); }
+        .deco-line-2 { bottom: 22%; left: -2%; width: 45px; transform: rotate(22deg); }
+        .deco-line-3 { top: 55%; right: 2%; width: 30px; transform: rotate(-35deg); opacity: 0.15; }
+
+        /* Convention break: a nearly-invisible horizontal rule
+           sits at the very bottom of the page, past the content,
+           like the bottom of a legal pad page — a line you'd
+           never interact with but subconsciously recognize. */
+        .page-end {
+            margin-top: 4rem;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--color-border) 20%, var(--color-border) 80%, transparent);
+            opacity: 0.5;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 2rem 1.2rem 3rem; }
+            body::before { left: 8px; }
+            .header h1 { font-size: 1.8rem; }
+            .project-card {
+                margin-left: -0.5rem;
+                margin-right: 0;
+                flex-direction: column;
+                padding-left: 1.5rem;
+            }
+            .project-card::after { display: none; }
+            .stat-strip {
+                margin-left: -1.2rem;
+                margin-right: -1.2rem;
+                padding: 1.5rem 1.2rem;
+                gap: 1.2rem 1.5rem;
+            }
+            .stat-value { font-size: 1.8rem; }
+            .pull-quote {
+                margin-left: 0;
+                margin-right: -0.5rem;
+                font-size: 1.15rem;
+                padding: 1.5rem 1rem;
+            }
+            .flow-diagram {
+                margin-left: -0.5rem;
+                font-size: 0.68rem;
+                padding: 0.8rem;
+            }
+            .dialogue-entry.host { margin-left: 0; }
+            .blog-entry { grid-template-columns: 3.5rem 8px 1fr; }
+            .deco-line { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="deco-line deco-line-1"></div>
+    <div class="deco-line deco-line-2"></div>
+    <div class="deco-line deco-line-3"></div>
+
+    <div class="version-label">Brief 1 — Version 10: Full rubric optimization — everything tuned, convention broken where it earns its place</div>
+
+    <!-- HEADER: 15-20% viewport budget. Loud by weight, not size. -->
+    <header class="header">
+        <h1>rowbyroh</h1>
+        <div class="tagline">PM, AI-native tools, 0-1, B2B, Enterprise, HR Tech, Supply Chain</div>
+    </header>
+
+    <!-- PROJECT CARD: Primary section. Breaks frame left. Margin-note aesthetic. -->
+    <div class="project-card">
+        <div class="project-info">
+            <div class="project-name">Obsidian MCP Server</div>
+            <div class="project-desc">Bridging Claude AI with a personal knowledge vault</div>
+        </div>
+        <div class="project-tags">
+            <span>systems</span>
+            <span>infrastructure</span>
+            <span>AI</span>
+        </div>
+    </div>
+
+    <!-- STAT CLUSTER: Full breakout. Oversized numbers as anchors. -->
+    <div class="stat-strip">
+        <div class="stat">
+            <span class="stat-value">672</span>
+            <span class="stat-label">notes</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">4</span>
+            <span class="stat-label">sources</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">14</span>
+            <span class="stat-label">taxonomy dimensions</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">2,599</span>
+            <span class="stat-label">auto-generated links</span>
+        </div>
+    </div>
+
+    <!-- BODY TEXT: Generous line-height. Narratives breathe. -->
+    <p>Conversations with Claude are disposable by default. Every session starts from zero. I had hundreds of conversations across Claude.ai, Notion, and Apple Notes that contained real decisions, technical reasoning, and project context. None of it was connected. None of it was searchable from inside a new session.</p>
+
+    <p>The MCP protocol lets Claude call tools directly. So I built a server that turns an Obsidian vault into Claude's long-term memory — and then built the pipelines to populate, classify, and link everything in it.</p>
+
+    <!-- PULL QUOTE: Breaks frame right. Legal pad yellow. Thesis statement. -->
+    <div class="pull-quote">
+        The constraint is the brief.
+        <span class="attribution">Eames, paraphrased</span>
+    </div>
+
+    <!-- SECTION HEADER: Uppercase + red marker = scannable landmark -->
+    <h2>4 Import Pipelines</h2>
+
+    <!-- FLOW DIAGRAM: Breaks frame left. Labeled. -->
+    <div class="diagram-wrapper">
+        <div class="diagram-label">Data flow</div>
+        <div class="flow-diagram">Claude.ai ──→ API sync ──→ markdown + frontmatter ──→ vault
+Notion     ──→ API sync ──→ markdown + frontmatter ──→ vault
+Notion     ──→ export   ──→ markdown + frontmatter ──→ vault
+Apple Notes──→ Shortcut ──→ iCloud ──→ importer    ──→ vault
+
+shared: source_id dedup │ --dry-run │ dev → prod</div>
+    </div>
+
+    <!-- DIALOGUE: Asymmetric — host reaches out, designer responds within. -->
+    <h2>From the Roundtable</h2>
+
+    <div class="dialogue-entry host">
+        <span class="name">Daniel</span>
+        <p>What makes a good chair? Not a good design — a good chair.</p>
+    </div>
+
+    <div class="dialogue-entry">
+        <span class="name">Charles Eames</span>
+        <p>A good chair is one that solves the problem it was asked to solve. Not the problem you wish it had. The constraint is the brief. Always has been.</p>
+    </div>
+
+    <div class="dialogue-entry host">
+        <span class="name">Daniel</span>
+        <p>So you start with the constraint, not the material?</p>
+    </div>
+
+    <div class="dialogue-entry">
+        <span class="name">Hans Wegner</span>
+        <p>You start with the body. The constraint tells you what the body needs. The material tells you what it can afford.</p>
+    </div>
+
+    <!-- BLOG ENTRY: Grid-based. Red dash connects to h2 markers. -->
+    <h2>Writing</h2>
+
+    <div class="blog-entry">
+        <span class="blog-date">2026.03</span>
+        <span class="blog-dash"></span>
+        <span class="blog-title">Reverse-engineering the Claude.ai conversation API</span>
+    </div>
+
+    <!-- CONNECT: Tertiary. Contained. Light. -->
+    <h2>Connect</h2>
+
+    <div class="connect-list">
+        <a href="mailto:rowbyroh@gmail.com" class="connect-link">email</a>
+    </div>
+
+    <div class="page-end"></div>
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!-- Brief 3 / Exploration 2 / today: Concrete + Light (Tadao Ando) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>rowbyroh — Concrete + Light (Today)</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --concrete: #d4d0c8;
+    --concrete-dark: #b8b4ac;
+    --concrete-light: #e8e5de;
+    --shadow: #8a8680;
+    --text: #2a2825;
+    --text-mid: #5a5650;
+    --light: #f0c850;
+    --light-glow: rgba(240, 200, 80, 0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--concrete);
+    color: var(--text);
+    min-height: 100vh;
+    /* Concrete texture */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  }
+
+  .label {
+    position: fixed;
+    top: 16px;
+    right: 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--shadow);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 100;
+  }
+
+  /* The light shaft — one dramatic aperture */
+  .light-shaft {
+    position: fixed;
+    top: 0;
+    right: 15%;
+    width: 3px;
+    height: 100vh;
+    background: linear-gradient(to bottom, var(--light), transparent 80%);
+    opacity: 0.6;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .light-shaft::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -40px;
+    right: -40px;
+    height: 100vh;
+    background: linear-gradient(to bottom, var(--light-glow), transparent 60%);
+    z-index: -1;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 80px 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Formwork lines — concrete pour marks */
+  .formwork {
+    border-left: 1px solid var(--concrete-dark);
+    padding-left: 32px;
+  }
+
+  header {
+    margin-bottom: 80px;
+  }
+
+  header h1 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  header .tagline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text-mid);
+    letter-spacing: 0.02em;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-bottom: 80px;
+    border-top: 1px solid var(--concrete-dark);
+    border-bottom: 1px solid var(--concrete-dark);
+  }
+
+  .stat {
+    padding: 24px 0;
+    text-align: center;
+    border-right: 1px solid var(--concrete-dark);
+  }
+
+  .stat:last-child { border-right: none; }
+
+  .stat .number {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 28px;
+    font-weight: 700;
+    display: block;
+    color: var(--text);
+  }
+
+  .stat .unit {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--shadow);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .body-text {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 80px;
+    max-width: 540px;
+  }
+
+  .pull-quote {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 80px;
+    padding: 40px 0;
+    border-top: 3px solid var(--text);
+    border-bottom: 1px solid var(--concrete-dark);
+    letter-spacing: -0.5px;
+  }
+
+  .section-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 40px;
+    color: var(--shadow);
+  }
+
+  .diagram {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 80px;
+  }
+
+  .diagram .step {
+    flex: 1;
+    text-align: center;
+    padding: 20px 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: var(--concrete-light);
+    border: 1px solid var(--concrete-dark);
+    border-right: none;
+  }
+
+  .diagram .step:last-child { border-right: 1px solid var(--concrete-dark); }
+
+  .diagram .step:nth-child(3) {
+    /* The one that catches the light */
+    background: linear-gradient(135deg, var(--concrete-light), var(--light-glow));
+    border-color: var(--shadow);
+  }
+
+  .dialogue {
+    margin-bottom: 80px;
+    padding: 32px;
+    background: var(--concrete-dark);
+    position: relative;
+  }
+
+  .dialogue .speaker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--shadow);
+    margin-bottom: 12px;
+  }
+
+  .dialogue .quote {
+    font-style: italic;
+    font-size: 15px;
+    color: var(--text-mid);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .dialogue .response {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  .blog-entry {
+    margin-bottom: 80px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--concrete-dark);
+  }
+
+  .blog-entry .date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--shadow);
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+
+  .blog-entry .title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  footer {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--shadow);
+    padding-top: 40px;
+  }
+
+  footer a {
+    color: var(--text-mid);
+    text-decoration: none;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  @media (max-width: 640px) {
+    .container { padding: 40px 20px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: none; }
+    .formwork { padding-left: 20px; }
+    .light-shaft { right: 5%; }
+    header h1 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+  <div class="label">Brief 3 / E2 / Today: Concrete + Light</div>
+  <div class="light-shaft"></div>
+
+  <div class="container">
+    <div class="formwork">
+      <header>
+        <h1>rowbyroh</h1>
+        <div class="tagline">PM who builds. AI-native tools, 0&rarr;1, B2B, Enterprise.</div>
+      </header>
+
+      <div class="stats">
+        <div class="stat">
+          <span class="number">672</span>
+          <span class="unit">Notes</span>
+        </div>
+        <div class="stat">
+          <span class="number">4</span>
+          <span class="unit">Sources</span>
+        </div>
+        <div class="stat">
+          <span class="number">14</span>
+          <span class="unit">Dimensions</span>
+        </div>
+        <div class="stat">
+          <span class="number">2,599</span>
+          <span class="unit">Links</span>
+        </div>
+      </div>
+
+      <p class="body-text">I built an MCP server that bridges Claude AI with an Obsidian vault. Not because one existed — because it didn't. The vault holds 672 notes from four sources: Claude conversations, Notion pages, Apple Notes, and manual entries. Each note is classified across 14 taxonomy dimensions and connected through 2,599 auto-generated wikilinks.</p>
+
+      <div class="pull-quote">"The constraint is the brief"</div>
+
+      <h2 class="section-header">How It Works</h2>
+
+      <div class="diagram">
+        <div class="step">Input</div>
+        <div class="step">Process</div>
+        <div class="step">Classify</div>
+        <div class="step">Link</div>
+        <div class="step">Output</div>
+      </div>
+
+      <div class="dialogue">
+        <div class="speaker">WEGNER</div>
+        <div class="quote">"A cushion is not design — a cushion is an apology."</div>
+        <div class="response">That's the principle. If the structure needs padding to be comfortable, the structure failed.</div>
+      </div>
+
+      <div class="blog-entry">
+        <div class="date">2026-03-15</div>
+        <div class="title">Reverse Engineering the Claude API</div>
+      </div>
+
+      <footer>
+        <a href="#">github</a> &middot; <a href="#">email</a>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

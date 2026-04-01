@@ -1,0 +1,398 @@
+<!-- Brief 1 / Version 1: Faithful reproduction of current site visual system -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brief 1 — v01 | rowbyroh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-mono: 'IBM Plex Mono', monospace;
+            --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+            --weight-title: 700;
+            --weight-heading: 600;
+            --weight-label: 500;
+            --weight-body: 400;
+            --size-h1: 1.6rem;
+            --size-h2: 1rem;
+            --size-body: 0.88rem;
+            --size-label: 0.7rem;
+            --size-stat: 1.4rem;
+            --color-text: #1a1a1a;
+            --color-secondary: #555;
+            --color-tertiary: #888;
+            --color-bg: #fefefe;
+            --color-surface: #f8f8f6;
+            --color-warm: #fffef5;
+            --color-accent: #e84040;
+            --color-border: #e0e0e0;
+            --max-width: 680px;
+            --line-height: 1.8;
+            --section-gap: 2.5rem;
+            --pull-quote-size: 1.1rem;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-mono);
+            background: var(--color-bg);
+            color: var(--color-text);
+            font-weight: var(--weight-body);
+            line-height: var(--line-height);
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 3rem 2rem 4rem;
+        }
+
+        /* Version label */
+        .version-label {
+            font-family: var(--font-sans);
+            font-size: 0.65rem;
+            color: var(--color-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: var(--section-gap);
+        }
+
+        .header h1 {
+            font-family: var(--font-mono);
+            font-size: var(--size-h1);
+            font-weight: var(--weight-title);
+            color: var(--color-text);
+            margin-bottom: 0.3rem;
+        }
+
+        .header .tagline {
+            font-size: var(--size-body);
+            color: var(--color-secondary);
+            font-weight: var(--weight-body);
+        }
+
+        /* Section headers */
+        h2 {
+            font-family: var(--font-sans);
+            font-size: var(--size-h2);
+            font-weight: var(--weight-heading);
+            color: var(--color-text);
+            margin-top: var(--section-gap);
+            margin-bottom: 0.8rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 2px;
+            background: var(--color-accent);
+            margin-right: 0.6rem;
+            vertical-align: middle;
+            opacity: 0.7;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        /* Project card */
+        .project-card {
+            background: var(--color-surface);
+            padding: 1.5rem;
+            margin-bottom: var(--section-gap);
+        }
+
+        .project-card .project-name {
+            font-family: var(--font-mono);
+            font-size: 0.92rem;
+            font-weight: var(--weight-heading);
+            margin-bottom: 0.3rem;
+        }
+
+        .project-card .project-desc {
+            font-size: 0.85rem;
+            color: var(--color-secondary);
+            font-weight: var(--weight-body);
+        }
+
+        .project-card .project-tags {
+            margin-top: 0.6rem;
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .project-card .project-tags span {
+            font-family: var(--font-sans);
+            font-size: 0.65rem;
+            padding: 0.1rem 0.4rem;
+            background: #f0f0f0;
+            color: var(--color-secondary);
+        }
+
+        /* Stat strip */
+        .stat-strip {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            padding: 1.2rem 0;
+            margin-bottom: 1.5rem;
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-family: var(--font-mono);
+            font-size: var(--size-stat);
+            font-weight: var(--weight-heading);
+            color: var(--color-text);
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-family: var(--font-sans);
+            font-size: 0.68rem;
+            color: var(--color-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-top: 0.15rem;
+        }
+
+        /* Body text */
+        p {
+            font-size: var(--size-body);
+            margin-bottom: 1rem;
+            line-height: var(--line-height);
+        }
+
+        /* Pull quote */
+        .pull-quote {
+            font-size: var(--pull-quote-size);
+            font-weight: var(--weight-label);
+            color: var(--color-text);
+            line-height: 1.6;
+            padding: 1rem 0 1rem 1.2rem;
+            margin: 1.5rem 0;
+            border-left: 2px solid var(--color-accent);
+            opacity: 0.9;
+        }
+
+        /* Flow diagram */
+        .flow-diagram {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            line-height: 1.6;
+            background: #fafafa;
+            border: 1px solid var(--color-border);
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            white-space: pre;
+            color: var(--color-text);
+        }
+
+        /* Dialogue */
+        .dialogue-section {
+            margin-top: var(--section-gap);
+        }
+
+        .dialogue-entry {
+            padding-left: 1rem;
+            border-left: 2px solid #ddd;
+            margin: 1.4rem 0;
+        }
+
+        .dialogue-entry.host {
+            border-left-color: var(--color-text);
+        }
+
+        .dialogue-entry .name {
+            font-family: var(--font-sans);
+            font-weight: var(--weight-label);
+            font-size: 0.72rem;
+            color: var(--color-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .dialogue-entry.host .name {
+            font-weight: var(--weight-heading);
+            color: var(--color-text);
+        }
+
+        .dialogue-entry p {
+            margin-bottom: 0.6rem;
+        }
+        .dialogue-entry p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Blog entry */
+        .blog-entry {
+            display: flex;
+            align-items: baseline;
+            gap: 0.6rem;
+            margin: 1rem 0;
+        }
+
+        .blog-entry .blog-date {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            color: var(--color-tertiary);
+            white-space: nowrap;
+        }
+
+        .blog-entry .blog-dash {
+            width: 10px;
+            height: 2px;
+            background: var(--color-accent);
+            opacity: 0.7;
+            flex-shrink: 0;
+            align-self: center;
+        }
+
+        .blog-entry .blog-title {
+            font-size: var(--size-body);
+            font-weight: var(--weight-body);
+            color: var(--color-text);
+        }
+
+        /* Connect link */
+        .connect-link {
+            font-size: var(--size-body);
+            color: var(--color-text);
+            text-decoration: none;
+            border-bottom: 1px solid #ccc;
+        }
+        .connect-link:hover {
+            border-color: var(--color-text);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            body { padding: 2rem 1.2rem 3rem; }
+            .header h1 { font-size: 1.4rem; }
+            .stat-strip { gap: 1.2rem; }
+            .stat-value { font-size: 1.1rem; }
+            .pull-quote { font-size: 1rem; padding-left: 1rem; }
+            .flow-diagram { font-size: 0.7rem; padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="version-label">Brief 1 — Version 1: Faithful reproduction of current visual system</div>
+
+    <!-- 1. Header -->
+    <header class="header">
+        <h1>rowbyroh</h1>
+        <div class="tagline">PM, AI-native tools, 0-1, B2B, Enterprise, HR Tech, Supply Chain</div>
+    </header>
+
+    <!-- 2. Project Card -->
+    <div class="project-card">
+        <div class="project-name">Obsidian MCP Server</div>
+        <div class="project-desc">Bridging Claude AI with a personal knowledge vault</div>
+        <div class="project-tags">
+            <span>systems</span>
+            <span>infrastructure</span>
+            <span>AI</span>
+        </div>
+    </div>
+
+    <!-- 3. Stat Cluster -->
+    <div class="stat-strip">
+        <div class="stat">
+            <span class="stat-value">672</span>
+            <span class="stat-label">notes</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">4</span>
+            <span class="stat-label">sources</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">14</span>
+            <span class="stat-label">taxonomy dimensions</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">2,599</span>
+            <span class="stat-label">auto-generated links</span>
+        </div>
+    </div>
+
+    <!-- 4. Body Text -->
+    <p>Conversations with Claude are disposable by default. Every session starts from zero. I had hundreds of conversations across Claude.ai, Notion, and Apple Notes that contained real decisions, technical reasoning, and project context. None of it was connected. None of it was searchable from inside a new session.</p>
+
+    <p>The MCP protocol lets Claude call tools directly. So I built a server that turns an Obsidian vault into Claude's long-term memory — and then built the pipelines to populate, classify, and link everything in it.</p>
+
+    <!-- 5. Pull Quote -->
+    <div class="pull-quote">The constraint is the brief.</div>
+
+    <!-- 6. Section Header -->
+    <h2>4 Import Pipelines</h2>
+
+    <!-- 7. Diagram Placeholder -->
+    <div class="flow-diagram">Claude.ai ──→ API sync ──→ markdown + frontmatter ──→ vault
+Notion     ──→ API sync ──→ markdown + frontmatter ──→ vault
+Notion     ──→ export   ──→ markdown + frontmatter ──→ vault
+Apple Notes──→ Shortcut ──→ iCloud ──→ importer    ──→ vault
+
+shared: source_id dedup │ --dry-run │ dev → prod</div>
+
+    <!-- 8. Dialogue Excerpt -->
+    <h2>From the Roundtable</h2>
+
+    <div class="dialogue-entry host">
+        <span class="name">Daniel</span>
+        <p>What makes a good chair? Not a good design — a good chair.</p>
+    </div>
+
+    <div class="dialogue-entry">
+        <span class="name">Charles Eames</span>
+        <p>A good chair is one that solves the problem it was asked to solve. Not the problem you wish it had. The constraint is the brief. Always has been.</p>
+    </div>
+
+    <div class="dialogue-entry host">
+        <span class="name">Daniel</span>
+        <p>So you start with the constraint, not the material?</p>
+    </div>
+
+    <div class="dialogue-entry">
+        <span class="name">Hans Wegner</span>
+        <p>You start with the body. The constraint tells you what the body needs. The material tells you what it can afford.</p>
+    </div>
+
+    <!-- 9. Blog Entry -->
+    <h2>Writing</h2>
+
+    <div class="blog-entry">
+        <span class="blog-date">2026.03</span>
+        <span class="blog-dash"></span>
+        <span class="blog-title">Reverse-engineering the Claude.ai conversation API</span>
+    </div>
+
+    <!-- 10. Connect Link -->
+    <h2>Connect</h2>
+
+    <a href="mailto:rowbyroh@gmail.com" class="connect-link">email</a>
+</body>
+</html>

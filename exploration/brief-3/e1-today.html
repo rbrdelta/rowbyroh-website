@@ -1,0 +1,326 @@
+<!-- Brief 3 / Exploration 1 / today: Worn Notebook -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>rowbyroh — Worn Notebook (Today)</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a18;
+    --ink-light: #4a483f;
+    --ink-faint: #8a8778;
+    --paper: #f5f0e1;
+    --paper-dark: #ebe5d3;
+    --rule-blue: #b8cce4;
+    --margin-red: #d4837c;
+    --margin-width: 80px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* Paper texture via subtle noise */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 40px 60px calc(var(--margin-width) + 40px);
+    position: relative;
+    z-index: 1;
+    /* Ruled lines */
+    background-image:
+      repeating-linear-gradient(
+        transparent,
+        transparent 31px,
+        var(--rule-blue) 31px,
+        var(--rule-blue) 32px
+      );
+    background-position: 0 10px;
+    min-height: 100vh;
+  }
+
+  /* Red margin line */
+  .page::before {
+    content: '';
+    position: absolute;
+    left: var(--margin-width);
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--margin-red);
+    opacity: 0.6;
+  }
+
+  .label {
+    position: fixed;
+    top: 12px;
+    right: 16px;
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 10;
+  }
+
+  /* Elements sit on the ruled lines */
+  .line {
+    line-height: 32px;
+    min-height: 32px;
+  }
+
+  header {
+    margin-bottom: 64px;
+  }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 32px;
+    margin-bottom: 0;
+    color: var(--ink);
+  }
+
+  header .tagline {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink-light);
+    line-height: 32px;
+  }
+
+  .stats {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+    line-height: 32px;
+  }
+
+  .stat {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-light);
+  }
+
+  .stat strong {
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .body-text {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 32px;
+    color: var(--ink);
+    margin-bottom: 64px;
+    max-width: 560px;
+  }
+
+  .pull-quote {
+    font-size: 20px;
+    font-weight: 500;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 32px;
+    margin-bottom: 64px;
+    padding-left: 20px;
+    border-left: 3px solid var(--ink);
+    /* Slight ink variation */
+    opacity: 0.85;
+  }
+
+  .section-header {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 32px;
+    margin-bottom: 32px;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1.5px;
+  }
+
+  .diagram {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 64px;
+    line-height: 32px;
+    font-size: 13px;
+    font-weight: 400;
+  }
+
+  .diagram .step {
+    padding: 4px 14px;
+    border: 1.5px solid var(--ink);
+    border-radius: 2px;
+  }
+
+  .diagram .arrow {
+    color: var(--ink-faint);
+    font-size: 16px;
+  }
+
+  .dialogue {
+    margin-bottom: 64px;
+    font-size: 13px;
+    line-height: 32px;
+  }
+
+  .dialogue .speaker {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 11px;
+  }
+
+  .dialogue .quote {
+    font-style: italic;
+    color: var(--ink-light);
+    margin-bottom: 16px;
+  }
+
+  .dialogue .response {
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  .blog-entry {
+    margin-bottom: 64px;
+    line-height: 32px;
+  }
+
+  .blog-entry .date {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--ink-faint);
+    letter-spacing: 0.05em;
+  }
+
+  .blog-entry .title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  footer {
+    line-height: 32px;
+    font-size: 13px;
+    color: var(--ink-faint);
+    padding-top: 32px;
+  }
+
+  footer a {
+    color: var(--ink-light);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-faint);
+  }
+
+  footer a:hover {
+    color: var(--ink);
+  }
+
+  /* Margin annotations */
+  .margin-note {
+    position: absolute;
+    left: 8px;
+    width: calc(var(--margin-width) - 20px);
+    font-size: 9px;
+    color: var(--margin-red);
+    line-height: 14px;
+    font-weight: 400;
+    text-align: right;
+  }
+
+  @media (max-width: 640px) {
+    :root { --margin-width: 40px; }
+    .page { padding: 40px 20px 40px calc(var(--margin-width) + 20px); }
+    .margin-note { display: none; }
+    .stats { flex-direction: column; gap: 0; }
+  }
+</style>
+</head>
+<body>
+  <div class="label">Brief 3 / E1 / Today: Worn Notebook</div>
+  <div class="page">
+    <header>
+      <div style="position:relative;">
+        <span class="margin-note" style="top: 0;">est. 2026</span>
+        <h1 class="line">rowbyroh</h1>
+      </div>
+      <div class="tagline line">PM who builds. AI-native tools, 0&rarr;1, B2B, Enterprise.</div>
+    </header>
+
+    <div style="position:relative;">
+      <span class="margin-note" style="top: 0;">current</span>
+      <div class="stats">
+        <span class="stat"><strong>672</strong> notes</span>
+        <span class="stat"><strong>4</strong> sources</span>
+        <span class="stat"><strong>14</strong> dimensions</span>
+        <span class="stat"><strong>2,599</strong> links</span>
+      </div>
+    </div>
+
+    <div style="position:relative;">
+      <span class="margin-note" style="top: 0;">the pitch</span>
+      <p class="body-text">I built an MCP server that bridges Claude AI with an Obsidian vault. Not because one existed — because it didn't. The vault holds 672 notes from four sources: Claude conversations, Notion pages, Apple Notes, and manual entries. Each note is classified across 14 taxonomy dimensions and connected through 2,599 auto-generated wikilinks.</p>
+    </div>
+
+    <div style="position:relative;">
+      <span class="margin-note" style="top: 4px;">remember</span>
+      <blockquote class="pull-quote">"The constraint is the brief"</blockquote>
+    </div>
+
+    <h2 class="section-header line">How It Works</h2>
+
+    <div style="position:relative;">
+      <span class="margin-note" style="top: 0;">pipeline</span>
+      <div class="diagram">
+        <span class="step">Input</span>
+        <span class="arrow">&rarr;</span>
+        <span class="step">Process</span>
+        <span class="arrow">&rarr;</span>
+        <span class="step">Classify</span>
+        <span class="arrow">&rarr;</span>
+        <span class="step">Link</span>
+        <span class="arrow">&rarr;</span>
+        <span class="step">Output</span>
+      </div>
+    </div>
+
+    <div class="dialogue">
+      <div class="speaker">WEGNER</div>
+      <div class="quote line">"A cushion is not design — a cushion is an apology."</div>
+      <div class="response">That's the principle. If the structure needs padding to be comfortable, the structure failed.</div>
+    </div>
+
+    <div style="position:relative;">
+      <span class="margin-note" style="top: 0;">log</span>
+      <div class="blog-entry">
+        <div class="date line">2026-03-15</div>
+        <div class="title line">Reverse Engineering the Claude API</div>
+      </div>
+    </div>
+
+    <footer>
+      <a href="#">github</a> &middot; <a href="#">email</a>
+    </footer>
+  </div>
+</body>
+</html>

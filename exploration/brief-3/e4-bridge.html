@@ -1,0 +1,357 @@
+<!-- Brief 3 / Exploration 4 / bridge: Stream of Consciousness -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>rowbyroh — Stream of Consciousness (Bridge)</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --text: #1a1a1a;
+    --text-mid: #555;
+    --text-faint: #999;
+    --bg: #fafaf8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .label {
+    position: fixed;
+    top: 12px;
+    right: 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 100;
+  }
+
+  .stream {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 80px 24px 160px;
+    position: relative;
+  }
+
+  /* Marginalia that drifts in */
+  .margin {
+    position: absolute;
+    right: -180px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-faint);
+    max-width: 160px;
+    line-height: 1.5;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .margin.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Text density waves — controlled via classes */
+  .tight {
+    font-size: 13px;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5em;
+  }
+
+  .normal {
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 2em;
+  }
+
+  .loose {
+    font-size: 17px;
+    line-height: 2.2;
+    margin-bottom: 2.5em;
+  }
+
+  .name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: inherit;
+    font-weight: 700;
+  }
+
+  .tagline-inline {
+    color: var(--text-mid);
+  }
+
+  .stat-inline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+  }
+
+  /* Scroll-triggered emphasis */
+  .emphasize {
+    transition: all 0.6s ease;
+  }
+
+  .emphasize.active {
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  /* The pause — pull quote that emerges */
+  .pause {
+    font-size: 24px;
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.4;
+    padding: 2em 0;
+    color: var(--text);
+    opacity: 0.3;
+    transition: opacity 0.8s ease;
+  }
+
+  .pause.focused {
+    opacity: 1;
+  }
+
+  .flow-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-faint);
+    padding: 0.5em 0;
+  }
+
+  .diagram-flow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-mid);
+    padding: 0.5em 0 1.5em;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .diagram-flow .step {
+    transition: all 0.3s ease;
+    padding: 2px 0;
+  }
+
+  .diagram-flow .step.lit {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .diagram-flow .arrow {
+    color: var(--text-faint);
+    transition: color 0.3s ease;
+  }
+
+  .dialogue-inline {
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 2em;
+    position: relative;
+  }
+
+  .speaker-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .spoken {
+    font-style: italic;
+    color: var(--text-mid);
+  }
+
+  .entry {
+    font-size: 15px;
+    line-height: 1.75;
+    padding: 1em 0;
+    border-top: 1px solid #e8e8e4;
+    margin-top: 2em;
+  }
+
+  .entry-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--text-faint);
+  }
+
+  .links {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--text-faint);
+    padding-top: 3em;
+  }
+
+  .links a {
+    color: var(--text-mid);
+    text-decoration: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .links a:hover { color: var(--text); }
+
+  /* Reading progress — subtle line on left */
+  .progress-line {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 2px;
+    height: 0%;
+    background: var(--text);
+    transition: height 0.1s linear;
+    z-index: 50;
+  }
+
+  @media (max-width: 900px) {
+    .margin { display: none; }
+  }
+
+  @media (max-width: 640px) {
+    .stream { padding: 40px 20px 80px; }
+    .pause { font-size: 20px; }
+    .loose { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+  <div class="label">Brief 3 / E4 / Bridge: Stream of Consciousness</div>
+  <div class="progress-line" id="progress"></div>
+
+  <div class="stream">
+    <p class="tight" style="position:relative;">
+      <span class="margin" style="top: 0;" data-reveal>est. 2026 — built from scratch, on purpose</span>
+      <span class="name">rowbyroh</span> <span class="tagline-inline">— PM who builds. AI-native tools, 0&rarr;1, B2B, Enterprise.</span> The numbers: <span class="stat-inline">672 notes</span>, <span class="stat-inline">4 sources</span>, <span class="stat-inline">14 dimensions</span>, <span class="stat-inline">2,599 links</span>. All live. All connected.
+    </p>
+
+    <p class="normal emphasize" style="position:relative;">
+      <span class="margin" style="top: 0;" data-reveal>nobody built this. vacancy became project.</span>
+      I built an MCP server that bridges Claude AI with an Obsidian vault. Not because one existed — because it didn't. The vault holds 672 notes from four sources: Claude conversations, Notion pages, Apple Notes, and manual entries. Each note is classified across 14 taxonomy dimensions and connected through 2,599 auto-generated wikilinks.
+    </p>
+
+    <div class="loose">
+      <div class="pause">"The constraint is the brief"</div>
+    </div>
+
+    <div class="tight" style="position:relative;">
+      <span class="margin" style="top: 0;" data-reveal>five stages, each idempotent</span>
+      <div class="flow-header">How It Works</div>
+      <div class="diagram-flow" id="pipeline">
+        <span class="step">Input</span>
+        <span class="arrow">&rarr;</span>
+        <span class="step">Process</span>
+        <span class="arrow">&rarr;</span>
+        <span class="step">Classify</span>
+        <span class="arrow">&rarr;</span>
+        <span class="step">Link</span>
+        <span class="arrow">&rarr;</span>
+        <span class="step">Output</span>
+      </div>
+    </div>
+
+    <div class="normal dialogue-inline" style="position:relative;">
+      <span class="margin" style="top: 0;" data-reveal>the standard. no exceptions.</span>
+      <span class="speaker-name">Wegner</span> said <span class="spoken">"A cushion is not design — a cushion is an apology."</span> That's the principle. If the structure needs padding to be comfortable, the structure failed.
+    </div>
+
+    <div class="entry" style="position:relative;">
+      <span class="margin" style="top: 1em;" data-reveal>undocumented. that was the invitation.</span>
+      <span class="entry-date">2026-03-15</span><br>
+      Reverse Engineering the Claude API
+    </div>
+
+    <div class="links">
+      <a href="#">github</a> &middot; <a href="#">email</a>
+    </div>
+  </div>
+
+  <script>
+    // Reading progress
+    const progress = document.getElementById('progress');
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = (window.scrollY / h) * 100;
+      progress.style.height = pct + '%';
+    });
+
+    // Scroll-triggered marginalia
+    const margins = document.querySelectorAll('.margin[data-reveal]');
+    const marginObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
+    }, { threshold: 0.5, rootMargin: '-50px' });
+
+    margins.forEach(m => marginObs.observe(m));
+
+    // Scroll-triggered emphasis
+    const emphasize = document.querySelectorAll('.emphasize');
+    const emphObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        e.target.classList.toggle('active', e.isIntersecting);
+      });
+    }, { threshold: 0.7 });
+
+    emphasize.forEach(el => emphObs.observe(el));
+
+    // Pull quote focus
+    const pause = document.querySelector('.pause');
+    const pauseObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        e.target.classList.toggle('focused', e.isIntersecting);
+      });
+    }, { threshold: 0.8 });
+
+    pauseObs.observe(pause);
+
+    // Pipeline sequential lighting on scroll
+    const pipeline = document.getElementById('pipeline');
+    const steps = pipeline.querySelectorAll('.step');
+    const arrows = pipeline.querySelectorAll('.arrow');
+    let litIndex = -1;
+
+    const pipeObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          let i = 0;
+          const interval = setInterval(() => {
+            if (i > 0) {
+              steps[i-1].classList.remove('lit');
+              if (arrows[i-1]) arrows[i-1].style.color = '';
+            }
+            if (i < steps.length) {
+              steps[i].classList.add('lit');
+              if (arrows[i]) arrows[i].style.color = 'var(--text)';
+              i++;
+            } else {
+              clearInterval(interval);
+              // Leave all lit
+              steps.forEach(s => s.classList.add('lit'));
+            }
+          }, 300);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    pipeObs.observe(pipeline);
+  </script>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!-- Brief 2 / Version 3: Option C — Pure Monochrome (no color, hierarchy from scale/weight/space only) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>rowbyroh — Vocabulary Sampler v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ground: #f6f5f2;
+    --ink: #1c1c1c;
+    --ink-secondary: #6b6b6b;
+    --rule: #d4d2cd;
+    --surface: #eeedea;
+
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+
+    --outer-max: 1100px;
+    --text-max: 620px;
+    --margin-break-max: 800px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .outer {
+    max-width: var(--outer-max);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .text-col { max-width: var(--text-max); }
+  .margin-break { max-width: var(--margin-break-max); }
+
+  .version-label {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-secondary);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .section { margin-top: 4rem; }
+  .section-major { margin-top: 8rem; }
+
+  /* ---- HEADER ---- */
+  .header { padding-top: 6rem; }
+
+  .page-title {
+    font-family: var(--font-body);
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+
+  .tagline {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--ink-secondary);
+    margin-top: 0.75rem;
+  }
+
+  /* ---- HEAVY RULE (Move 1) ---- */
+  .heavy-rule {
+    border: none;
+    border-top: 6px solid var(--ink);
+    margin: 4rem 0;
+  }
+
+  /* ---- STAT CLUSTER (Move 2) ---- */
+  .stat-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    padding: 3rem 0 2rem;
+  }
+
+  .stat { display: flex; flex-direction: column; }
+
+  .stat-number {
+    font-family: var(--font-mono);
+    font-size: 64px;
+    font-weight: 300;
+    line-height: 1.0;
+    color: var(--ink);
+  }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--ink-secondary);
+    margin-top: 0.5rem;
+  }
+
+  /* ---- SECTION HEADER ---- */
+  .section-header {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-header .marker {
+    color: var(--ink-secondary);
+    margin-right: 0.5em;
+  }
+
+  /* ---- BODY TEXT ---- */
+  .body-text p {
+    max-width: var(--text-max);
+    margin-bottom: 1.25rem;
+  }
+  .body-text p:last-child { margin-bottom: 0; }
+
+  /* ---- PULL QUOTE (Move 4: no color — weight and scale only) ---- */
+  .pull-quote {
+    font-family: var(--font-body);
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--ink);
+    max-width: var(--text-max);
+    padding: 3rem 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ---- DIAGRAM (Move 3 + Move 5) ---- */
+  .diagram {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    padding: 2.5rem;
+    max-width: var(--margin-break-max);
+    margin: 2rem 0;
+  }
+
+  .diagram-title {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  .diagram-flow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .diagram-node {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink);
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--ink);
+    background: var(--ground);
+  }
+
+  .diagram-node.numbered::before {
+    content: attr(data-n);
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--ink-secondary);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .diagram-arrow {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--ink-secondary);
+  }
+
+  /* ---- DIALOGUE (Move 6) ---- */
+  .dialogue-block { margin-top: 2rem; }
+  .dialogue-entry { margin-bottom: 2.5rem; }
+
+  .dialogue-entry .speaker {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-secondary);
+    margin-bottom: 0.5rem;
+  }
+
+  .dialogue-entry .speech {
+    max-width: var(--text-max);
+    line-height: 1.6;
+  }
+
+  .dialogue-entry.designer .speech { padding-left: 1.5rem; }
+  .dialogue-entry.self .speech { padding-left: 0; }
+
+  /* ---- BLOG ENTRY ---- */
+  .blog-item {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--rule);
+    max-width: var(--text-max);
+  }
+
+  .blog-item .date {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-secondary);
+    white-space: nowrap;
+  }
+
+  .blog-item .title {
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ---- CONNECT ---- */
+  .connect-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+    transition: opacity 0.15s;
+  }
+
+  .connect-link:hover { opacity: 0.6; }
+
+  /* ---- RULES ---- */
+  .light-rule {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 4rem 0;
+  }
+
+  .footer { padding-bottom: 6rem; }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 768px) {
+    body { font-size: 16px; }
+    .page-title { font-size: 28px; }
+    .stat-number { font-size: 44px; }
+    .stat-cluster { gap: 2rem; }
+    .pull-quote { font-size: 24px; }
+    .outer { padding: 0 1.25rem; }
+    .header { padding-top: 4rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="outer">
+
+  <div class="version-label">Brief 2 / v3 — Option C: Pure Monochrome</div>
+
+  <!-- 1. Header -->
+  <header class="header text-col">
+    <h1 class="page-title">rowbyroh</h1>
+    <p class="tagline">infrastructure thinker. builder of quiet systems.</p>
+  </header>
+
+  <!-- 10. Heavy Rule (Move 1) — thicker for monochrome emphasis -->
+  <hr class="heavy-rule">
+
+  <!-- 2. Stat Cluster (Move 2) — larger numbers, weight carries the hierarchy -->
+  <section class="stat-cluster">
+    <div class="stat">
+      <span class="stat-number">672</span>
+      <span class="stat-label">notes indexed</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">4</span>
+      <span class="stat-label">source systems</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">14</span>
+      <span class="stat-label">taxonomy dimensions</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">2,599</span>
+      <span class="stat-label">auto-generated links</span>
+    </div>
+  </section>
+
+  <hr class="light-rule">
+
+  <!-- 5. Section Header -->
+  <section class="section">
+    <h2 class="section-header"><span class="marker">01</span>Case Study</h2>
+
+    <!-- 3. Body Text -->
+    <div class="body-text">
+      <p>The Obsidian MCP server started as a way to give Claude direct access to my personal knowledge base. Four phases in, it has become the connective tissue between every tool I use: 672 notes imported from Claude conversations, Apple Notes, and Notion, each classified across a 14-dimension taxonomy that emerged from the data itself rather than being imposed upfront.</p>
+      <p>What makes it work is the pipeline's idempotence. Every import operation can be re-run safely. Every classification pass refines without destroying. The vault isn't a static archive; it's a living graph where 2,599 auto-generated wikilinks surface connections I never manually drew. The system rewards consistency over cleverness.</p>
+    </div>
+  </section>
+
+  <!-- 4. Pull Quote (Move 4: no accent color — scale, weight, and framing rules instead) -->
+  <section class="section-major">
+    <blockquote class="pull-quote">"The constraint is the brief."</blockquote>
+  </section>
+
+  <!-- 6. Diagram (Move 3: Margin Break + Move 5: Diagram Voice) -->
+  <section class="section">
+    <h2 class="section-header"><span class="marker">02</span>Pipeline</h2>
+    <div class="diagram margin-break">
+      <div class="diagram-title">Fig. 1 — Import Pipeline Flow</div>
+      <div class="diagram-flow">
+        <div class="diagram-node numbered" data-n="01">Source Sync</div>
+        <span class="diagram-arrow">&rarr;</span>
+        <div class="diagram-node numbered" data-n="02">Parse &amp; Normalize</div>
+        <span class="diagram-arrow">&rarr;</span>
+        <div class="diagram-node numbered" data-n="03">Classify (14-dim)</div>
+        <span class="diagram-arrow">&rarr;</span>
+        <div class="diagram-node numbered" data-n="04">Link Graph</div>
+        <span class="diagram-arrow">&rarr;</span>
+        <div class="diagram-node numbered" data-n="05">Vault Write</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="light-rule">
+
+  <!-- 7. Dialogue Excerpt (Move 6: Speaker Shift) -->
+  <section class="section">
+    <h2 class="section-header"><span class="marker">03</span>Roundtable</h2>
+    <div class="dialogue-block">
+      <div class="dialogue-entry designer">
+        <div class="speaker">Chair (Typographer)</div>
+        <p class="speech">The wide margin isn't wasted space. It's where the reader breathes. You've given the text room to work without needing decoration to fill the silence.</p>
+      </div>
+      <div class="dialogue-entry self">
+        <div class="speaker">rowbyroh</div>
+        <p class="speech">That was the intent. Every pixel that isn't text should be earning its keep by being empty. The margin is structural, not decorative.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="light-rule">
+
+  <!-- 8. Blog Entry -->
+  <section class="section">
+    <h2 class="section-header"><span class="marker">04</span>Writing</h2>
+    <div class="blog-item">
+      <span class="date">2026-03-15</span>
+      <span class="title">Building a PKM System That Survives Contact with Reality</span>
+    </div>
+  </section>
+
+  <!-- 9. Connect Link -->
+  <section class="section footer">
+    <h2 class="section-header"><span class="marker">05</span>Connect</h2>
+    <a href="https://github.com/rbrdelta" class="connect-link">github.com/rbrdelta</a>
+  </section>
+
+</div>
+
+</body>
+</html>

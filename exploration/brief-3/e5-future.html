@@ -1,0 +1,299 @@
+<!-- Brief 3 / Exploration 5 / future: Anti-Portfolio -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>rowbyroh — Anti-Portfolio (Future)</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: #fff;
+    color: #111;
+    min-height: 100vh;
+    padding: 60px 40px 120px;
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .label {
+    position: fixed;
+    top: 12px;
+    right: 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: #bbb;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 100;
+  }
+
+  p { margin-bottom: 1.2em; }
+
+  a {
+    color: #111;
+    text-decoration: underline;
+  }
+
+  /* Meta-commentary layer */
+  .meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: #999;
+    border-left: 2px solid #ddd;
+    padding-left: 16px;
+    margin: 1.5em 0;
+    line-height: 1.6;
+  }
+
+  .meta .tag {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #bbb;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* Rubric display */
+  .rubric {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    margin: 2em 0;
+    border: 1px solid #eee;
+    padding: 20px;
+    background: #fafafa;
+  }
+
+  .rubric-title {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #999;
+    margin-bottom: 12px;
+  }
+
+  .rubric-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 11px;
+  }
+
+  .rubric-row:last-child { border-bottom: none; }
+
+  .rubric-label { color: #666; }
+
+  .rubric-score {
+    font-weight: 700;
+    color: #111;
+  }
+
+  .rubric-bar {
+    width: 60px;
+    height: 4px;
+    background: #eee;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rubric-bar::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: var(--fill, 0%);
+    background: #111;
+    transition: width 1s ease;
+  }
+
+  /* Source view toggle */
+  .source-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    padding: 8px 14px;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #999;
+    z-index: 100;
+    transition: all 0.2s ease;
+  }
+
+  .source-toggle:hover {
+    border-color: #111;
+    color: #111;
+  }
+
+  /* Source code view */
+  .source-view {
+    display: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    line-height: 1.6;
+    color: #666;
+    background: #fafafa;
+    padding: 20px;
+    border: 1px solid #eee;
+    margin: 1.5em 0;
+    white-space: pre-wrap;
+  }
+
+  body.show-source .source-view { display: block; }
+  body.show-source .content-view { color: #ccc; }
+  body.show-source .meta { color: #111; border-left-color: #111; }
+
+  @media (max-width: 640px) {
+    body { padding: 40px 20px 100px; }
+    .source-toggle { bottom: 10px; right: 10px; }
+  }
+</style>
+</head>
+<body>
+  <div class="label">Brief 3 / E5 / Future: Anti-Portfolio</div>
+  <button class="source-toggle" id="sourceToggle">View source / process</button>
+
+  <div class="meta">
+    <span class="tag">Meta</span>
+    This page is its own case study. You are looking at a portfolio that refuses to be a portfolio. Every design decision is visible. The rubric is exposed. The process is the product.
+  </div>
+
+  <div class="content-view">
+    <p>rowbyroh. PM who builds. AI-native tools, 0-to-1, B2B, Enterprise.</p>
+  </div>
+
+  <div class="meta">
+    <span class="tag">Design decision</span>
+    No hero section. The name is just text in a paragraph. Most portfolios would put this in 72px type with a gradient. That choice signals something. This choice signals something else.
+  </div>
+
+  <div class="content-view">
+    <p>The vault holds 672 notes from 4 sources, classified across 14 dimensions, connected through 2,599 links.</p>
+  </div>
+
+  <div class="meta">
+    <span class="tag">Design decision</span>
+    Stats mentioned casually, mid-paragraph. Not in a flashy grid. Not animated. Just facts stated plainly, the way you'd tell a colleague over coffee.
+  </div>
+
+  <div class="content-view">
+    <p>I built an MCP server that bridges Claude AI with an Obsidian vault. Not because one existed — because it didn't. The vault holds 672 notes from four sources: Claude conversations, Notion pages, Apple Notes, and manual entries. Each note is classified across 14 taxonomy dimensions and connected through 2,599 auto-generated wikilinks.</p>
+  </div>
+
+  <div class="source-view" id="src1">
+// decision: running prose, not bullet points
+// the work speaks through narrative, not feature lists
+// portfolio convention rejected: project cards, tech stack badges, "view case study" buttons
+{
+  format: "prose",
+  rejected: ["cards", "grids", "badges", "CTAs", "hero images"],
+  why: "Portfolios are performative. Letters are honest."
+}</div>
+
+  <div class="content-view">
+    <p>"The constraint is the brief."</p>
+  </div>
+
+  <div class="meta">
+    <span class="tag">Design decision</span>
+    The pull quote gets no special treatment. No oversized italic. No decorative quotation marks. If the words are strong, they don't need visual amplification.
+  </div>
+
+  <div class="content-view">
+    <p>How it works: input, process, classify, link, output.</p>
+  </div>
+
+  <div class="meta">
+    <span class="tag">Design decision</span>
+    The pipeline described in one sentence instead of an elaborate diagram. The information density is actually higher this way. The diagram is theater.
+  </div>
+
+  <div class="source-view" id="src2">
+// the pipeline as text vs. diagram
+// text: 9 words, instantly parsed
+// diagram: requires visual processing, orientation, box-arrow grammar
+// text wins on information density
+// diagram wins on... what exactly? looking like a "real" portfolio?</div>
+
+  <div class="content-view">
+    <p>Wegner said "A cushion is not design — a cushion is an apology." That's the principle. If the structure needs padding to be comfortable, the structure failed.</p>
+  </div>
+
+  <div class="content-view">
+    <p>2026-03-15 — Reverse Engineering the Claude API.</p>
+  </div>
+
+  <div class="rubric">
+    <div class="rubric-title">Self-Assessment Against Brief Rubric</div>
+    <div class="rubric-row">
+      <span class="rubric-label">Visual distinction from templates</span>
+      <span class="rubric-score">High <span class="rubric-bar" style="--fill: 90%"></span></span>
+    </div>
+    <div class="rubric-row">
+      <span class="rubric-label">Provokes thought about portfolios</span>
+      <span class="rubric-score">High <span class="rubric-bar" style="--fill: 85%"></span></span>
+    </div>
+    <div class="rubric-row">
+      <span class="rubric-label">Positions as thought leader</span>
+      <span class="rubric-score">Med <span class="rubric-bar" style="--fill: 65%"></span></span>
+    </div>
+    <div class="rubric-row">
+      <span class="rubric-label">Risk of being misread as lazy</span>
+      <span class="rubric-score">Med <span class="rubric-bar" style="--fill: 50%"></span></span>
+    </div>
+    <div class="rubric-row">
+      <span class="rubric-label">Memorable</span>
+      <span class="rubric-score">High <span class="rubric-bar" style="--fill: 80%"></span></span>
+    </div>
+  </div>
+
+  <div class="meta">
+    <span class="tag">Meta</span>
+    The rubric is the portfolio. The process is the case study. You just read a portfolio that demonstrated product thinking, design literacy, and technical execution — without a single screenshot, mockup, or "View Project" button. The portfolio IS the case study of building a portfolio.
+  </div>
+
+  <div class="content-view">
+    <p><a href="#">github</a> / <a href="#">email</a></p>
+  </div>
+
+  <script>
+    // Source view toggle
+    const toggle = document.getElementById('sourceToggle');
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('show-source');
+      toggle.textContent = document.body.classList.contains('show-source')
+        ? 'Hide source / process'
+        : 'View source / process';
+    });
+
+    // Animate rubric bars on scroll
+    const rubricBars = document.querySelectorAll('.rubric-bar');
+    const rubricObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          // Bars animate via CSS transition when --fill is set
+          // They're already set inline, just need the element to be visible
+          e.target.style.opacity = '1';
+        }
+      });
+    }, { threshold: 0.5 });
+
+    rubricBars.forEach(b => rubricObs.observe(b));
+  </script>
+</body>
+</html>

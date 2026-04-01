@@ -1,0 +1,480 @@
+<!-- Brief 3 / Exploration 3 / today: Assembly Manual -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>rowbyroh — Assembly Manual (Today)</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #fafafa;
+    --bg: #f5f5f3;
+    --border: #d0d0cc;
+    --text: #1a1a1a;
+    --text-mid: #666;
+    --text-light: #999;
+    --accent: #e63020;
+    --callout: #2070c0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  .label {
+    position: fixed;
+    top: 12px;
+    right: 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-light);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 100;
+  }
+
+  /* Document frame */
+  .manual {
+    max-width: 700px;
+    margin: 40px auto;
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 0;
+  }
+
+  /* Title block — like a technical document cover */
+  .title-block {
+    padding: 40px;
+    border-bottom: 2px solid var(--text);
+    position: relative;
+  }
+
+  .doc-ref {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-light);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .title-block h1 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .title-block .tagline {
+    font-size: 14px;
+    color: var(--text-mid);
+  }
+
+  .revision {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-light);
+    text-align: right;
+  }
+
+  .revision strong {
+    display: block;
+    font-size: 11px;
+    color: var(--text-mid);
+  }
+
+  /* Parts list */
+  .parts-list {
+    padding: 32px 40px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  .parts-list h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-mid);
+    margin-bottom: 16px;
+  }
+
+  .parts-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .part {
+    text-align: center;
+  }
+
+  .part .part-number {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--callout);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .part .part-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 24px;
+    font-weight: 700;
+    display: block;
+  }
+
+  .part .part-label {
+    font-size: 11px;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Content section */
+  .section {
+    padding: 32px 40px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .step-number {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .step-number::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section .body-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text);
+    max-width: 540px;
+  }
+
+  /* Callout arrow */
+  .callout {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 20px 0;
+    padding-left: 20px;
+    border-left: 2px solid var(--callout);
+  }
+
+  .callout-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--callout);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .callout-text {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.5;
+  }
+
+  /* Pull quote as WARNING block */
+  .warning-block {
+    padding: 24px 32px;
+    background: var(--bg);
+    border-left: 4px solid var(--accent);
+    margin: 0;
+  }
+
+  .warning-block .warning-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  .warning-block .quote-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* Section header */
+  .section-header-row {
+    padding: 20px 40px;
+    background: var(--text);
+    color: var(--white);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* Diagram as assembly step */
+  .assembly-diagram {
+    padding: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pipeline {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .pipeline-step {
+    flex: 1;
+    text-align: center;
+    padding: 16px 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 1px solid var(--border);
+    border-right: none;
+    position: relative;
+  }
+
+  .pipeline-step:last-child { border-right: 1px solid var(--border); }
+
+  .pipeline-step .step-ref {
+    position: absolute;
+    top: -8px;
+    left: 8px;
+    font-size: 9px;
+    color: var(--callout);
+    background: var(--white);
+    padding: 0 4px;
+  }
+
+  /* CSS arrows between steps */
+  .pipeline-step::after {
+    content: '';
+    position: absolute;
+    right: -7px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    width: 12px;
+    height: 12px;
+    border-top: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    background: var(--white);
+    z-index: 1;
+  }
+
+  .pipeline-step:last-child::after { display: none; }
+
+  /* Dialogue as spec note */
+  .spec-note {
+    padding: 32px 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .spec-note .reference {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+
+  .spec-note .spec-quote {
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text-mid);
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+
+  .spec-note .spec-response {
+    font-size: 14px;
+    line-height: 1.6;
+    padding-left: 16px;
+    border-left: 2px solid var(--border);
+  }
+
+  /* Blog entry as revision log */
+  .revision-log {
+    padding: 24px 40px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+  }
+
+  .revision-log .rev-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-light);
+    white-space: nowrap;
+  }
+
+  .revision-log .rev-title {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .revision-log .rev-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--white);
+    background: var(--accent);
+    padding: 2px 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  footer {
+    padding: 24px 40px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-light);
+  }
+
+  footer a {
+    color: var(--text-mid);
+    text-decoration: none;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  @media (max-width: 640px) {
+    .manual { margin: 20px 12px; }
+    .title-block, .section, .spec-note, .assembly-diagram { padding: 24px 20px; }
+    .parts-grid { grid-template-columns: repeat(2, 1fr); }
+    .revision { display: none; }
+    .pipeline { flex-direction: column; }
+    .pipeline-step { border-right: 1px solid var(--border); border-bottom: none; }
+    .pipeline-step:last-child { border-bottom: 1px solid var(--border); }
+    .pipeline-step::after { display: none; }
+    .revision-log { flex-direction: column; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+  <div class="label">Brief 3 / E3 / Today: Assembly Manual</div>
+
+  <div class="manual">
+    <div class="title-block">
+      <div class="doc-ref">DOC-RBR-001 / PORTFOLIO ASSEMBLY</div>
+      <h1>rowbyroh</h1>
+      <div class="tagline">PM who builds. AI-native tools, 0&rarr;1, B2B, Enterprise.</div>
+      <div class="revision">
+        <strong>Rev. 3.1</strong>
+        2026-03-27
+      </div>
+    </div>
+
+    <div class="parts-list">
+      <h3>Parts Inventory</h3>
+      <div class="parts-grid">
+        <div class="part">
+          <div class="part-number">P-001</div>
+          <span class="part-value">672</span>
+          <span class="part-label">Notes</span>
+        </div>
+        <div class="part">
+          <div class="part-number">P-002</div>
+          <span class="part-value">4</span>
+          <span class="part-label">Sources</span>
+        </div>
+        <div class="part">
+          <div class="part-number">P-003</div>
+          <span class="part-value">14</span>
+          <span class="part-label">Dimensions</span>
+        </div>
+        <div class="part">
+          <div class="part-number">P-004</div>
+          <span class="part-value">2,599</span>
+          <span class="part-label">Links</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="step-number">STEP 1 — UNDERSTAND THE BUILD</div>
+      <p class="body-text">I built an MCP server that bridges Claude AI with an Obsidian vault. Not because one existed — because it didn't. The vault holds 672 notes from four sources: Claude conversations, Notion pages, Apple Notes, and manual entries. Each note is classified across 14 taxonomy dimensions and connected through 2,599 auto-generated wikilinks.</p>
+      <div class="callout" style="margin-top: 20px;">
+        <span class="callout-label">Note</span>
+        <span class="callout-text">All imports are idempotent. Re-running skips existing notes by source_id.</span>
+      </div>
+    </div>
+
+    <div class="warning-block">
+      <div class="warning-label">Design Principle</div>
+      <div class="quote-text">"The constraint is the brief"</div>
+    </div>
+
+    <div class="section-header-row">How It Works</div>
+
+    <div class="assembly-diagram">
+      <div class="pipeline">
+        <div class="pipeline-step">
+          <span class="step-ref">2.1</span>
+          Input
+        </div>
+        <div class="pipeline-step">
+          <span class="step-ref">2.2</span>
+          Process
+        </div>
+        <div class="pipeline-step">
+          <span class="step-ref">2.3</span>
+          Classify
+        </div>
+        <div class="pipeline-step">
+          <span class="step-ref">2.4</span>
+          Link
+        </div>
+        <div class="pipeline-step">
+          <span class="step-ref">2.5</span>
+          Output
+        </div>
+      </div>
+    </div>
+
+    <div class="spec-note">
+      <div class="reference">REF: WEGNER, HANS J.</div>
+      <div class="spec-quote">"A cushion is not design — a cushion is an apology."</div>
+      <div class="spec-response">That's the principle. If the structure needs padding to be comfortable, the structure failed.</div>
+    </div>
+
+    <div class="revision-log">
+      <span class="rev-date">2026-03-15</span>
+      <span class="rev-title">Reverse Engineering the Claude API</span>
+      <span class="rev-tag">New</span>
+    </div>
+
+    <footer>
+      <a href="#">github</a> &middot; <a href="#">email</a>
+    </footer>
+  </div>
+</body>
+</html>

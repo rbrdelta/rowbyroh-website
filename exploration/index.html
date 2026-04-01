@@ -1,0 +1,345 @@
+<!-- Exploration Gallery — Visual Identity Experiments -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>rowbyroh — Visual Identity Explorations</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      background: #f6f5f2;
+      color: #1c1c1c;
+      padding: 4rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+      color: #6b6b6b;
+      margin-bottom: 3rem;
+    }
+    .brief {
+      margin-bottom: 4rem;
+    }
+    .brief-header {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6b6b6b;
+      margin-bottom: 0.75rem;
+    }
+    .brief-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .brief-desc {
+      color: #6b6b6b;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      max-width: 620px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      display: block;
+      background: #fff;
+      border: 1px solid #d4d2cd;
+      padding: 1.25rem;
+      text-decoration: none;
+      color: #1c1c1c;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .card:hover {
+      border-color: #1c1c1c;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .card-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #6b6b6b;
+      margin-bottom: 0.5rem;
+    }
+    .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+    .card-desc {
+      font-size: 0.8rem;
+      color: #6b6b6b;
+      line-height: 1.45;
+    }
+    .exploration-group {
+      margin-bottom: 2rem;
+    }
+    .exploration-name {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #1c1c1c;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    hr {
+      border: none;
+      border-top: 5px solid #1c1c1c;
+      margin: 4rem 0;
+    }
+    .count {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 2.5rem;
+      font-weight: 300;
+      margin-bottom: 0.25rem;
+    }
+    .count-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: #6b6b6b;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .stats {
+      display: flex;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    @media (max-width: 600px) {
+      body { padding: 2rem 1.25rem; }
+      h1 { font-size: 1.5rem; }
+      .stats { gap: 1.5rem; }
+      .count { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Visual Identity Explorations</h1>
+  <p class="subtitle">rowbyroh.com — exploration/visual-identity branch</p>
+
+  <div class="stats">
+    <div><div class="count">28</div><div class="count-label">versions</div></div>
+    <div><div class="count">3</div><div class="count-label">briefs</div></div>
+    <div><div class="count">5</div><div class="count-label">explorations</div></div>
+  </div>
+
+  <!-- Brief 1 -->
+  <div class="brief">
+    <div class="brief-header">Brief 1</div>
+    <div class="brief-title">Rubric-Driven Evolution</div>
+    <p class="brief-desc">10 progressive iterations optimizing the current site against the proportionality rubric. Each version improves one dimension while preserving what works.</p>
+    <div class="grid">
+      <a href="brief-1/v01.html" class="card">
+        <div class="card-label">v01</div>
+        <div class="card-title">Baseline</div>
+        <div class="card-desc">Faithful reproduction of current visual system</div>
+      </a>
+      <a href="brief-1/v02.html" class="card">
+        <div class="card-label">v02</div>
+        <div class="card-title">Spacing + Rhythm</div>
+        <div class="card-desc">Increased section gaps, vertical progression</div>
+      </a>
+      <a href="brief-1/v03.html" class="card">
+        <div class="card-label">v03</div>
+        <div class="card-title">Hierarchy</div>
+        <div class="card-desc">Clearer tier separation between elements</div>
+      </a>
+      <a href="brief-1/v04.html" class="card">
+        <div class="card-label">v04</div>
+        <div class="card-title">Anchors</div>
+        <div class="card-desc">Stats become oversized visual anchors</div>
+      </a>
+      <a href="brief-1/v05.html" class="card">
+        <div class="card-label">v05</div>
+        <div class="card-title">Density</div>
+        <div class="card-desc">Tighter lists, breathing narratives</div>
+      </a>
+      <a href="brief-1/v06.html" class="card">
+        <div class="card-label">v06</div>
+        <div class="card-title">Identity</div>
+        <div class="card-desc">Napkin-to-real-life aesthetic pushed further</div>
+      </a>
+      <a href="brief-1/v07.html" class="card">
+        <div class="card-label">v07</div>
+        <div class="card-title">Scannability</div>
+        <div class="card-desc">Grid layouts, information density tuning</div>
+      </a>
+      <a href="brief-1/v08.html" class="card">
+        <div class="card-label">v08</div>
+        <div class="card-title">Contrast</div>
+        <div class="card-desc">Bigger type scale, bolder tier separation</div>
+      </a>
+      <a href="brief-1/v09.html" class="card">
+        <div class="card-label">v09</div>
+        <div class="card-title">Boundaries</div>
+        <div class="card-desc">Elements break the content frame</div>
+      </a>
+      <a href="brief-1/v10.html" class="card">
+        <div class="card-label">v10</div>
+        <div class="card-title">Full Optimization</div>
+        <div class="card-desc">Everything tuned, conventions broken where earned</div>
+      </a>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Brief 2 -->
+  <div class="brief">
+    <div class="brief-header">Brief 2</div>
+    <div class="brief-title">Design Vocabulary Implementation</div>
+    <p class="brief-desc">3 versions implementing the full "Quiet Field, Sharp Punctuation" vocabulary — all 6 moves, each with a different color strategy from the roundtable exploration.</p>
+    <div class="grid">
+      <a href="brief-2/vocab-v1.html" class="card">
+        <div class="card-label">Option A</div>
+        <div class="card-title">Oxide Red</div>
+        <div class="card-desc">Single #b84233 accent. Rusted steel, woodworker's crayon.</div>
+      </a>
+      <a href="brief-2/vocab-v2.html" class="card">
+        <div class="card-label">Option B</div>
+        <div class="card-title">Zone System</div>
+        <div class="card-desc">Oxide red portfolio, ochre blog, monochrome dialogue.</div>
+      </a>
+      <a href="brief-2/vocab-v3.html" class="card">
+        <div class="card-label">Option C</div>
+        <div class="card-title">Pure Monochrome</div>
+        <div class="card-desc">Zero color. Scale, weight, and space only. Maximum Ando.</div>
+      </a>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Brief 3 -->
+  <div class="brief">
+    <div class="brief-header">Brief 3</div>
+    <div class="brief-title">Wild Explorations</div>
+    <p class="brief-desc">5 radical directions, each in 3 temporal versions: today (shippable refresh), bridge (experimental push), future (no constraints). Theme: Super Normal + Gestural + Stream of Consciousness.</p>
+
+    <div class="exploration-group">
+      <div class="exploration-name">E1 — Worn Notebook</div>
+      <div class="grid">
+        <a href="brief-3/e1-today.html" class="card">
+          <div class="card-label">Today</div>
+          <div class="card-title">Clean Legal Pad</div>
+          <div class="card-desc">Refined lines, ink hierarchy, paper texture</div>
+        </a>
+        <a href="brief-3/e1-bridge.html" class="card">
+          <div class="card-label">Bridge</div>
+          <div class="card-title">Interactive Notebook</div>
+          <div class="card-desc">Expanding margin notes, ink-drying transitions, torn edges</div>
+        </a>
+        <a href="brief-3/e1-future.html" class="card">
+          <div class="card-label">Future</div>
+          <div class="card-title">Full Moleskine</div>
+          <div class="card-desc">Variable stroke weights, hand-drawn SVG, page-flip feeling</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="exploration-group">
+      <div class="exploration-name">E2 — Concrete + Light</div>
+      <div class="grid">
+        <a href="brief-3/e2-today.html" class="card">
+          <div class="card-label">Today</div>
+          <div class="card-title">Ando Palette</div>
+          <div class="card-desc">Raw concrete gray, one light shaft, geometric sections</div>
+        </a>
+        <a href="brief-3/e2-bridge.html" class="card">
+          <div class="card-label">Bridge</div>
+          <div class="card-title">Architectural Spaces</div>
+          <div class="card-desc">Sections as rooms, doorways, one glass wall</div>
+        </a>
+        <a href="brief-3/e2-future.html" class="card">
+          <div class="card-label">Future</div>
+          <div class="card-title">Spatial Walk-Through</div>
+          <div class="card-desc">Perspective transforms, parallax concrete, light that moves</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="exploration-group">
+      <div class="exploration-name">E3 — Assembly Manual</div>
+      <div class="grid">
+        <a href="brief-3/e3-today.html" class="card">
+          <div class="card-label">Today</div>
+          <div class="card-title">Technical Document</div>
+          <div class="card-desc">Step numbers, parts list, callout arrows, revision log</div>
+        </a>
+        <a href="brief-3/e3-bridge.html" class="card">
+          <div class="card-label">Bridge</div>
+          <div class="card-title">Interactive Assembly</div>
+          <div class="card-desc">Hover cross-references, exploded views that snap together</div>
+        </a>
+        <a href="brief-3/e3-future.html" class="card">
+          <div class="card-label">Future</div>
+          <div class="card-title">Full Technical Illustration</div>
+          <div class="card-desc">SVG callout system, annotation toggle, assembly sequence</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="exploration-group">
+      <div class="exploration-name">E4 — Stream of Consciousness</div>
+      <div class="grid">
+        <a href="brief-3/e4-today.html" class="card">
+          <div class="card-label">Today</div>
+          <div class="card-title">Continuous Flow</div>
+          <div class="card-desc">No sections, no cards. One river of content.</div>
+        </a>
+        <a href="brief-3/e4-bridge.html" class="card">
+          <div class="card-label">Bridge</div>
+          <div class="card-title">Responsive Stream</div>
+          <div class="card-desc">Density waves, drifting marginalia, scroll emphasis</div>
+        </a>
+        <a href="brief-3/e4-future.html" class="card">
+          <div class="card-label">Future</div>
+          <div class="card-title">Generative Layout</div>
+          <div class="card-desc">Positions shift per load, words grow with repetition</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="exploration-group">
+      <div class="exploration-name">E5 — Anti-Portfolio</div>
+      <div class="grid">
+        <a href="brief-3/e5-today.html" class="card">
+          <div class="card-label">Today</div>
+          <div class="card-title">Flat Text</div>
+          <div class="card-desc">README as portfolio. No hierarchy except paragraph breaks.</div>
+        </a>
+        <a href="brief-3/e5-bridge.html" class="card">
+          <div class="card-label">Bridge</div>
+          <div class="card-title">One Moment of Craft</div>
+          <div class="card-desc">Total plainness, one beautiful SVG diagram</div>
+        </a>
+        <a href="brief-3/e5-future.html" class="card">
+          <div class="card-label">Future</div>
+          <div class="card-title">Meta-Portfolio</div>
+          <div class="card-desc">The site comments on its own design as you scroll</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

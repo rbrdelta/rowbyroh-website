@@ -1,0 +1,126 @@
+<!-- Brief 3 / Exploration 5 / bridge: Anti-Portfolio -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>rowbyroh — Anti-Portfolio (Bridge)</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: #fff;
+    color: #111;
+    min-height: 100vh;
+    padding: 60px 40px;
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .label {
+    position: fixed;
+    top: 12px;
+    right: 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: #bbb;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 100;
+  }
+
+  p { margin-bottom: 1.2em; }
+
+  a {
+    color: #111;
+    text-decoration: underline;
+  }
+
+  /* The one shocking moment of craft */
+  .the-diagram {
+    margin: 3em 0;
+    padding: 0;
+    position: relative;
+  }
+
+  .the-diagram svg {
+    width: 100%;
+    max-width: 500px;
+    display: block;
+  }
+
+  /* Everything else: aggressively plain */
+
+  @media (max-width: 640px) {
+    body { padding: 40px 20px; }
+  }
+</style>
+</head>
+<body>
+  <div class="label">Brief 3 / E5 / Bridge: Anti-Portfolio</div>
+
+  <p>rowbyroh. PM who builds. AI-native tools, 0-to-1, B2B, Enterprise.</p>
+
+  <p>The vault holds 672 notes from 4 sources, classified across 14 dimensions, connected through 2,599 links.</p>
+
+  <p>I built an MCP server that bridges Claude AI with an Obsidian vault. Not because one existed — because it didn't. The vault holds 672 notes from four sources: Claude conversations, Notion pages, Apple Notes, and manual entries. Each note is classified across 14 taxonomy dimensions and connected through 2,599 auto-generated wikilinks.</p>
+
+  <p>"The constraint is the brief."</p>
+
+  <p>How it works:</p>
+
+  <!-- The single moment of craft amid total plainness -->
+  <div class="the-diagram">
+    <svg viewBox="0 0 500 140" xmlns="http://www.w3.org/2000/svg">
+      <!-- Elegant pipeline rendering — the one beautiful thing -->
+      <defs>
+        <linearGradient id="flow" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#ddd"/>
+          <stop offset="50%" stop-color="#111"/>
+          <stop offset="100%" stop-color="#ddd"/>
+        </linearGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="2" result="blur"/>
+          <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+        </filter>
+      </defs>
+
+      <!-- The flow line — one continuous curve -->
+      <path d="M 30,70 C 60,70 70,30 110,30 C 150,30 150,70 190,70 C 230,70 230,110 270,110 C 310,110 310,70 350,70 C 390,70 400,30 440,30"
+            stroke="url(#flow)" stroke-width="2" fill="none" filter="url(#glow)"/>
+
+      <!-- Nodes — perfectly placed -->
+      <circle cx="30" cy="70" r="5" fill="#111"/>
+      <circle cx="150" cy="70" r="5" fill="#111"/>
+      <circle cx="270" cy="110" r="5" fill="#111"/>
+      <circle cx="350" cy="70" r="5" fill="#111"/>
+      <circle cx="440" cy="30" r="5" fill="#111"/>
+
+      <!-- Labels — precise typography -->
+      <text x="30" y="95" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#666" font-weight="400">Input</text>
+      <text x="150" y="95" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#666" font-weight="400">Process</text>
+      <text x="270" y="135" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#666" font-weight="400">Classify</text>
+      <text x="350" y="95" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#666" font-weight="400">Link</text>
+      <text x="440" y="55" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#666" font-weight="400">Output</text>
+
+      <!-- Subtle connection dots along the path -->
+      <circle cx="70" cy="48" r="1.5" fill="#ccc"/>
+      <circle cx="110" cy="30" r="1.5" fill="#ccc"/>
+      <circle cx="190" cy="70" r="1.5" fill="#ccc"/>
+      <circle cx="230" cy="90" r="1.5" fill="#ccc"/>
+      <circle cx="310" cy="90" r="1.5" fill="#ccc"/>
+      <circle cx="390" cy="48" r="1.5" fill="#ccc"/>
+    </svg>
+  </div>
+
+  <p>Wegner said "A cushion is not design — a cushion is an apology." That's the principle. If the structure needs padding to be comfortable, the structure failed.</p>
+
+  <p>2026-03-15 — Reverse Engineering the Claude API.</p>
+
+  <p><a href="#">github</a> / <a href="#">email</a></p>
+</body>
+</html>

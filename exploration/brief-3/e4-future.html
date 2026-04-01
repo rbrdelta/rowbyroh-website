@@ -1,0 +1,326 @@
+<!-- Brief 3 / Exploration 4 / future: Stream of Consciousness -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>rowbyroh — Stream of Consciousness (Future)</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --text: #1a1a1a;
+    --text-mid: #555;
+    --text-faint: #aaa;
+    --bg: #fafaf8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 300vh;
+    overflow-x: hidden;
+  }
+
+  .label {
+    position: fixed;
+    top: 12px;
+    right: 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 100;
+  }
+
+  /* The stream — single column, generative feel */
+  .stream {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 100px 24px 200px;
+    position: relative;
+  }
+
+  /* Fragments that compose the stream */
+  .fragment {
+    margin-bottom: 0;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+  }
+
+  /* Density wave classes */
+  .f-dense {
+    font-size: 12px;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    padding: 0.5em 0;
+    color: var(--text-mid);
+  }
+
+  .f-normal {
+    font-size: 16px;
+    line-height: 1.8;
+    padding: 0.8em 0;
+  }
+
+  .f-open {
+    font-size: 20px;
+    line-height: 2.4;
+    padding: 1.5em 0;
+    letter-spacing: 0.01em;
+  }
+
+  .f-breath {
+    font-size: 28px;
+    line-height: 1.4;
+    padding: 2.5em 0;
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  /* Repeating words grow — tracked via data-word */
+  .grow-word {
+    display: inline;
+    transition: font-size 0.3s ease, font-weight 0.3s ease;
+  }
+
+  .grow-word[data-count="1"] { font-size: inherit; }
+  .grow-word[data-count="2"] { font-size: 105%; font-weight: 500; }
+  .grow-word[data-count="3"] { font-size: 112%; font-weight: 600; }
+  .grow-word[data-count="4"] { font-size: 120%; font-weight: 700; }
+
+  .name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+  }
+
+  .stat-inline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+  }
+
+  .mono {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .faint { color: var(--text-faint); }
+  .mid { color: var(--text-mid); }
+
+  /* Floating marginalia */
+  .drift {
+    position: absolute;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-faint);
+    opacity: 0;
+    transform: translate(20px, 0);
+    transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+    pointer-events: none;
+  }
+
+  .drift.in {
+    opacity: 0.6;
+    transform: translate(0, 0);
+  }
+
+  /* Pipeline as flowing text, not boxes */
+  .pipeline-stream {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    letter-spacing: 0.03em;
+    position: relative;
+    padding: 1em 0;
+  }
+
+  .pipeline-stream .pipe-step {
+    display: inline;
+    opacity: 0.3;
+    transition: all 0.4s ease;
+  }
+
+  .pipeline-stream .pipe-step.active {
+    opacity: 1;
+    font-weight: 500;
+  }
+
+  .pipeline-stream .pipe-arrow {
+    color: var(--text-faint);
+    margin: 0 0.3em;
+  }
+
+  /* The thought-drift zone — content that shifts position on each load */
+  .thought-zone {
+    position: relative;
+    min-height: 200px;
+    padding: 2em 0;
+  }
+
+  .thought {
+    position: relative;
+    transition: all 0.8s ease;
+  }
+
+  /* Links */
+  .stream-links {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--text-faint);
+    padding-top: 4em;
+  }
+
+  .stream-links a {
+    color: var(--text-mid);
+    text-decoration: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .stream-links a:hover { color: var(--text); }
+
+  /* Scroll progress — vertical thread */
+  .thread {
+    position: fixed;
+    left: 24px;
+    top: 0;
+    width: 1px;
+    height: 0;
+    background: var(--text);
+    opacity: 0.15;
+    transition: height 0.05s linear;
+    z-index: 50;
+  }
+
+  /* Subtle position variation on load */
+  .jitter { transform: translateX(var(--jx, 0px)); }
+
+  @media (max-width: 640px) {
+    .stream { padding: 40px 20px 100px; }
+    .f-breath { font-size: 22px; }
+    .f-open { font-size: 17px; }
+    .drift { display: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="label">Brief 3 / E4 / Future: Stream of Consciousness</div>
+  <div class="thread" id="thread"></div>
+
+  <div class="stream" id="stream">
+
+    <div class="fragment f-normal jitter">
+      <span class="name">rowbyroh</span> <span class="mid">— PM who builds. AI-native tools, 0&rarr;1, B2B, Enterprise.</span>
+    </div>
+
+    <div class="fragment f-dense jitter">
+      <span class="stat-inline">672</span> notes from <span class="stat-inline">4</span> sources across <span class="stat-inline">14</span> dimensions through <span class="stat-inline">2,599</span> links — all <span class="grow-word" data-word="live">live</span>, all <span class="grow-word" data-word="connected">connected</span>, all <span class="grow-word" data-word="mine">mine</span>.
+      <span class="drift" style="right: -160px; top: 0;">the vault is the brain</span>
+    </div>
+
+    <div class="fragment f-open jitter">
+      I <span class="grow-word" data-word="built">built</span> an MCP server that bridges Claude AI with an Obsidian vault. Not because one existed — because it didn't.
+      <span class="drift" style="right: -140px; top: 1em;">vacancy became project</span>
+    </div>
+
+    <div class="fragment f-normal jitter">
+      The vault holds 672 notes from four sources: Claude conversations, Notion pages, Apple Notes, and manual entries. Each note is classified across 14 taxonomy dimensions and <span class="grow-word" data-word="connected">connected</span> through 2,599 auto-generated wikilinks.
+    </div>
+
+    <div class="fragment f-breath jitter">
+      "The constraint is the brief"
+    </div>
+
+    <div class="fragment f-dense jitter" style="position:relative;">
+      <span class="mono faint" style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;">How It Works</span>
+      <span class="drift" style="right: -120px; top: 0;">five stages, idempotent</span>
+    </div>
+
+    <div class="fragment f-normal jitter">
+      <div class="pipeline-stream" id="pipeline">
+        <span class="pipe-step">Input</span><span class="pipe-arrow">&rarr;</span><span class="pipe-step">Process</span><span class="pipe-arrow">&rarr;</span><span class="pipe-step">Classify</span><span class="pipe-arrow">&rarr;</span><span class="pipe-step">Link</span><span class="pipe-arrow">&rarr;</span><span class="pipe-step">Output</span>
+      </div>
+    </div>
+
+    <div class="fragment f-open jitter">
+      <span class="mono" style="font-size:11px;font-weight:700;letter-spacing:0.05em;">WEGNER</span> said <em class="mid">"A cushion is not design — a cushion is an apology."</em>
+    </div>
+
+    <div class="fragment f-normal jitter">
+      That's the principle. If the structure needs padding to be comfortable, the structure failed.
+      <span class="drift" style="right: -150px; top: 0;">no cushions. no apologies.</span>
+    </div>
+
+    <div class="thought-zone">
+      <div class="thought fragment f-dense jitter" id="thought1">
+        <span class="mono faint" style="font-size:11px;">2026-03-15</span> — Reverse Engineering the Claude API
+      </div>
+    </div>
+
+    <div class="fragment f-dense jitter">
+      The things I <span class="grow-word" data-word="built">built</span> are <span class="grow-word" data-word="live">live</span>. The things I write are <span class="grow-word" data-word="connected">connected</span>. The vault is <span class="grow-word" data-word="mine">mine</span>.
+    </div>
+
+    <div class="stream-links jitter">
+      <a href="#">github</a> &middot; <a href="#">email</a>
+    </div>
+  </div>
+
+  <script>
+    // Thread progress
+    const thread = document.getElementById('thread');
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = (window.scrollY / h) * 100;
+      thread.style.height = pct + 'vh';
+    });
+
+    // Jitter — randomize horizontal positions slightly on each load
+    document.querySelectorAll('.jitter').forEach(el => {
+      const jx = (Math.random() - 0.5) * 16;
+      el.style.setProperty('--jx', jx + 'px');
+    });
+
+    // Growing words — count occurrences and size up
+    const wordCounts = {};
+    document.querySelectorAll('.grow-word').forEach(el => {
+      const word = el.dataset.word;
+      wordCounts[word] = (wordCounts[word] || 0) + 1;
+      el.dataset.count = wordCounts[word];
+    });
+
+    // Drift marginalia on scroll
+    const drifts = document.querySelectorAll('.drift');
+    const driftObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        e.target.classList.toggle('in', e.isIntersecting);
+      });
+    }, { threshold: 0.3, rootMargin: '-80px' });
+
+    drifts.forEach(d => driftObs.observe(d));
+
+    // Pipeline activation on scroll
+    const pipeline = document.getElementById('pipeline');
+    const pipeSteps = pipeline.querySelectorAll('.pipe-step');
+
+    const pipeObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          pipeSteps.forEach((s, i) => {
+            setTimeout(() => s.classList.add('active'), i * 200);
+          });
+        } else {
+          pipeSteps.forEach(s => s.classList.remove('active'));
+        }
+      });
+    }, { threshold: 0.5 });
+
+    pipeObs.observe(pipeline);
+
+    // Thought zone — shift position on load
+    const thought1 = document.getElementById('thought1');
+    thought1.style.marginLeft = (Math.random() * 40) + 'px';
+    thought1.style.marginTop = (Math.random() * 20) + 'px';
+  </script>
+</body>
+</html>

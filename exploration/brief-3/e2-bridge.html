@@ -1,0 +1,415 @@
+<!-- Brief 3 / Exploration 2 / bridge: Concrete + Light (Tadao Ando) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>rowbyroh — Concrete + Light (Bridge)</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --concrete: #d4d0c8;
+    --concrete-dark: #b8b4ac;
+    --concrete-light: #e8e5de;
+    --shadow: #8a8680;
+    --text: #2a2825;
+    --text-mid: #5a5650;
+    --light: #f0c850;
+    --light-glow: rgba(240, 200, 80, 0.12);
+    --glass: rgba(255,255,255,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--concrete);
+    color: var(--text);
+    min-height: 100vh;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+    overflow-x: hidden;
+  }
+
+  .label {
+    position: fixed;
+    top: 16px;
+    right: 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--shadow);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 100;
+  }
+
+  /* Rooms — sections as architectural spaces */
+  .room {
+    position: relative;
+    border-bottom: 1px solid var(--concrete-dark);
+    overflow: hidden;
+  }
+
+  .room-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* Room 1: Entry — low ceiling */
+  .room-entry {
+    padding: 40px 0;
+    background: var(--concrete-dark);
+  }
+
+  .room-entry h1 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+  }
+
+  .room-entry .tagline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text-mid);
+  }
+
+  /* Room 2: Gallery — tall ceiling, stats displayed like art */
+  .room-gallery {
+    padding: 100px 0;
+    background: var(--concrete);
+    position: relative;
+  }
+
+  /* Light from above */
+  .room-gallery::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 100%;
+    background: radial-gradient(ellipse at top, var(--light-glow), transparent 70%);
+    pointer-events: none;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  .stat {
+    padding: 40px 0;
+    text-align: center;
+    position: relative;
+  }
+
+  .stat::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 20%;
+    height: 60%;
+    width: 1px;
+    background: var(--concrete-dark);
+  }
+
+  .stat:last-child::after { display: none; }
+
+  .stat .number {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 32px;
+    font-weight: 700;
+    display: block;
+  }
+
+  .stat .unit {
+    font-size: 11px;
+    color: var(--shadow);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-top: 8px;
+    display: block;
+  }
+
+  /* Room 3: Reading room — generous ceiling */
+  .room-reading {
+    padding: 80px 0;
+    background: var(--concrete-light);
+  }
+
+  .body-text {
+    font-size: 17px;
+    line-height: 1.8;
+    max-width: 520px;
+    color: var(--text);
+  }
+
+  /* Room 4: The aperture — pull quote with dramatic light */
+  .room-aperture {
+    padding: 120px 0;
+    background: var(--concrete-dark);
+    position: relative;
+    text-align: center;
+  }
+
+  /* Vertical light slit */
+  .room-aperture::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background: var(--light);
+    opacity: 0.5;
+  }
+
+  .room-aperture::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 100%;
+    background: radial-gradient(ellipse at center, var(--light-glow), transparent 70%);
+  }
+
+  .pull-quote {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    position: relative;
+    z-index: 1;
+    letter-spacing: -0.5px;
+  }
+
+  /* Room 5: Workshop — diagram room */
+  .room-workshop {
+    padding: 80px 0;
+    background: var(--concrete);
+  }
+
+  .section-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 48px;
+    color: var(--shadow);
+  }
+
+  .diagram {
+    display: flex;
+    align-items: stretch;
+    margin-bottom: 0;
+  }
+
+  .diagram .step {
+    flex: 1;
+    padding: 28px 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: center;
+    background: var(--concrete-light);
+    border-right: 1px solid var(--concrete-dark);
+    /* Doorways between rooms */
+    transition: all 0.4s ease;
+    cursor: default;
+  }
+
+  .diagram .step:last-child { border-right: none; }
+
+  .diagram .step:hover {
+    background: var(--concrete-dark);
+    padding: 36px 12px;
+  }
+
+  /* Room 6: The glass wall — breaks all rules */
+  .room-glass {
+    padding: 60px 0;
+    background: var(--text);
+    color: var(--concrete-light);
+  }
+
+  .room-glass .dialogue .speaker {
+    color: var(--shadow);
+  }
+
+  .room-glass .dialogue .quote {
+    color: var(--concrete-dark);
+  }
+
+  .room-glass .dialogue .response {
+    color: var(--concrete-light);
+  }
+
+  .dialogue .speaker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--shadow);
+    margin-bottom: 16px;
+  }
+
+  .dialogue .quote {
+    font-style: italic;
+    font-size: 15px;
+    color: var(--text-mid);
+    margin-bottom: 24px;
+    line-height: 1.7;
+  }
+
+  .dialogue .response {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* Room 7: Corridor */
+  .room-corridor {
+    padding: 40px 0;
+    background: var(--concrete);
+  }
+
+  .blog-entry .date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--shadow);
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+
+  .blog-entry .title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  /* Room 8: Exit */
+  .room-exit {
+    padding: 40px 0;
+    background: var(--concrete-dark);
+  }
+
+  footer {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--shadow);
+  }
+
+  footer a {
+    color: var(--text-mid);
+    text-decoration: none;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  @media (max-width: 640px) {
+    .room-inner { padding: 0 24px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2)::after { display: none; }
+    .room-entry h1 { font-size: 28px; }
+    .pull-quote { font-size: 22px; }
+    .room-gallery { padding: 60px 0; }
+    .room-aperture { padding: 80px 0; }
+  }
+</style>
+</head>
+<body>
+  <div class="label">Brief 3 / E2 / Bridge: Concrete + Light</div>
+
+  <div class="room room-entry">
+    <div class="room-inner">
+      <h1>rowbyroh</h1>
+      <div class="tagline">PM who builds. AI-native tools, 0&rarr;1, B2B, Enterprise.</div>
+    </div>
+  </div>
+
+  <div class="room room-gallery">
+    <div class="room-inner">
+      <div class="stats">
+        <div class="stat">
+          <span class="number">672</span>
+          <span class="unit">Notes</span>
+        </div>
+        <div class="stat">
+          <span class="number">4</span>
+          <span class="unit">Sources</span>
+        </div>
+        <div class="stat">
+          <span class="number">14</span>
+          <span class="unit">Dimensions</span>
+        </div>
+        <div class="stat">
+          <span class="number">2,599</span>
+          <span class="unit">Links</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="room room-reading">
+    <div class="room-inner">
+      <p class="body-text">I built an MCP server that bridges Claude AI with an Obsidian vault. Not because one existed — because it didn't. The vault holds 672 notes from four sources: Claude conversations, Notion pages, Apple Notes, and manual entries. Each note is classified across 14 taxonomy dimensions and connected through 2,599 auto-generated wikilinks.</p>
+    </div>
+  </div>
+
+  <div class="room room-aperture">
+    <div class="room-inner">
+      <div class="pull-quote">"The constraint is the brief"</div>
+    </div>
+  </div>
+
+  <div class="room room-workshop">
+    <div class="room-inner">
+      <h2 class="section-header">How It Works</h2>
+      <div class="diagram">
+        <div class="step">Input</div>
+        <div class="step">Process</div>
+        <div class="step">Classify</div>
+        <div class="step">Link</div>
+        <div class="step">Output</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="room room-glass">
+    <div class="room-inner">
+      <div class="dialogue">
+        <div class="speaker">WEGNER</div>
+        <div class="quote">"A cushion is not design — a cushion is an apology."</div>
+        <div class="response">That's the principle. If the structure needs padding to be comfortable, the structure failed.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="room room-corridor">
+    <div class="room-inner">
+      <div class="blog-entry">
+        <div class="date">2026-03-15</div>
+        <div class="title">Reverse Engineering the Claude API</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="room room-exit">
+    <div class="room-inner">
+      <footer>
+        <a href="#">github</a> &middot; <a href="#">email</a>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

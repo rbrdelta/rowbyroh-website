@@ -1,0 +1,533 @@
+<!-- Brief 3 / Exploration 2 / future: Concrete + Light (Tadao Ando) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>rowbyroh — Concrete + Light (Future)</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --concrete: #d4d0c8;
+    --concrete-dark: #b8b4ac;
+    --concrete-light: #e8e5de;
+    --shadow: #8a8680;
+    --deep-shadow: #4a4842;
+    --text: #2a2825;
+    --text-mid: #5a5650;
+    --light: #f0c850;
+    --light-glow: rgba(240, 200, 80, 0.1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: #3a3835;
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    perspective: 1px;
+    transform-style: preserve-3d;
+  }
+
+  .label {
+    position: fixed;
+    top: 16px;
+    right: 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--shadow);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 100;
+    mix-blend-mode: difference;
+  }
+
+  /* Each room is a 3D space */
+  .room {
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+  }
+
+  .room-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* Room 1: Exterior — approaching the building */
+  .room-exterior {
+    height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    background: linear-gradient(to bottom, #2a2825 0%, #3a3835 40%, var(--concrete-dark) 100%);
+    padding-bottom: 80px;
+  }
+
+  .room-exterior h1 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    color: var(--concrete-light);
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: emerge 2s ease-out 0.5s forwards;
+  }
+
+  .room-exterior .tagline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--shadow);
+    opacity: 0;
+    animation: emerge 2s ease-out 1s forwards;
+  }
+
+  @keyframes emerge {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Concrete texture overlay */
+  .concrete-texture {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: overlay;
+  }
+
+  /* Room 2: Atrium — stats floating in light */
+  .room-atrium {
+    min-height: 80vh;
+    background: var(--concrete);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* Skylight */
+  .room-atrium::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, var(--light-glow) 30%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px 100px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat .number {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 48px;
+    font-weight: 700;
+    display: block;
+    color: var(--text);
+    opacity: 0;
+    transition: opacity 1s ease, transform 1s ease;
+    transform: translateY(20px);
+  }
+
+  .stat .number.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .stat .unit {
+    font-size: 11px;
+    color: var(--shadow);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-top: 8px;
+    display: block;
+  }
+
+  /* Room 3: Long corridor — text as you walk */
+  .room-corridor {
+    background: var(--concrete-light);
+    position: relative;
+    /* Parallax concrete wall effect */
+  }
+
+  .corridor-inner {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 120px 40px;
+    position: relative;
+  }
+
+  /* Formwork line (where concrete was poured) */
+  .corridor-inner::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--concrete-dark) 0px,
+      var(--concrete-dark) 60px,
+      transparent 60px,
+      transparent 62px
+    );
+  }
+
+  .body-text {
+    font-size: 18px;
+    line-height: 2;
+    color: var(--text);
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Room 4: Chapel — the light room */
+  .room-chapel {
+    min-height: 70vh;
+    background: var(--deep-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Cross of light (Ando's Church of the Light) */
+  .light-cross {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .light-cross .h {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 6px;
+    background: var(--light);
+    opacity: 0.4;
+    box-shadow: 0 0 60px 20px var(--light-glow);
+  }
+
+  .light-cross .v {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 160px;
+    background: var(--light);
+    opacity: 0.4;
+    box-shadow: 0 0 60px 20px var(--light-glow);
+  }
+
+  .pull-quote {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--concrete-light);
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    letter-spacing: -1px;
+    text-shadow: 0 0 40px rgba(240, 200, 80, 0.2);
+  }
+
+  /* Room 5: Workshop */
+  .room-workshop {
+    background: var(--concrete);
+    padding: 100px 0;
+  }
+
+  .section-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 60px;
+    color: var(--shadow);
+  }
+
+  .diagram {
+    display: flex;
+    align-items: stretch;
+    height: 120px;
+  }
+
+  .diagram .step {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: default;
+    position: relative;
+    background: var(--concrete-light);
+  }
+
+  .diagram .step:nth-child(1) { height: 80px; align-self: flex-end; }
+  .diagram .step:nth-child(2) { height: 95px; align-self: flex-end; }
+  .diagram .step:nth-child(3) { height: 120px; background: linear-gradient(to bottom, var(--light-glow), var(--concrete-light)); }
+  .diagram .step:nth-child(4) { height: 95px; align-self: flex-end; }
+  .diagram .step:nth-child(5) { height: 80px; align-self: flex-end; }
+
+  .diagram .step::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--concrete-dark);
+  }
+
+  .diagram .step:last-child::after { display: none; }
+
+  .diagram .step:hover {
+    background: var(--concrete-dark);
+    height: 120px !important;
+  }
+
+  /* Room 6: The void — glass wall, everything inverts */
+  .room-void {
+    background: var(--text);
+    padding: 80px 0;
+    position: relative;
+  }
+
+  /* Glass reflection */
+  .room-void::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+  }
+
+  .dialogue .speaker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--shadow);
+    margin-bottom: 16px;
+  }
+
+  .dialogue .quote {
+    font-style: italic;
+    font-size: 16px;
+    color: var(--concrete-dark);
+    margin-bottom: 28px;
+    line-height: 1.8;
+  }
+
+  .dialogue .response {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--concrete-light);
+  }
+
+  /* Room 7: Exit corridor */
+  .room-exit-corridor {
+    background: var(--concrete-dark);
+    padding: 60px 0;
+  }
+
+  .blog-entry .date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--shadow);
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+
+  .blog-entry .title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* Room 8: Returning to exterior */
+  .room-return {
+    padding: 60px 0 80px;
+    background: linear-gradient(to bottom, var(--concrete-dark), #3a3835);
+  }
+
+  footer {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--shadow);
+  }
+
+  footer a {
+    color: var(--concrete-dark);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  footer a:hover { color: var(--concrete-light); }
+
+  @media (max-width: 640px) {
+    .room-inner { padding: 0 24px; }
+    .room-exterior h1 { font-size: 32px; }
+    .stats { grid-template-columns: 1fr; gap: 40px; }
+    .stat .number { font-size: 36px; }
+    .pull-quote { font-size: 24px; }
+    .diagram { height: auto; flex-direction: column; }
+    .diagram .step { height: 60px !important; }
+    .room-chapel { min-height: 50vh; }
+  }
+</style>
+</head>
+<body>
+  <div class="label">Brief 3 / E2 / Future: Concrete + Light</div>
+
+  <div class="room room-exterior">
+    <div class="concrete-texture"></div>
+    <div class="room-inner">
+      <h1>rowbyroh</h1>
+      <div class="tagline">PM who builds. AI-native tools, 0&rarr;1, B2B, Enterprise.</div>
+    </div>
+  </div>
+
+  <div class="room room-atrium">
+    <div class="concrete-texture"></div>
+    <div class="stats">
+      <div class="stat">
+        <span class="number">672</span>
+        <span class="unit">Notes</span>
+      </div>
+      <div class="stat">
+        <span class="number">4</span>
+        <span class="unit">Sources</span>
+      </div>
+      <div class="stat">
+        <span class="number">14</span>
+        <span class="unit">Dimensions</span>
+      </div>
+      <div class="stat">
+        <span class="number">2,599</span>
+        <span class="unit">Links</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="room room-corridor">
+    <div class="concrete-texture"></div>
+    <div class="corridor-inner">
+      <p class="body-text">I built an MCP server that bridges Claude AI with an Obsidian vault. Not because one existed — because it didn't. The vault holds 672 notes from four sources: Claude conversations, Notion pages, Apple Notes, and manual entries. Each note is classified across 14 taxonomy dimensions and connected through 2,599 auto-generated wikilinks.</p>
+    </div>
+  </div>
+
+  <div class="room room-chapel">
+    <div class="light-cross">
+      <div class="h"></div>
+      <div class="v"></div>
+    </div>
+    <div class="pull-quote">"The constraint is the brief"</div>
+  </div>
+
+  <div class="room room-workshop">
+    <div class="concrete-texture"></div>
+    <div class="room-inner">
+      <h2 class="section-header">How It Works</h2>
+      <div class="diagram">
+        <div class="step">Input</div>
+        <div class="step">Process</div>
+        <div class="step">Classify</div>
+        <div class="step">Link</div>
+        <div class="step">Output</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="room room-void">
+    <div class="room-inner">
+      <div class="dialogue">
+        <div class="speaker">WEGNER</div>
+        <div class="quote">"A cushion is not design — a cushion is an apology."</div>
+        <div class="response">That's the principle. If the structure needs padding to be comfortable, the structure failed.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="room room-exit-corridor">
+    <div class="concrete-texture"></div>
+    <div class="room-inner">
+      <div class="blog-entry">
+        <div class="date">2026-03-15</div>
+        <div class="title">Reverse Engineering the Claude API</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="room room-return">
+    <div class="room-inner">
+      <footer>
+        <a href="#">github</a> &middot; <a href="#">email</a>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // Scroll-triggered stat reveals
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.stat .number').forEach(el => observer.observe(el));
+
+    // Light that follows scroll — the cross in the chapel rotates subtly
+    const chapel = document.querySelector('.room-chapel');
+    const lightH = document.querySelector('.light-cross .h');
+    const lightV = document.querySelector('.light-cross .v');
+
+    window.addEventListener('scroll', () => {
+      if (!chapel) return;
+      const rect = chapel.getBoundingClientRect();
+      const progress = 1 - (rect.top / window.innerHeight);
+      if (progress > 0 && progress < 2) {
+        const angle = (progress - 0.5) * 3;
+        lightH.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+        lightV.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+        lightH.style.opacity = 0.3 + Math.sin(progress * Math.PI) * 0.3;
+        lightV.style.opacity = 0.3 + Math.sin(progress * Math.PI) * 0.3;
+      }
+    });
+  </script>
+</body>
+</html>
