@@ -11,63 +11,20 @@
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/base.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'IBM Plex Mono', monospace;
-            background: #fefefe;
-            color: #1a1a1a;
-            font-weight: 400;
-            line-height: 1.8;
-            max-width: 780px;
-            margin: 0 auto;
-            padding: 3rem 2rem 4rem;
-        }
-
-        .back-link {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 0.75rem;
-            color: #888;
-            text-decoration: none;
-            display: inline-block;
-            margin-bottom: 2rem;
-            font-weight: 400;
-        }
-        .back-link:hover { color: #1a1a1a; }
-        .back-link::before { content: '\2190  '; }
-
-        h1 {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 0.3rem;
-        }
-
-        .page-subtitle {
-            font-size: 0.88rem;
-            color: #555;
-            margin-bottom: 2.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid #e0e0e0;
-            font-weight: 400;
-            line-height: 1.7;
-        }
-
         /* ---- NARRATIVE ---- */
         .narrative {
             margin-bottom: 3rem;
             padding-bottom: 2.5rem;
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 1px solid var(--light);
         }
 
         .narrative p {
             font-size: 0.88rem;
             line-height: 1.85;
             margin-bottom: 1.2rem;
-            color: #1a1a1a;
         }
 
         .narrative p:last-child {
@@ -84,48 +41,19 @@
             margin-bottom: 2rem;
         }
 
-        .tenets h2 {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: #888;
-            font-weight: 500;
-            margin-bottom: 0.4rem;
-        }
-
-        .tenets h2::before {
-            content: '';
-            display: inline-block;
-            width: 10px;
-            height: 2px;
-            background: #e84040;
-            margin-right: 0.5rem;
-            vertical-align: middle;
-            opacity: 0.7;
-        }
-
         .tenets-intro {
             font-size: 0.78rem;
-            color: #888;
+            color: var(--muted);
             margin-bottom: 1rem;
         }
 
         .tenet-list {
             list-style: none;
+            padding: 0;
         }
 
         .tenet-item {
             padding: 0.35rem 0;
-            border-bottom: none;
-        }
-
-        .tenet-item:first-child {
-            border-top: none;
-        }
-
-        .tenet-item:last-child {
-            border-bottom: none;
         }
 
         .tenet-number {
@@ -141,7 +69,7 @@
 
         .tenet-desc {
             font-size: 0.75rem;
-            color: #888;
+            color: var(--muted);
             display: inline;
             line-height: 1.5;
         }
@@ -149,31 +77,25 @@
         /* ---- COLOPHON ---- */
         .colophon {
             font-size: 0.7rem;
-            color: #888;
+            color: var(--muted);
             margin-top: 3rem;
             padding-top: 1.5rem;
-            border-top: 1px solid #e8e8e8;
+            border-top: 1px solid var(--light);
             line-height: 1.6;
         }
 
         .colophon a {
-            color: #555;
+            color: var(--zone-mono);
             text-decoration: none;
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid var(--light);
         }
         .colophon a:hover {
-            color: #1a1a1a;
-            border-color: #1a1a1a;
+            color: var(--text);
+            border-color: var(--text);
         }
 
         /* ---- RESPONSIVE ---- */
         @media (max-width: 600px) {
-            body {
-                padding: 2rem 1rem 3rem;
-            }
-
-            h1 { font-size: 1.4rem; }
-
             .narrative p {
                 font-size: 0.84rem;
             }
@@ -189,12 +111,21 @@
     </style>
 </head>
 <body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="scroll-progress-inner" id="scrollProgressInner"></div>
+
     <a href="/" class="back-link">rowbyroh</a>
     <h1>About</h1>
     <p class="page-subtitle">Product leader. Builder. Father. Maker. Brooklyn.</p>
 
     <!-- ---- NARRATIVE ---- -->
     <div class="narrative">
+        <div class="section-header">
+            <span class="section-number zone-mono">01</span>
+            <h2>The Story</h2>
+        </div>
+        <div class="section-underline zone-mono"></div>
+
         <p>I've never been able to keep up with my own ideas. I'd think through an entire system — the architecture, the edge cases, the second-order effects — and by the time I sat down to build, three other ideas would rush in.</p>
 
         <p>The technological waves of my adult life — social media, smartphones, crypto — didn't help me express what I wanted. I studied architecture and construction. I built furniture. The problems I was drawn to lived in the physical world — how buildings shape communities, how a chair changes a room, how personal mobility empowers exploration and openness beyond your virtual world.</p>
@@ -210,7 +141,12 @@
 
     <!-- ---- TENETS ---- -->
     <div class="tenets">
-        <h2>Operating Tenets</h2>
+        <div class="section-header">
+            <span class="section-number zone-mono">02</span>
+            <h2>Operating Tenets</h2>
+        </div>
+        <div class="section-underline zone-mono"></div>
+
         <p class="tenets-intro">How I make decisions. When two paths diverge, these break the tie.</p>
         <ol class="tenet-list">
             <li class="tenet-item">
@@ -255,5 +191,7 @@
     <div class="colophon">
         See how these tenets inform the systems I build: <a href="/agentic-stack">Agentic Stack</a>, <a href="/obsidian-mcp">Obsidian MCP</a>, <a href="/chair-roundtable">Chair Roundtable</a>.
     </div>
+
+    <script src="/assets/js/scroll.js"></script>
 </body>
 </html>

@@ -1,73 +1,41 @@
-// writing.js — renders writing entries from posts.json
-// Used on: index.html (homepage, latest 3) and writing.html (full index)
+// writing.js — renders writing entries from content.json
+// Used on: writing.html (full index) and blog post pages (prev/next nav)
+// Homepage rendering is handled by stream.js
 
 (function () {
     function escapeHtml(str) {
-        const div = document.createElement('div');
+        var div = document.createElement('div');
         div.textContent = str;
         return div.innerHTML;
     }
 
-    function loadPosts(callback) {
-        fetch('/assets/data/posts.json')
-            .then(function (res) { return res.json(); })
-            .then(callback)
-            .catch(function () {
-                // Silent fail — writing section just won't render
-            });
+    // Writing types: essays, roundtables, analyses — everything that isn't a "project"
+    var writingTypes = ['essay', 'roundtable', 'analysis'];
+
+    function isWriting(item) {
+        return writingTypes.indexOf(item.type) !== -1;
     }
 
-    // Homepage: render featured post + upcoming teasers into #writing-list
-    function renderHomepage(posts) {
-        var container = document.getElementById('writing-list');
-        if (!container) return;
-
-        var published = posts.filter(function (p) { return p.published; });
-        var upcoming = posts.filter(function (p) { return !p.published; });
-
-        // Featured: latest published post with excerpt
-        if (published.length > 0) {
-            var feat = published[0];
-            var featEl = document.createElement('a');
-            featEl.href = feat.url;
-            featEl.className = 'writing-featured';
-            featEl.dataset.tags = feat.tags.join(',');
-            featEl.innerHTML =
-                '<span class="writing-featured-date">' + escapeHtml(feat.date) + '</span>' +
-                '<span class="writing-featured-title">' + escapeHtml(feat.title) + '</span>' +
-                '<span class="writing-featured-desc">' + escapeHtml(feat.description) + '</span>';
-            container.appendChild(featEl);
-        }
-
-        // Remaining published
-        published.slice(1, 3).forEach(function (post) {
-            var a = document.createElement('a');
-            a.href = post.url;
-            a.className = 'writing-entry';
-            a.dataset.tags = post.tags.join(',');
-            a.innerHTML =
-                '<span class="writing-date">' + escapeHtml(post.date) + '</span>' +
-                '<span class="writing-title">' + escapeHtml(post.title) + '</span>';
-            container.appendChild(a);
-        });
-
-        // Upcoming teasers
-        if (upcoming.length > 0) {
-            var upEl = document.createElement('div');
-            upEl.className = 'writing-upcoming';
-            var label = document.createElement('span');
-            label.className = 'writing-upcoming-label';
-            label.textContent = 'in progress';
-            upEl.appendChild(label);
-
-            upcoming.slice(0, 3).forEach(function (post) {
-                var item = document.createElement('span');
-                item.className = 'writing-upcoming-item';
-                item.textContent = post.title;
-                upEl.appendChild(item);
+    function loadContent(callback) {
+        fetch('/assets/data/content.json')
+            .then(function (res) { return res.json(); })
+            .then(function (content) {
+                // Extract writing items, map to posts-compatible shape
+                var posts = content.filter(isWriting).map(function (item) {
+                    return {
+                        title: item.title,
+                        date: item.date,
+                        url: item.url,
+                        description: item.description,
+                        tags: item.tags || [],
+                        published: item.published
+                    };
+                });
+                callback(posts);
+            })
+            .catch(function () {
+                // Silent fail
             });
-            container.appendChild(upEl);
-        }
     }
 
     // Writing index: render full post list + upcoming into containers
@@ -137,10 +105,7 @@
     }
 
     // Detect which page we're on and render accordingly
-    loadPosts(function (posts) {
-        if (document.getElementById('writing-list')) {
-            renderHomepage(posts);
-        }
+    loadContent(function (posts) {
         if (document.getElementById('post-list')) {
             renderIndex(posts);
         }

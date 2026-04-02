@@ -1,59 +1,24 @@
 /* project.css — shared styles for standalone project pages */
-/* Vocabulary: stat callouts, section markers, pull quotes, flow diagrams */
 /* Compose per page based on what the content needs */
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-    font-family: 'IBM Plex Mono', monospace;
-    background: #f8f8f6;
-    color: #1a1a1a;
-    font-weight: 400;
-    line-height: 1.8;
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 3rem 2rem 4rem;
-}
-
-/* ---- NAVIGATION ---- */
-
-.back-link {
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    font-size: 0.75rem;
-    color: #888;
-    text-decoration: none;
-    display: inline-block;
-    margin-bottom: 2rem;
-    font-weight: 400;
-}
-.back-link:hover { color: #1a1a1a; }
-.back-link::before { content: '\2190  '; }
+/* Requires base.css to be loaded first */
 
 /* ---- TITLE ---- */
 
-h1 {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 0.3rem;
-}
-
 .page-subtitle {
-    font-size: 0.88rem;
-    color: #555;
+    font-size: 0.82rem;
+    color: var(--muted);
     font-weight: 400;
     margin-bottom: 0.5rem;
 }
 
 .page-intro {
-    font-size: 0.88rem;
-    color: #555;
+    font-size: var(--body-size);
+    color: var(--muted);
     font-weight: 400;
     margin-bottom: 2rem;
     padding-bottom: 1.5rem;
-    border-bottom: 1px solid #e0e0e0;
-    line-height: 1.7;
+    border-bottom: 1px solid var(--light);
+    line-height: var(--body-lh);
 }
 
 /* ---- STAT CALLOUTS ---- */
@@ -61,12 +26,10 @@ h1 {
 
 .stat-strip {
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
     flex-wrap: wrap;
-    padding: 1.2rem 0;
+    padding: 0.8rem 0;
     margin-bottom: 1.5rem;
-    border-top: 1px solid #e0e0e0;
-    border-bottom: 1px solid #e0e0e0;
 }
 
 .stat {
@@ -76,57 +39,39 @@ h1 {
 
 .stat-value {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #1a1a1a;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text);
     line-height: 1.2;
 }
 
 .stat-label {
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 0.68rem;
-    color: #888;
+    color: var(--zone-portfolio);
     text-transform: uppercase;
     letter-spacing: 0.06em;
     margin-top: 0.15rem;
+    font-weight: 400;
 }
 
 /* ---- SECTION MARKERS ---- */
-/* Standard on all pages — red dash before h2s */
+/* h2 styling for project pages — works with section-header from base.css */
 
 h2 {
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    font-size: 1rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.95rem;
     font-weight: 600;
-    color: #1a1a1a;
+    color: var(--text);
     margin-top: 2.5rem;
     margin-bottom: 0.8rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #e0e0e0;
-}
-
-h2::before {
-    content: '';
-    display: inline-block;
-    width: 10px;
-    height: 2px;
-    background: #e84040;
-    margin-right: 0.6rem;
-    vertical-align: middle;
-    opacity: 0.7;
-}
-
-h2:first-of-type {
-    margin-top: 0;
-    padding-top: 0;
-    border-top: none;
 }
 
 h3 {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.92rem;
     font-weight: 600;
-    color: #1a1a1a;
+    color: var(--text);
     margin-top: 1.8rem;
     margin-bottom: 0.5rem;
 }
@@ -135,21 +80,22 @@ h3 {
 /* Use: when a single line captures the insight */
 
 .pull-quote {
-    font-size: 1.1rem;
+    background: var(--quote-bg);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1rem;
     font-weight: 500;
-    color: #1a1a1a;
+    color: var(--text);
     line-height: 1.6;
-    padding: 1rem 0 1rem 1.2rem;
-    margin: 1.5rem 0;
-    border-left: 2px solid #e84040;
-    opacity: 0.9;
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+    border-left: 3px solid var(--zone-portfolio);
 }
 
 .pull-quote cite {
     display: block;
     font-size: 0.72rem;
     font-weight: 400;
-    color: #888;
+    color: var(--muted);
     font-style: normal;
     margin-top: 0.4rem;
 }
@@ -161,34 +107,28 @@ h3 {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.78rem;
     line-height: 1.6;
-    background: #fafafa;
-    border: 1px solid #e0e0e0;
+    background: var(--bg);
+    border: 1px solid var(--zone-portfolio);
     padding: 1.2rem 1.5rem;
     margin: 1.5rem 0;
     overflow-x: auto;
     white-space: pre;
-    color: #1a1a1a;
+    color: var(--text);
 }
 
 /* ---- BODY TEXT ---- */
-
-p {
-    font-size: 0.88rem;
-    margin-bottom: 1rem;
-    line-height: 1.8;
-}
 
 strong {
     font-weight: 600;
 }
 
 a {
-    color: #1a1a1a;
+    color: var(--text);
     text-decoration: none;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--light);
     transition: border-color 0.2s;
 }
-a:hover { border-color: #1a1a1a; }
+a:hover { border-color: var(--text); }
 
 /* ---- LISTS ---- */
 
@@ -207,13 +147,13 @@ li {
 code {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.82rem;
-    background: #f5f5f5;
+    background: var(--bg-light);
     padding: 0.1rem 0.3rem;
 }
 
 pre {
-    background: #f5f5f5;
-    border: 1px solid #e0e0e0;
+    background: var(--bg-light);
+    border: 1px solid var(--light);
     padding: 1rem 1.2rem;
     margin: 1rem 0;
     overflow-x: auto;
@@ -226,28 +166,30 @@ pre code {
     padding: 0;
 }
 
+/* ---- HIGHLIGHT BOX ---- */
+
+.highlight-box {
+    background: var(--bg-light);
+    border: 1px solid var(--light);
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    font-size: 0.85rem;
+}
+
 /* ---- RESPONSIVE ---- */
 
 @media (max-width: 600px) {
-    body {
-        padding: 2rem 1.2rem 3rem;
-    }
-
-    h1 {
-        font-size: 1.5rem;
-    }
-
     .stat-strip {
-        gap: 1.2rem;
+        gap: 1rem;
     }
 
     .stat-value {
-        font-size: 1.1rem;
+        font-size: 0.8rem;
     }
 
     .pull-quote {
-        font-size: 1rem;
-        padding-left: 1rem;
+        font-size: 0.92rem;
+        padding: 1rem 1.25rem;
     }
 
     .flow-diagram {

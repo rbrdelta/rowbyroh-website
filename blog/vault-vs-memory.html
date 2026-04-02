@@ -11,10 +11,14 @@
     <meta property="og:type" content="article">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/base.css">
     <link rel="stylesheet" href="/assets/css/writing.css">
 </head>
 <body class="writing-page">
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="scroll-progress-inner" id="scrollProgressInner"></div>
+
     <a href="/writing.html" class="back-link">Writing</a>
 
     <div class="post-header">
@@ -29,7 +33,8 @@
 
     <p>That's not a minor friction. It's a compounding tax. The more I build, the more context each session needs, and the less of my time actually goes to building. I call it the re-explanation tax, and it's the reason I spent weeks building infrastructure that most people would call overkill.</p>
 
-    <h2>The convenience trap</h2>
+    <div class="section-header"><span class="section-number zone-writing">01</span><h2>The convenience trap</h2></div>
+    <div class="section-underline zone-writing"></div>
 
     <p>Claude has built-in memory now. It remembers who I am, what I'm working on, my preferences. So why build anything?</p>
 
@@ -39,7 +44,8 @@
 
     <p>Memory is optimized for "who is Daniel." It doesn't answer "what did Daniel decide about the taxonomy design at 2am, what were the rejected alternatives, and what file did it change." Those are fundamentally different retrieval problems.</p>
 
-    <h2>What infrastructure gives you that memory can't</h2>
+    <div class="section-header"><span class="section-number zone-writing">02</span><h2>What infrastructure gives you that memory can't</h2></div>
+    <div class="section-underline zone-writing"></div>
 
     <p><strong>Structure as thought.</strong> Memory is a flat summary. A vault has backlinks, tag topology, relationship emergence. The way you organize notes <em>is</em> a thinking process. Memory flattens that into prose.</p>
 
@@ -49,13 +55,15 @@
 
     <p><strong>Ownership.</strong> Memory is curated by an external process. You don't control the ontology. You can't export it, version it, back it up, or build tooling on top of it. If the provider changes their memory system tomorrow, you start over. Infrastructure you control doesn't have that failure mode.</p>
 
-    <h2>Where memory actually wins</h2>
+    <div class="section-header"><span class="section-number zone-writing">03</span><h2>Where memory actually wins</h2></div>
+    <div class="section-underline zone-writing"></div>
 
     <p>This isn't a zero-sum argument. Memory handles conversational continuity without friction — you don't preload context every time. Implicit personalization: tone, depth calibration. Cross-session coherence on low-stakes stuff like family logistics and learning paths.</p>
 
     <p>Memory is the convenience layer. It's good at what it does. The mistake is treating it as the infrastructure layer.</p>
 
-    <h2>The compounding effect</h2>
+    <div class="section-header"><span class="section-number zone-writing">04</span><h2>The compounding effect</h2></div>
+    <div class="section-underline zone-writing"></div>
 
     <p>Before: "Let me explain — I'm building a freight intelligence platform, I have 10 years of logistics experience, my composter business targets NYC's composting mandate..." every session.</p>
 
@@ -63,7 +71,8 @@
 
     <p>But the unexpected payoff was the compounding. Every new conversation adds to the graph. The graph serves every future conversation. The vault I built in week one is more valuable in week six — not because I added features, but because the system gets smarter as I use it. That's what infrastructure does and convenience doesn't: it compounds.</p>
 
-    <h2>The principle</h2>
+    <div class="section-header"><span class="section-number zone-writing">05</span><h2>The principle</h2></div>
+    <div class="section-underline zone-writing"></div>
 
     <p>Build the infrastructure layer even when the convenience layer seems good enough. Convenience is optimized for the common case. Infrastructure is optimized for <em>your</em> case. And over time, the compound value of infrastructure always exceeds the immediate comfort of convenience.</p>
 
@@ -79,5 +88,6 @@
     </div>
 
     <script src="/assets/js/writing.js"></script>
+    <script src="/assets/js/scroll.js"></script>
 </body>
 </html>

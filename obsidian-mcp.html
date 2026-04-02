@@ -11,7 +11,8 @@
     <meta property="og:type" content="article">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/project.css">
     <style>
         .tool-list {
@@ -20,7 +21,7 @@
 
         .tool-item {
             padding: 0.6rem 0;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid var(--light);
             font-size: 0.88rem;
         }
 
@@ -34,26 +35,19 @@
         }
 
         .tool-desc {
-            color: #555;
+            color: var(--muted);
             font-size: 0.82rem;
             font-weight: 400;
         }
 
         .label {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-family: 'IBM Plex Sans', sans-serif;
             font-size: 0.7rem;
             font-weight: 500;
-            color: #888;
+            color: var(--muted);
             text-transform: uppercase;
             letter-spacing: 0.06em;
             margin-bottom: 0.4rem;
-        }
-
-        .highlight-box {
-            background: #fafafa;
-            border: 1px solid #e8e8e8;
-            padding: 1.2rem 1.5rem;
-            margin: 1rem 0 1.5rem;
         }
 
         .highlight-box ul {
@@ -72,7 +66,7 @@
             content: '\2014';
             position: absolute;
             left: 0;
-            color: #888;
+            color: var(--muted);
         }
 
         .stack-list {
@@ -85,21 +79,24 @@
         .stack-list span {
             font-size: 0.7rem;
             padding: 0.15rem 0.5rem;
-            background: #f5f5f5;
-            border: 1px solid #e8e8e8;
-            color: #555;
+            background: var(--bg-light);
+            border: 1px solid var(--light);
+            color: var(--muted);
             font-weight: 400;
         }
 
         .copyright {
             margin-top: 4rem;
             font-size: 0.6rem;
-            color: #888;
+            color: var(--muted);
             text-align: right;
         }
     </style>
 </head>
 <body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="scroll-progress-inner" id="scrollProgressInner"></div>
+
     <a href="/" class="back-link">rowbyroh.com</a>
 
     <h1>Obsidian MCP Server</h1>
@@ -125,13 +122,15 @@
         </div>
     </div>
 
-    <h2>The Problem</h2>
+    <div class="section-header"><span class="section-number zone-portfolio">01</span><h2>The Problem</h2></div>
+    <div class="section-underline zone-portfolio"></div>
 
     <p>Conversations with Claude are disposable by default. Every session starts from zero. I had hundreds of conversations across Claude.ai, Notion, and Apple Notes that contained real decisions, technical reasoning, and project context. None of it was connected. None of it was searchable from inside a new session.</p>
 
     <p>The MCP protocol lets Claude call tools directly. So I built a server that turns an Obsidian vault into Claude's long-term memory &mdash; and then built the pipelines to populate, classify, and link everything in it.</p>
 
-    <h2>The Tools</h2>
+    <div class="section-header"><span class="section-number zone-portfolio">02</span><h2>The Tools</h2></div>
+    <div class="section-underline zone-portfolio"></div>
 
     <div class="tool-list">
         <div class="tool-item">
@@ -164,7 +163,8 @@
         </div>
     </div>
 
-    <h2>Claude.ai API Sync</h2>
+    <div class="section-header"><span class="section-number zone-portfolio">03</span><h2>Claude.ai API Sync</h2></div>
+    <div class="section-underline zone-portfolio"></div>
 
     <p>The first pipeline problem: getting conversations out of Claude.ai and into Obsidian. Claude.ai has no public export API. Anthropic offers a bulk JSON download, but it's manual, full-export-only, and gives you a single monolithic file with no incremental capability.</p>
 
@@ -185,7 +185,8 @@
         </ul>
     </div>
 
-    <h2>4 Import Pipelines</h2>
+    <div class="section-header"><span class="section-number zone-portfolio">04</span><h2>4 Import Pipelines</h2></div>
+    <div class="section-underline zone-portfolio"></div>
 
     <p>Every note enters through a typed pipeline: Claude.ai API sync, Notion API sync, Notion export parser, or Apple Notes sync. Each pipeline is different &mdash; different APIs, different auth, different edge cases &mdash; but they all converge on the same contract: markdown with YAML frontmatter, deduplicated by <code>source_id</code>, tested in dev before touching prod.</p>
 
@@ -198,7 +199,8 @@ Apple Notes──→ Shortcut ──→ iCloud ──→ importer    ──→ v
 
 shared: source_id dedup │ --dry-run │ dev → prod</div>
 
-    <h2>Two-Axis Taxonomy</h2>
+    <div class="section-header"><span class="section-number zone-portfolio">05</span><h2>Two-Axis Taxonomy</h2></div>
+    <div class="section-underline zone-portfolio"></div>
 
     <p>Flat tags don't scale. When 95% of notes are tagged "ai" and 89% are tagged "career," the tags tell you nothing. The vault needed a classification system that could differentiate a resume optimization conversation from a freight logistics brainstorm from a baby sleep tracker.</p>
 
@@ -217,7 +219,8 @@ shared: source_id dedup │ --dry-run │ dev → prod</div>
 
     <div class="pull-quote">The scoring threshold scales with note length. A 30-word Apple Note titled "Baby Sleep" correctly tags as domain/family. A 27,000-word PKM conversation doesn't tag as every domain just because it mentions each topic once.</div>
 
-    <h2>Link Graph</h2>
+    <div class="section-header"><span class="section-number zone-portfolio">06</span><h2>Link Graph</h2></div>
+    <div class="section-underline zone-portfolio"></div>
 
     <p>Tags classify notes individually. Links connect them into a navigable graph. The link builder reads all 672 notes, computes pairwise similarity from shared domain tags and keyword overlap, and generates <code>[[wikilinks]]</code> to the top related notes for each document.</p>
 
@@ -235,7 +238,8 @@ shared: source_id dedup │ --dry-run │ dev → prod</div>
 
     <p>Series detection finds notes that belong to a sequence &mdash; "Phase 1, Phase 2, Phase 3" or date-stamped daily notes &mdash; and adds prev/next navigation on top of the similarity-based links. This means Claude can traverse a chain of related sessions in order, not just find nearby topics.</p>
 
-    <h2>Apple Notes Sync</h2>
+    <div class="section-header"><span class="section-number zone-portfolio">07</span><h2>Apple Notes Sync</h2></div>
+    <div class="section-underline zone-portfolio"></div>
 
     <p>The most operationally complex pipeline. Apple Notes has no API &mdash; not an undocumented one, not a deprecated one. None. The only way to get notes out programmatically is an iPhone Shortcut that iterates through the Notes app, serializes each note as a text file with inline metadata, and writes it to iCloud Drive. iCloud for Windows syncs those files to a local folder. The importer reads from there.</p>
 
@@ -249,13 +253,15 @@ Node.js importer (MD5 dedup, #confidential filter)
   ↓
 Vault (217 notes, incremental)</div>
 
-    <h2>Notion Sync</h2>
+    <div class="section-header"><span class="section-number zone-portfolio">08</span><h2>Notion Sync</h2></div>
+    <div class="section-underline zone-portfolio"></div>
 
     <p>Not everything lives in Claude conversations. Project specs, meeting notes, and venture evaluations were in Notion. Two separate pipelines handle this: an API sync for live pages (104 from my active workspace) and an export parser for a static guest workspace snapshot (77 pages).</p>
 
     <p>The API sync detects updated pages by comparing <code>last_edited_time</code> against local frontmatter. Notion's block-based content model gets flattened into clean markdown. The export parser handles Notion's zip format and nested page hierarchies. Both are idempotent &mdash; same <code>source_id</code> pattern as the Claude.ai sync.</p>
 
-    <h2>Dev/Prod Pipeline</h2>
+    <div class="section-header"><span class="section-number zone-portfolio">09</span><h2>Dev/Prod Pipeline</h2></div>
+    <div class="section-underline zone-portfolio"></div>
 
     <div class="pull-quote">This exists because I broke prod once by shipping a tool that worked in dev but made assumptions about vault structure that didn't hold.</div>
 
@@ -266,7 +272,8 @@ Vault (217 notes, incremental)</div>
   + npm test        (dev vault)
   + npm run test:prod (prod vault)</div>
 
-    <h2>Stack</h2>
+    <div class="section-header"><span class="section-number zone-portfolio">10</span><h2>Stack</h2></div>
+    <div class="section-underline zone-portfolio"></div>
 
     <div class="label">Built with</div>
     <div class="stack-list">
@@ -280,5 +287,7 @@ Vault (217 notes, incremental)</div>
     </div>
 
     <div class="copyright">rowbyroh.com &copy; 2026</div>
+
+    <script src="/assets/js/scroll.js"></script>
 </body>
 </html>
