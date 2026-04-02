@@ -1,0 +1,369 @@
+<!-- Converged / C1: Quiet Precision -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>rowbyroh — C1: Quiet Precision</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text: #1a1a1a;
+      --bg: #fefefe;
+      --accent: #e84040;
+      --muted: #888;
+      --light: #ccc;
+      --body-size: 0.9rem;
+      --body-lh: 1.72;
+      --max-w: 620px;
+      --quote-bg: #faf6ed;
+      --progress-color: #e84040;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: var(--body-size);
+      font-weight: 400;
+      line-height: var(--body-lh);
+      color: var(--text);
+      background: var(--bg);
+      padding: 3.5rem 2rem 4rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    /* Scroll progress line */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 2px;
+      height: 0%;
+      background: var(--progress-color);
+      z-index: 100;
+      transition: height 0.05s linear;
+    }
+
+    /* Version label */
+    .version-label {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+
+    /* Header */
+    .header {
+      margin-bottom: 2.5rem;
+    }
+    .header h1 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+    .header .tagline {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      margin-bottom: 2rem;
+    }
+    .breadcrumb a {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      color: var(--text);
+    }
+
+    /* Stats */
+    .stats {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .stat {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .stat strong {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* Body text */
+    .body-text {
+      margin-bottom: 2.5rem;
+    }
+
+    /* Pull quote — the moment */
+    .pull-quote {
+      background: var(--quote-bg);
+      padding: 2rem 1.5rem;
+      margin: 3rem -1.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .pull-quote .attribution {
+      display: block;
+      margin-top: 0.75rem;
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    /* Section headers */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-top: 3rem;
+      margin-bottom: 1.25rem;
+    }
+    .section-number {
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: var(--muted);
+    }
+    .section-header h2 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    /* Diagram */
+    .diagram {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 1.5rem 0 2.5rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .diagram-step {
+      padding: 0.4rem 0.8rem;
+      border: 1px solid var(--light);
+    }
+    .diagram-arrow {
+      padding: 0 0.4rem;
+      color: var(--light);
+      font-size: 0.7rem;
+    }
+
+    /* Dialogue */
+    .dialogue {
+      margin: 2rem 0;
+      padding-left: 1rem;
+      border-left: 1px solid var(--light);
+    }
+    .dialogue .speaker {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+    .dialogue .speech {
+      font-size: var(--body-size);
+      margin-bottom: 1.25rem;
+    }
+    .dialogue .speech:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Blog entry */
+    .blog-entry {
+      margin: 2rem 0;
+      padding: 1rem 0;
+      border-top: 1px solid var(--light);
+    }
+    .blog-date {
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+    .blog-title {
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    /* Meta comment */
+    .meta-comment {
+      font-size: 0.72rem;
+      font-style: italic;
+      color: var(--muted);
+      margin: 1.5rem 0;
+      line-height: 1.55;
+    }
+
+    /* Rubric bar */
+    .rubric {
+      margin: 1.5rem 0;
+    }
+    .rubric-label {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    .rubric-bar {
+      width: 100%;
+      height: 3px;
+      background: var(--light);
+      position: relative;
+    }
+    .rubric-fill {
+      height: 100%;
+      background: var(--accent);
+      width: 78%;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--light);
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+    .footer a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      color: var(--text);
+    }
+
+    @media (max-width: 375px) {
+      body {
+        padding: 2rem 1.25rem 3rem;
+        font-size: 0.85rem;
+      }
+      .pull-quote {
+        margin: 2rem -1.25rem;
+        padding: 1.5rem 1.25rem;
+      }
+      .stats { gap: 1rem; }
+      .diagram { flex-wrap: wrap; gap: 0.25rem; }
+      .diagram-arrow { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <div class="version-label">C1 — Quiet Precision</div>
+
+  <nav class="breadcrumb">
+    <a href="#">&larr; rowbyroh.com</a>
+  </nav>
+
+  <header class="header">
+    <h1>rowbyroh</h1>
+    <p class="tagline">PM who builds. AI-native tools, 0&rarr;1, B2B, Enterprise.</p>
+  </header>
+
+  <div class="stats">
+    <span class="stat"><strong>672</strong> notes</span>
+    <span class="stat"><strong>4</strong> sources</span>
+    <span class="stat"><strong>14</strong> dimensions</span>
+    <span class="stat"><strong>2,599</strong> links</span>
+  </div>
+
+  <div class="body-text">
+    <p>I built an MCP server that bridges Claude AI with an Obsidian vault. Not because one existed — because it didn't. The vault holds 672 notes from four sources: Claude conversations, Notion pages, Apple Notes, and manual entries. Each note is classified across 14 taxonomy dimensions and connected through 2,599 auto-generated wikilinks.</p>
+  </div>
+
+  <div class="pull-quote">
+    "The constraint is the brief."
+    <span class="attribution">Principle</span>
+  </div>
+
+  <div class="meta-comment">This page settles around the quote. Everything else supports it.</div>
+
+  <div class="section-header">
+    <span class="section-number">01</span>
+    <h2>How It Works</h2>
+  </div>
+
+  <div class="diagram">
+    <span class="diagram-step">Input</span>
+    <span class="diagram-arrow">&rarr;</span>
+    <span class="diagram-step">Process</span>
+    <span class="diagram-arrow">&rarr;</span>
+    <span class="diagram-step">Classify</span>
+    <span class="diagram-arrow">&rarr;</span>
+    <span class="diagram-step">Link</span>
+    <span class="diagram-arrow">&rarr;</span>
+    <span class="diagram-step">Output</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-number">02</span>
+    <h2>Design Dialogue</h2>
+  </div>
+
+  <div class="dialogue">
+    <div class="speaker">Wegner</div>
+    <div class="speech">"A cushion is not design — a cushion is an apology."</div>
+    <div class="speech">That's the principle. If the structure needs padding to be comfortable, the structure failed.</div>
+  </div>
+
+  <div class="section-header">
+    <span class="section-number">03</span>
+    <h2>Writing</h2>
+  </div>
+
+  <div class="blog-entry">
+    <div class="blog-date">2026-03-15</div>
+    <div class="blog-title">Reverse Engineering the Claude API</div>
+  </div>
+
+  <div class="rubric">
+    <div class="rubric-label">Taxonomy coverage</div>
+    <div class="rubric-bar">
+      <div class="rubric-fill"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <a href="#">github</a> &middot; <a href="#">email</a>
+  </footer>
+
+  <script>
+    const progress = document.getElementById('scrollProgress');
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progress.style.height = pct + '%';
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!-- Converged / C3: Functional Poetry -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>rowbyroh — C3: Functional Poetry</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text: #1a1a1a;
+      --bg: #fefefe;
+      --accent: #b84233;
+      --muted: #888;
+      --muted-light: #aaa;
+      --light: #d4d2cd;
+      --body-size: 0.9rem;
+      --body-lh: 1.78;
+      --max-w: 580px;
+      --progress-color: #b84233;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: var(--body-size);
+      font-weight: 400;
+      line-height: var(--body-lh);
+      color: var(--text);
+      background: var(--bg);
+      padding: 4.5rem 2rem 5rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Scroll progress — structural element */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 2px;
+      height: 0%;
+      background: var(--progress-color);
+      z-index: 100;
+      opacity: 0.5;
+      transition: height 0.05s linear;
+    }
+
+    /* Version label */
+    .version-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 3.5rem;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      margin-bottom: 3rem;
+    }
+    .breadcrumb a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted-light);
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      color: var(--text);
+    }
+
+    /* Header — offset left */
+    .header {
+      margin-bottom: 3.5rem;
+      max-width: var(--max-w);
+    }
+    .header h1 {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+    .header .tagline {
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    /* Flowing content — varied margins for placement-based hierarchy */
+    .flow {
+      max-width: var(--max-w);
+    }
+
+    .flow-wide {
+      max-width: 100%;
+    }
+
+    .flow-indent {
+      max-width: var(--max-w);
+      margin-left: 2.5rem;
+    }
+
+    /* Body text with inline stats */
+    .body-text {
+      margin-bottom: 2rem;
+    }
+    .inline-stat {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 500;
+      font-size: 0.88rem;
+    }
+
+    /* Pull quote — full-width pause, the moment */
+    .pull-quote-wrapper {
+      margin: 4rem 0;
+      padding: 3rem 0;
+      max-width: 100%;
+    }
+    .pull-quote {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.1rem;
+      font-weight: 500;
+      line-height: 1.55;
+      color: var(--text);
+      max-width: var(--max-w);
+    }
+    .pull-quote .mark {
+      color: var(--accent);
+    }
+    .pull-quote-attribution {
+      margin-top: 1rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 400;
+      color: var(--muted-light);
+    }
+
+    /* Section markers — numbers as structural cues, varied placement */
+    .section-marker {
+      margin-top: 3.5rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+    .section-marker .num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 300;
+      color: var(--accent);
+    }
+    .section-marker h2 {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    /* Diagram — minimal strokes */
+    .diagram {
+      display: flex;
+      align-items: center;
+      margin: 1.5rem 0 2rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--muted);
+    }
+    .diagram-step {
+      padding: 0.35rem 0;
+    }
+    .diagram-step.active {
+      color: var(--text);
+      font-weight: 500;
+    }
+    .diagram-link {
+      width: 2rem;
+      height: 1px;
+      background: var(--light);
+      margin: 0 0.3rem;
+    }
+
+    /* Dialogue — flows naturally */
+    .dialogue {
+      margin: 2rem 0;
+    }
+    .dialogue .speaker {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted-light);
+      margin-bottom: 0.35rem;
+    }
+    .dialogue .speech {
+      font-size: var(--body-size);
+      margin-bottom: 1rem;
+    }
+    .dialogue .response {
+      margin-left: 2.5rem;
+      font-size: var(--body-size);
+      color: var(--text);
+    }
+
+    /* Meta comment — woven in like thinking aloud */
+    .meta-comment {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted-light);
+      margin: 1.5rem 0;
+      line-height: 1.5;
+    }
+
+    /* Blog entry — soft transition */
+    .blog-entry {
+      margin: 2.5rem 0;
+    }
+    .blog-date {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted-light);
+      margin-bottom: 0.2rem;
+    }
+    .blog-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* Rubric — thin, understated */
+    .rubric {
+      margin: 2rem 0;
+    }
+    .rubric-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted-light);
+      margin-bottom: 0.35rem;
+    }
+    .rubric-bar {
+      width: 100%;
+      height: 2px;
+      background: #eae8e4;
+      position: relative;
+    }
+    .rubric-fill {
+      height: 100%;
+      background: var(--accent);
+      width: 78%;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 5rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted-light);
+    }
+    .footer a {
+      color: var(--muted-light);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      color: var(--text);
+    }
+
+    @media (max-width: 375px) {
+      body {
+        padding: 2.5rem 1.25rem 3rem;
+        font-size: 0.85rem;
+      }
+      .flow-indent {
+        margin-left: 1rem;
+      }
+      .pull-quote-wrapper {
+        margin: 2.5rem 0;
+        padding: 2rem 0;
+      }
+      .pull-quote { font-size: 1rem; }
+      .diagram { flex-wrap: wrap; }
+      .diagram-link { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <div class="version-label">C3 — Functional Poetry</div>
+
+  <nav class="breadcrumb">
+    <a href="#">&larr; rowbyroh.com</a>
+  </nav>
+
+  <header class="header">
+    <h1>rowbyroh</h1>
+    <p class="tagline">PM who builds. AI-native tools, 0&rarr;1, B2B, Enterprise.</p>
+  </header>
+
+  <div class="flow">
+    <div class="body-text">
+      <p>I built an MCP server that bridges Claude AI with an Obsidian vault. Not because one existed — because it didn't. The vault holds <span class="inline-stat">672</span> notes from four sources: Claude conversations, Notion pages, Apple Notes, and manual entries. Each note is classified across <span class="inline-stat">14</span> taxonomy dimensions and connected through <span class="inline-stat">2,599</span> auto-generated wikilinks.</p>
+    </div>
+  </div>
+
+  <div class="meta-comment flow">Four sources, one graph. The numbers matter less than the connections.</div>
+
+  <div class="pull-quote-wrapper flow-wide">
+    <div class="pull-quote">
+      <span class="mark">"</span>The constraint is the brief.<span class="mark">"</span>
+    </div>
+    <div class="pull-quote-attribution">Principle</div>
+  </div>
+
+  <div class="flow">
+    <div class="section-marker">
+      <span class="num">01</span>
+      <h2>How It Works</h2>
+    </div>
+  </div>
+
+  <div class="flow-indent">
+    <div class="diagram">
+      <span class="diagram-step active">Input</span>
+      <span class="diagram-link"></span>
+      <span class="diagram-step">Process</span>
+      <span class="diagram-link"></span>
+      <span class="diagram-step">Classify</span>
+      <span class="diagram-link"></span>
+      <span class="diagram-step">Link</span>
+      <span class="diagram-link"></span>
+      <span class="diagram-step active">Output</span>
+    </div>
+
+    <div class="meta-comment">The pipeline is five steps. Every note passes through all of them.</div>
+  </div>
+
+  <div class="flow">
+    <div class="section-marker">
+      <span class="num">02</span>
+      <h2>Design Dialogue</h2>
+    </div>
+
+    <div class="dialogue">
+      <div class="speaker">Wegner</div>
+      <div class="speech">"A cushion is not design — a cushion is an apology."</div>
+      <div class="response">That's the principle. If the structure needs padding to be comfortable, the structure failed.</div>
+    </div>
+  </div>
+
+  <div class="flow">
+    <div class="section-marker">
+      <span class="num">03</span>
+      <h2>Writing</h2>
+    </div>
+  </div>
+
+  <div class="flow-indent">
+    <div class="blog-entry">
+      <div class="blog-date">2026-03-15</div>
+      <div class="blog-title">Reverse Engineering the Claude API</div>
+    </div>
+
+    <div class="rubric">
+      <div class="rubric-label">Taxonomy coverage</div>
+      <div class="rubric-bar">
+        <div class="rubric-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer flow">
+    <a href="#">github</a> &middot; <a href="#">email</a>
+  </footer>
+
+  <script>
+    const progress = document.getElementById('scrollProgress');
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progress.style.height = pct + '%';
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  </script>
+
+</body>
+</html>
