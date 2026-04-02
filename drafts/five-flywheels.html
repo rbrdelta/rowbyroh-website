@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Five Flywheels | Agentic Stack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background: #fefefe;
+            color: #1a1a1a;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            font-size: 0.82rem;
+            color: #555;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+        .flywheel-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+        .flywheel-card {
+            border: 1px solid #e0e0e0;
+            padding: 1.5rem;
+        }
+        .flywheel-card.full-width {
+            grid-column: 1 / -1;
+        }
+        .flywheel-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+        .flywheel-compounds {
+            font-size: 0.72rem;
+            color: #888;
+            margin-bottom: 1.2rem;
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+        svg { width: 100%; height: auto; display: block; }
+        .legend {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+        }
+        .legend-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+        .legend-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.5rem;
+        }
+        .legend-item {
+            font-size: 0.7rem;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .legend-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+        @media (max-width: 768px) {
+            .flywheel-grid { grid-template-columns: 1fr; }
+            .legend-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Five Flywheels</h1>
+    <p class="subtitle">Each loop compounds a different thing. L1 (shared state) is the hub all five revolve around.</p>
+
+    <div class="flywheel-grid">
+
+        <!-- LOOP 1: Core Flywheel -->
+        <div class="flywheel-card">
+            <div class="flywheel-title">1. Session → State</div>
+            <div class="flywheel-compounds">Compounds: context richness</div>
+            <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrow1" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                        <path d="M0,0 L8,3 L0,6" fill="#1a1a1a"/>
+                    </marker>
+                </defs>
+                <!-- Nodes -->
+                <rect x="140" y="10" width="120" height="36" rx="3" fill="#f0f0f0" stroke="#1a1a1a" stroke-width="1.5"/>
+                <text x="200" y="33" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600">Session</text>
+
+                <rect x="290" y="110" width="100" height="36" rx="3" fill="#f0f0f0" stroke="#1a1a1a" stroke-width="1.5"/>
+                <text x="340" y="133" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600">Work</text>
+
+                <rect x="140" y="210" width="120" height="36" rx="3" fill="#fff3f3" stroke="#e84040" stroke-width="1.5"/>
+                <text x="200" y="233" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600">/debrief</text>
+
+                <rect x="10" y="110" width="100" height="36" rx="3" fill="#f5f5f0" stroke="#1a1a1a" stroke-width="1.5"/>
+                <text x="60" y="128" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600">L1 State</text>
+                <text x="60" y="141" text-anchor="middle" font-family="IBM Plex Sans" font-size="8" fill="#888">(richer each cycle)</text>
+
+                <!-- Arrows -->
+                <path d="M260,35 Q330,35 335,110" fill="none" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#arrow1)"/>
+                <text x="310" y="65" font-family="IBM Plex Sans" font-size="9" fill="#888">produces</text>
+
+                <path d="M310,146 Q260,200 260,210" fill="none" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#arrow1)"/>
+                <text x="290" y="185" font-family="IBM Plex Sans" font-size="9" fill="#888">triggers</text>
+
+                <path d="M140,235 Q60,235 60,146" fill="none" stroke="#e84040" stroke-width="1.5" marker-end="url(#arrow1)"/>
+                <text x="70" y="200" font-family="IBM Plex Sans" font-size="9" fill="#e84040">writes back</text>
+
+                <path d="M60,110 Q60,45 140,30" fill="none" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#arrow1)"/>
+                <text x="68" y="65" font-family="IBM Plex Sans" font-size="9" fill="#888">reads</text>
+            </svg>
+        </div>
+
+        <!-- LOOP 2: Learning Loop -->
+        <div class="flywheel-card">
+            <div class="flywheel-title">2. Learning → Behavior</div>
+            <div class="flywheel-compounds">Compounds: judgment quality</div>
+            <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrow2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                        <path d="M0,0 L8,3 L0,6" fill="#1a1a1a"/>
+                    </marker>
+                    <marker id="arrow2r" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                        <path d="M0,0 L8,3 L0,6" fill="#e84040"/>
+                    </marker>
+                </defs>
+                <!-- Nodes -->
+                <rect x="130" y="10" width="140" height="36" rx="3" fill="#f0f0f0" stroke="#1a1a1a" stroke-width="1.5"/>
+                <text x="200" y="33" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600">Session Insight</text>
+
+                <rect x="275" y="80" width="120" height="36" rx="3" fill="#fff3f3" stroke="#e84040" stroke-width="1.5"/>
+                <text x="335" y="103" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600">/learnings</text>
+
+                <rect x="275" y="150" width="120" height="36" rx="3" fill="#f5f5f0" stroke="#1a1a1a" stroke-width="1.5"/>
+                <text x="335" y="173" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600">Learnings.md</text>
+
+                <rect x="140" y="220" width="120" height="36" rx="3" fill="#fff3f3" stroke="#e84040" stroke-width="1.5"/>
+                <text x="200" y="243" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600">/digest</text>
+
+                <rect x="5" y="150" width="120" height="36" rx="3" fill="#f5f5f0" stroke="#1a1a1a" stroke-width="1.5"/>
+                <text x="65" y="173" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600">CLAUDE.md</text>
+
+                <rect x="5" y="80" width="120" height="36" rx="3" fill="#f0f0f0" stroke="#1a1a1a" stroke-width="1.5"/>
+                <text x="65" y="98" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" font-weight="600">Future Sessions</text>
+                <text x="65" y="111" text-anchor="middle" font-family="IBM Plex Sans" font-size="8" fill="#888">(behave differently)</text>
+
+                <!-- Arrows -->
+                <path d="M270,38 L280,80" fill="none" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#arrow2)"/>
+                <path d="M335,116 L335,150" fill="none" stroke="#e84040" stroke-width="1.5" marker-end="url(#arrow2r)"/>
+                <text x="345" y="137" font-family="IBM Plex Sans" font-size="8" fill="#e84040">captures</text>
+                <path d="M275,168 L260,220" fill="none" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#arrow2)"/>
+                <path d="M140,238 L125,186" fill="none" stroke="#e84040" stroke-width="1.5" marker-end="url(#arrow2r)"/>
+                <text x="110" y="220" font-family="IBM Plex Sans" font-size="8" fill="#e84040">promotes</text>
+                <path d="M65,150 L65,116" fill="none" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#arrow2)"/>
+                <text x="75" y="137" font-family="IBM Plex Sans" font-size="8" fill="#888">shapes</text>
+                <path d="M125,90 L130,30" fill="none" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#arrow2)"/>
+                <text x="90" y="55" font-family="IBM Plex Sans" font-size="8" fill="#888">produces new</text>
+            </svg>
+        </div>
+
+        <!-- LOOP 3: Value Chain -->
+        <div class="flywheel-card">
+            <div class="flywheel-title">3. Gap → Priority → Task → Ship</div>
+            <div class="flywheel-compounds">Compounds: strategic coherence</div>
+            <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrow3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                        <path d="M0,0 L8,3 L0,6" fill="#1a1a1a"/>
+                    </marker>
+                    <marker id="arrow3r" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                        <path d="M0,0 L8,3 L0,6" fill="#e84040"/>
+                    </marker>
+                </defs>
+                <!-- Nodes in a cycle -->
+                <rect x="10" y="30" width="110" height="36" rx="3" fill="#fff3f3" stroke="#e84040" stroke-width="1.5"/>
+                <text x="65" y="53" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600">/architect</text>
+
+                <rect x="10" y="120" width="110" height="36" rx="3" fill="#f5f5f0" stroke="#1a1a1a" stroke-width="1.5"/>
+                <text x="65" y="143" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" font-weight="500">Handoff Note</text>
+
+                <rect x="155" y="120" width="90" height="36" rx="3" fill="#fff3f3" stroke="#e84040" stroke-width="1.5"/>
+                <text x="200" y="143" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600">/pm</text>
+
+                <rect x="155" y="210" width="90" height="36" rx="3" fill="#f5f5f0" stroke="#1a1a1a" stroke-width="1.5"/>
+                <text x="200" y="228" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" font-weight="500">Backlog</text>
+                <text x="200" y="241" text-anchor="middle" font-family="IBM Plex Sans" font-size="8" fill="#888">(prioritized)</text>
+
+                <rect x="280" y="120" width="110" height="36" rx="3" fill="#fff3f3" stroke="#e84040" stroke-width="1.5"/>
+                <text x="335" y="143" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600">/program</text>
+
+                <rect x="280" y="30" width="110" height="36" rx="3" fill="#f0f0f0" stroke="#1a1a1a" stroke-width="1.5"/>
+                <text x="335" y="53" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600">Execution</text>
+
+                <!-- Arrows -->
+                <path d="M65,66 L65,120" fill="none" stroke="#e84040" stroke-width="1.5" marker-end="url(#arrow3r)"/>
+                <text x="75" y="95" font-family="IBM Plex Sans" font-size="8" fill="#e84040">writes gaps</text>
+
+                <path d="M120,138 L155,138" fill="none" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#arrow3)"/>
+
+                <path d="M200,156 L200,210" fill="none" stroke="#e84040" stroke-width="1.5" marker-end="url(#arrow3r)"/>
+                <text x="210" y="185" font-family="IBM Plex Sans" font-size="8" fill="#e84040">prioritizes</text>
+
+                <path d="M245,228 Q280,228 300,156" fill="none" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#arrow3)"/>
+                <text x="275" y="200" font-family="IBM Plex Sans" font-size="8" fill="#888">tracks</text>
+
+                <path d="M335,120 L335,66" fill="none" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#arrow3)"/>
+                <text x="345" y="95" font-family="IBM Plex Sans" font-size="8" fill="#888">ships</text>
+
+                <!-- Feedback arrow back to architect -->
+                <path d="M280,42 L120,42" fill="none" stroke="#e84040" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow3r)"/>
+                <text x="195" y="36" text-anchor="middle" font-family="IBM Plex Sans" font-size="8" fill="#e84040">reassesses</text>
+            </svg>
+        </div>
+
+        <!-- LOOP 4: Career Loop -->
+        <div class="flywheel-card">
+            <div class="flywheel-title">4. Work → Content → Career</div>
+            <div class="flywheel-compounds">Compounds: external proof</div>
+            <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrow4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                        <path d="M0,0 L8,3 L0,6" fill="#1a1a1a"/>
+                    </marker>
+                    <marker id="arrow4r" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                        <path d="M0,0 L8,3 L0,6" fill="#e84040"/>
+                    </marker>
+                </defs>
+
+                <rect x="10" y="30" width="120" height="36" rx="3" fill="#f0f0f0" stroke="#1a1a1a" stroke-width="1.5"/>
+                <text x="70" y="53" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600">Session Work</text>
+
+                <rect x="10" y="120" width="120" height="36" rx="3" fill="#fff3f3" stroke="#e84040" stroke-width="1.5"/>
+                <text x="70" y="138" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600">/debrief</text>
+                <text x="70" y="151" text-anchor="middle" font-family="IBM Plex Sans" font-size="8" fill="#888">Step 4: content scan</text>
+
+                <rect x="160" y="120" width="120" height="36" rx="3" fill="#f5f5f0" stroke="#1a1a1a" stroke-width="1.5"/>
+                <text x="220" y="143" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" font-weight="500">Content Pipeline</text>
+
+                <rect x="160" y="210" width="80" height="36" rx="3" fill="#fff3f3" stroke="#e84040" stroke-width="1.5"/>
+                <text x="200" y="233" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600">/content</text>
+
+                <rect x="270" y="210" width="80" height="36" rx="3" fill="#fff3f3" stroke="#e84040" stroke-width="1.5"/>
+                <text x="310" y="233" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600">/draft</text>
+
+                <rect x="270" y="120" width="120" height="36" rx="3" fill="#f0f0f0" stroke="#1a1a1a" stroke-width="1.5"/>
+                <text x="330" y="138" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600">rowbyroh.com</text>
+                <text x="330" y="151" text-anchor="middle" font-family="IBM Plex Sans" font-size="8" fill="#888">(application artifact)</text>
+
+                <rect x="270" y="30" width="120" height="36" rx="3" fill="#f0f0f0" stroke="#1a1a1a" stroke-width="1.5"/>
+                <text x="330" y="48" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600">Career Impact</text>
+                <text x="330" y="61" text-anchor="middle" font-family="IBM Plex Sans" font-size="8" fill="#888">(interviews, clients)</text>
+
+                <!-- Arrows -->
+                <path d="M70,66 L70,120" fill="none" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#arrow4)"/>
+                <text x="80" y="95" font-family="IBM Plex Sans" font-size="8" fill="#888">triggers</text>
+
+                <path d="M130,138 L160,138" fill="none" stroke="#e84040" stroke-width="1.5" marker-end="url(#arrow4r)"/>
+
+                <path d="M220,156 L205,210" fill="none" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#arrow4)"/>
+                <text x="195" y="185" font-family="IBM Plex Sans" font-size="8" fill="#888">directs</text>
+
+                <path d="M240,228 L270,228" fill="none" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#arrow4)"/>
+
+                <path d="M350,228 Q390,180 390,156 Q390,138 380,138" fill="none" stroke="#e84040" stroke-width="1.5" marker-end="url(#arrow4r)"/>
+                <text x="385" y="185" font-family="IBM Plex Sans" font-size="8" fill="#e84040" transform="rotate(90,385,185)">publishes</text>
+
+                <path d="M330,120 L330,66" fill="none" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#arrow4)"/>
+                <text x="340" y="95" font-family="IBM Plex Sans" font-size="8" fill="#888">proves</text>
+
+                <!-- Feedback: career drives more work -->
+                <path d="M270,42 L130,42" fill="none" stroke="#e84040" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow4r)"/>
+                <text x="195" y="36" text-anchor="middle" font-family="IBM Plex Sans" font-size="8" fill="#e84040">drives new work</text>
+            </svg>
+        </div>
+
+        <!-- LOOP 5: Growth Loop (full width) -->
+        <div class="flywheel-card full-width">
+            <div class="flywheel-title">5. Skill → Tracking → Coaching</div>
+            <div class="flywheel-compounds">Compounds: operator capability</div>
+            <svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrow5" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                        <path d="M0,0 L8,3 L0,6" fill="#1a1a1a"/>
+                    </marker>
+                    <marker id="arrow5r" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                        <path d="M0,0 L8,3 L0,6" fill="#e84040"/>
+                    </marker>
+                </defs>
+
+                <rect x="20" y="60" width="140" height="40" rx="3" fill="#f0f0f0" stroke="#1a1a1a" stroke-width="1.5"/>
+                <text x="90" y="78" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600">Session Practice</text>
+                <text x="90" y="93" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#888">(any skill in use)</text>
+
+                <rect x="210" y="60" width="120" height="40" rx="3" fill="#fff3f3" stroke="#e84040" stroke-width="1.5"/>
+                <text x="270" y="85" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600">/maestro</text>
+
+                <rect x="380" y="60" width="140" height="40" rx="3" fill="#f5f5f0" stroke="#1a1a1a" stroke-width="1.5"/>
+                <text x="450" y="78" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="500">AI Skills Inventory</text>
+                <text x="450" y="93" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#888">(levels + practice log)</text>
+
+                <rect x="570" y="60" width="140" height="40" rx="3" fill="#f0f0f0" stroke="#1a1a1a" stroke-width="1.5"/>
+                <text x="640" y="78" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600">Targeted Coaching</text>
+                <text x="640" y="93" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#888">(next session briefing)</text>
+
+                <!-- Forward arrows -->
+                <path d="M160,80 L210,80" fill="none" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#arrow5)"/>
+                <text x="185" y="73" text-anchor="middle" font-family="IBM Plex Sans" font-size="8" fill="#888">observes</text>
+
+                <path d="M330,80 L380,80" fill="none" stroke="#e84040" stroke-width="1.5" marker-end="url(#arrow5r)"/>
+                <text x="355" y="73" text-anchor="middle" font-family="IBM Plex Sans" font-size="8" fill="#e84040">updates</text>
+
+                <path d="M520,80 L570,80" fill="none" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#arrow5)"/>
+                <text x="545" y="73" text-anchor="middle" font-family="IBM Plex Sans" font-size="8" fill="#888">informs</text>
+
+                <!-- Feedback arrow -->
+                <path d="M640,100 Q640,150 400,150 Q90,150 90,100" fill="none" stroke="#e84040" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow5r)"/>
+                <text x="380" y="145" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#e84040">better practice next session</text>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="legend">
+        <div class="legend-title">Legend</div>
+        <div class="legend-grid">
+            <div class="legend-item">
+                <div class="legend-swatch" style="background: #fff3f3; border: 1.5px solid #e84040;"></div>
+                L4 Skills (judgment)
+            </div>
+            <div class="legend-item">
+                <div class="legend-swatch" style="background: #f5f5f0; border: 1.5px solid #1a1a1a;"></div>
+                L1 Artifacts (state)
+            </div>
+            <div class="legend-item">
+                <div class="legend-swatch" style="background: #f0f0f0; border: 1.5px solid #1a1a1a;"></div>
+                Actions / Outcomes
+            </div>
+            <div class="legend-item">
+                <svg width="30" height="12"><line x1="0" y1="6" x2="30" y2="6" stroke="#e84040" stroke-width="1.5"/></svg>
+                Write (changes state)
+            </div>
+            <div class="legend-item">
+                <svg width="30" height="12"><line x1="0" y1="6" x2="30" y2="6" stroke="#1a1a1a" stroke-width="1.5"/></svg>
+                Read / Flow
+            </div>
+            <div class="legend-item">
+                <svg width="30" height="12"><line x1="0" y1="6" x2="30" y2="6" stroke="#e84040" stroke-width="1.5" stroke-dasharray="4,3"/></svg>
+                Feedback (closes the loop)
+            </div>
+        </div>
+    </div>
+</body>
+</html>
