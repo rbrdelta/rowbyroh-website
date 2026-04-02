@@ -11,55 +11,21 @@
     <meta property="og:type" content="article">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/base.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
+        /* Override base max-width for wider architecture layout */
         body {
-            font-family: 'IBM Plex Mono', monospace;
-            background: #f8f8f6;
-            color: #1a1a1a;
-            font-weight: 400;
-            line-height: 1.8;
             max-width: 780px;
-            margin: 0 auto;
-            padding: 3rem 2rem 4rem;
-        }
-
-        .back-link {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 0.75rem;
-            color: #888;
-            text-decoration: none;
-            display: inline-block;
-            margin-bottom: 2rem;
-            font-weight: 400;
-        }
-        .back-link:hover { color: #1a1a1a; }
-        .back-link::before { content: '\2190  '; }
-
-        h1 {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 0.3rem;
-        }
-
-        .page-subtitle {
-            font-size: 0.88rem;
-            color: #555;
-            margin-bottom: 0.5rem;
-            font-weight: 400;
         }
 
         .page-intro {
             font-size: 0.88rem;
-            color: #555;
+            color: var(--muted);
             font-weight: 400;
             margin-bottom: 2.5rem;
             padding-bottom: 1.5rem;
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 1px solid var(--light);
             line-height: 1.7;
         }
 
@@ -79,33 +45,16 @@
         }
 
         .narrative code {
-            background: #f0f0f0;
+            background: var(--bg-light);
             padding: 0.1rem 0.35rem;
             font-size: 0.8rem;
-            border: 1px solid #e0e0e0;
+            border: 1px solid var(--light);
         }
 
-        /* ---- SECTION HEADERS ---- */
-        h2 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-        }
-
-        h2::before {
-            content: '';
-            display: inline-block;
-            width: 12px;
-            height: 2px;
-            background: #e84040;
-            margin-right: 0.6rem;
-            vertical-align: middle;
-            opacity: 0.7;
-        }
-
+        /* ---- SECTION INTRO ---- */
         .section-intro {
             font-size: 0.82rem;
-            color: #555;
+            color: var(--muted);
             margin-bottom: 1.5rem;
             line-height: 1.7;
         }
@@ -127,7 +76,7 @@
 
         .skill-graph .zone-sep { stroke: #eee; stroke-width: 0.5; }
         .skill-graph .zone-label {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-family: 'IBM Plex Sans', sans-serif;
             font-size: 10px;
             font-weight: 500;
             fill: #bbb;
@@ -137,7 +86,7 @@
         .skill-graph .nt {
             font-family: 'IBM Plex Mono', monospace;
             font-size: 12.5px;
-            fill: #1a1a1a;
+            fill: var(--text);
             cursor: pointer;
             transition: fill 0.15s;
         }
@@ -159,11 +108,11 @@
         .skill-graph.hov .nd { fill: #ddd; }
         .skill-graph.hov .el, .skill-graph.hov .el-r, .skill-graph.hov .el-f { stroke: #f0f0f0; }
 
-        .skill-graph.hov .nt.lit { fill: #1a1a1a; }
-        .skill-graph.hov .nt-s.lit { fill: #555; }
-        .skill-graph.hov .nd.lit { fill: #e84040; }
+        .skill-graph.hov .nt.lit { fill: var(--text); }
+        .skill-graph.hov .nt-s.lit { fill: var(--muted); }
+        .skill-graph.hov .nd.lit { fill: var(--zone-portfolio); }
         .skill-graph.hov .el.lit, .skill-graph.hov .el-r.lit, .skill-graph.hov .el-f.lit {
-            stroke: #e84040; stroke-width: 1.5;
+            stroke: var(--zone-portfolio); stroke-width: 1.5;
         }
 
         /* ---- LEGEND ---- */
@@ -173,7 +122,7 @@
             flex-wrap: wrap;
             margin-bottom: 2rem;
             padding: 0.8rem 0;
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 1px solid var(--light);
         }
 
         .legend-item {
@@ -181,7 +130,7 @@
             align-items: center;
             gap: 0.5rem;
             font-size: 0.72rem;
-            color: #888;
+            color: var(--muted);
         }
 
         .legend-line {
@@ -208,17 +157,17 @@
         .graph-principles {
             margin-top: 0;
             padding-top: 1.5rem;
-            border-top: 1px solid #e0e0e0;
+            border-top: 1px solid var(--light);
         }
 
         .gp { margin-bottom: 0.6rem; font-size: 0.82rem; line-height: 1.6; }
         .gp strong { font-weight: 600; }
-        .gp span { color: #555; }
+        .gp span { color: var(--muted); }
         .gp code {
-            background: #f0f0f0;
+            background: var(--bg-light);
             padding: 0.1rem 0.35rem;
             font-size: 0.74rem;
-            border: 1px solid #e0e0e0;
+            border: 1px solid var(--light);
         }
 
         /* ---- STACK TABLE ---- */
@@ -234,11 +183,11 @@
         }
 
         .stack-table th {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-family: 'IBM Plex Sans', sans-serif;
             font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: #888;
+            color: var(--muted);
             font-weight: 500;
             text-align: left;
             padding: 0.5rem 0.8rem;
@@ -257,11 +206,11 @@
         }
 
         .stack-table .layer-id {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-family: 'IBM Plex Sans', sans-serif;
             font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: #888;
+            color: var(--muted);
             font-weight: 500;
             white-space: nowrap;
         }
@@ -272,11 +221,11 @@
         }
 
         .stack-table .layer-desc {
-            color: #555;
+            color: var(--muted);
         }
 
         .stack-table .layer-contains {
-            color: #555;
+            color: var(--muted);
             font-size: 0.78rem;
         }
 
@@ -287,18 +236,18 @@
 
         .tenets-link {
             font-size: 0.85rem;
-            color: #555;
+            color: var(--muted);
         }
 
         .tenets-link a {
-            color: #1a1a1a;
+            color: var(--text);
             text-decoration: none;
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid var(--light);
             font-weight: 600;
         }
 
         .tenets-link a:hover {
-            border-color: #1a1a1a;
+            border-color: var(--text);
         }
 
         /* ---- STATS ---- */
@@ -307,8 +256,8 @@
             gap: 2rem;
             margin: 2.5rem 0;
             padding: 1.2rem 0;
-            border-top: 1px solid #e0e0e0;
-            border-bottom: 1px solid #e0e0e0;
+            border-top: 1px solid var(--light);
+            border-bottom: 1px solid var(--light);
         }
 
         .stat {
@@ -317,47 +266,42 @@
         }
 
         .stat-value {
-            font-size: 1.4rem;
-            font-weight: 700;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 500;
         }
 
         .stat-label {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-family: 'IBM Plex Sans', sans-serif;
             font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: #888;
-            font-weight: 500;
+            color: var(--zone-portfolio);
+            font-weight: 400;
         }
 
         /* ---- COLOPHON ---- */
         .colophon {
             font-size: 0.7rem;
-            color: #888;
+            color: var(--muted);
             margin-top: 3rem;
             padding-top: 1.5rem;
-            border-top: 1px solid #e8e8e8;
+            border-top: 1px solid var(--light);
             line-height: 1.6;
         }
 
         .colophon a {
-            color: #555;
+            color: var(--zone-mono);
             text-decoration: none;
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid var(--light);
         }
         .colophon a:hover {
-            color: #1a1a1a;
-            border-color: #1a1a1a;
+            color: var(--text);
+            border-color: var(--text);
         }
 
         /* ---- RESPONSIVE ---- */
         @media (max-width: 600px) {
-            body {
-                padding: 2rem 1rem 3rem;
-            }
-
-            h1 { font-size: 1.4rem; }
-
             .skill-graph .nt { font-size: 9px; }
             .skill-graph .nt-p { font-size: 10.5px; }
             .skill-graph .nt-s { font-size: 7.5px; }
@@ -383,6 +327,9 @@
     </style>
 </head>
 <body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="scroll-progress-inner" id="scrollProgressInner"></div>
+
     <a href="/" class="back-link">rowbyroh</a>
     <h1>Agentic Stack</h1>
     <p class="page-subtitle">How I build with AI. Infrastructure first, automation last.</p>
@@ -390,13 +337,21 @@
 
     <!-- ---- CASE STUDY NARRATIVE ---- -->
     <div class="narrative-section">
-        <h2>Why I Built This</h2>
+        <div class="section-header">
+            <span class="section-number zone-portfolio">01</span>
+            <h2>Why I Built This</h2>
+        </div>
+        <div class="section-underline zone-portfolio"></div>
 
         <p class="narrative">I was running five ventures and a day job out of 10-15 hours a week. Every Claude session started with me re-explaining who I am, what I'm building, and what we decided last time. That's not a minor inconvenience — it's a compounding tax. The more I build, the more context each session needs, and the less of my 15% actually goes to building.</p>
 
         <p class="narrative">The first instinct was to use Claude's built-in memory. It handles "who is Daniel" well enough. But it can't tell you what phase the PKM project is in, what the last architecture decision was, or which of three financial models we picked for the composter business. Memory is a summary. I needed a system of record.</p>
 
-        <h2>What I Tried and Rejected</h2>
+        <div class="section-header">
+            <span class="section-number zone-portfolio">02</span>
+            <h2>What I Tried and Rejected</h2>
+        </div>
+        <div class="section-underline zone-portfolio"></div>
 
         <p class="narrative"><strong>Folder-based organization.</strong> Started here. Ended up with a category debate every time I saved a note. A freight conversation that touches career planning — where does it go? Tags and links replaced folders entirely. The vault uses a flat structure with a 14-dimension taxonomy and 2,599 auto-generated wikilinks.</p>
 
@@ -404,7 +359,11 @@
 
         <p class="narrative"><strong>Automation first.</strong> The temptation was to build scheduled pipelines immediately. But the data model wasn't right yet. I spent weeks on vault structure, taxonomy design, and MCP tools before writing a single cron job. Getting the primitives right meant the automation layer, when it came, was trivial to build. The reverse order would have automated a bad foundation.</p>
 
-        <h2>What Surprised Me</h2>
+        <div class="section-header">
+            <span class="section-number zone-portfolio">03</span>
+            <h2>What Surprised Me</h2>
+        </div>
+        <div class="section-underline zone-portfolio"></div>
 
         <p class="narrative"><strong>The value chain emerged, it wasn't designed.</strong> I built <code>/architect</code> for gap assessments and <code>/pm</code> for prioritization as separate tools. After a few sessions I noticed they naturally produced artifacts the other consumed — architect handoff notes became PM inputs. The sequential pipeline (<code>/architect</code> &#8594; <code>/pm</code> &#8594; <code>/program</code> &#8594; build) wasn't planned. It was discovered.</p>
 
@@ -412,14 +371,22 @@
 
         <p class="narrative"><strong>Slash commands beat every alternative.</strong> I evaluated fine-tuning, system prompts, and custom GPT-style configurations. Slash commands (markdown files in <code>~/.claude/commands/</code>) won because they're version-controlled, editable in any text editor, and compose with the layers below them. No vendor lock-in. No configuration UI. Just files.</p>
 
-        <h2>What I'd Do Differently</h2>
+        <div class="section-header">
+            <span class="section-number zone-portfolio">04</span>
+            <h2>What I'd Do Differently</h2>
+        </div>
+        <div class="section-underline zone-portfolio"></div>
 
         <p class="narrative">Build the <code>/debrief</code> feedback loop earlier. I ran dozens of sessions before formalizing the write-back mechanism. Every one of those sessions produced learnings that were trapped in conversation history instead of flowing into the system. The compounding only starts when the loop closes.</p>
     </div>
 
     <!-- ---- SKILL COMPOSITION GRAPH ---- -->
     <div class="graph-section">
-        <h2>How Skills Compose</h2>
+        <div class="section-header">
+            <span class="section-number zone-portfolio">05</span>
+            <h2>How Skills Compose</h2>
+        </div>
+        <div class="section-underline zone-portfolio"></div>
         <p class="section-intro">Skills form a pipeline, not a flat menu. Each one produces artifacts the next one consumes. Hover any node to trace its connections.</p>
 
         <!-- Legend -->
@@ -446,7 +413,7 @@
             <svg id="graph-a" class="skill-graph" viewBox="0 0 800 560" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <marker id="ah" viewBox="0 0 10 8" refX="8" refY="4" markerWidth="6" markerHeight="5" orient="auto"><path d="M1,1 L8,4 L1,7" fill="none" stroke="#ccc" stroke-width="1.2" stroke-linecap="round"/></marker>
-                    <marker id="ah-lit" viewBox="0 0 10 8" refX="8" refY="4" markerWidth="6" markerHeight="5" orient="auto"><path d="M1,1 L8,4 L1,7" fill="none" stroke="#e84040" stroke-width="1.2" stroke-linecap="round"/></marker>
+                    <marker id="ah-lit" viewBox="0 0 10 8" refX="8" refY="4" markerWidth="6" markerHeight="5" orient="auto"><path d="M1,1 L8,4 L1,7" fill="none" stroke="#b84233" stroke-width="1.2" stroke-linecap="round"/></marker>
                 </defs>
 
                 <!-- Zone separators (4 equal zones of 140px each) -->
@@ -602,7 +569,11 @@
 
     <!-- ---- STACK LAYERS ---- -->
     <div class="stack-section">
-        <h2>The Stack</h2>
+        <div class="section-header">
+            <span class="section-number zone-portfolio">06</span>
+            <h2>The Stack</h2>
+        </div>
+        <div class="section-underline zone-portfolio"></div>
         <p class="section-intro">Four layers, bottom-up. Each one solves a specific problem in the chain from scattered data to persistent, context-aware sessions.</p>
 
         <table class="stack-table">
@@ -728,5 +699,6 @@
 
         setupGraph(document.getElementById('graph-a'));
     </script>
+    <script src="/assets/js/scroll.js"></script>
 </body>
 </html>
