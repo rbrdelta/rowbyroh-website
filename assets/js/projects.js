@@ -32,19 +32,19 @@ const projects = [
             'Constraint-based optimization — maximize upside, cap annual loss at 20%',
             'Bayesian framework — quarterly updates with event-driven overrides'
         ],
-        tags: ['quantitative', 'systems'],
+        tags: ['finance', 'systems'],
         link: '/portfolio-analysis.html'
     },
     {
-        id: 'chair-roundtable',
-        title: 'chair roundtable',
-        about: 'First-principles design conversation with six legendary chair designers',
+        id: 'deadweight',
+        title: 'deadweight',
+        about: 'AI-powered freight invoice auditor — a decade of domain expertise encoded as software',
         highlights: [
-            'Thonet, Eames, Wegner, Prouve, Rietveld, Morrison',
-            'Ergonomics, materials, cost, and craft',
-            'Applied to real constraints: NYC apartment, toddler, Japanese handsaw'
+            '$977-$1,352 savings identified on 8 sample shipments',
+            '6 analyzers — fuel surcharge, accessorials, rate benchmarking, carrier intelligence',
+            'Built in 1 Claude Code session with 10 years of freight knowledge'
         ],
-        tags: ['craft'],
-        link: '/chair-roundtable.html'
+        tags: ['freight'],
+        link: '/deadweight.html'
     }
 ];

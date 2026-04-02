@@ -209,6 +209,41 @@
             font-size: 0.88rem;
         }
 
+        .post-meta {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.7rem;
+            color: #888;
+            margin-bottom: 0.3rem;
+            font-weight: 400;
+        }
+
+        .post-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.82rem;
+        }
+        .post-nav a {
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+        .post-nav a:hover { color: #e84040; }
+        .nav-prev::before { content: '\2190  '; }
+        .nav-next::after { content: '  \2192'; }
+
+        .post-footer {
+            margin-top: 2rem;
+            font-size: 0.78rem;
+            color: #888;
+        }
+        .post-footer a {
+            color: #888;
+            text-decoration: none;
+        }
+        .post-footer a:hover { color: #1a1a1a; }
+
         .copyright {
             margin-top: 4rem;
             font-size: 0.6rem;
@@ -223,8 +258,9 @@
     </style>
 </head>
 <body>
-    <a href="/" class="back-link">rowbyroh.com</a>
+    <a href="/writing.html" class="back-link">Writing</a>
 
+    <div class="post-meta">March 2026</div>
     <h1>Chair Roundtable</h1>
     <div class="page-subtitle">Session 1</div>
     <p class="premise">A fictional roundtable with six of history's greatest chair designers. The mission: make quality housing and furniture available to all.</p>
@@ -551,6 +587,14 @@
         </ul>
     </div>
 
+    <div id="post-nav" class="post-nav"></div>
+
+    <div class="post-footer">
+        <p><a href="/writing.html">More writing</a></p>
+    </div>
+
     <div class="copyright">rowbyroh.com &copy; 2026</div>
+
+    <script src="/assets/js/writing.js"></script>
 </body>
 </html>

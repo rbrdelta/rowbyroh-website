@@ -20,15 +20,25 @@
         "date": "Mar 2026",
         "url": "/blog/ai-pricing-market-maker.html",
         "description": "The pricing model you choose determines what kind of economy forms around your product.",
-        "tags": ["quantitative"],
+        "tags": ["AI"],
         "published": true
     },
     {
-        "title": "Deadweight: A Decade of Freight Expertise in One Afternoon",
+        "title": "Chair Roundtable — Session 1",
         "date": "Mar 2026",
-        "url": "/blog/deadweight.html",
-        "description": "Claude wrote the code. I wrote the knowledge. $977-$1,352 in savings on 8 sample shipments.",
-        "tags": ["freight"],
+        "url": "/chair-roundtable.html",
+        "description": "Six legendary designers argue about ergonomics, materials, cost, and craft. A fictional roundtable on first-principles chair design.",
+        "tags": ["design"],
         "published": true
+    },
+    {
+        "title": "Chair Roundtable — Session 2",
+        "tags": ["design"],
+        "published": false
+    },
+    {
+        "title": "Chair Roundtable — Session 3",
+        "tags": ["design"],
+        "published": false
     }
 ]

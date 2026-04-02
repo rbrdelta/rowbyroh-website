@@ -73,17 +73,20 @@ Not every page uses every element. A quantitative project leans on stat callouts
 
 ## Pages
 
-| Page | Status |
-|------|--------|
-| `index.html` | Live — portfolio hub |
-| `chair-roundtable.html` | Live — full transcript |
-| `obsidian-mcp.html` | Live — narrative + technical deep dive |
-| `agentic-stack.html` | Live — system architecture diagram |
-| `about.html` | Live — operating tenets, mission (placeholder) |
-| `portfolio-analysis.html` | Live — quantitative finance case study |
-| `writing.html` | Live — blog index page |
-| `blog/reverse-engineering-claude-api.html` | Live — first blog post |
-| classifier, research-agent | Pending — "coming soon" |
+| Page | Section | Status |
+|------|---------|--------|
+| `index.html` | — | Live — portfolio hub |
+| `obsidian-mcp.html` | Portfolio | Live — narrative + technical deep dive |
+| `agentic-stack.html` | Portfolio | Live — system architecture diagram |
+| `portfolio-analysis.html` | Portfolio | Live — quantitative finance case study |
+| `deadweight.html` | Portfolio | Live — freight audit tool (moved from blog) |
+| `chair-roundtable.html` | Writing | Live — Session 1 dialogue (moved from portfolio) |
+| `blog/reverse-engineering-claude-api.html` | Writing | Live — rewrite planned (deeper AI collab) |
+| `blog/vault-vs-memory.html` | Writing | Live |
+| `blog/ai-pricing-market-maker.html` | Writing | Live |
+| `blog/deadweight.html` | — | Redirect to /deadweight.html |
+| `about.html` | — | Live — operating tenets, mission |
+| `writing.html` | — | Live — blog index page |
 
 ## Project Data
 

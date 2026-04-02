@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deadweight | rowbyroh</title>
+    <meta name="description" content="AI-powered freight invoice auditor. $977-$1,352 in savings on 8 sample shipments. A decade of domain expertise encoded as software.">
+    <meta property="og:title" content="Deadweight">
+    <meta property="og:description" content="Claude wrote the code. I wrote the knowledge. $977-$1,352 in savings on 8 sample shipments.">
+    <meta property="og:url" content="https://rowbyroh.com/deadweight">
+    <meta property="og:type" content="article">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/project.css">
+    <style>
+        .label {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.4rem;
+        }
+
+        .stack-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin: 0.5rem 0 1.5rem;
+        }
+
+        .stack-list span {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.5rem;
+            background: #f5f5f5;
+            border: 1px solid #e8e8e8;
+            color: #555;
+            font-weight: 400;
+        }
+
+        .copyright {
+            margin-top: 4rem;
+            font-size: 0.6rem;
+            color: #ccc;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-link">rowbyroh.com</a>
+
+    <h1>Deadweight</h1>
+    <div class="page-subtitle">AI-powered freight invoice auditor</div>
+    <p class="page-intro">A tool that does what I do — audits freight invoices for overcharges — built in one afternoon, in one Claude Code session. It found $977-$1,352 in savings on 8 sample shipments.</p>
+
+    <div class="stat-strip">
+        <div class="stat">
+            <span class="stat-value">22</span>
+            <span class="stat-label">findings</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">$977-$1,352</span>
+            <span class="stat-label">savings identified</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">6</span>
+            <span class="stat-label">analyzers</span>
+        </div>
+        <div class="stat">
+            <span class="stat-value">1</span>
+            <span class="stat-label">session</span>
+        </div>
+    </div>
+
+    <h2>The name</h2>
+
+    <p>Deadweight tonnage (DWT) is the measure of how much weight a vessel can carry. It's the most fundamental metric in ocean freight. It's also, literally, dead weight — the thing you're paying to move but shouldn't be.</p>
+
+    <p>The tool cuts dead weight from freight spend. The name writes itself.</p>
+
+    <h2>The problem</h2>
+
+    <p>I spent ten years in global freight — ocean carrier, Fortune 500 negotiations, $100M+ in revenue, $350M in contracts. I know how carriers pad invoices. I know which accessorial charges are real and which are negotiating leverage. I know that the fuel surcharge threshold XPO Logistics uses is different from the one ODFL uses, and both are different from what's published.</p>
+
+    <p>Most shippers can't do this audit themselves because they don't know what to look for.</p>
+
+    <h2>What it does</h2>
+
+    <p>Feed it a freight invoice (CSV or PDF). It parses every line item using Claude's API (Haiku — fast and cheap). Then six analyzers run:</p>
+
+    <ul>
+        <li><strong>Fuel surcharge validation</strong> — compares against DOE diesel benchmarks and carrier-specific thresholds</li>
+        <li><strong>Accessorial charge audit</strong> — checks 30+ charge types against published maximums</li>
+        <li><strong>Rate benchmarking</strong> — compares lane rates to market data</li>
+        <li><strong>Duplicate detection</strong> — catches double-billed shipments</li>
+        <li><strong>Arithmetic verification</strong> — recalculates totals, checks unit math</li>
+        <li><strong>Carrier intelligence</strong> — fires carrier-specific rules (XPO's dim weight conversion, ODFL's cubic capacity charges, FedEx's address correction patterns)</li>
+    </ul>
+
+    <p>Output: a branded 8-page PDF report with executive summary, findings ranked by savings, and shipment-level detail.</p>
+
+    <h2>The design decisions</h2>
+
+    <p><strong>Python, not TypeScript.</strong> My default stack is TypeScript. But this is data analysis — Pandas, PDF generation, Claude SDK. Python is the right tool.</p>
+
+    <p><strong>CLI-first, no UI.</strong> The instinct is to build a web app. A dashboard. A client portal. I rejected all of it. The tool is a pipeline, not a product.</p>
+
+    <p><strong>Extensible data model.</strong> Pydantic models with <code>extra="allow"</code>. The initial version handles LTL and truckload. The data model accepts ocean, air, parcel — any freight mode — without code changes.</p>
+
+    <p><strong>No benchmarks are static.</strong> Fuel surcharges change weekly. Accessorial limits change quarterly. Lane rates shift with the market. The architecture separates benchmark data from analysis logic so the data can be updated without touching the code.</p>
+
+    <h2>Why this works</h2>
+
+    <div class="pull-quote">Claude wrote the code. I wrote the knowledge.</div>
+
+    <p>Anyone can prompt Claude to write a Python script. The tool works because of what went into the prompt: a decade of knowing which charges to check, which carriers use which tactics, which thresholds are real and which are bluffs.</p>
+
+    <p>The carrier intelligence rules in this tool aren't from research. They're from sitting across the table from XPO's pricing team. From running rate negotiations at a global ocean carrier. From managing $350M in freight contracts and knowing that the published tariff is never the real tariff.</p>
+
+    <h2>The numbers</h2>
+
+    <ul>
+        <li>22 findings on 8 sample shipments</li>
+        <li>$977-$1,352 identified savings (4.9%-6.8% of total spend)</li>
+        <li>11 carriers in the intelligence database</li>
+        <li>30+ accessorial charge caps</li>
+        <li>8 NJ-origin lane benchmarks</li>
+        <li>Built in 1 Claude Code session</li>
+    </ul>
+
+    <h2>What's next</h2>
+
+    <p>Real invoices. The sample data validates the pipeline. Now I need to run actual carrier invoices from actual shippers and see where the analysis holds up and where my benchmarks are off.</p>
+
+    <h2>Stack</h2>
+
+    <div class="label">Built with</div>
+    <div class="stack-list">
+        <span>Python</span>
+        <span>Pandas</span>
+        <span>Anthropic API (Haiku)</span>
+        <span>Pydantic</span>
+        <span>ReportLab</span>
+    </div>
+
+    <div class="label" style="margin-top: 1rem;">Source</div>
+    <div class="stack-list">
+        <span><a href="https://github.com/rbrdelta/deadweight" style="color: #555; border-bottom: none;">github.com/rbrdelta/deadweight</a></span>
+    </div>
+
+    <div class="copyright">rowbyroh.com &copy; 2026</div>
+</body>
+</html>
