@@ -1,50 +1,40 @@
-/* rowbyroh — Homepage (Unified Stream) */
+/* rowbyroh — Homepage (Unified Stream)
+   Extends base.css — only homepage-specific overrides here. */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* Homepage body: centered flex layout, raw edge border */
 body {
     font-family: 'IBM Plex Mono', monospace;
-    background: #fefefe;
-    color: #1a1a1a;
-    font-weight: 400;
-    line-height: 1.5;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     padding: 3rem 2rem 3rem;
-    position: relative;
     border: 1px solid #333;
     margin: 1rem;
+    max-width: none;
 }
 
-/* Legal pad double margin lines */
+/* Homepage margin lines — bolder than content pages */
 body::before {
-    content: '';
     position: absolute;
-    top: 0;
     left: calc(50% - 328px);
-    width: 2px;
     height: 100%;
-    background: #e84040;
     opacity: 0.55;
     box-shadow: 4px 0 0 0 rgba(232, 64, 64, 0.35);
+    z-index: auto;
 }
 
 body::after {
-    content: '';
     position: absolute;
+    top: auto;
     bottom: 4rem;
     left: calc(50% - 328px);
     width: 60%;
     height: 1px;
     background: #b8b8b8;
     opacity: 0.5;
+    z-index: auto;
 }
 
 .container {
@@ -77,13 +67,13 @@ body::after {
     font-weight: 700;
     letter-spacing: 0.06em;
     margin-bottom: 0.5rem;
-    color: #1a1a1a;
+    color: var(--text);
 }
 
 .orientation {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.82rem;
-    color: #555;
+    color: var(--muted);
     font-weight: 400;
     line-height: 1.5;
     max-width: 420px;
@@ -91,7 +81,7 @@ body::after {
 }
 
 .about-link {
-    color: #b84233;
+    color: var(--zone-portfolio);
     text-decoration: none;
     font-weight: 500;
     transition: opacity 0.2s ease;
@@ -117,7 +107,7 @@ body::after {
 .tag-filter {
     font-family: 'IBM Plex Sans', system-ui, sans-serif;
     font-size: 0.75rem;
-    color: #888;
+    color: var(--muted);
     cursor: pointer;
     letter-spacing: 0.03em;
     transition: color 0.2s ease;
@@ -132,11 +122,11 @@ body::after {
 }
 
 .tag-filter:hover {
-    color: #1a1a1a;
+    color: var(--text);
 }
 
 .tag-filter.active {
-    color: #1a1a1a;
+    color: var(--text);
     font-weight: 500;
 }
 
@@ -169,12 +159,12 @@ body::after {
     border-top: 1px solid #e8e8e8;
 }
 
-/* Zone material: portfolio items — cool, structural */
+/* Zone material: portfolio items */
 .stream-item.zone-portfolio {
     border-left-color: rgba(184, 66, 51, 0.3);
 }
 
-/* Zone material: writing items — warm background, ochre border */
+/* Zone material: writing items */
 .stream-item.zone-writing {
     border-left-color: rgba(138, 125, 60, 0.3);
     background: rgba(255, 254, 245, 0.6);
@@ -213,15 +203,15 @@ body::after {
     flex-shrink: 0;
 }
 
-.stream-type.zone-portfolio { color: #b84233; }
-.stream-type.zone-writing { color: #8a7d3c; }
-.stream-type.zone-mono { color: #555; }
+.stream-type.zone-portfolio { color: var(--zone-portfolio); }
+.stream-type.zone-writing { color: var(--zone-writing); }
+.stream-type.zone-mono { color: var(--zone-mono); }
 
 .stream-title {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.92rem;
     font-weight: 600;
-    color: #1a1a1a;
+    color: var(--text);
     line-height: 1.3;
 }
 
@@ -231,7 +221,7 @@ body::after {
     display: inline-block;
     width: 8px;
     height: 2px;
-    background: #e84040;
+    background: var(--red-line);
     margin-right: 0.4rem;
     vertical-align: middle;
     opacity: 0.7;
@@ -244,7 +234,7 @@ body::after {
 
 .stream-desc {
     font-size: 0.82rem;
-    color: #555;
+    color: var(--muted);
     line-height: 1.5;
 }
 
@@ -258,7 +248,7 @@ body::after {
 .stream-date {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.65rem;
-    color: #888;
+    color: var(--muted);
     letter-spacing: 0.02em;
     flex-shrink: 0;
 }
@@ -289,7 +279,7 @@ body::after {
 .stream-upcoming-label {
     font-family: 'IBM Plex Sans', system-ui, sans-serif;
     font-size: 0.65rem;
-    color: #888;
+    color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     display: block;
@@ -308,7 +298,7 @@ body::after {
 .stream-item--upcoming .stream-title {
     font-weight: 400;
     font-size: 0.82rem;
-    color: #888;
+    color: var(--muted);
 }
 
 .stream-item--upcoming .stream-title::before {
@@ -324,6 +314,22 @@ body::after {
 
 .stream-status {
     display: none;
+}
+
+/* ---- WRITING LINK ---- */
+.writing-link {
+    display: block;
+    text-align: center;
+    margin-top: 1.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.writing-link:hover {
+    color: var(--text);
 }
 
 /* ---- TERTIARY: CONNECT ---- */
@@ -344,18 +350,18 @@ body::after {
 .connect-links a {
     font-size: 0.78rem;
     text-decoration: none;
-    color: #555;
+    color: var(--muted);
     font-weight: 400;
     transition: color 0.2s ease;
 }
 
 .connect-links a:hover {
-    color: #1a1a1a;
+    color: var(--text);
 }
 
 .copyright {
     font-size: 0.6rem;
-    color: #888;
+    color: var(--muted);
     letter-spacing: 0.03em;
 }
 
