@@ -64,10 +64,11 @@
         container.appendChild(article);
     }
 
-    function collectEvents(items, activeTag) {
+    function collectEvents(items, activeTag, featuredId) {
         var events = [];
         items.forEach(function (item) {
             if (!item.published || !item.events) return;
+            if (item.id === featuredId) return;
             if (activeTag && (!item.tags || item.tags.indexOf(activeTag) === -1)) return;
             item.events.forEach(function (ev) {
                 events.push({
@@ -91,7 +92,9 @@
         if (!container) return;
         container.innerHTML = '';
 
-        var events = collectEvents(items, activeTag);
+        var featured = findFeatured(items, activeTag);
+        var featuredId = featured ? featured.id : null;
+        var events = collectEvents(items, activeTag, featuredId);
 
         if (events.length === 0) {
             container.style.display = 'none';
