@@ -1,4 +1,4 @@
-/* rowbyroh — Homepage (Unified Stream)
+/* rowbyroh — Homepage (Aperture + Logbook)
    Extends base.css — only homepage-specific overrides here. */
 
 /* Homepage body: centered flex layout, raw edge border */
@@ -116,191 +116,152 @@ body {
     opacity: 0.5;
 }
 
-/* ---- CONTENT STREAM ---- */
-.stream-section {
+/* ---- APERTURE ---- */
+.aperture-section {
     width: 100%;
-}
-
-.content-stream {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-}
-
-/* Stream item — material differentiation via left border + background */
-.stream-item {
-    border-bottom: 1px solid #e8e8e8;
-    transition: opacity 0.2s ease;
-    border-left: 2px solid transparent;
-    padding-left: 0.8rem;
-}
-
-.stream-item:first-child {
     border-top: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 1.5rem 0;
+    margin-bottom: 1.5rem;
 }
 
-/* Zone material: portfolio items */
-.stream-item.zone-portfolio {
-    border-left-color: rgba(184, 66, 51, 0.3);
+.aperture {
+    border-left: 3px solid transparent;
+    padding-left: 1rem;
 }
 
-/* Zone material: writing items */
-.stream-item.zone-writing {
-    border-left-color: rgba(138, 125, 60, 0.3);
-    background: rgba(255, 254, 245, 0.6);
+.aperture.zone-portfolio {
+    border-left-color: var(--zone-portfolio);
 }
 
-.stream-item.filtered-out {
-    opacity: 0.1;
-    pointer-events: none;
+.aperture.zone-writing {
+    border-left-color: var(--zone-writing);
+    background: rgba(255, 254, 245, 0.4);
+    padding: 1rem;
+    margin-left: -1rem;
+    padding-left: 1rem;
 }
 
-.stream-item-link {
-    display: block;
-    text-decoration: none;
-    padding: 0.9rem 0;
-    transition: opacity 0.15s ease;
+.aperture-header {
+    margin-bottom: 0.5rem;
 }
 
-.stream-item-link:hover {
-    opacity: 0.65;
-}
-
-/* Item header: type label + title */
-.stream-item-header {
-    display: flex;
-    align-items: baseline;
-    gap: 0.6rem;
-    margin-bottom: 0.25rem;
-}
-
-.stream-type {
+.aperture-type {
     font-family: 'IBM Plex Sans', system-ui, sans-serif;
     font-size: 0.62rem;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    flex-shrink: 0;
 }
 
-.stream-type.zone-portfolio { color: var(--zone-portfolio); }
-.stream-type.zone-writing { color: var(--zone-writing); }
-.stream-type.zone-mono { color: var(--zone-mono); }
+.aperture-type.zone-portfolio { color: var(--zone-portfolio); }
+.aperture-type.zone-writing { color: var(--zone-writing); }
 
-.stream-title {
+.aperture-title {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.92rem;
-    font-weight: 600;
+    font-size: 1.1rem;
+    font-weight: 700;
     color: var(--text);
     line-height: 1.3;
+    margin-bottom: 0.4rem;
 }
 
-/* Red dash before title */
-.stream-title::before {
-    content: '';
-    display: inline-block;
-    width: 8px;
-    height: 2px;
-    background: var(--red-line);
-    margin-right: 0.4rem;
-    vertical-align: middle;
-    opacity: 0.7;
-}
-
-/* Description */
-.stream-item-body {
-    margin-bottom: 0.3rem;
-}
-
-.stream-desc {
+.aperture-theme {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
     font-size: 0.82rem;
+    font-weight: 400;
     color: var(--muted);
     line-height: 1.5;
+    margin-bottom: 0.75rem;
 }
 
-/* Meta: date + tags */
-.stream-item-meta {
+.aperture-link {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.aperture.zone-portfolio .aperture-link { color: var(--zone-portfolio); }
+.aperture.zone-writing .aperture-link { color: var(--zone-writing); }
+
+.aperture-link:hover {
+    opacity: 0.65;
+}
+
+/* ---- LOGBOOK ---- */
+.logbook-section {
+    width: 100%;
+    margin-bottom: 0.75rem;
+}
+
+.logbook-label {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.logbook-entries {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.logbook-entry {
     display: flex;
     align-items: baseline;
-    gap: 0.8rem;
+    gap: 0.6rem;
+    text-decoration: none;
+    padding: 0.25rem 0;
+    transition: opacity 0.15s ease;
 }
 
-.stream-date {
+.logbook-entry:hover {
+    opacity: 0.65;
+}
+
+.logbook-date {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--muted);
+    font-size: 0.7rem;
+    font-weight: 400;
     letter-spacing: 0.02em;
+    flex-shrink: 0;
+    width: 2.8rem;
+}
+
+.logbook-date.zone-portfolio { color: var(--zone-portfolio); }
+.logbook-date.zone-writing { color: var(--zone-writing); }
+
+.logbook-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text);
     flex-shrink: 0;
 }
 
-.stream-tags {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.stream-tag {
+.logbook-action {
     font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    font-size: 0.6rem;
-    color: #aaa;
-    letter-spacing: 0.03em;
-}
-
-.stream-tag::before {
-    content: '#';
-}
-
-/* Upcoming items */
-.stream-upcoming {
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
-    border-top: 1px solid #f0f0f0;
-}
-
-.stream-upcoming-label {
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    font-size: 0.65rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    display: block;
-    margin-bottom: 0.3rem;
-}
-
-.stream-item--upcoming {
-    border-bottom: none;
-    padding: 0.25rem 0;
-}
-
-.stream-item--upcoming .stream-item-header {
-    margin-bottom: 0;
-}
-
-.stream-item--upcoming .stream-title {
+    font-size: 0.72rem;
     font-weight: 400;
-    font-size: 0.82rem;
     color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.stream-item--upcoming .stream-title::before {
-    width: 6px;
-    height: 1px;
-    background: #ccc;
-    opacity: 1;
-}
-
-.stream-item--upcoming .stream-type {
-    opacity: 0.5;
-}
-
-.stream-status {
-    display: none;
-}
-
-/* ---- WRITING LINK ---- */
-.writing-link {
+/* ---- ALL WORK LINK ---- */
+.all-work-link {
     display: block;
     text-align: center;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 0;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.78rem;
     color: var(--muted);
@@ -308,8 +269,36 @@ body {
     transition: color 0.2s ease;
 }
 
-.writing-link:hover {
+.all-work-link:hover {
     color: var(--text);
+}
+
+/* ---- CLOSING GESTURE ---- */
+.closing-gesture {
+    margin-top: 2.5rem;
+    text-align: center;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.closing-gesture p {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.closing-link {
+    color: var(--zone-portfolio);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+}
+
+.closing-link:hover {
+    opacity: 0.7;
 }
 
 /* ---- TERTIARY: CONNECT ---- */
@@ -363,12 +352,20 @@ body {
         max-width: 100%;
     }
 
-    .stream-title {
-        font-size: 0.85rem;
+    .aperture-title {
+        font-size: 0.95rem;
     }
 
-    .stream-desc {
+    .aperture-theme {
         font-size: 0.78rem;
+    }
+
+    .logbook-action {
+        display: none;
+    }
+
+    .closing-gesture p {
+        font-size: 0.8rem;
     }
 
     .connect-links {
@@ -382,9 +379,12 @@ body {
         font-size: 1.2rem;
     }
 
-    .stream-item-header {
-        flex-direction: column;
-        gap: 0.15rem;
+    .logbook-entry {
+        gap: 0.4rem;
+    }
+
+    .logbook-title {
+        font-size: 0.78rem;
     }
 
     .connect-links {

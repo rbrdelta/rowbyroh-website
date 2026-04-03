@@ -9,8 +9,14 @@
         "url": "/obsidian-mcp.html",
         "published": true,
         "status": "live",
-        "pinned": true,
-        "pin_expires": "2026-07-01",
+        "featured_for": ["default", "systems", "infrastructure"],
+        "events": [
+            {"date": "2026-03-24", "action": "updated — taxonomy + 2,599 links"},
+            {"date": "2026-03-20", "action": "updated — Apple Notes sync, 217 notes"},
+            {"date": "2026-03-17", "action": "updated — Notion sync, 181 pages"},
+            {"date": "2026-03-16", "action": "updated — Claude.ai sync, 274 conversations"},
+            {"date": "2026-03-13", "action": "published"}
+        ],
         "highlights": [
             "4 import pipelines — Claude.ai, Notion, Apple Notes",
             "14-dimension taxonomy — 10 domains, 4 modes",
@@ -23,12 +29,15 @@
         "type": "project",
         "description": "What happens when you treat AI sessions as infrastructure instead of disposable prompts.",
         "date": "Mar 2026",
-        "tags": ["systems", "infrastructure"],
+        "tags": ["systems", "infrastructure", "AI"],
         "url": "/agentic-stack.html",
         "published": true,
         "status": "live",
-        "pinned": true,
-        "pin_expires": "2026-07-01",
+        "featured_for": ["AI"],
+        "events": [
+            {"date": "2026-04-02", "action": "updated — skills migration, 13 personas"},
+            {"date": "2026-03-23", "action": "published"}
+        ],
         "highlights": [
             "4 layers — shared state, data pipelines, surfaces, session roles",
             "6 personas that prime sessions with role + context",
@@ -45,6 +54,10 @@
         "url": "/portfolio-analysis.html",
         "published": true,
         "status": "live",
+        "featured_for": ["finance"],
+        "events": [
+            {"date": "2026-03-24", "action": "published"}
+        ],
         "highlights": [
             "Concentration risk quantified — HHI 8,221 on a 19-position portfolio",
             "Constraint-based optimization — maximize upside, cap annual loss at 20%",
@@ -61,6 +74,11 @@
         "url": "/deadweight.html",
         "published": true,
         "status": "live",
+        "featured_for": ["freight"],
+        "events": [
+            {"date": "2026-03-31", "action": "reclassified — blog post to portfolio"},
+            {"date": "2026-03-24", "action": "published"}
+        ],
         "highlights": [
             "$977-$1,352 savings identified on 8 sample shipments",
             "6 analyzers — fuel surcharge, accessorials, rate benchmarking, carrier intelligence",
@@ -76,7 +94,10 @@
         "tags": ["infrastructure"],
         "url": "/blog/reverse-engineering-claude-api.html",
         "published": true,
-        "status": "live"
+        "status": "live",
+        "events": [
+            {"date": "2026-03-24", "action": "published"}
+        ]
     },
     {
         "id": "vault-vs-memory",
@@ -87,7 +108,10 @@
         "tags": ["infrastructure", "systems"],
         "url": "/blog/vault-vs-memory.html",
         "published": true,
-        "status": "live"
+        "status": "live",
+        "events": [
+            {"date": "2026-03-26", "action": "published"}
+        ]
     },
     {
         "id": "ai-pricing-market-maker",
@@ -98,7 +122,10 @@
         "tags": ["AI"],
         "url": "/blog/ai-pricing-market-maker.html",
         "published": true,
-        "status": "live"
+        "status": "live",
+        "events": [
+            {"date": "2026-03-28", "action": "published"}
+        ]
     },
     {
         "id": "chair-roundtable-1",
@@ -109,7 +136,11 @@
         "tags": ["design"],
         "url": "/chair-roundtable.html",
         "published": true,
-        "status": "live"
+        "status": "live",
+        "featured_for": ["design"],
+        "events": [
+            {"date": "2026-03-28", "action": "published"}
+        ]
     },
     {
         "id": "chair-roundtable-2",
