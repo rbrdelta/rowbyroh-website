@@ -15,27 +15,7 @@ body {
     max-width: none;
 }
 
-/* Homepage margin lines — bolder than content pages */
-body::before {
-    position: absolute;
-    left: calc(50% - 328px);
-    height: 100%;
-    opacity: 0.55;
-    box-shadow: 4px 0 0 0 rgba(232, 64, 64, 0.35);
-    z-index: auto;
-}
-
-body::after {
-    position: absolute;
-    top: auto;
-    bottom: 4rem;
-    left: calc(50% - 328px);
-    width: 60%;
-    height: 1px;
-    background: #b8b8b8;
-    opacity: 0.5;
-    z-index: auto;
-}
+/* Margin lines + scroll indicator: inherited from base.css */
 
 .container {
     max-width: 560px;
@@ -369,10 +349,6 @@ body::after {
 @media (max-width: 600px) {
     body {
         padding: 2rem 1.2rem 2rem;
-    }
-
-    body::before {
-        left: 0.5rem;
     }
 
     .title {
