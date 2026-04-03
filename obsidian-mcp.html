@@ -192,12 +192,84 @@
 
     <p>The key design decision: idempotency as a shared invariant. Every pipeline can be re-run safely. <code>source_id</code> prevents duplicates. Incremental modes mean a typical sync makes 1 API call. And every pipeline has a <code>--dry-run</code> flag, because the first time you run something that writes 274 files is not the time to discover a bug.</p>
 
-    <div class="flow-diagram">Claude.ai ──→ API sync ──→ markdown + frontmatter ──→ vault
-Notion     ──→ API sync ──→ markdown + frontmatter ──→ vault
-Notion     ──→ export   ──→ markdown + frontmatter ──→ vault
-Apple Notes──→ Shortcut ──→ iCloud ──→ importer    ──→ vault
+    <div class="flow-diagram">
+        <span class="diagram-label">fig. 01 — import pipeline</span>
+        <svg viewBox="0 0 680 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <marker id="arrow" viewBox="0 0 6 6" refX="6" refY="3" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M0,0 L6,3 L0,6 Z" fill="#1a1a1a" stroke="#1a1a1a"/>
+                </marker>
+            </defs>
 
-shared: source_id dedup │ --dry-run │ dev → prod</div>
+            <!-- Source boxes -->
+            <rect x="8" y="18" width="108" height="28" rx="2" fill="#fefefe" stroke="#d4d2cd" stroke-width="1"/>
+            <text x="62" y="37" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="500" fill="#1a1a1a">Claude.ai</text>
+
+            <rect x="8" y="56" width="108" height="28" rx="2" fill="#fefefe" stroke="#d4d2cd" stroke-width="1"/>
+            <text x="62" y="75" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="500" fill="#1a1a1a">Notion API</text>
+
+            <rect x="8" y="94" width="108" height="28" rx="2" fill="#fefefe" stroke="#d4d2cd" stroke-width="1"/>
+            <text x="62" y="113" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="500" fill="#1a1a1a">Notion export</text>
+
+            <rect x="8" y="132" width="108" height="28" rx="2" fill="#fefefe" stroke="#d4d2cd" stroke-width="1"/>
+            <text x="62" y="151" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="500" fill="#1a1a1a">Apple Notes</text>
+
+            <!-- Convergence lines from sources -->
+            <line x1="116" y1="32" x2="150" y2="32" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="116" y1="70" x2="150" y2="70" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="116" y1="108" x2="150" y2="108" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="116" y1="146" x2="150" y2="146" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4 3"/>
+
+            <!-- Vertical convergence -->
+            <line x1="150" y1="32" x2="150" y2="146" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4 3"/>
+
+            <!-- Convergence to step 01 -->
+            <line x1="150" y1="89" x2="206" y2="89" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+
+            <!-- Step 01: parse -->
+            <circle cx="222" cy="89" r="12" fill="#b84233"/>
+            <text x="222" y="93" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="700" fill="#faf9f6">01</text>
+            <text x="222" y="118" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="500" fill="#1a1a1a">parse</text>
+
+            <!-- Step 01 to 02 -->
+            <line x1="234" y1="89" x2="326" y2="89" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+
+            <!-- Step 02: frontmatter -->
+            <circle cx="342" cy="89" r="12" fill="#b84233"/>
+            <text x="342" y="93" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="700" fill="#faf9f6">02</text>
+            <text x="342" y="118" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="500" fill="#1a1a1a">frontmatter</text>
+
+            <!-- Step 02 to 03 -->
+            <line x1="354" y1="89" x2="446" y2="89" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+
+            <!-- Step 03: deduplicate -->
+            <circle cx="462" cy="89" r="12" fill="#b84233"/>
+            <text x="462" y="93" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="700" fill="#faf9f6">03</text>
+            <text x="462" y="118" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="500" fill="#1a1a1a">deduplicate</text>
+
+            <!-- Step 03 to vault -->
+            <line x1="474" y1="89" x2="548" y2="89" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+
+            <!-- Vault (active box) -->
+            <rect x="550" y="75" width="100" height="28" rx="2" fill="#fefefe" stroke="#b84233" stroke-width="1.5"/>
+            <text x="600" y="94" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="500" fill="#1a1a1a">Vault</text>
+
+            <!-- Callout labels with leader lines -->
+            <!-- idempotent — spans processing chain -->
+            <line x1="222" y1="135" x2="462" y2="135" stroke="#d4d2cd" stroke-width="1"/>
+            <line x1="222" y1="133" x2="222" y2="137" stroke="#d4d2cd" stroke-width="1"/>
+            <line x1="462" y1="133" x2="462" y2="137" stroke="#d4d2cd" stroke-width="1"/>
+            <text x="342" y="152" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" font-weight="400" fill="#888">idempotent</text>
+
+            <!-- source_id dedup — callout near step 03 -->
+            <line x1="462" y1="138" x2="462" y2="168" stroke="#d4d2cd" stroke-width="1"/>
+            <text x="462" y="180" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" font-weight="400" fill="#888">source_id dedup</text>
+
+            <!-- dry-run first — callout near vault -->
+            <line x1="600" y1="103" x2="600" y2="120" stroke="#d4d2cd" stroke-width="1"/>
+            <text x="600" y="132" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" font-weight="400" fill="#888">dry-run first</text>
+        </svg>
+    </div>
 
     <div class="section-header"><span class="section-number zone-portfolio">05</span><h2>Two-Axis Taxonomy</h2></div>
     <div class="section-underline zone-portfolio"></div>
