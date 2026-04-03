@@ -17,12 +17,13 @@ Converged from 28-version exploration (archived as `v2-exploration` tag). Full s
 ## Architecture
 
 ### Homepage (Navigation Surface)
-- **Layout:** Unified content stream — portfolio and writing items in a single chronological feed
-- **Data:** `assets/data/content.json` — structured content entries with type, tags, descriptions, highlights
-- **Rendering:** `assets/js/stream.js` generates stream items from content.json
-- **Filtering:** Tag buttons filter across all content types (unified, not section-specific)
+- **Layout:** Aperture (one featured item) + Logbook (7 recent activity events) + closing gesture
+- **Data:** `assets/data/content.json` — content entries with `featured_for` (tag-based featuring) and `events` (activity log)
+- **Rendering:** `assets/js/stream.js` renders aperture + logbook from content.json
+- **Filtering:** Tag buttons reshape both sections — swap aperture to best match, filter logbook, update "all work" link
 - **Styles:** `assets/css/style.css` (homepage-specific) + `assets/css/base.css` (shared design system)
 - **Zone differentiation:** Left border color (oxide red for projects, ochre for writing) + background tint for writing items
+- **Archive page:** `archive.html` shows all published items, supports `?tag=` URL param filtering
 
 ### Content Pages (Consumption Surfaces)
 - **Styles:** `assets/css/base.css` (shared) + page-specific CSS (`project.css`, `writing.css`)
@@ -33,7 +34,7 @@ Converged from 28-version exploration (archived as `v2-exploration` tag). Full s
 ### Data Files
 | File | Purpose | Used by |
 |------|---------|---------|
-| `assets/data/content.json` | All content entries (projects, essays, roundtables, analyses) | `stream.js` (homepage), `writing.js` (writing index, blog post nav) |
+| `assets/data/content.json` | All content entries with `featured_for`, `events`, tags, descriptions | `stream.js` (homepage), `archive.js` (archive page), `writing.js` (writing index, blog post nav) |
 
 ## Site Design Rubric
 
@@ -82,7 +83,8 @@ Shared vocabulary, composed per page:
 
 | Page | Type | Status |
 |------|------|--------|
-| `index.html` | Homepage / Navigation | Live — unified content stream |
+| `index.html` | Homepage / Navigation | Live — aperture + logbook |
+| `archive.html` | Archive / All Work | Live |
 | `obsidian-mcp.html` | Portfolio | Live |
 | `agentic-stack.html` | Portfolio | Live |
 | `portfolio-analysis.html` | Portfolio | Live |
@@ -96,11 +98,28 @@ Shared vocabulary, composed per page:
 
 ## Known Gaps
 
-- **Writing page navigation:** No route from homepage to writing.html. Unified stream removed the "all posts" link. Needs broader content routing discussion.
-- **base.css / style.css overlap:** Homepage style.css overrides some base.css body styles (background, margin lines). May cause visual inconsistency between homepage and content pages. Needs review.
+- **Writing page navigation:** Blog posts link back to `/writing.html`. Homepage routes to `/archive.html` for "all work". writing.html remains as blog-specific browse page.
+- **Phase D pending:** SVG diagram sprints (D1-D4). Sprint script at `~/.claude/hooks/sprint-d1.sh`. Full spec in vault note `rowbyroh — Homepage Redesign Plan (Aperture + Logbook)`.
+
+## Versioning
+
+Simple integer versions (v1, v2, v3...). Each version is a git tag on main.
+
+**What triggers a new version:** Structural changes — navigation model, page architecture, data model, design system overhaul. If the site *works differently*, it's a new version.
+
+**What does NOT trigger a new version:** Content additions, copy edits, CSS tweaks, mobile fixes, new blog posts. These are just commits on main.
+
+**Before shipping a structural change to main:** Tag the current prod state as `vN` and push the tag. Then merge/commit the new work, which becomes the next version candidate.
+
+| Tag | What | Date |
+|-----|------|------|
+| `v1.0` / `v1` branch | Original site — gallery frame + legal pad | 2026-03-28 |
+| `v2-exploration` | Design exploration artifact (not a release) | 2026-04-02 |
+| `v2` | C2-Refined design system + unified content stream | 2026-04-02 |
 
 ## Rules
 
+- **Archive before overwrite:** Before any structural change ships to main, tag current prod as `vN` and push the tag
 - Take screenshots via PowerShell to verify visual changes (see reference_screenshot_workflow in memory)
 - Every element must pass the Earned Placement Rubric (scannability, hierarchy, rhythm, identity)
 - IBM Plex Mono 500+ for anything that needs to read clearly — never Courier New
