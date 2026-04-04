@@ -206,6 +206,32 @@ h1 {
   background: var(--bg);
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.78rem;
+  overflow: hidden;
+}
+.flow-diagram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.flow-diagram.flow-diagram--blueprint {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: -1rem auto -2rem;
+  width: 140%;
+  max-width: none;
+  overflow: visible;
+  position: relative;
+  left: -20%;
+}
+.flow-diagram.flow-diagram--blueprint .diagram-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  display: block;
+  margin: 0;
 }
 .flow-diagram .diagram-label {
   display: block;
