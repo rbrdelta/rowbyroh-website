@@ -359,4 +359,9 @@ li {
   .stat-strip { gap: 1rem; }
   .flow-diagram { padding: 1rem; }
   .section-header { margin-top: 2.5rem; }
+  .flow-diagram.flow-diagram--blueprint {
+    width: 100%;
+    left: 0;
+    margin: 0 auto;
+  }
 }
