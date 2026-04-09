@@ -1,5 +1,8 @@
 {
+  "cleanUrls": true,
   "redirects": [
+    { "source": "/blog/deadweight", "destination": "/deadweight.html", "statusCode": 301 },
+    { "source": "/blog/deadweight.html", "destination": "/deadweight.html", "statusCode": 301 },
     { "source": "/drafts/:path*", "destination": "/404", "statusCode": 404 }
   ]
 }
