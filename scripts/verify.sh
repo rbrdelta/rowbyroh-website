@@ -41,7 +41,6 @@ PAGES=(
     "/deadweight"
     "/portfolio-analysis"
     "/chair-roundtable"
-    "/writing"
     "/archive"
     "/blog/reverse-engineering-claude-api"
     "/blog/vault-vs-memory"
@@ -98,9 +97,27 @@ else
     fail "Vercel production ($deploy_sha) does not match origin/main ($local_head)"
 fi
 
-# --- 4. Internal links (href values in content.json resolve) ---
+# --- 4. Redirects ---
 echo ""
-echo "4. content.json URLs"
+echo "4. Redirects"
+
+check_redirect() {
+    local from="$1" expected="$2"
+    local actual
+    actual=$(curl -s -o /dev/null -w "%{redirect_url}" "${SITE}${from}")
+    if [[ "$actual" == *"$expected"* ]]; then
+        pass "$from -> $expected"
+    else
+        fail "$from should redirect to $expected, got $actual"
+    fi
+}
+
+check_redirect "/writing" "/archive"
+check_redirect "/blog/deadweight" "/deadweight"
+
+# --- 5. Internal links (content.json) ---
+echo ""
+echo "5. content.json URLs"
 
 urls=$(grep -oP '"url":\s*"[^"]*"' "$REPO_ROOT/assets/data/content.json" | grep -oP '"/[^"]*"' | tr -d '"')
 for url in $urls; do
@@ -112,9 +129,9 @@ for url in $urls; do
     fi
 done
 
-# --- 5. External links ---
+# --- 6. External links ---
 echo ""
-echo "5. External links"
+echo "6. External links"
 
 ext_links=$(grep -rohP 'href="(https://[^"]+)"' "$REPO_ROOT"/*.html "$REPO_ROOT"/blog/*.html 2>/dev/null | \
     grep -oP 'https://[^"]+' | grep -v 'fonts.google\|fonts.gstatic' | sort -u)
@@ -133,9 +150,9 @@ for link in $ext_links; do
     fi
 done
 
-# --- 6. Uncommitted changes ---
+# --- 7. Uncommitted changes ---
 echo ""
-echo "6. Working tree"
+echo "7. Working tree"
 
 uncommitted=$(cd "$REPO_ROOT" && git status --porcelain)
 if [[ -z "$uncommitted" ]]; then

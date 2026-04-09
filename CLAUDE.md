@@ -29,12 +29,13 @@ Converged from 28-version exploration (archived as `v2-exploration` tag). Full s
 - **Styles:** `assets/css/base.css` (shared) + page-specific CSS (`project.css`, `writing.css`)
 - **Portfolio pages:** Standalone HTML files at root (`obsidian-mcp.html`, `deadweight.html`, etc.)
 - **Blog posts:** In `blog/` directory
-- **Writing pages:** Root level (`chair-roundtable.html`, `writing.html`)
+- **Writing pages:** Root level (`chair-roundtable.html`)
+- **All breadcrumbs** point to `/` (homepage). No sub-section index pages — `/archive` is the only listing page.
 
 ### Data Files
 | File | Purpose | Used by |
 |------|---------|---------|
-| `assets/data/content.json` | All content entries with `featured_for`, `events`, tags, descriptions | `stream.js` (homepage), `archive.js` (archive page), `writing.js` (writing index, blog post nav) |
+| `assets/data/content.json` | All content entries with `featured_for`, `events`, tags, descriptions | `stream.js` (homepage), `archive.js` (archive page), `writing.js` (blog post prev/next nav) |
 
 ## Site Design Rubric
 
@@ -94,11 +95,21 @@ Shared vocabulary, composed per page:
 | `blog/vault-vs-memory.html` | Essay | Live |
 | `blog/ai-pricing-market-maker.html` | Essay | Live |
 | `about.html` | About | Live |
-| `writing.html` | Writing index | Live |
+
+## Navigation Model
+
+- **One listing page:** `/archive` — all published content, filterable by tag
+- **`/writing` redirects to `/archive`** (301 in vercel.json)
+- **All breadcrumbs** point to `/` (homepage) — no sub-section indexes
+- **Blog post footers** link to `/archive` ("All work")
+- **Homepage "all work"** links to `/archive`
+
+## QA Verification
+
+Run `./scripts/verify.sh` after every push. Checks: all pages 200, title fingerprints match source, deploy commit matches main, content.json URLs, external links, clean working tree.
 
 ## Known Gaps
 
-- **Writing page navigation:** Blog posts link back to `/writing.html`. Homepage routes to `/archive.html` for "all work". writing.html remains as blog-specific browse page.
 - **Phase D pending:** SVG diagram sprints (D1-D4). Sprint script at `~/.claude/hooks/sprint-d1.sh`. Full spec in vault note `rowbyroh — Homepage Redesign Plan (Aperture + Logbook)`.
 
 ## Versioning
