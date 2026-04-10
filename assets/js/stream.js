@@ -70,7 +70,9 @@
             if (!item.published || !item.events) return;
             if (item.id === featuredId) return;
             if (activeTag && (!item.tags || item.tags.indexOf(activeTag) === -1)) return;
-            item.events.forEach(function (ev) {
+            // Only take the most recent event per item to avoid duplicates
+            var ev = item.events[0];
+            if (ev) {
                 events.push({
                     date: ev.date,
                     action: ev.action,
@@ -79,7 +81,7 @@
                     type: item.type,
                     tags: item.tags || []
                 });
-            });
+            }
         });
         events.sort(function (a, b) {
             return b.date.localeCompare(a.date);
@@ -135,10 +137,10 @@
         if (!link) return;
         if (activeTag) {
             link.textContent = 'all ' + activeTag + ' work \u2192';
-            link.href = '/archive.html?tag=' + encodeURIComponent(activeTag);
+            link.href = '/archive?tag=' + encodeURIComponent(activeTag);
         } else {
             link.innerHTML = 'all work &rarr;';
-            link.href = '/archive.html';
+            link.href = '/archive';
         }
     }
 

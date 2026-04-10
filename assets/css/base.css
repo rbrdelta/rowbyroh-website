@@ -87,7 +87,25 @@ body::after {
   pointer-events: none;
 }
 
-/* Breadcrumb / back link */
+/* Breadcrumb navigation */
+.breadcrumb {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+.breadcrumb a {
+  color: var(--muted);
+  text-decoration: none;
+}
+.breadcrumb a:hover {
+  color: var(--text);
+}
+.breadcrumb .sep {
+  margin: 0 0.4rem;
+  color: var(--light);
+}
+/* Legacy back-link (archive, about — single level) */
 .back-link {
   display: inline-block;
   font-family: 'IBM Plex Mono', monospace;
