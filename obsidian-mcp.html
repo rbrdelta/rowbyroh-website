@@ -4,92 +4,431 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Obsidian MCP Server | rowbyroh</title>
-    <meta name="description" content="An MCP server bridging Claude AI with an Obsidian knowledge vault. 672 notes, 14 taxonomy dimensions, 2,599 auto-generated wikilinks.">
+    <meta name="description" content="What happens when your AI has access to 672 notes, 7 years of thinking, and 3 platforms of context. An interactive demonstration.">
     <meta property="og:title" content="Obsidian MCP Server">
-    <meta property="og:description" content="672 notes across 4 sources, classified into a 14-dimension taxonomy with 2,599 auto-generated wikilinks. Claude's long-term memory.">
+    <meta property="og:description" content="Every AI session starts from zero. This is what changes when it doesn't.">
     <meta property="og:url" content="https://rowbyroh.com/obsidian-mcp">
     <meta property="og:type" content="article">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/project.css">
     <style>
-        .tool-list {
-            margin: 1rem 0;
-        }
-
-        .tool-item {
-            padding: 0.6rem 0;
+        /* ---- INTRO ---- */
+        .intro {
+            margin-bottom: 3rem;
+            padding-bottom: 2.5rem;
             border-bottom: 1px solid var(--light);
+        }
+        .intro p {
             font-size: 0.88rem;
+            line-height: 1.85;
+            margin-bottom: 1.2rem;
         }
 
-        .tool-item:last-child {
-            border-bottom: none;
+        /* ---- DEMO SECTION ---- */
+        .demo-section {
+            margin-top: 2rem;
         }
 
-        .tool-name {
-            font-weight: 600;
-            font-size: 0.85rem;
+        /* Prompt selector */
+        .prompt-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 2.5rem;
         }
-
-        .tool-desc {
-            color: var(--muted);
+        .prompt-btn {
+            background: var(--bg);
+            border: 1px solid var(--light);
+            padding: 0.75rem 1rem;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 0.82rem;
             font-weight: 400;
+            color: var(--muted);
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.15s ease;
+            position: relative;
+            padding-left: 1.75rem;
         }
-
-        .label {
+        .prompt-btn::before {
+            content: '';
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--light);
+            transition: background 0.15s ease;
+        }
+        .prompt-btn:hover {
+            border-color: var(--zone-mono);
+            color: var(--text);
+        }
+        .prompt-btn:hover::before {
+            background: var(--zone-mono);
+        }
+        .prompt-btn.active {
+            border-color: var(--zone-portfolio);
+            color: var(--text);
+            background: var(--bg-light);
+        }
+        .prompt-btn.active::before {
+            background: var(--zone-portfolio);
+        }
+        .prompt-capability {
+            display: block;
             font-family: 'IBM Plex Sans', sans-serif;
             font-size: 0.7rem;
-            font-weight: 500;
             color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            margin-bottom: 0.4rem;
-        }
-
-        .highlight-box ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .highlight-box li {
-            font-size: 0.85rem;
-            padding: 0.25rem 0;
-            padding-left: 1.2rem;
-            position: relative;
-        }
-
-        .highlight-box li::before {
-            content: '\2014';
-            position: absolute;
-            left: 0;
-            color: var(--muted);
-        }
-
-        .stack-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-            margin: 0.5rem 0 1.5rem;
-        }
-
-        .stack-list span {
-            font-size: 0.7rem;
-            padding: 0.15rem 0.5rem;
-            background: var(--bg-light);
-            border: 1px solid var(--light);
-            color: var(--muted);
+            margin-top: 0.25rem;
             font-weight: 400;
         }
 
-        .copyright {
-            margin-top: 4rem;
-            font-size: 0.6rem;
+        /* Demo panel */
+        .demo-panel {
+            display: none;
+        }
+        .demo-panel.active {
+            display: block;
+        }
+
+        /* Phase labels */
+        .phase-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .phase-label .phase-line {
+            flex: 1;
+            height: 1px;
+            background: var(--light);
+        }
+
+        /* Without vault */
+        .without-vault {
+            margin-bottom: 2.5rem;
+        }
+        .without-vault .phase-label {
             color: var(--muted);
-            text-align: right;
+        }
+        .without-response {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.7;
+            padding: 1rem 1.25rem;
+            background: var(--bg-light);
+            border: 1px solid var(--light);
+            font-style: italic;
+        }
+
+        /* MCP results area */
+        .mcp-results {
+            margin-bottom: 2.5rem;
+        }
+        .mcp-results .phase-label {
+            color: var(--zone-portfolio);
+        }
+
+        /* With vault */
+        .with-vault {
+            margin-bottom: 2rem;
+        }
+        .with-vault .phase-label {
+            color: var(--text);
+        }
+        .with-response {
+            font-size: 0.85rem;
+            line-height: 1.8;
+            padding: 1rem 1.25rem;
+            border-left: 3px solid var(--zone-portfolio);
+            background: var(--bg-light);
+        }
+        .with-response p {
+            margin-bottom: 0.8rem;
+        }
+
+        /* ============================================
+           VISUAL MODE 1: TAXONOMY (timeline scatter)
+           ============================================ */
+        .taxonomy-view {
+            position: relative;
+            padding: 1.25rem 0;
+        }
+
+        /* Timeline axis */
+        .taxonomy-timeline {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .taxonomy-year-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 0.5rem 0;
+        }
+        .taxonomy-year {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--muted);
+            min-width: 3rem;
+            padding-top: 0.5rem;
+            position: relative;
+        }
+        .taxonomy-year::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--light);
+        }
+        .taxonomy-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            flex: 1;
+            padding-left: 0.5rem;
+        }
+        .taxonomy-card {
+            padding: 0.6rem 0.75rem;
+            border: 1px solid var(--light);
+            background: var(--bg-light);
+            transition: border-color 0.15s;
+        }
+        .taxonomy-card:hover {
+            border-color: var(--zone-mono);
+        }
+        .taxonomy-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.3rem;
+            flex-wrap: wrap;
+        }
+        .taxonomy-card-title {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+        .source-badge {
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 500;
+            padding: 0.1rem 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .source-badge.apple-notes {
+            background: #f0ebe3;
+            color: #8a7d3c;
+        }
+        .source-badge.claude-conversation {
+            background: #eee8e6;
+            color: #b84233;
+        }
+        .source-badge.knowledge-project {
+            background: #e8eae8;
+            color: #555;
+        }
+        .source-badge.debrief {
+            background: #e8eae8;
+            color: #555;
+        }
+        .source-badge.meta {
+            background: #e8eae8;
+            color: #555;
+        }
+        .source-badge.notion {
+            background: #e8ecea;
+            color: #37695e;
+        }
+        .source-badge.vault-inbox {
+            background: #eee8e6;
+            color: #8a5a3c;
+        }
+        .taxonomy-card-excerpt {
+            font-size: 0.78rem;
+            color: var(--muted);
+            line-height: 1.55;
+            margin-bottom: 0.35rem;
+        }
+        .taxonomy-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+        }
+        .taxonomy-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.58rem;
+            padding: 0.1rem 0.35rem;
+            background: var(--bg);
+            border: 1px solid var(--light);
+            color: var(--muted);
+        }
+
+        /* ============================================
+           VISUAL MODE 2: GRAPH TRAVERSAL (path view)
+           ============================================ */
+        .traversal-view {
+            padding: 1.25rem 0;
+        }
+        .traversal-path {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .traversal-node {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--light);
+            background: var(--bg-light);
+            position: relative;
+        }
+        .traversal-node:first-child {
+            border-color: var(--zone-portfolio);
+            border-width: 2px;
+        }
+        .traversal-node-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.3rem;
+            flex-wrap: wrap;
+        }
+        .traversal-node-title {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .traversal-node-date {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--muted);
+        }
+        .traversal-node-excerpt {
+            font-size: 0.78rem;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+        .traversal-edge {
+            display: flex;
+            align-items: center;
+            padding: 0.4rem 0 0.4rem 1.5rem;
+            gap: 0.5rem;
+        }
+        .traversal-edge-line {
+            width: 1px;
+            height: 1.5rem;
+            background: var(--zone-portfolio);
+            opacity: 0.4;
+        }
+        .traversal-edge-arrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--zone-portfolio);
+            opacity: 0.6;
+        }
+        .traversal-edge-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--zone-portfolio);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+        }
+
+        /* ============================================
+           VISUAL MODE 3: SOURCE CONVERGENCE
+           ============================================ */
+        .convergence-view {
+            padding: 1.25rem 0;
+        }
+        .convergence-sources {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+        }
+        .convergence-source {
+            padding: 0.75rem;
+            border: 1px solid var(--light);
+            background: var(--bg-light);
+            position: relative;
+        }
+        .convergence-source-type {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.58rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.4rem;
+        }
+        .convergence-source.research .convergence-source-type { color: var(--zone-portfolio); }
+        .convergence-source.working-notes .convergence-source-type { color: #37695e; }
+        .convergence-source.decision .convergence-source-type { color: #8a5a3c; }
+        .convergence-source.mission .convergence-source-type { color: var(--zone-mono); }
+        .convergence-source-title {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        .convergence-source-excerpt {
+            font-size: 0.73rem;
+            color: var(--muted);
+            line-height: 1.5;
+            margin-bottom: 0.3rem;
+        }
+        .convergence-contributes {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--zone-portfolio);
+            font-weight: 400;
+        }
+        .convergence-arrow {
+            text-align: center;
+            padding: 0.5rem 0;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--zone-portfolio);
+            opacity: 0.5;
+        }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 600px) {
+            .intro p { font-size: 0.84rem; }
+            .convergence-sources {
+                grid-template-columns: 1fr;
+            }
+            .taxonomy-year-group {
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+            .taxonomy-year {
+                min-width: auto;
+                padding-top: 0;
+            }
+            .taxonomy-year::after {
+                display: none;
+            }
+            .taxonomy-cards {
+                padding-left: 0;
+            }
+            .traversal-edge {
+                padding-left: 1rem;
+            }
         }
     </style>
 </head>
@@ -100,194 +439,202 @@
     <nav class="breadcrumb"><a href="/">rowbyroh</a><span class="sep">/</span><a href="/archive">all work</a></nav>
 
     <h1>Obsidian MCP Server</h1>
-    <div class="page-subtitle">Bridging Claude AI with a personal knowledge vault</div>
-    <p class="page-intro">An MCP server that gives Claude direct read/write access to an Obsidian vault. Built to make years of thinking searchable and traversable from inside any Claude session.</p>
+    <p class="page-subtitle">672 notes. 3 platforms. 7 years. One context layer.</p>
 
-    <div class="stat-strip">
-        <div class="stat">
-            <span class="stat-value">672</span>
-            <span class="stat-label">notes</span>
+    <!-- ---- INTRO ---- -->
+    <div class="intro">
+        <p>Every AI session starts from zero. Your second conversation about the same project knows nothing from the first. Your notes live in three apps that don't talk to each other. Your decisions, your research, your half-formed ideas — all invisible to the next session.</p>
+        <p>I built an MCP server that connects Claude to an Obsidian vault containing everything — 274 Claude conversations, 217 Apple Notes, 181 Notion pages. Classified across 14 taxonomy dimensions, interconnected with 2,599 auto-generated wikilinks.</p>
+        <p>This is what it looks like when that changes. Pick a question.</p>
+    </div>
+
+    <!-- ---- DEMO ---- -->
+    <div class="demo-section" id="demo">
+        <div class="prompt-selector" id="prompt-selector">
+            <!-- Generated by JS -->
         </div>
-        <div class="stat">
-            <span class="stat-value">4</span>
-            <span class="stat-label">sources</span>
-        </div>
-        <div class="stat">
-            <span class="stat-value">14</span>
-            <span class="stat-label">taxonomy dimensions</span>
-        </div>
-        <div class="stat">
-            <span class="stat-value">2,599</span>
-            <span class="stat-label">auto-generated links</span>
+
+        <div id="demo-container">
+            <!-- Generated by JS -->
         </div>
     </div>
 
-    <div class="section-header"><span class="section-number zone-portfolio">01</span><h2>The Problem</h2></div>
-    <div class="section-underline zone-portfolio"></div>
+    <footer>
+        <a href="/">rowbyroh</a> &middot; <a href="https://github.com/rbrdelta">github</a>
+    </footer>
 
-    <p>Conversations with Claude are disposable by default. Every session starts from zero. I had hundreds of conversations across Claude.ai, Notion, and Apple Notes that contained real decisions, technical reasoning, and project context. None of it was connected. None of it was searchable from inside a new session.</p>
+    <script src="assets/js/scroll.js"></script>
+    <script src="assets/data/mcp-demo.js"></script>
+    <script>
+    (function() {
+        let data = window.__MCP_DEMO_DATA;
+        let activePrompt = null;
 
-    <p>The MCP protocol lets Claude call tools directly. So I built a server that turns an Obsidian vault into Claude's long-term memory &mdash; and then built the pipelines to populate, classify, and link everything in it.</p>
+        renderSelector();
 
-    <div class="section-header"><span class="section-number zone-portfolio">02</span><h2>The Tools</h2></div>
-    <div class="section-underline zone-portfolio"></div>
+        function renderSelector() {
+            const container = document.getElementById('prompt-selector');
+            container.innerHTML = data.prompts.map(p =>
+                `<button class="prompt-btn" data-id="${p.id}">
+                    ${p.label}
+                    <span class="prompt-capability">${p.capabilityLabel} — ${p.capabilityDesc}</span>
+                </button>`
+            ).join('');
 
-    <div class="tool-list">
-        <div class="tool-item">
-            <span class="tool-name">create_note</span>
-            <span class="tool-desc"> &mdash; create notes with YAML frontmatter, tags, links</span>
-        </div>
-        <div class="tool-item">
-            <span class="tool-name">read_note</span>
-            <span class="tool-desc"> &mdash; read any note by path, returns full content</span>
-        </div>
-        <div class="tool-item">
-            <span class="tool-name">search_notes</span>
-            <span class="tool-desc"> &mdash; full-text search across the vault</span>
-        </div>
-        <div class="tool-item">
-            <span class="tool-name">link_notes</span>
-            <span class="tool-desc"> &mdash; create bidirectional [[wikilinks]] between notes</span>
-        </div>
-        <div class="tool-item">
-            <span class="tool-name">get_backlinks</span>
-            <span class="tool-desc"> &mdash; find all notes that reference a given note</span>
-        </div>
-        <div class="tool-item">
-            <span class="tool-name">process_daily_note</span>
-            <span class="tool-desc"> &mdash; atomize daily notes into linked individual notes</span>
-        </div>
-        <div class="tool-item">
-            <span class="tool-name">screenshot</span>
-            <span class="tool-desc"> &mdash; capture screen via PowerShell for visual verification</span>
-        </div>
-    </div>
+            container.querySelectorAll('.prompt-btn').forEach(btn => {
+                btn.addEventListener('click', () => selectPrompt(btn.dataset.id));
+            });
+        }
 
-    <div class="section-header"><span class="section-number zone-portfolio">03</span><h2>Claude.ai API Sync</h2></div>
-    <div class="section-underline zone-portfolio"></div>
+        function selectPrompt(id) {
+            activePrompt = id;
 
-    <p>The first pipeline problem: getting conversations out of Claude.ai and into Obsidian. Claude.ai has no public export API. Anthropic offers a bulk JSON download, but it's manual, full-export-only, and gives you a single monolithic file with no incremental capability.</p>
+            // Update button states
+            document.querySelectorAll('.prompt-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.id === id);
+            });
 
-    <p>So I opened DevTools. The claude.ai frontend makes authenticated requests to internal endpoints using a <code>sessionKey</code> cookie. Two endpoints do everything: <code>/chat_conversations_v2</code> returns a paginated index of conversations sorted by <code>updated_at</code>, and <code>/chat_conversations/{uuid}</code> returns the full message tree for a single conversation. Neither is documented. Both could break any time Anthropic changes their frontend.</p>
+            const prompt = data.prompts.find(p => p.id === id);
+            const container = document.getElementById('demo-container');
 
-    <div class="pull-quote">That fragility is a conscious tradeoff. The alternative was no sync at all.</div>
+            let resultsHtml = '';
+            if (prompt.capability === 'taxonomy') {
+                resultsHtml = renderTaxonomy(prompt);
+            } else if (prompt.capability === 'traversal') {
+                resultsHtml = renderTraversal(prompt);
+            } else if (prompt.capability === 'synthesis') {
+                resultsHtml = renderConvergence(prompt);
+            }
 
-    <p>The session cookie expires every few days and requires re-extraction from the browser &mdash; there's a helper script for that, but it's still manual. A cron job runs the sync every 8 hours while WSL is active, and a session-start hook alerts when the key has expired or sync is stale. It's a brittle hack held together with timestamp checks and error handling, and it's synced 274 conversations without losing one.</p>
+            container.innerHTML = `
+                <div class="demo-panel active">
+                    <div class="without-vault">
+                        <div class="phase-label">
+                            Without vault context
+                            <span class="phase-line"></span>
+                        </div>
+                        <div class="without-response">${prompt.withoutVault}</div>
+                    </div>
 
-    <div class="highlight-box">
-        <div class="label">The undocumented API contract</div>
-        <ul>
-            <li>Auth: <code>sessionKey</code> cookie from browser &mdash; expires periodically, no refresh mechanism</li>
-            <li>Rate limit: ~3 req/sec, 350ms throttle between calls, 429 handling</li>
-            <li>Incremental sync via <code>updated_at</code> comparison &mdash; typical run makes 1 API call</li>
-            <li>Full conversation fetch uses <code>tree=True&amp;rendering_mode=messages</code> to get the complete message structure</li>
-            <li>Idempotent by UUID &mdash; re-running skips existing, <code>--overwrite</code> to force update</li>
-        </ul>
-    </div>
+                    <div class="mcp-results">
+                        <div class="phase-label">
+                            MCP returns
+                            <span class="phase-line"></span>
+                        </div>
+                        ${resultsHtml}
+                    </div>
 
-    <div class="section-header"><span class="section-number zone-portfolio">04</span><h2>4 Import Pipelines</h2></div>
-    <div class="section-underline zone-portfolio"></div>
+                    <div class="with-vault">
+                        <div class="phase-label">
+                            With vault context
+                            <span class="phase-line"></span>
+                        </div>
+                        <div class="with-response">
+                            ${prompt.withVault.split('\n\n').map(p => `<p>${p}</p>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
 
-    <p>Every note enters through a typed pipeline: Claude.ai API sync, Notion API sync, Notion export parser, or Apple Notes sync. Each pipeline is different &mdash; different APIs, different auth, different edge cases &mdash; but they all converge on the same contract: markdown with YAML frontmatter, deduplicated by <code>source_id</code>, tested in dev before touching prod.</p>
+        function renderTaxonomy(prompt) {
+            // Group results by year
+            const groups = {};
+            prompt.results.forEach(r => {
+                if (!groups[r.year]) groups[r.year] = [];
+                groups[r.year].push(r);
+            });
 
-    <p>The key design decision: idempotency as a shared invariant. Every pipeline can be re-run safely. <code>source_id</code> prevents duplicates. Incremental modes mean a typical sync makes 1 API call. And every pipeline has a <code>--dry-run</code> flag, because the first time you run something that writes 274 files is not the time to discover a bug.</p>
+            const years = Object.keys(groups).sort((a, b) => a - b);
 
-    <div class="flow-diagram">Claude.ai ──→ API sync ──→ markdown + frontmatter ──→ vault
-Notion     ──→ API sync ──→ markdown + frontmatter ──→ vault
-Notion     ──→ export   ──→ markdown + frontmatter ──→ vault
-Apple Notes──→ Shortcut ──→ iCloud ──→ importer    ──→ vault
+            return `<div class="taxonomy-view">
+                <div class="taxonomy-timeline">
+                    ${years.map(year => `
+                        <div class="taxonomy-year-group">
+                            <div class="taxonomy-year">${year}</div>
+                            <div class="taxonomy-cards">
+                                ${groups[year].map(r => `
+                                    <div class="taxonomy-card">
+                                        <div class="taxonomy-card-header">
+                                            <span class="taxonomy-card-title">${r.title}</span>
+                                            <span class="source-badge ${r.source}">${formatSource(r.source)}</span>
+                                        </div>
+                                        <div class="taxonomy-card-excerpt">${r.excerpt}</div>
+                                        <div class="taxonomy-tags">
+                                            ${r.tags.map(t => `<span class="taxonomy-tag">${t}</span>`).join('')}
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>`;
+        }
 
-shared: source_id dedup │ --dry-run │ dev → prod</div>
+        function renderTraversal(prompt) {
+            const nodes = prompt.nodes;
+            let html = '<div class="traversal-view"><div class="traversal-path">';
 
-    <div class="section-header"><span class="section-number zone-portfolio">05</span><h2>Two-Axis Taxonomy</h2></div>
-    <div class="section-underline zone-portfolio"></div>
+            nodes.forEach((node, i) => {
+                // Edge before node (except first)
+                if (i > 0 && node.edgeLabel) {
+                    html += `
+                        <div class="traversal-edge">
+                            <div class="traversal-edge-line"></div>
+                            <span class="traversal-edge-arrow">&darr;</span>
+                            <span class="traversal-edge-label">${node.edgeLabel}</span>
+                        </div>
+                    `;
+                }
 
-    <p>Flat tags don't scale. When 95% of notes are tagged "ai" and 89% are tagged "career," the tags tell you nothing. The vault needed a classification system that could differentiate a resume optimization conversation from a freight logistics brainstorm from a baby sleep tracker.</p>
+                html += `
+                    <div class="traversal-node">
+                        <div class="traversal-node-header">
+                            <span class="traversal-node-title">${node.title}</span>
+                            <span class="source-badge ${node.source}">${formatSource(node.source)}</span>
+                            <span class="traversal-node-date">${node.date}</span>
+                        </div>
+                        <div class="traversal-node-excerpt">${node.excerpt}</div>
+                    </div>
+                `;
+            });
 
-    <p>The taxonomy uses two orthogonal axes. <strong>Domain</strong> captures what a note is about &mdash; 10 tags from <code>domain/career</code> to <code>domain/meta</code>. <strong>Mode</strong> captures what the note does &mdash; thinking, doing, reference, or reflection. A third axis, <strong>lifecycle</strong>, tracks where the note stands: seed, active, evergreen, or archived.</p>
+            html += '</div></div>';
+            return html;
+        }
 
-    <div class="highlight-box">
-        <div class="label">14 taxonomy dimensions across 672 notes</div>
-        <ul>
-            <li>10 domain tags &mdash; career (225), building (164), AI (153), learning (109), finance (106), ventures (99), freight (86), creative (84), family (62), meta (16)</li>
-            <li>4 mode tags &mdash; doing (522), thinking (376), reference (129), reflection (41)</li>
-            <li>364 notes classified across multiple domains &mdash; the system handles overlap, not just single-label assignment</li>
-        </ul>
-    </div>
+        function renderConvergence(prompt) {
+            const sources = prompt.sources;
 
-    <p>Classification uses scored keyword matching with title weighting. Title keywords count 3x. Longer notes require higher scores to qualify for a domain, preventing verbose documents from matching everything. Each note is capped at 3 domains and 2 modes &mdash; enough to capture cross-cutting themes, constrained enough to stay meaningful.</p>
+            return `<div class="convergence-view">
+                <div class="convergence-sources">
+                    ${sources.map(s => `
+                        <div class="convergence-source ${s.id}">
+                            <div class="convergence-source-type">${formatSource(s.sourceType)}</div>
+                            <div class="convergence-source-title">${s.title}</div>
+                            <div class="convergence-source-excerpt">${s.excerpt}</div>
+                            <div class="convergence-contributes">${s.contributes}</div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="convergence-arrow">&darr; synthesized into one response &darr;</div>
+            </div>`;
+        }
 
-    <div class="pull-quote">The scoring threshold scales with note length. A 30-word Apple Note titled "Baby Sleep" correctly tags as domain/family. A 27,000-word PKM conversation doesn't tag as every domain just because it mentions each topic once.</div>
-
-    <div class="section-header"><span class="section-number zone-portfolio">06</span><h2>Link Graph</h2></div>
-    <div class="section-underline zone-portfolio"></div>
-
-    <p>Tags classify notes individually. Links connect them into a navigable graph. The link builder reads all 672 notes, computes pairwise similarity from shared domain tags and keyword overlap, and generates <code>[[wikilinks]]</code> to the top related notes for each document.</p>
-
-    <div class="highlight-box">
-        <div class="label">2,599 wikilinks across 503 notes</div>
-        <ul>
-            <li>Each linked note gets up to 5 related notes &mdash; ranked by weighted similarity score</li>
-            <li>65 notes have series navigation (prev/next) &mdash; auto-detected from numbered or dated titles</li>
-            <li>169 notes skipped &mdash; too short for meaningful keyword signal</li>
-            <li>Idempotent &mdash; re-running strips and rebuilds the Related section cleanly</li>
-        </ul>
-    </div>
-
-    <p>Similarity scoring combines tag Jaccard distance (50%) with keyword Jaccard distance (50%). Keywords are extracted from the title (weighted 3x) and first 500 words of body, with stopword filtering. The result: a baby sleep note links to other parenting notes, a PKM architecture conversation links to other systems-building conversations, and a ServiceTitan interview prep note links to other interview prep notes &mdash; across all three source systems.</p>
-
-    <p>Series detection finds notes that belong to a sequence &mdash; "Phase 1, Phase 2, Phase 3" or date-stamped daily notes &mdash; and adds prev/next navigation on top of the similarity-based links. This means Claude can traverse a chain of related sessions in order, not just find nearby topics.</p>
-
-    <div class="section-header"><span class="section-number zone-portfolio">07</span><h2>Apple Notes Sync</h2></div>
-    <div class="section-underline zone-portfolio"></div>
-
-    <p>The most operationally complex pipeline. Apple Notes has no API &mdash; not an undocumented one, not a deprecated one. None. The only way to get notes out programmatically is an iPhone Shortcut that iterates through the Notes app, serializes each note as a text file with inline metadata, and writes it to iCloud Drive. iCloud for Windows syncs those files to a local folder. The importer reads from there.</p>
-
-    <p>The Shortcut times out after ~50 notes. Covering a 278-note library means running it multiple times with different sort orders (by date created, date modified, title) to ensure full coverage. iCloud doesn't sync files eagerly &mdash; they appear as cloud-only placeholders until you open the folder in Windows Explorer to trigger download. The importer detects unreadable placeholders and skips them rather than failing.</p>
-
-    <div class="flow-diagram">iPhone Shortcut (50 notes/batch)
-  ↓
-iCloud Drive (cloud → local sync, needs manual trigger)
-  ↓
-Node.js importer (MD5 dedup, #confidential filter)
-  ↓
-Vault (217 notes, incremental)</div>
-
-    <div class="section-header"><span class="section-number zone-portfolio">08</span><h2>Notion Sync</h2></div>
-    <div class="section-underline zone-portfolio"></div>
-
-    <p>Not everything lives in Claude conversations. Project specs, meeting notes, and venture evaluations were in Notion. Two separate pipelines handle this: an API sync for live pages (104 from my active workspace) and an export parser for a static guest workspace snapshot (77 pages).</p>
-
-    <p>The API sync detects updated pages by comparing <code>last_edited_time</code> against local frontmatter. Notion's block-based content model gets flattened into clean markdown. The export parser handles Notion's zip format and nested page hierarchies. Both are idempotent &mdash; same <code>source_id</code> pattern as the Claude.ai sync.</p>
-
-    <div class="section-header"><span class="section-number zone-portfolio">09</span><h2>Dev/Prod Pipeline</h2></div>
-    <div class="section-underline zone-portfolio"></div>
-
-    <div class="pull-quote">This exists because I broke prod once by shipping a tool that worked in dev but made assumptions about vault structure that didn't hold.</div>
-
-    <p>Every change is tested in a dev vault before touching production. The dev vault is a structural mirror of prod with test fixtures. The promote pipeline runs: build, test against dev, test against prod.</p>
-
-    <div class="flow-diagram">npm run promote
-  = build
-  + npm test        (dev vault)
-  + npm run test:prod (prod vault)</div>
-
-    <div class="section-header"><span class="section-number zone-portfolio">10</span><h2>Stack</h2></div>
-    <div class="section-underline zone-portfolio"></div>
-
-    <div class="label">Built with</div>
-    <div class="stack-list">
-        <span>TypeScript</span>
-        <span>MCP SDK</span>
-        <span>Anthropic API</span>
-        <span>Node.js</span>
-        <span>Notion API</span>
-        <span>iCloud Drive</span>
-        <span>iOS Shortcuts</span>
-    </div>
-
-    <div class="copyright">rowbyroh.com &copy; 2026</div>
-
-    <script src="/assets/js/scroll.js"></script>
+        function formatSource(source) {
+            const map = {
+                'apple-notes': 'Apple Notes',
+                'claude-conversation': 'Claude',
+                'knowledge-project': 'Knowledge',
+                'debrief': 'Debrief',
+                'meta': 'Meta',
+                'notion': 'Notion',
+                'vault-inbox': 'Vault'
+            };
+            return map[source] || source;
+        }
+    })();
+    </script>
 </body>
 </html>

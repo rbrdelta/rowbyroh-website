@@ -1,0 +1,176 @@
+window.__MCP_DEMO_DATA = {
+  "prompts": [
+    {
+      "id": "chair-design",
+      "label": "What do I know about chair design?",
+      "capability": "taxonomy",
+      "capabilityLabel": "Taxonomy + Search",
+      "capabilityDesc": "14-dimension classification across 3 platforms and 7 years of thinking",
+      "withoutVault": "I don't have information about your chair design interests or background. Generally, chair design involves considerations of ergonomics, materials selection, structural engineering, and aesthetic form. Would you like me to explain any of these areas?",
+      "withVault": "You've been thinking about chair design since at least 2019 — early concept sketches linked to ideas like Encase, Plant, and Branch. By 2023, you had a concrete goal: design your own chair and enter the architects' chair competition. Your Apple Notes from that period show deep research into wood species (Japanese Zelkova, cypress, hickory), anticlastic curves, and makers like Thos. Moser and Bern Chandley.\n\nYour design philosophy note frames the core tension you keep returning to: form follows function, or form embodies feeling? You haven't resolved that — it's a productive tension that shows up in the roundtable you ran with Thonet, Eames, Wegner, Prouve, and Rietveld.\n\nBy 2025 you were moving from thinking to making — tools list (spokeshave, travisher, scorp, band saw, lathe), 3D modeling in Fusion 360. The trajectory is clear: observer → student → builder. Seven years of notes, three platforms, one compounding interest.",
+      "results": [
+        {
+          "title": "Furniture",
+          "source": "apple-notes",
+          "date": "Apr 2023",
+          "tags": ["domain/creative", "domain/learning", "mode/thinking", "mode/reference"],
+          "excerpt": "Goal for this year — design my own chair. If it's anything close to what I imagine, consider registering to the architects chair competition by 11/1.",
+          "score": 12,
+          "year": 2023
+        },
+        {
+          "title": "Design Philosophy",
+          "source": "apple-notes",
+          "date": "Jun 2023",
+          "tags": ["domain/creative", "domain/building", "domain/career", "mode/thinking"],
+          "excerpt": "Form follows? complements? Function. Form manifests? displays? embodies? Feelings/emotions. Function dictates? Form.",
+          "score": 12,
+          "year": 2023
+        },
+        {
+          "title": "Chair",
+          "source": "apple-notes",
+          "date": "Jan 2019",
+          "tags": ["domain/creative", "mode/doing"],
+          "excerpt": "Earliest concept — linked to Encase, Plant, Branch, Bag, Lace. The seed of the idea, years before the research began.",
+          "score": 12,
+          "year": 2019
+        },
+        {
+          "title": "Build a chair",
+          "source": "apple-notes",
+          "date": "Mar 2025",
+          "tags": ["mode/doing"],
+          "excerpt": "Tools: moisture meter, drill/brace, spokeshave, travisher, scorp, band saw, lathe. Moving from thinking to making.",
+          "score": 13,
+          "year": 2025
+        },
+        {
+          "title": "Modeling Bern Chandley chairs in Fusion 360",
+          "source": "claude-conversation",
+          "date": "Nov 2025",
+          "tags": ["domain/creative", "domain/building", "mode/thinking", "mode/doing"],
+          "excerpt": "Modeling the Harry, No. 14, and Lowbow chairs to practice 3D skills. Windsor construction: solid carved seat, round tenons, steam-bent components.",
+          "score": 59,
+          "year": 2025
+        },
+        {
+          "title": "Learning chair design from historical masters",
+          "source": "claude-conversation",
+          "date": "Mar 2026",
+          "tags": ["domain/creative", "domain/building", "domain/learning", "mode/thinking", "mode/doing"],
+          "excerpt": "A roundtable with Thonet, Eames, Wegner, Prouve, and Rietveld — first-principles chair design through the voices of the masters.",
+          "score": 120,
+          "year": 2026
+        },
+        {
+          "title": "Chair Roundtable — Session 1",
+          "source": "knowledge-project",
+          "date": "Mar 2026",
+          "tags": ["chair-design", "first-principles", "woodworking", "furniture", "ergonomics"],
+          "excerpt": "Six legendary designers argue about ergonomics, materials, cost, and craft. The output of the roundtable conversation, structured as a learning artifact.",
+          "score": 33,
+          "year": 2026
+        }
+      ]
+    },
+    {
+      "id": "agentic-stack",
+      "label": "How did the agentic stack evolve?",
+      "capability": "traversal",
+      "capabilityLabel": "Link Traversal",
+      "capabilityDesc": "Following the decision trail through connected notes",
+      "withoutVault": "I'm not aware of the specifics of your agentic stack. In general, agentic architectures involve orchestrating AI models with tools, memory, and planning capabilities. Would you like me to explain common patterns?",
+      "withVault": "The agentic stack started as a concept in your March 23 session where you asked Claude to be 'chief architect' — that session produced the first four-layer model: shared state, data pipelines, surfaces, and session roles.\n\nFour days later, the skill audit (March 27) consolidated 13 personas and mapped their interconnections. This surfaced a problem: skills were isolated, not composable. The interconnection map made dependencies explicit for the first time.\n\nBy April 1, the Five Flywheels document formalized what had been implicit: the system isn't a stack, it's five compounding loops. Session-to-state, learning-to-behavior, gap-to-ship, work-to-content, skill-to-coaching. Each one makes the next cycle smarter.\n\nThe key insight across this trail: the architecture wasn't designed once. It was discovered through iteration — each session revealed structure that was already there but unnamed.",
+      "nodes": [
+        {
+          "id": "root",
+          "title": "Agentic Stack",
+          "source": "meta",
+          "date": "Mar 2026",
+          "excerpt": "Daniel's mental model for building with AI. Infrastructure first, automation last. Four layers: shared state, data pipelines, surfaces, session roles.",
+          "connections": ["arch-debrief"]
+        },
+        {
+          "id": "arch-debrief",
+          "title": "Debrief — Agentic Stack Architecture",
+          "source": "debrief",
+          "date": "Mar 23",
+          "excerpt": "Daniel asked Claude to be the 'chief architect' of his Claude Code setup. First formal architecture session — produced the four-layer model.",
+          "edgeLabel": "originated in",
+          "connections": ["skill-audit"]
+        },
+        {
+          "id": "skill-audit",
+          "title": "Skill Audit and Agentic Stack Visual Redesign",
+          "source": "debrief",
+          "date": "Mar 27",
+          "excerpt": "Skills migrated and consolidated. 13 personas mapped. Surfaced the composability problem — skills were isolated, not interconnected.",
+          "edgeLabel": "led to audit",
+          "connections": ["interconnection"]
+        },
+        {
+          "id": "interconnection",
+          "title": "Agentic Harness — Skill Interconnection Map",
+          "source": "knowledge-project",
+          "date": "Mar 28",
+          "excerpt": "Every skill's inputs, outputs, and dependencies mapped explicitly. Made the implicit structure visible.",
+          "edgeLabel": "produced map",
+          "connections": ["flywheels"]
+        },
+        {
+          "id": "flywheels",
+          "title": "Agentic Stack — Five Flywheels and I/O Map",
+          "source": "knowledge-project",
+          "date": "Apr 1",
+          "excerpt": "One flywheel is the pitch. This is the engineering diagram. Five compounding loops: session→state, learning→behavior, gap→ship, work→content, skill→coaching.",
+          "edgeLabel": "formalized as",
+          "connections": []
+        }
+      ]
+    },
+    {
+      "id": "composter",
+      "label": "What's my composter business strategy?",
+      "capability": "synthesis",
+      "capabilityLabel": "Cross-Source Synthesis",
+      "capabilityDesc": "Four different tools contributed different pieces of the answer",
+      "withoutVault": "I don't have details about your composter business plans. If you'd like, I can help you think through a business strategy for a composting venture — what stage are you at?",
+      "withVault": "You researched the electric kitchen composter market in a deep Claude session — market sizing, regulatory tailwinds (NYC composting mandate, Mayor Mamdani resumed fines on day one), and competitive landscape of Asian brands with limited US presence.\n\nYou modeled three options across 24 months: Option A (pure distribution), Option B (distribution-to-white-label), Option C (B2B-led compliance packages targeting NYC property managers). Option C won on nearly every metric — highest revenue, highest net profit, lowest startup capex at roughly $19,600.\n\nThe PM decision from March 27 placed Composter as Tier 1 alongside Deadweight and the website. Your NorthStar frames it as a revenue venture. Notion tracks the current status: in-progress, with next actions on first outreach, OEM supplier research, pricing model, and legal entity formation.\n\nThe strategy is selected. The gap is execution — no outreach has happened yet.",
+      "sources": [
+        {
+          "id": "research",
+          "sourceType": "claude-conversation",
+          "title": "Electric kitchen composter US market opportunity",
+          "date": "Mar 2026",
+          "excerpt": "Market sizing, competitive landscape, three business options modeled with 24-month P&L. Option C (B2B-led compliance) selected — highest revenue, lowest capex at ~$19,600.",
+          "contributes": "The research and analysis"
+        },
+        {
+          "id": "working-notes",
+          "sourceType": "notion",
+          "title": "Composter — General",
+          "date": "Apr 2026",
+          "excerpt": "Status: in-progress. Tier: 2. Next actions: first outreach, OEM supplier research, pricing model, legal entity formation.",
+          "contributes": "Current status and next actions"
+        },
+        {
+          "id": "decision",
+          "sourceType": "vault-inbox",
+          "title": "PM Decisions — 2026-03-27",
+          "date": "Mar 2026",
+          "excerpt": "Current Tier 1 is Deadweight, Composter, Website. All three need shipping actions, not infrastructure.",
+          "contributes": "Strategic priority and sequencing"
+        },
+        {
+          "id": "mission",
+          "sourceType": "meta",
+          "title": "NorthStar",
+          "date": "Ongoing",
+          "excerpt": "B2B-led electric composter distribution targeting NYC composting mandate compliance. Revenue venture — bridge income for long-term furniture ambitions.",
+          "contributes": "How it fits the mission"
+        }
+      ]
+    }
+  ]
+};
