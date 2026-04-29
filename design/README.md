@@ -1,0 +1,48 @@
+# Design System
+
+Canonical design reference for rowbyroh.com. Live in the working tree so it's discoverable — not archived to a tag.
+
+## Contents
+
+| File / folder | What it is |
+|---------------|------------|
+| `DESIGN-SYSTEM.md` | High-level summary. Identity, type, color, zones, page rubric. **Start here.** |
+| `UI-KIT.md` | Full design language spec. Signed off 2026-04-01 after the 28-version exploration. |
+| `screenshots/` | Live captures of every published page, desktop (1440×900) + mobile (390×844), 2× DPR. |
+| `capture-screenshots.js` | Playwright script that regenerates `screenshots/` against `https://rowbyroh.com` (or any `BASE` env override). |
+
+## Refreshing screenshots
+
+After any visible design change, refresh the captures:
+
+```bash
+node design/capture-screenshots.js
+```
+
+Or against a local dev server:
+
+```bash
+BASE=http://localhost:3000 node design/capture-screenshots.js
+```
+
+Requires Playwright (`npm install playwright && npx playwright install chromium`).
+
+## Source of truth
+
+The spec in `DESIGN-SYSTEM.md` and `UI-KIT.md` is what we *intend*. The CSS in `assets/css/` is what actually ships. If they disagree, fix the CSS or update the spec — don't let them drift.
+
+## Exploration archive
+
+The 28-version exploration that produced this spec is preserved on the `v2-exploration` git tag. To browse:
+
+```bash
+git checkout v2-exploration
+# explore exploration/ folder (gallery at exploration/index.html)
+git checkout main
+```
+
+Or extract without checkout:
+
+```bash
+git archive v2-exploration exploration/ | tar -x -C /tmp/exploration-archive
+```

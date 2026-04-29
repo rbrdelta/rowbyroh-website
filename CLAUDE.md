@@ -4,7 +4,7 @@ Personal portfolio site. Static HTML/CSS on Vercel (auto-deploy from GitHub main
 
 ## Design System — C2-Refined (Zoned Warmth + Raw Edge)
 
-Converged from 28-version exploration (archived as `v2-exploration` tag). Full spec in `exploration/UI-KIT.md` (on the archived tag).
+Converged from 28-version exploration (archived as `v2-exploration` tag). **Canonical spec lives in `design/`** — `design/DESIGN-SYSTEM.md` (overview), `design/UI-KIT.md` (full language), `design/screenshots/` (live page captures), `design/capture-screenshots.js` (refresh tool).
 
 - **Shared foundation:** `assets/css/base.css` — CSS variables, zone colors, typography, warm concrete background (#faf9f6), red notebook margin lines. All content pages link this.
 - **Fonts:** IBM Plex Sans (author voice — body text, orientation), IBM Plex Mono (system voice — titles, code, metadata)
@@ -131,7 +131,8 @@ Simple integer versions (v1, v2, v3...). Each version is a git tag on main.
 ## Rules
 
 - **Archive before overwrite:** Before any structural change ships to main, tag current prod as `vN` and push the tag
-- Take screenshots via PowerShell to verify visual changes (see reference_screenshot_workflow in memory)
+- **Refresh design screenshots after visible changes:** `node design/capture-screenshots.js` (or `BASE=http://localhost:3000 node ...` for local). Keeps `design/screenshots/` current as the visual reference.
+- Take ad-hoc verification screenshots via Playwright headless (see `feedback_playwright_verification` memory)
 - Every element must pass the Earned Placement Rubric (scannability, hierarchy, rhythm, identity)
 - IBM Plex Mono 500+ for anything that needs to read clearly — never Courier New
 - Test at mobile widths before calling it done
