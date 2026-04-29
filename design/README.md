@@ -10,6 +10,7 @@ Canonical design reference for rowbyroh.com. Live in the working tree so it's di
 | `UI-KIT.md` | Full design language spec. Signed off 2026-04-01 after the 28-version exploration. |
 | `screenshots/v2/` | Current site captures — every published page, desktop (1440×900) + mobile (390×844), 2× DPR. |
 | `screenshots/v1/` | Frozen snapshot of the v1 site (gallery frame + legal pad, Mar 2026). For evolution reference only — never re-captured. |
+| `screenshots/d1/` | Frozen snapshot of the D1 diagram-system exploration (SVG "blueprint" approach to project-page diagrams). Captured from `diagram-d1-draft` git tag. obsidian-mcp + homepage only — D1 was a sub-sprint within v2, not a full design era. |
 | `capture-screenshots.js` | Playwright script that regenerates `screenshots/v2/` against `https://rowbyroh.com` (or any `BASE` env override). |
 
 ## Refreshing screenshots
