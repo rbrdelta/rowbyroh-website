@@ -13,7 +13,7 @@ const fs = require('fs');
 const path = require('path');
 
 const BASE = process.env.BASE || 'https://rowbyroh.com';
-const OUT = path.join(__dirname, 'screenshots');
+const OUT = path.join(__dirname, 'screenshots', 'v2');
 
 const PAGES = [
   ['homepage', '/'],

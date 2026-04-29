@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colophon | rowbyroh</title>
+    <meta name="description" content="How this site is built — design system, tokens, structural furniture, and the version it's on.">
+    <meta property="og:title" content="Colophon | rowbyroh">
+    <meta property="og:description" content="How this site is built — design system, tokens, structural furniture, and the version it's on.">
+    <meta property="og:url" content="https://rowbyroh.com/colophon">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <style>
+        body { max-width: 760px; }
+
+        h1 + .page-subtitle {
+            color: var(--muted);
+            font-size: 0.88rem;
+            margin-bottom: 2.5rem;
+        }
+
+        section + section { margin-top: 3.5rem; }
+
+        /* ---- VERSION TOGGLE ---- */
+        .ver-toggle {
+            display: flex;
+            gap: 0;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--light);
+            width: fit-content;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        .ver-btn {
+            background: transparent;
+            border: 0;
+            padding: 0.55rem 1rem;
+            font-family: inherit;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--muted);
+            cursor: pointer;
+            border-right: 1px solid var(--light);
+        }
+        .ver-btn:last-child { border-right: 0; }
+        .ver-btn.active {
+            background: var(--zone-portfolio);
+            color: #fff;
+        }
+        .ver-caption {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-shot {
+            margin-bottom: 1.5rem;
+        }
+        .hero-shot img {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+            border: 1px solid var(--light);
+        }
+        .hero-shot figcaption {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--muted);
+            margin-top: 0.5rem;
+        }
+
+        .page-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        .page-grid figure {
+            margin: 0;
+        }
+        .page-grid img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+            border: 1px solid var(--light);
+        }
+        .page-grid figcaption {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--muted);
+            margin-top: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* ---- TOKENS ---- */
+        .tokens-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+        .swatch {
+            border: 1px solid var(--light);
+            padding: 1.25rem 0.85rem 0.75rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 110px;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        .swatch-name {
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .swatch-hex {
+            font-size: 0.72rem;
+            color: var(--muted);
+            margin-top: 0.2rem;
+        }
+        .swatch-var {
+            font-size: 0.65rem;
+            color: var(--muted);
+            margin-top: 0.4rem;
+        }
+
+        .swatch.dark .swatch-name,
+        .swatch.dark .swatch-hex,
+        .swatch.dark .swatch-var { color: #fff; opacity: 0.92; }
+        .swatch.dark .swatch-hex,
+        .swatch.dark .swatch-var { opacity: 0.7; }
+
+        /* ---- TYPE SPECIMENS ---- */
+        .type-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        .type-card {
+            border: 1px solid var(--light);
+            padding: 1.25rem;
+        }
+        .type-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+        .type-name { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .type-role { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.85rem; }
+        .type-card.sans .type-sample-1 { font-family: 'IBM Plex Sans', sans-serif; font-size: 0.95rem; line-height: 1.6; }
+        .type-card.mono .type-sample-1 { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; font-weight: 500; }
+
+        /* ---- FURNITURE ---- */
+        .furniture-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem 1.75rem;
+        }
+        .furn-item {
+            border-top: 1px solid var(--light);
+            padding-top: 1rem;
+        }
+        .furn-name {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--muted);
+            margin-bottom: 0.65rem;
+        }
+        .furn-demo {
+            margin-bottom: 0.65rem;
+            min-height: 38px;
+            display: flex;
+            align-items: center;
+        }
+        .furn-note {
+            font-size: 0.74rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* live demos */
+        .demo-section-marker {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .demo-section-marker::before {
+            content: '—';
+            color: var(--red-line);
+            font-weight: 700;
+        }
+        .demo-stat-callout {
+            display: flex;
+            gap: 1.5rem;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        .demo-stat-callout .num { font-size: 1.15rem; font-weight: 600; display: block; }
+        .demo-stat-callout .lbl { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+        .demo-pull-quote {
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 0.95rem;
+            font-style: italic;
+            border-left: 2px solid var(--red-line);
+            padding-left: 0.85rem;
+        }
+        .demo-margin-line {
+            height: 38px;
+            position: relative;
+            width: 80px;
+        }
+        .demo-margin-line::before, .demo-margin-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            background: var(--red-line);
+        }
+        .demo-margin-line::before { left: 18px; width: 2px; opacity: 0.4; }
+        .demo-margin-line::after { left: 22px; width: 1px; opacity: 0.3; }
+        .demo-zone-row {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .demo-zone-chip {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            padding: 0.25rem 0.55rem;
+            border-left: 3px solid;
+        }
+        .demo-zone-chip.portfolio { border-color: var(--zone-portfolio); }
+        .demo-zone-chip.writing { border-color: var(--zone-writing); background: #fcf6e2; }
+        .demo-zone-chip.system { border-color: var(--zone-mono); }
+
+        /* ---- PROCESS ---- */
+        .process-prose p {
+            font-size: 0.88rem;
+            line-height: 1.85;
+            margin-bottom: 1.1rem;
+        }
+        .process-links {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.78rem;
+            color: var(--muted);
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        .process-links a {
+            color: var(--text);
+            text-decoration: none;
+            border-bottom: 1px solid var(--light);
+        }
+        .process-links a:hover { border-color: var(--red-line); color: var(--red-line); }
+
+        /* ---- CLOSING COLOPHON STRIP ---- */
+        .closing-strip {
+            margin-top: 4rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--light);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        @media (max-width: 600px) {
+            .tokens-grid { grid-template-columns: repeat(2, 1fr); }
+            .page-grid { grid-template-columns: 1fr; }
+            .type-row { grid-template-columns: 1fr; }
+            .furniture-list { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="scroll-progress-inner" id="scrollProgressInner"></div>
+
+    <a href="/" class="back-link">rowbyroh</a>
+    <h1>Colophon</h1>
+    <p class="page-subtitle">How this site is built. The design system is the work — visible by design.</p>
+
+    <!-- ---- VERSION ---- -->
+    <section>
+        <div class="section-header">
+            <span class="section-number zone-portfolio">01</span>
+            <h2>Version</h2>
+        </div>
+        <div class="section-underline zone-portfolio"></div>
+
+        <p style="font-size: 0.86rem; margin-bottom: 1.25rem;">The site is on its second design. <strong>v1</strong> got a portfolio up; <strong>v2</strong> came out of a 28-version exploration. Toggle to see the difference.</p>
+
+        <div class="ver-toggle" role="tablist" aria-label="Site version">
+            <button class="ver-btn active" data-version="v2" aria-selected="true">v2 — current</button>
+            <button class="ver-btn" data-version="v1" aria-selected="false">v1 — Mar 2026</button>
+        </div>
+        <div class="ver-caption" id="verCaption">Apr 2026 · Zoned Warmth + Raw Edge · aperture + logbook</div>
+
+        <figure class="hero-shot">
+            <img src="/design/screenshots/v2/homepage-desktop.png" alt="Homepage screenshot" id="heroImg">
+            <figcaption>Homepage</figcaption>
+        </figure>
+
+        <div class="page-grid">
+            <figure>
+                <img src="/design/screenshots/v2/obsidian-mcp-desktop.png" alt="Project page" data-page="obsidian-mcp">
+                <figcaption>Project</figcaption>
+            </figure>
+            <figure>
+                <img src="/design/screenshots/v2/archive-desktop.png" alt="Feed page" data-page-v2="archive" data-page-v1="writing">
+                <figcaption>Feed</figcaption>
+            </figure>
+            <figure>
+                <img src="/design/screenshots/v2/chair-roundtable-desktop.png" alt="Writing page" data-page="chair-roundtable">
+                <figcaption>Writing</figcaption>
+            </figure>
+            <figure>
+                <img src="/design/screenshots/v2/blog-vault-vs-memory-desktop.png" alt="Essay page" data-page="blog-vault-vs-memory">
+                <figcaption>Essay</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <!-- ---- TOKENS ---- -->
+    <section>
+        <div class="section-header">
+            <span class="section-number zone-mono">02</span>
+            <h2>Tokens</h2>
+        </div>
+        <div class="section-underline zone-mono"></div>
+
+        <p style="font-size: 0.86rem; margin-bottom: 1.25rem;">All values live in <code style="font-family: 'IBM Plex Mono'; font-size: 0.85em;">assets/css/base.css</code>. The swatches below render from those variables — change a value, the colophon updates.</p>
+
+        <div class="tokens-grid">
+            <div class="swatch" style="background: var(--bg);">
+                <span class="swatch-name">warm concrete</span>
+                <div>
+                    <div class="swatch-hex">#faf9f6</div>
+                    <div class="swatch-var">--bg</div>
+                </div>
+            </div>
+            <div class="swatch dark" style="background: var(--text);">
+                <span class="swatch-name">body text</span>
+                <div>
+                    <div class="swatch-hex">#1a1a1a</div>
+                    <div class="swatch-var">--text</div>
+                </div>
+            </div>
+            <div class="swatch dark" style="background: var(--muted);">
+                <span class="swatch-name">muted</span>
+                <div>
+                    <div class="swatch-hex">#888</div>
+                    <div class="swatch-var">--muted</div>
+                </div>
+            </div>
+            <div class="swatch dark" style="background: var(--zone-portfolio);">
+                <span class="swatch-name">oxide red</span>
+                <div>
+                    <div class="swatch-hex">#b84233</div>
+                    <div class="swatch-var">--zone-portfolio</div>
+                </div>
+            </div>
+            <div class="swatch dark" style="background: var(--zone-writing);">
+                <span class="swatch-name">ochre</span>
+                <div>
+                    <div class="swatch-hex">#8a7d3c</div>
+                    <div class="swatch-var">--zone-writing</div>
+                </div>
+            </div>
+            <div class="swatch dark" style="background: var(--zone-mono);">
+                <span class="swatch-name">system mono</span>
+                <div>
+                    <div class="swatch-hex">#555</div>
+                    <div class="swatch-var">--zone-mono</div>
+                </div>
+            </div>
+            <div class="swatch dark" style="background: var(--red-line);">
+                <span class="swatch-name">accent red</span>
+                <div>
+                    <div class="swatch-hex">#e84040</div>
+                    <div class="swatch-var">--red-line</div>
+                </div>
+            </div>
+            <div class="swatch" style="background: var(--surface);">
+                <span class="swatch-name">surface</span>
+                <div>
+                    <div class="swatch-hex">#eeedea</div>
+                    <div class="swatch-var">--surface</div>
+                </div>
+            </div>
+            <div class="swatch" style="background: var(--light);">
+                <span class="swatch-name">light line</span>
+                <div>
+                    <div class="swatch-hex">#d4d2cd</div>
+                    <div class="swatch-var">--light</div>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 2rem; font-size: 0.78rem; font-family: 'IBM Plex Mono'; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-weight: 500;">Type</h3>
+        <div class="type-row">
+            <div class="type-card sans">
+                <div class="type-label">author voice</div>
+                <div class="type-name">IBM Plex Sans</div>
+                <div class="type-role">Body text, orientation</div>
+                <div class="type-sample-1">Build from zero. Identify the core primitives.</div>
+            </div>
+            <div class="type-card mono">
+                <div class="type-label">system voice</div>
+                <div class="type-name" style="font-family: 'IBM Plex Mono'; font-weight: 500;">IBM Plex Mono</div>
+                <div class="type-role">Titles, code, metadata</div>
+                <div class="type-sample-1">— OBSIDIAN MCP &nbsp;·&nbsp; 2026-04</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ---- FURNITURE ---- -->
+    <section>
+        <div class="section-header">
+            <span class="section-number zone-mono">03</span>
+            <h2>Furniture</h2>
+        </div>
+        <div class="section-underline zone-mono"></div>
+
+        <p style="font-size: 0.86rem; margin-bottom: 1.5rem;">Repeating structural elements. Each shows up across the site — some live on this page right now.</p>
+
+        <div class="furniture-list">
+            <div class="furn-item">
+                <div class="furn-name">Red margin line</div>
+                <div class="furn-demo"><div class="demo-margin-line"></div></div>
+                <div class="furn-note">Two parallel red lines fixed at the left edge. Notebook reference. Scroll fills the inner one.</div>
+            </div>
+            <div class="furn-item">
+                <div class="furn-name">Section marker</div>
+                <div class="furn-demo"><span class="demo-section-marker">Section title</span></div>
+                <div class="furn-note">Red dash before every h2. Visual anchor without a heavy line.</div>
+            </div>
+            <div class="furn-item">
+                <div class="furn-name">Zone borders</div>
+                <div class="furn-demo">
+                    <div class="demo-zone-row">
+                        <span class="demo-zone-chip portfolio">portfolio</span>
+                        <span class="demo-zone-chip writing">writing</span>
+                        <span class="demo-zone-chip system">system</span>
+                    </div>
+                </div>
+                <div class="furn-note">Left-border color signals zone. Writing also gets a warm yellow tint.</div>
+            </div>
+            <div class="furn-item">
+                <div class="furn-name">Stat callout</div>
+                <div class="furn-demo">
+                    <div class="demo-stat-callout">
+                        <div><span class="num">672</span><span class="lbl">notes</span></div>
+                        <div><span class="num">2,599</span><span class="lbl">links</span></div>
+                        <div><span class="num">14</span><span class="lbl">tags</span></div>
+                    </div>
+                </div>
+                <div class="furn-note">Mono numbers, weight 600, micro labels. Used on project pages.</div>
+            </div>
+            <div class="furn-item">
+                <div class="furn-name">Pull quote</div>
+                <div class="furn-demo"><span class="demo-pull-quote">The constraint is the brief.</span></div>
+                <div class="furn-note">Italic, red left rule. Used to surface a key sentence.</div>
+            </div>
+            <div class="furn-item">
+                <div class="furn-name">Scroll indicator</div>
+                <div class="furn-demo" style="font-size: 0.78rem; color: var(--muted);">↑ Look up.</div>
+                <div class="furn-note">The red line at the page edge fills as you read this. Same vocabulary as the margin.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ---- PROCESS ---- -->
+    <section>
+        <div class="section-header">
+            <span class="section-number zone-portfolio">04</span>
+            <h2>Process</h2>
+        </div>
+        <div class="section-underline zone-portfolio"></div>
+
+        <div class="process-prose">
+            <p>v1 was built fast — a portfolio frame to stop hiding work. Two weeks later it felt generic, so I ran a 28-version exploration: three briefs, fifteen visual identities, three convergence rounds. C2-Refined ("Zoned Warmth + Raw Edge") won.</p>
+            <p>Vanilla CSS, no frameworks. The constraint was the brief: a personal portfolio shouldn't feel like a SaaS template. Identity comes from material choices — warm concrete background, red notebook margin, IBM Plex as the typographic spine — not from JavaScript.</p>
+        </div>
+
+        <div class="process-links">
+            <a href="https://github.com/rbrdelta/rowbyroh-website">github.com/rbrdelta/rowbyroh-website</a>
+            <a href="https://github.com/rbrdelta/rowbyroh-website/tree/v2-exploration/exploration">v2-exploration tag · 28 versions + UI kit</a>
+            <a href="https://github.com/rbrdelta/rowbyroh-website/tree/main/design">design/ folder · current spec + screenshots</a>
+        </div>
+    </section>
+
+    <div class="closing-strip">
+        Set in IBM Plex Sans &amp; IBM Plex Mono. Hosted on Vercel. Sources on GitHub. <br>
+        &copy; 2026 rowbyroh.com
+    </div>
+
+    <script src="/assets/js/scroll.js"></script>
+    <script>
+        (function () {
+            const buttons = document.querySelectorAll('.ver-btn');
+            const heroImg = document.getElementById('heroImg');
+            const verCaption = document.getElementById('verCaption');
+            const gridImgs = document.querySelectorAll('.page-grid img');
+
+            const captions = {
+                v2: 'Apr 2026 · Zoned Warmth + Raw Edge · aperture + logbook',
+                v1: 'Mar 2026 · Gallery Frame + Legal Pad · portfolio + writing sections'
+            };
+
+            function setVersion(v) {
+                buttons.forEach(b => {
+                    const active = b.dataset.version === v;
+                    b.classList.toggle('active', active);
+                    b.setAttribute('aria-selected', active ? 'true' : 'false');
+                });
+                heroImg.src = `/design/screenshots/${v}/homepage-desktop.png`;
+                verCaption.textContent = captions[v];
+                gridImgs.forEach(img => {
+                    let page;
+                    if (img.dataset.page) {
+                        page = img.dataset.page;
+                    } else {
+                        page = v === 'v1' ? img.dataset.pageV1 : img.dataset.pageV2;
+                    }
+                    img.src = `/design/screenshots/${v}/${page}-desktop.png`;
+                });
+            }
+
+            buttons.forEach(b => b.addEventListener('click', () => setVersion(b.dataset.version)));
+        })();
+    </script>
+</body>
+</html>
