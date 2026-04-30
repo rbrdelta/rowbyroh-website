@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Field Note 02 — Headless Parity | rowbyroh</title>
+    <meta name="description" content="Started with a bandwidth problem. Built a template. The spec is the highest-leverage point in agentic work — depth at the foundation compounds upward.">
+    <meta property="og:title" content="Field Note 02 — Headless Parity">
+    <meta property="og:description" content="Started with a bandwidth problem. Built a template. The spec is the highest-leverage point in agentic work — depth at the foundation compounds upward.">
+    <meta property="og:url" content="https://rowbyroh.com/field-notes/headless-parity">
+    <meta property="og:type" content="article">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/writing.css">
+</head>
+<body class="writing-page fn-page">
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="scroll-progress-inner" id="scrollProgressInner"></div>
+
+    <nav class="breadcrumb"><a href="/">rowbyroh</a><span class="sep">/</span><a href="/archive">all work</a></nav>
+
+    <div class="post-header">
+        <div class="post-meta">Field Note 02 &middot; April 2026</div>
+        <h1>Headless Parity</h1>
+        <div class="fn-principle">
+            <span class="fn-principle-label">Principle</span><span class="fn-principle-body">spec depth compounds upward</span>
+        </div>
+    </div>
+
+    <p class="fn-source">Code: <a href="REPO_LINK_HEADLESS_MD"><code>~/.claude/skills/sprint/HEADLESS.md</code></a></p>
+
+    <article>
+
+    <h2>Gap</h2>
+
+    <p>Time is the scarce resource. A handful of hours a week where I can build &mdash; the rest is family, day job, commute. For the work to happen at all, it had to happen while I was elsewhere.</p>
+
+    <p>I had a sprint contract &mdash; a written brief of the goal, the scope, and what &ldquo;done&rdquo; looks like. Enough to start the session, but only the shell. The details underneath are where the work lives, and I was still figuring out what a good eval looks like.</p>
+
+    <h2>Discovery chain</h2>
+
+    <p class="fn-step"><strong>1. D1, a design exploration sprint.</strong> The brief was to push the design language. Instead we spent more of the sprint on margin and padding than on design.</p>
+
+    <p class="fn-step"><strong>2. The fight with the page.</strong> The diagram shipped, looked right in isolation, and then refused to sit on the page. Hours on the same few lines:</p>
+
+<pre><code>margin: 0 auto &rarr; -1.5rem auto 0 &rarr; -3rem auto 0 &rarr; -1rem auto -2rem</code></pre>
+
+    <p>Every fix created a new edge case. The problem wasn&rsquo;t the diagram. It was that the diagram wasn&rsquo;t native to the page it was joining &mdash; built with different rules than everything around it.</p>
+
+    <p class="fn-step"><strong>3. The diagnosis.</strong> Late in D1, I named it:</p>
+
+    <blockquote>
+        <p>&ldquo;We&rsquo;re trying to force this in a format that was not designed to accommodate these types of changes.&rdquo;</p>
+    </blockquote>
+
+    <p>That&rsquo;s the pivot. Supervising more wouldn&rsquo;t have helped &mdash; the hours I lost were already spent supervising. The spec said &ldquo;build the diagram&rdquo; and didn&rsquo;t say &ldquo;build a diagram that&rsquo;s native to the page&rdquo; &mdash; same spacing, same sizing, same rules as everything around it. Fine in interactive mode, where I could catch the mismatch live. Fatal in autonomous mode, where nobody catches it.</p>
+
+    <p class="fn-step"><strong>4. The template.</strong> Four days later: <code>~/.claude/skills/sprint/HEADLESS.md</code>. Architectural compatibility as ritual, encoded in the prompt itself.</p>
+
+    <h2>Solution</h2>
+
+    <p>Two sections, both non-skippable, both in the prompt:</p>
+
+    <ul class="fn-list">
+        <li><strong>System Understanding Gate</strong> &mdash; after setup reads, the session writes a short block naming the existing tokens, spacing, and patterns it must follow. If the spec conflicts with existing patterns and can&rsquo;t be resolved, the session writes a blocker handoff and exits cleanly instead of shipping broken output.</li>
+        <li><strong>Integration Check</strong> &mdash; after building, verify no new values, no new patterns, no unintended side effects before commit.</li>
+    </ul>
+
+    <p>The template doesn&rsquo;t make the session smarter. It makes the session ask the right questions before writing code.</p>
+
+    <p>D2 was the first project built with the Gate in place. Similar scope to D1. Different outcome.</p>
+
+    <table class="fn-table">
+        <thead>
+            <tr><th></th><th>D1 (before)</th><th>D2 (after)</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Commits</td><td>3</td><td>1</td></tr>
+            <tr><td>Lines changed</td><td>~480</td><td>~500</td></tr>
+            <tr><td>Wall-clock</td><td>Across 2 days</td><td>Single evening</td></tr>
+            <tr><td>Outcome</td><td>Archived (<code>diagram-d1-draft</code> tag)</td><td>Shipped to production</td></tr>
+            <tr><td>Hardcoded CSS values</td><td>Many</td><td>Zero</td></tr>
+        </tbody>
+    </table>
+
+    <p>D2&rsquo;s commit message closed the loop:</p>
+
+    <blockquote>
+        <p>&ldquo;All colors from base.css tokens, no hardcoded values.&rdquo;</p>
+    </blockquote>
+
+    <p>That&rsquo;s what the Gate is for.</p>
+
+    <h2>Attribution</h2>
+
+    <ul class="fn-list">
+        <li><strong>Daniel</strong> &mdash; gap, diagnosis, the &ldquo;force fit&rdquo; call.</li>
+        <li><strong>Claude</strong> &mdash; HEADLESS.md template. System Understanding Gate and Integration Check structure.</li>
+    </ul>
+
+    <h2>Why this matters</h2>
+
+    <p>Started with a bandwidth problem. Built a template.</p>
+
+    <p>The spec is the highest-leverage point in agentic work. Depth at the foundation compounds upward &mdash; code, tests, integration, the user-facing surface, all rebuild from it. Every unit of precision in the spec removes units of work at every layer above. Shallow spec means I rebuild that precision by hand, by supervising in real time, every iteration.</p>
+
+    <blockquote class="fn-pull">
+        <p>I strive for timelessness in all my work. In building with agents, the output can only be truly unique and feel seamless or easy when you provide the most specific inputs systematically.</p>
+    </blockquote>
+
+    <p>Next layer up: the evals inside my skills. Most are too loose. Rewriting them is the same work, higher altitude.</p>
+
+    <p class="fn-footer">Open / deferred: eval rubric maturity &rarr; ongoing &middot; reconciliation with workarounds #4&ndash;#6 where Claude drove design &rarr; resolve during those drafts.</p>
+
+    </article>
+
+    <div class="post-footer">
+        <a href="/archive">All work</a>
+    </div>
+
+    <footer>
+        <a href="mailto:rowbyroh@gmail.com">email</a> &middot;
+        <a href="https://linkedin.com/in/drohh">linkedin</a> &middot;
+        <a href="https://github.com/rbrdelta">github</a>
+        <div style="margin-top: 0.5rem;">&copy; 2026 rowbyroh.com</div>
+    </footer>
+
+    <script src="/assets/js/scroll.js"></script>
+</body>
+</html>
