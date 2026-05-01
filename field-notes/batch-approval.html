@@ -15,45 +15,54 @@
     <link rel="stylesheet" href="/assets/css/base.css">
     <link rel="stylesheet" href="/assets/css/writing.css">
 </head>
-<body class="writing-page fn-page">
+<body class="writing-page">
     <div class="scroll-progress" id="scrollProgress"></div>
     <div class="scroll-progress-inner" id="scrollProgressInner"></div>
 
-    <nav class="breadcrumb"><a href="/">rowbyroh</a><span class="sep">/</span><a href="/archive">all work</a></nav>
+    <nav class="breadcrumb"><a href="/">rowbyroh</a></nav>
 
     <div class="post-header">
         <div class="post-meta">Field Note 05 &middot; April 2026</div>
         <h1>Batch Approval</h1>
-        <div class="fn-principle">
-            <span class="fn-principle-label">Principle</span><span class="fn-principle-body">mutual clarity</span>
-        </div>
+        <p class="post-subtitle">When the model shows you its limitations, the right reaction is not frustration, but anticipation. The work isn&rsquo;t predicting harder; it&rsquo;s anticipating for the agent.</p>
     </div>
 
-    <p class="fn-source">Code: <a href="https://github.com/rbrdelta/claude-harness/blob/main/hooks/log-tool-use.sh"><code>hooks/log-tool-use.sh</code></a> &middot; <a href="https://github.com/rbrdelta/claude-harness/blob/main/hooks/approval-report.js"><code>hooks/approval-report.js</code></a></p>
+    <div class="callout">
+        <p><strong>Principle</strong> &mdash; mutual clarity</p>
+    </div>
+
+    <p class="source-cite">
+        <span class="source-label">Code &rarr;</span>
+        <a href="https://github.com/rbrdelta/claude-harness/blob/main/hooks/log-tool-use.sh">hooks/log-tool-use.sh</a>
+        <a href="https://github.com/rbrdelta/claude-harness/blob/main/hooks/approval-report.js">hooks/approval-report.js</a>
+    </p>
 
     <article>
 
-    <h2>Gap</h2>
+    <div class="section-header"><span class="section-number zone-writing">01</span><h2>Gap</h2></div>
+    <div class="section-underline zone-writing"></div>
 
     <p>New to Claude Code. Every session, the same shape: agree the goal, agree the approach, watch it start &mdash; then get pulled back for an approval prompt. <em>Allow this command? Allow this file write?</em> Five-second tax, none of them dangerous, all of them breaking the flow I&rsquo;d just handed off.</p>
 
     <p>The agent either tells you up front, proceeds without telling you, or checks in midstream as necessary. The midstream check is the marker of the model&rsquo;s confidence to predict &mdash; every prompt is it telling me <em>I couldn&rsquo;t be sure this one was covered.</em></p>
 
-    <h2>Discovery chain</h2>
+    <div class="section-header"><span class="section-number zone-writing">02</span><h2>Discovery chain</h2></div>
+    <div class="section-underline zone-writing"></div>
 
-    <p class="fn-step"><strong>1. Ideal proposed, ruled out.</strong> I asked Claude to flip the script: walk the plan, enumerate every operation needing approval, present them up front grouped by risk. I&rsquo;d preapprove the batch, it&rsquo;d run unattended. <code>/architect</code> came back: not supported. Claude Code&rsquo;s permissions are pattern-based wildcards in a config file, not session- or plan-scoped. The legal approximation was widening the patterns and accepting the rest case-by-case.</p>
+    <p><strong>1. Ideal proposed, ruled out.</strong> I asked Claude to flip the script: walk the plan, enumerate every operation needing approval, present them up front grouped by risk. I&rsquo;d preapprove the batch, it&rsquo;d run unattended. <code>/architect</code> came back: not supported. Claude Code&rsquo;s permissions are pattern-based wildcards in a config file, not session- or plan-scoped. The legal approximation was widening the patterns and accepting the rest case-by-case.</p>
 
-    <p class="fn-step"><strong>2. Fallback.</strong> Reasonable plan B. Added ~25 patterns for predictable file utilities, git, npm, web, all 7 MCP tools. A couple of <code>deny</code> rules for the actually-destructive ones. Session debrief estimated <strong>80&ndash;90% coverage</strong>.</p>
+    <p><strong>2. Fallback.</strong> Reasonable plan B. Added ~25 patterns for predictable file utilities, git, npm, web, all 7 MCP tools. A couple of <code>deny</code> rules for the actually-destructive ones. Session debrief estimated <strong>80&ndash;90% coverage</strong>.</p>
 
-    <p class="fn-step"><strong>3. Death by a thousand paper cuts.</strong> Three days later, the per-project ad-hoc approvals files had accumulated <strong>135 entries across four files</strong>. Every variation of every command I&rsquo;d touched. <code>VAULT_PATH=/mnt/c/MCP node -e "..."</code> and <code>VAULT_PATH=/mnt/c/MCP-dev node -e "..."</code> &mdash; each shape a separate approval, none collapsed into the wildcards I&rsquo;d added. The 80&ndash;90% claim wasn&rsquo;t wrong on the calls I&rsquo;d thought of. It was useless against the calls I hadn&rsquo;t.</p>
+    <p><strong>3. Death by a thousand paper cuts.</strong> Three days later, the per-project ad-hoc approvals files had accumulated <strong>135 entries across four files</strong>. Every variation of every command I&rsquo;d touched. <code>VAULT_PATH=/mnt/c/MCP node -e "..."</code> and <code>VAULT_PATH=/mnt/c/MCP-dev node -e "..."</code> &mdash; each shape a separate approval, none collapsed into the wildcards I&rsquo;d added. The 80&ndash;90% claim wasn&rsquo;t wrong on the calls I&rsquo;d thought of. It was useless against the calls I hadn&rsquo;t.</p>
 
-    <p class="fn-step"><strong>4. Reframe.</strong> After back and forth: the ad-hoc approvals file already <em>is</em> the log. Every accepted prompt is a row in unstructured data about what the model actually tried to do. Don&rsquo;t add instrumentation &mdash; mine what&rsquo;s already there. From there the build was straightforward: a hook that logs every call, an analyzer that flags the high-frequency misses with suggested wildcards.</p>
+    <p><strong>4. Reframe.</strong> After back and forth: the ad-hoc approvals file already <em>is</em> the log. Every accepted prompt is a row in unstructured data about what the model actually tried to do. Don&rsquo;t add instrumentation &mdash; mine what&rsquo;s already there. From there the build was straightforward: a hook that logs every call, an analyzer that flags the high-frequency misses with suggested wildcards.</p>
 
-    <h2>Solution</h2>
+    <div class="section-header"><span class="section-number zone-writing">03</span><h2>Solution</h2></div>
+    <div class="section-underline zone-writing"></div>
 
     <p>Two files in <code>~/.claude/hooks/</code>:</p>
 
-    <ul class="fn-list">
+    <ul>
         <li><strong><code>log-tool-use.sh</code></strong> &mdash; fires before every tool call. Writes one JSON line per call: tool, command shape, timestamp.</li>
         <li><strong><code>approval-report.js</code></strong> &mdash; reads the log, matches each call against the existing rules, prints coverage and suggests new wildcards for the highest-frequency misses.</li>
     </ul>
@@ -68,25 +77,27 @@ Top uncovered:
 
     <p>The longer it runs, the better the predicted column gets. Not the system I wanted. The system the platform allows.</p>
 
-    <h2>Attribution</h2>
+    <div class="section-header"><span class="section-number zone-writing">04</span><h2>Attribution</h2></div>
+    <div class="section-underline zone-writing"></div>
 
-    <ul class="fn-list">
+    <ul>
         <li><strong>Daniel</strong> &mdash; gap, trichotomy, the original &ldquo;batch from plan&rdquo; proposal, the question across sessions of <em>why are we re-asking things we already approved?</em></li>
         <li><strong>Claude</strong> &mdash; <code>log-tool-use.sh</code> and <code>approval-report.js</code>, glob-to-regex matcher, debrief integration.</li>
     </ul>
 
-    <h2>Why this matters</h2>
+    <div class="section-header"><span class="section-number zone-writing">05</span><h2>Why this matters</h2></div>
+    <div class="section-underline zone-writing"></div>
 
     <p>When the model shows you its limitations, the right reaction is not frustration, but anticipation. An agent can&rsquo;t anticipate its own needs. The midstream prompt is it asking me to do that on its behalf. My role is to be the manager &mdash; clearing the path forward for an employee before they hit a blocker.</p>
 
     <p>The principle: <strong>mutual clarity.</strong> What we agreed up front, what runs silently, what the agent is honestly telling me it isn&rsquo;t sure about. The work isn&rsquo;t predicting harder; it&rsquo;s anticipating <em>for the agent</em>, so it can spend less on asks and more on the work.</p>
 
-    <p class="fn-footer">Open / deferred: platform-side question &mdash; preflight permissions from a plan? &mdash; logged separately. Format / publishing &rarr; post-content sprint.</p>
+    <p class="meta-comment">Open / deferred: platform-side question &mdash; preflight permissions from a plan? &mdash; logged separately. Format / publishing &rarr; post-content sprint.</p>
 
     </article>
 
     <div class="post-footer">
-        <a href="/archive">All work</a>
+        <a href="/">&larr; rowbyroh</a>
     </div>
 
     <footer>

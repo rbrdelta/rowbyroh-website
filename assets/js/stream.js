@@ -133,18 +133,6 @@
         container.appendChild(logbook);
     }
 
-    function updateAllWorkLink(activeTag) {
-        var link = document.getElementById('all-work-link');
-        if (!link) return;
-        if (activeTag) {
-            link.textContent = 'all ' + activeTag + ' work \u2192';
-            link.href = '/archive?tag=' + encodeURIComponent(activeTag);
-        } else {
-            link.innerHTML = 'all work &rarr;';
-            link.href = '/archive';
-        }
-    }
-
     function initFilters(items) {
         var tagButtons = document.querySelectorAll('.tag-filter');
         var activeTag = null;
@@ -165,7 +153,6 @@
 
                 renderAperture(items, activeTag);
                 renderLogbook(items, activeTag);
-                updateAllWorkLink(activeTag);
             });
         });
     }
@@ -175,7 +162,6 @@
         .then(function (content) {
             renderAperture(content, null);
             renderLogbook(content, null);
-            updateAllWorkLink(null);
             initFilters(content);
         })
         .catch(function () {

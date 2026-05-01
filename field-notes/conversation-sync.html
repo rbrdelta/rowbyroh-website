@@ -15,66 +15,76 @@
     <link rel="stylesheet" href="/assets/css/base.css">
     <link rel="stylesheet" href="/assets/css/writing.css">
 </head>
-<body class="writing-page fn-page">
+<body class="writing-page">
     <div class="scroll-progress" id="scrollProgress"></div>
     <div class="scroll-progress-inner" id="scrollProgressInner"></div>
 
-    <nav class="breadcrumb"><a href="/">rowbyroh</a><span class="sep">/</span><a href="/archive">all work</a></nav>
+    <nav class="breadcrumb"><a href="/">rowbyroh</a></nav>
 
     <div class="post-header">
         <div class="post-meta">Field Note 01 &middot; April 2026</div>
         <h1>Conversation Sync</h1>
-        <div class="fn-principle">
-            <span class="fn-principle-label">Principle</span><span class="fn-principle-body">agent-era intentional surface assignment</span>
-        </div>
+        <p class="post-subtitle">Three surfaces, one backend. There is an API door &mdash; just not for me. Started with data portability, built the sync.</p>
     </div>
 
-    <p class="fn-source">Code: <a href="https://github.com/rbrdelta/obsidian-mcp/blob/main/src/importers/claude_api_sync.ts"><code>src/importers/claude_api_sync.ts</code></a></p>
+    <div class="callout">
+        <p><strong>Principle</strong> &mdash; agent-era intentional surface assignment</p>
+    </div>
+
+    <p class="source-cite">
+        <span class="source-label">Code &rarr;</span>
+        <a href="https://github.com/rbrdelta/obsidian-mcp/blob/main/src/importers/claude_api_sync.ts">src/importers/claude_api_sync.ts</a>
+    </p>
 
     <article>
 
-    <h2>Gap</h2>
+    <div class="section-header"><span class="section-number zone-writing">01</span><h2>Gap</h2></div>
+    <div class="section-underline zone-writing"></div>
 
     <p>Setting up the vault to work more with Claude Code. The vault is my local Obsidian notes directory; Claude Code writes session transcripts into it automatically. Migration phase exposes the asymmetry:</p>
 
-    <ul class="fn-list">
+    <ul>
         <li>Code sessions &rarr; vault, automatic.</li>
         <li>Web sessions (claude.ai) &rarr; no API to call. Didn&rsquo;t anticipate that.</li>
     </ul>
 
     <p>The only thing claude.ai offers is a bulk export &mdash; zip file, on demand, stale by design. That&rsquo;s not a sync, that&rsquo;s a filing cabinet. Without a real sync, ~90% of my Claude thinking stays locked on the one surface that won&rsquo;t let it leave. Vault premise breaks.</p>
 
-    <h2>Discovery chain</h2>
+    <div class="section-header"><span class="section-number zone-writing">02</span><h2>Discovery chain</h2></div>
+    <div class="section-underline zone-writing"></div>
 
-    <p class="fn-step"><strong>1. Didn&rsquo;t accept export-or-nothing.</strong> Started looking for a real sync. While setting up a local integration that lets Claude Desktop read my vault, noticed Desktop, mobile, and web all showed identical session lists &mdash; same titles, same timestamps. Three surfaces, one backend. Which meant: <em>there is</em> an API door. Just not for me.</p>
+    <p><strong>1. Didn&rsquo;t accept export-or-nothing.</strong> Started looking for a real sync. While setting up a local integration that lets Claude Desktop read my vault, noticed Desktop, mobile, and web all showed identical session lists &mdash; same titles, same timestamps. Three surfaces, one backend. Which meant: <em>there is</em> an API door. Just not for me.</p>
 
-    <p class="fn-step"><strong>2. First solve &mdash; rejected deliberately.</strong> Honest first instinct was a surface-level workaround: script a cloud agent to open the desktop app, wait for Desktop to sync the web session down, then let my local integration pick up the new files:</p>
+    <p><strong>2. First solve &mdash; rejected deliberately.</strong> Honest first instinct was a surface-level workaround: script a cloud agent to open the desktop app, wait for Desktop to sync the web session down, then let my local integration pick up the new files:</p>
 
 <pre><code>remote agent &rarr; opens Desktop &rarr; Desktop syncs web &rarr; local integration harvests</code></pre>
 
     <p>Four links, any one breaks. Remote agent failure, Desktop failure, sync lag, harvest miss. Not a sync &mdash; a hostage situation stacked on top of a GUI I don&rsquo;t control. The brainstorm clarified what reliability would require: cut dependencies, don&rsquo;t add them.</p>
 
-    <p class="fn-step"><strong>3. Pivot.</strong> Don&rsquo;t go <em>through</em> the app. Go <em>to</em> the service. Every surface sends an auth credential &mdash; find it.</p>
+    <p><strong>3. Pivot.</strong> Don&rsquo;t go <em>through</em> the app. Go <em>to</em> the service. Every surface sends an auth credential &mdash; find it.</p>
 
-    <p class="fn-step"><strong>4. Hunt.</strong> Two quotes from the session carry the texture better than paraphrase:</p>
+    <p><strong>4. Hunt.</strong> Two quotes from the session carry the texture better than paraphrase:</p>
 
-    <blockquote>
-        <p>&ldquo;I can&rsquo;t interact with Windows GUI apps, only the WSL terminal.&rdquo;<span class="fn-attrib">&mdash; Claude</span></p>
-    </blockquote>
+    <div class="dialogue">
+        <div class="speaker">Claude</div>
+        <p>&ldquo;I can&rsquo;t interact with Windows GUI apps, only the WSL terminal.&rdquo;</p>
+    </div>
 
-    <blockquote>
-        <p>&ldquo;The Cookies DB is locked (Claude Desktop has it open). Can&rsquo;t read it while the app is running.&rdquo;<span class="fn-attrib">&mdash; Claude</span></p>
-    </blockquote>
+    <div class="dialogue">
+        <div class="speaker">Claude</div>
+        <p>&ldquo;The Cookies DB is locked (Claude Desktop has it open). Can&rsquo;t read it while the app is running.&rdquo;</p>
+    </div>
 
     <p>Windows app-storage angle: dead end. Detour to web DevTools network tab. Two endpoints surfaced immediately:</p>
 
-    <ul class="fn-list">
+    <ul>
         <li><code>GET /api/organizations/{org_id}/chat_conversations_v2</code> &rarr; metadata list</li>
         <li><code>GET /api/organizations/{org_id}/chat_conversations/{uuid}</code> &rarr; full content</li>
         <li>Auth: session cookie, pulled from DevTools in under a minute.</li>
     </ul>
 
-    <h2>Solution</h2>
+    <div class="section-header"><span class="section-number zone-writing">03</span><h2>Solution</h2></div>
+    <div class="section-underline zone-writing"></div>
 
     <p>Two endpoints, one cookie, incremental by default.</p>
 
@@ -82,7 +92,7 @@
 GET /chat_conversations/{uuid}       &rarr; content
 Cookie: sessionKey=&lt;from DevTools&gt;</code></pre>
 
-    <ul class="fn-list">
+    <ul>
         <li>List returns newest first; diff <code>updated_at</code> against vault frontmatter; fetch deltas only.</li>
         <li>Key at <code>~/.claude_session_key</code> (chmod 600). Cron reads it.</li>
         <li>Cron every 8h, skip if &lt;6h.</li>
@@ -91,14 +101,16 @@ Cookie: sessionKey=&lt;from DevTools&gt;</code></pre>
 
     <p>The key-rotation step is the human-in-the-loop piece. Not hidden automation masking a manual dependency &mdash; the system surfaces the expiry cleanly and hands control back at the only moment it needs a human. Deliberate.</p>
 
-    <h2>Attribution</h2>
+    <div class="section-header"><span class="section-number zone-writing">04</span><h2>Attribution</h2></div>
+    <div class="section-underline zone-writing"></div>
 
-    <ul class="fn-list">
+    <ul>
         <li><strong>Daniel</strong> &mdash; gap identification, discovery chain, rejecting the surface solve.</li>
         <li><strong>Claude</strong> &mdash; endpoint trace, sync engine, incremental pattern.</li>
     </ul>
 
-    <h2>Why this matters</h2>
+    <div class="section-header"><span class="section-number zone-writing">05</span><h2>Why this matters</h2></div>
+    <div class="section-underline zone-writing"></div>
 
     <p>Started with data portability. Built the sync.</p>
 
@@ -106,13 +118,13 @@ Cookie: sessionKey=&lt;from DevTools&gt;</code></pre>
 
     <p>The bigger lesson is still in motion for me &mdash;</p>
 
-    <blockquote class="fn-pull">
-        <p>In the cloud era we&rsquo;ve become so accustomed to having our applications available on any surface at any time anywhere &mdash; we&rsquo;ve designed UIs and security systems accordingly. But as agents become embedded and go deeper into our local environments, down the abstraction layer, it&rsquo;s more important that we are very intentional about the way our agents can live: where we quarantine or isolate them, how we think about security, UIs, human-in-the-loop. All designed intentionally. Not one-size-fits-all.</p>
+    <blockquote class="pull-quote">
+        In the cloud era we&rsquo;ve become so accustomed to having our applications available on any surface at any time anywhere &mdash; we&rsquo;ve designed UIs and security systems accordingly. But as agents become embedded and go deeper into our local environments, down the abstraction layer, it&rsquo;s more important that we are very intentional about the way our agents can live: where we quarantine or isolate them, how we think about security, UIs, human-in-the-loop. All designed intentionally. Not one-size-fits-all.
     </blockquote>
 
     <p>Three live questions, same question asked three ways:</p>
 
-    <ul class="fn-list">
+    <ul>
         <li><strong>Vault</strong> &mdash; Obsidian-local vs. cloud repo? <em>Does my notes directory live on my laptop or in a cloud-hosted repo I sync down?</em></li>
         <li><strong>Harness</strong> &mdash; local vs. cloud? <em>Does the background automation that runs my agents live on my machine or on a server I reach remotely?</em></li>
         <li><strong>Cron jobs</strong> &mdash; local cron vs. remote-triggered? <em>Do scheduled jobs fire from my laptop&rsquo;s scheduler, or from a remote trigger that calls into my environment?</em></li>
@@ -120,12 +132,12 @@ Cookie: sessionKey=&lt;from DevTools&gt;</code></pre>
 
     <p>Surface assignment isn&rsquo;t a one-time call. Running decision, re-evaluated every time the agent layer pushes deeper.</p>
 
-    <p class="fn-footer">Open / deferred: format (repo / blog / both) &rarr; post-content sprint &middot; arch questions &rarr; <code>/program</code> &middot; template fit &rarr; reassess after #2.</p>
+    <p class="meta-comment">Open / deferred: format (repo / blog / both) &rarr; post-content sprint &middot; arch questions &rarr; <code>/program</code> &middot; template fit &rarr; reassess after #2.</p>
 
     </article>
 
     <div class="post-footer">
-        <a href="/archive">All work</a>
+        <a href="/">&larr; rowbyroh</a>
     </div>
 
     <footer>
