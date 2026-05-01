@@ -16,6 +16,7 @@
             case 'analysis': return 'zone-portfolio';
             case 'essay': return 'zone-writing';
             case 'roundtable': return 'zone-writing';
+            case 'field-note': return 'zone-writing';
             default: return 'zone-mono';
         }
     }

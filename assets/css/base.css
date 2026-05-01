@@ -270,6 +270,65 @@ h1 {
   font-size: 0.85rem;
 }
 
+/* Comparison table — system tokens, no decoration */
+.compare-table {
+  width: 100%;
+  margin: 2rem 0;
+  border-collapse: collapse;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.85rem;
+}
+.compare-table th,
+.compare-table td {
+  text-align: left;
+  padding: 0.55rem 0.9rem 0.55rem 0;
+  border-bottom: 1px solid var(--light);
+  vertical-align: top;
+}
+.compare-table thead th {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--zone-portfolio);
+  border-bottom: 2px solid var(--zone-portfolio);
+  padding-top: 0;
+}
+.compare-table tbody th {
+  font-weight: 500;
+  color: var(--text);
+  width: 40%;
+}
+.compare-table tbody tr:last-child th,
+.compare-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Source citation — confident, mono, linked */
+.source-cite {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text);
+  margin: -0.5rem 0 2rem;
+}
+.source-cite .source-label {
+  color: var(--zone-portfolio);
+  margin-right: 0.4rem;
+}
+.source-cite a {
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--zone-portfolio);
+}
+.source-cite a:hover {
+  background: rgba(184, 66, 51, 0.08);
+}
+.source-cite a + a {
+  margin-left: 0.6rem;
+}
+
 /* Code blocks */
 pre, code {
   font-family: 'IBM Plex Mono', monospace;

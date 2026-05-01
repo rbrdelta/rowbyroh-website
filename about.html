@@ -74,6 +74,41 @@
             line-height: 1.5;
         }
 
+        /* ---- CONTACT ---- */
+        .contact {
+            margin-bottom: 2rem;
+        }
+
+        .contact-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact-item {
+            padding: 0.35rem 0;
+        }
+
+        .contact-label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            display: inline-block;
+            min-width: 5.5rem;
+        }
+
+        .contact-value {
+            font-size: 0.82rem;
+        }
+
+        .contact-value a {
+            color: var(--zone-portfolio);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(184, 66, 51, 0.35);
+        }
+
+        .contact-value a:hover {
+            border-bottom-color: var(--zone-portfolio);
+        }
+
         /* ---- COLOPHON ---- */
         .colophon {
             font-size: 0.7rem;
@@ -116,15 +151,14 @@
 
     <a href="/" class="back-link">rowbyroh</a>
     <h1>About</h1>
-    <p class="page-subtitle">Product leader. Builder. Father. Maker. Brooklyn.</p>
 
     <!-- ---- NARRATIVE ---- -->
     <div class="narrative">
         <div class="section-header">
-            <span class="section-number zone-mono">01</span>
+            <span class="section-number zone-portfolio">01</span>
             <h2>The Story</h2>
         </div>
-        <div class="section-underline zone-mono"></div>
+        <div class="section-underline zone-portfolio"></div>
 
         <p>I want to solve really hard problems. For a long time, I didn't understand them or couldn't articulate them. Looking back, the throughline is clear: I move between domains. I connect things that seem unrelated. I bring technology into legacy industries. I see the needs of people on the fringes. Everyone deserves affordable housing, and furniture that spans generations and holds memories. Everyone deserves mobility — to see the world and interact with it.</p>
 
@@ -136,12 +170,12 @@
     <!-- ---- TENETS ---- -->
     <div class="tenets">
         <div class="section-header">
-            <span class="section-number zone-mono">02</span>
-            <h2>Operating Tenets</h2>
+            <span class="section-number zone-portfolio">02</span>
+            <h2>My Tenets &mdash; 2026-03</h2>
         </div>
-        <div class="section-underline zone-mono"></div>
+        <div class="section-underline zone-portfolio"></div>
 
-        <p class="tenets-intro">How I make decisions. When two paths diverge, these break the tie.</p>
+        <p class="tenets-intro">If you know better, let&rsquo;s chat! &mdash; <a href="https://discord.com/users/rbrdelta">discord</a></p>
         <ol class="tenet-list">
             <li class="tenet-item">
                 <span class="tenet-number">01</span>
@@ -181,10 +215,42 @@
         </ol>
     </div>
 
-    <!-- ---- COLOPHON ---- -->
-    <div class="colophon">
-        See how these tenets inform the systems I build: <a href="/agentic-stack">Agentic Stack</a>, <a href="/obsidian-mcp">Obsidian MCP</a>, <a href="/chair-roundtable">Chair Roundtable</a>. Or <a href="/colophon">how this site is built</a>.
+    <!-- ---- CONTACT ---- -->
+    <div class="contact">
+        <div class="section-header">
+            <span class="section-number zone-portfolio">03</span>
+            <h2>Contact</h2>
+        </div>
+        <div class="section-underline zone-portfolio"></div>
+
+        <ul class="contact-list">
+            <li class="contact-item">
+                <span class="contact-label">Email</span>
+                <span class="contact-value"><a href="mailto:daniel@rowbyroh.com">daniel@rowbyroh.com</a></span>
+            </li>
+            <li class="contact-item">
+                <span class="contact-label">Discord</span>
+                <span class="contact-value"><a href="https://discord.com/users/rbrdelta">@rbrdelta</a></span>
+            </li>
+            <li class="contact-item">
+                <span class="contact-label">GitHub</span>
+                <span class="contact-value"><a href="https://github.com/rbrdelta">@rbrdelta</a></span>
+            </li>
+            <li class="contact-item">
+                <span class="contact-label">LinkedIn</span>
+                <span class="contact-value"><a href="https://linkedin.com/in/drohh">@drohh</a></span>
+            </li>
+        </ul>
     </div>
+
+    <footer>
+        <a href="mailto:daniel@rowbyroh.com">email</a> &middot;
+        <a href="https://discord.com/users/rbrdelta">discord</a> &middot;
+        <a href="https://github.com/rbrdelta">github</a> &middot;
+        <a href="https://linkedin.com/in/drohh">linkedin</a> &middot;
+        <a href="/colophon">colophon</a>
+        <div style="margin-top: 0.5rem;">&copy; 2026 rowbyroh.com</div>
+    </footer>
 
     <script src="/assets/js/scroll.js"></script>
 </body>

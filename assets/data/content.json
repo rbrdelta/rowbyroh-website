@@ -1,161 +1,80 @@
 [
     {
-        "id": "obsidian-mcp",
-        "title": "obsidian mcp",
-        "type": "project",
-        "description": "Knowledge as infrastructure — eliminating the re-explanation tax across every AI conversation.",
-        "date": "Mar 2026",
-        "tags": ["systems", "infrastructure"],
-        "url": "/obsidian-mcp",
+        "id": "fn-memory-and-the-live-channel",
+        "title": "Field Note 07 — Memory and the Live Channel",
+        "type": "field-note",
+        "description": "The agent doesn't blindly follow rules. It has a judgement layer that sits between instruction and action — and that layer is shaped by signals in the live chat that no static file carries.",
+        "date": "Apr 2026",
+        "tags": ["field-notes", "AI", "infrastructure"],
+        "url": "/field-notes/memory-and-the-live-channel",
         "published": true,
         "status": "live",
-        "featured_for": ["default", "systems", "infrastructure"],
+        "featured_for": ["default", "AI"],
         "events": [
-            {"date": "2026-03-24", "action": "updated — taxonomy + 2,599 links"},
-            {"date": "2026-03-20", "action": "updated — Apple Notes sync, 217 notes"},
-            {"date": "2026-03-17", "action": "updated — Notion sync, 181 pages"},
-            {"date": "2026-03-16", "action": "updated — Claude.ai sync, 274 conversations"},
-            {"date": "2026-03-13", "action": "published"}
+            {"date": "2026-04-29", "action": "published"}
         ],
         "highlights": [
-            "4 import pipelines — Claude.ai, Notion, Apple Notes",
-            "14-dimension taxonomy — 10 domains, 4 modes",
-            "2,599 wikilinks across 503 interconnected notes"
+            "Read-only audit of every layer Claude reads from — global rules, per-project rules, memory, role prompts",
+            "First run flagged a commit/push contradiction loading every session",
+            "Made the case for a second design problem: live-channel discipline"
         ]
     },
     {
-        "id": "agentic-stack",
-        "title": "agentic stack",
-        "type": "project",
-        "description": "What happens when you treat AI sessions as infrastructure instead of disposable prompts.",
-        "date": "Mar 2026",
-        "tags": ["systems", "infrastructure", "AI"],
-        "url": "/agentic-stack",
+        "id": "fn-conversation-sync",
+        "title": "Field Note 01 — Hidden Connector",
+        "type": "field-note",
+        "description": "Three surfaces, one backend. There is an API door — just not for me. Started with data portability, built the sync.",
+        "date": "Apr 2026",
+        "tags": ["field-notes", "infrastructure"],
+        "url": "/field-notes/conversation-sync",
         "published": true,
         "status": "live",
-        "featured_for": ["AI"],
+        "featured_for": ["infrastructure"],
         "events": [
-            {"date": "2026-04-02", "action": "updated — skills migration, 13 personas"},
-            {"date": "2026-03-23", "action": "published"}
+            {"date": "2026-04-23", "action": "published"}
         ],
         "highlights": [
-            "4 layers — shared state, data pipelines, surfaces, session roles",
-            "6 personas that prime sessions with role + context",
-            "672 notes in a linked, classified vault"
+            "Two endpoints, one cookie, incremental by default",
+            "Cron every 8h; key rotation surfaces cleanly when the session expires",
+            "Surface assignment is a running decision, not a one-time call"
         ]
     },
     {
-        "id": "portfolio-analysis",
-        "title": "portfolio analysis",
-        "type": "analysis",
-        "description": "Applying the same systems thinking to a personal portfolio — concentration risk, constraint optimization, Bayesian updating.",
-        "date": "Mar 2026",
-        "tags": ["finance", "systems"],
-        "url": "/portfolio-analysis",
+        "id": "fn-headless-parity",
+        "title": "Field Note 02 — Go a Level Deeper",
+        "type": "field-note",
+        "description": "Started with a bandwidth problem. Built a template. The spec is the highest-leverage point in agentic work — depth at the foundation compounds upward.",
+        "date": "Apr 2026",
+        "tags": ["field-notes", "AI"],
+        "url": "/field-notes/headless-parity",
         "published": true,
         "status": "live",
-        "featured_for": ["finance"],
         "events": [
-            {"date": "2026-03-24", "action": "published"}
+            {"date": "2026-04-24", "action": "published"}
         ],
         "highlights": [
-            "Concentration risk quantified — HHI 8,221 on a 19-position portfolio",
-            "Constraint-based optimization — maximize upside, cap annual loss at 20%",
-            "Bayesian framework — quarterly updates with event-driven overrides"
+            "System Understanding Gate — name existing tokens and patterns before writing code",
+            "Integration Check — verify no new values, no new patterns before commit",
+            "D2 shipped in one commit instead of three"
         ]
     },
     {
-        "id": "deadweight",
-        "title": "deadweight",
-        "type": "project",
-        "description": "A decade of freight knowledge encoded as software — what happens when domain expertise meets AI tooling.",
-        "date": "Mar 2026",
-        "tags": ["freight"],
-        "url": "/deadweight",
+        "id": "fn-batch-approval",
+        "title": "Field Note 05 — How Can I Help?",
+        "type": "field-note",
+        "description": "When the model shows you its limitations, the right reaction is not frustration, but anticipation. The work isn't predicting harder; it's anticipating for the agent.",
+        "date": "Apr 2026",
+        "tags": ["field-notes", "AI"],
+        "url": "/field-notes/batch-approval",
         "published": true,
         "status": "live",
-        "featured_for": ["freight"],
         "events": [
-            {"date": "2026-03-31", "action": "reclassified — blog post to portfolio"},
-            {"date": "2026-03-24", "action": "published"}
+            {"date": "2026-04-27", "action": "published"}
         ],
         "highlights": [
-            "$977-$1,352 savings identified on 8 sample shipments",
-            "6 analyzers — fuel surcharge, accessorials, rate benchmarking, carrier intelligence",
-            "Built in 1 Claude Code session with 10 years of freight knowledge"
+            "Permissions accumulated 135 entries across four files in three days",
+            "log-tool-use.sh + approval-report.js — coverage report with suggested wildcards",
+            "Wired into the session debrief — every close-out checks coverage"
         ]
-    },
-    {
-        "id": "reverse-engineering-claude-api",
-        "title": "When You're Blocked, Keep Digging",
-        "type": "essay",
-        "description": "Reverse-engineering Claude.ai's undocumented endpoints to sync 274 conversations into a personal knowledge vault.",
-        "date": "Mar 2026",
-        "tags": ["infrastructure"],
-        "url": "/blog/reverse-engineering-claude-api",
-        "published": true,
-        "status": "live",
-        "events": [
-            {"date": "2026-03-24", "action": "published"}
-        ]
-    },
-    {
-        "id": "vault-vs-memory",
-        "title": "Infrastructure Beats Convenience",
-        "type": "essay",
-        "description": "AI tools are stateless by default. Memory helps. Infrastructure fixes it. Here's what I learned building the layer underneath.",
-        "date": "Mar 2026",
-        "tags": ["infrastructure", "systems"],
-        "url": "/blog/vault-vs-memory",
-        "published": true,
-        "status": "live",
-        "events": [
-            {"date": "2026-03-26", "action": "published"}
-        ]
-    },
-    {
-        "id": "ai-pricing-market-maker",
-        "title": "Why Outcomes-Based AI Pricing Kills the Market Maker",
-        "type": "essay",
-        "description": "The pricing model you choose determines what kind of economy forms around your product.",
-        "date": "Mar 2026",
-        "tags": ["AI"],
-        "url": "/blog/ai-pricing-market-maker",
-        "published": true,
-        "status": "live",
-        "events": [
-            {"date": "2026-03-28", "action": "published"}
-        ]
-    },
-    {
-        "id": "chair-roundtable-1",
-        "title": "Chair Roundtable — Session 1",
-        "type": "roundtable",
-        "description": "Six legendary designers argue about ergonomics, materials, cost, and craft. A fictional roundtable on first-principles chair design.",
-        "date": "Mar 2026",
-        "tags": ["design"],
-        "url": "/chair-roundtable",
-        "published": true,
-        "status": "live",
-        "featured_for": ["design"],
-        "events": [
-            {"date": "2026-03-28", "action": "published"}
-        ]
-    },
-    {
-        "id": "chair-roundtable-2",
-        "title": "Chair Roundtable — Session 2",
-        "type": "roundtable",
-        "tags": ["design"],
-        "published": false,
-        "status": "in-progress"
-    },
-    {
-        "id": "chair-roundtable-3",
-        "title": "Chair Roundtable — Session 3",
-        "type": "roundtable",
-        "tags": ["design"],
-        "published": false,
-        "status": "in-progress"
     }
 ]

@@ -36,15 +36,14 @@ echo "1. Page status codes"
 PAGES=(
     "/"
     "/about"
-    "/obsidian-mcp"
-    "/agentic-stack"
-    "/deadweight"
-    "/portfolio-analysis"
-    "/chair-roundtable"
     "/archive"
-    "/blog/reverse-engineering-claude-api"
-    "/blog/vault-vs-memory"
+    "/colophon"
+    "/chair-roundtable"
     "/blog/ai-pricing-market-maker"
+    "/field-notes/conversation-sync"
+    "/field-notes/headless-parity"
+    "/field-notes/batch-approval"
+    "/field-notes/memory-and-the-live-channel"
 )
 
 for page in "${PAGES[@]}"; do
@@ -76,11 +75,12 @@ check_title() {
     fi
 }
 
-check_title "/obsidian-mcp" "obsidian-mcp.html"
-check_title "/deadweight" "deadweight.html"
-check_title "/agentic-stack" "agentic-stack.html"
 check_title "/" "index.html"
 check_title "/about" "about.html"
+check_title "/field-notes/conversation-sync" "field-notes/conversation-sync.html"
+check_title "/field-notes/headless-parity" "field-notes/headless-parity.html"
+check_title "/field-notes/batch-approval" "field-notes/batch-approval.html"
+check_title "/field-notes/memory-and-the-live-channel" "field-notes/memory-and-the-live-channel.html"
 
 # --- 3. Deploy commit matches origin/main ---
 echo ""
@@ -113,7 +113,6 @@ check_redirect() {
 }
 
 check_redirect "/writing" "/archive"
-check_redirect "/blog/deadweight" "/deadweight"
 
 # --- 5. Internal links (content.json) ---
 echo ""
@@ -133,7 +132,7 @@ done
 echo ""
 echo "6. External links"
 
-ext_links=$(grep -rohP 'href="(https://[^"]+)"' "$REPO_ROOT"/*.html "$REPO_ROOT"/blog/*.html 2>/dev/null | \
+ext_links=$(grep -rohP 'href="(https://[^"]+)"' "$REPO_ROOT"/*.html "$REPO_ROOT"/blog/*.html "$REPO_ROOT"/field-notes/*.html 2>/dev/null | \
     grep -oP 'https://[^"]+' | grep -v 'fonts.google\|fonts.gstatic' | sort -u)
 
 for link in $ext_links; do

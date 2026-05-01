@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Field Note 07 — Memory and the Live Channel | rowbyroh</title>
+    <meta name="description" content="The agent doesn't blindly follow rules. It has a judgement layer that sits between instruction and action — and that layer is shaped by signals in the live chat that no static file carries.">
+    <meta property="og:title" content="Field Note 07 — Memory and the Live Channel">
+    <meta property="og:description" content="The agent doesn't blindly follow rules. It has a judgement layer that sits between instruction and action — and that layer is shaped by signals in the live chat that no static file carries.">
+    <meta property="og:url" content="https://rowbyroh.com/field-notes/memory-and-the-live-channel">
+    <meta property="og:type" content="article">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/writing.css">
+</head>
+<body class="writing-page">
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="scroll-progress-inner" id="scrollProgressInner"></div>
+
+    <nav class="breadcrumb"><a href="/">rowbyroh</a></nav>
+
+    <div class="post-header">
+        <div class="post-meta">Field Note 07 &middot; April 2026</div>
+        <h1>Memory and the Live Channel</h1>
+        <p class="post-subtitle">The agent doesn&rsquo;t blindly follow rules. It has a judgement layer that sits between instruction and action &mdash; and that layer is shaped by signals in the live chat that no static file carries.</p>
+    </div>
+
+    <div class="callout">
+        <p><strong>Principle</strong> &mdash; the agent needs context and in-session mechanisms for focus</p>
+    </div>
+
+    <p class="source-cite">
+        <span class="source-label">Code &rarr;</span>
+        <a href="https://github.com/rbrdelta/claude-harness/blob/main/tools/claude-rules-audit.js">tools/claude-rules-audit.js</a>
+    </p>
+
+    <article>
+
+    <div class="section-header"><span class="section-number zone-writing">01</span><h2>Gap</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>Claude follows instructions from many places:</p>
+
+    <ul>
+        <li>a global rules file</li>
+        <li>per-project rules files</li>
+        <li>a memory index plus the individual files it points to</li>
+        <li>prompts for specialized roles</li>
+        <li>prompts for sub-agents</li>
+    </ul>
+
+    <p>Updates to one layer don&rsquo;t propagate. Prioritization is opaque, not absent &mdash; the system exists, I can&rsquo;t see it, and the more rules I add, the less traceable selection becomes.</p>
+
+    <blockquote class="pull-quote">
+        I don&rsquo;t know why it&rsquo;s choosing one over the other, or at what point the memory drops and live channel influence takes over.
+    </blockquote>
+
+    <p>There&rsquo;s also a dimension outside files entirely: urgency in the live chat. Pressure language inside a prompt &mdash; <em>&ldquo;felt tactical,&rdquo;</em> <em>&ldquo;highest leverage&rdquo;</em> &mdash; can override a standing rule written for that exact case.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">02</span><h2>Discovery chain</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>Iteration log. The chain is current, not closed.</p>
+
+    <p><strong>1. Built the vault.</strong> A place for rules and context to persist across sessions. Without it, every session was effectively stateless. Solved persistence; didn&rsquo;t solve which rule fires when.</p>
+
+    <p><strong>2. Promoted feedback to standing instructions.</strong> When something needed to stick, I&rsquo;d move it into a more durable layer &mdash; global rules file or individual memory files. An accreting practice, not a discrete event. Rules I could trust to persist; rules that didn&rsquo;t always fire when needed.</p>
+
+    <p><strong>3. Built dedicated prompts for key roles</strong> &mdash; architect, content, pm, designer, others. <em>That&rsquo;s where things diverged.</em> Each role got its own context and rule layer; the system stopped being a clean hierarchy and became a graph. Selection across the expanded graph became less traceable, not more. The opacity from the Gap took its real shape here.</p>
+
+    <p><strong>4. Built <code>claude-rules-audit</code></strong> &mdash; a read-only script that makes the layers visible. The headline wasn&rsquo;t the conflict scan; the conflicts jogged memory of specific lived failures.</p>
+
+<pre><code>[CONFLICT] commit / push directive
+  ~/.claude/CLAUDE.md:183
+    "Never auto-commit &mdash; only commit when I explicitly ask"
+  ~/.claude/projects/.../memory/feedback_commit_push.md
+    "Commit and push are approved globally; git versioning is the safety net"
+  Both load every session.</code></pre>
+
+    <p>A structural change pushed direct to <code>main</code> under an execution-leaning chat tone. <em>&ldquo;Highest leverage&rdquo;</em> in a draft session pulling Claude away from the voice rules it was meant to hold. Talking through those in interview surfaced the dimension that lives outside files: <strong>urgency in the live channel.</strong></p>
+
+    <p><strong>5. Rethink the role and sub-agent prompts</strong> &mdash; queued, not started. Better evals, sharper triggering metadata, structural revisions to how role contexts interact. The audit&rsquo;s output is the input to this iteration. This is where I am.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">03</span><h2>Solution</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p><code>claude-rules-audit</code> is a read-only Node script. It walks the rules sources Claude Code loads &mdash; global file, per-project files, memory index, role prompts &mdash; and emits:</p>
+
+    <ul>
+        <li><strong>Resolved rules</strong> with <code>file:line</code> provenance</li>
+        <li><strong>Cross-source conflict scan</strong> &mdash; directive contradictions across files</li>
+        <li><strong>Within-source topic accumulation</strong> &mdash; keyword clusters in a single file</li>
+        <li><strong>Coverage</strong> &mdash; rule counts, last-modified, freshness flags</li>
+        <li><strong>Sync drift</strong> &mdash; between mirrored copies of the global file</li>
+    </ul>
+
+    <p>First run made the case for itself:</p>
+
+    <ul>
+        <li>Commit/push contradiction between the global file (<em>&ldquo;Never auto-commit&rdquo;</em>) and a rule file (<em>&ldquo;approved globally&rdquo;</em>)</li>
+        <li>Screenshot-workflow file flagged STALE in its own index, still loading every session</li>
+        <li><strong>12 keyword clusters</strong> in the global file alone (vault&times;9, never&times;8, commit&times;6, verify&times;6)</li>
+    </ul>
+
+    <p>Deliberately dumb. Curated keyword scan, false positives accepted, no semantic conflict resolution, no auto-fix. The eye stays on me. It makes the <em>inputs</em> to selection inspectable. It doesn&rsquo;t reach selection itself &mdash; which rule wins at runtime is a model decision, not a file &mdash; or the live channel, where pressure language overrides standing rules on a dimension no file holds.</p>
+
+    <div class="highlight-box">
+        Necessary scaffolding, not the full fix.
+    </div>
+
+    <div class="section-header"><span class="section-number zone-writing">04</span><h2>Attribution</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <ul>
+        <li><strong>Daniel</strong> &mdash; Gap framing, the principle, the call to keep the tool dumb.</li>
+        <li><strong>Claude</strong> &mdash; Tool implementation, conflict-scan logic, output structure.</li>
+    </ul>
+
+    <div class="section-header"><span class="section-number zone-writing">05</span><h2>Why this matters</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>The agent doesn&rsquo;t blindly follow rules. It has a judgement layer that sits between instruction and action &mdash; and that layer is shaped by signals in the live chat that no static file carries. Static rules, no matter how well-organized, can&rsquo;t fully constrain behavior. Most rule systems aren&rsquo;t built for that part.</p>
+
+    <p>Reliable outcomes require managing both layers: the <strong>memory layer</strong> (which this audit makes inspectable) and the <strong>live channel</strong> (which it doesn&rsquo;t). Live-channel discipline is its own design problem &mdash; being deliberate in real time, with specific vocabularies, engagement protocols, and keyword triggers for repeat behavior.</p>
+
+    <blockquote class="pull-quote">
+        It doesn&rsquo;t blindly follow rules &mdash; it has its own judgement layer.
+    </blockquote>
+
+    <p>Where this goes next is open. Two threads to explore: emotional influence on the model, and structured engagement rules and keyword choices for driving reliability.</p>
+
+    <p class="meta-comment">Open / deferred: layer 2 codification (engagement rules + keyword triggers) &rarr; next move &middot; emotional influence on the model &rarr; research thread &middot; stranger test &rarr; outside reader pass.</p>
+
+    </article>
+
+    <div class="post-footer">
+        <a href="/">&larr; rowbyroh</a>
+    </div>
+
+    <footer>
+        <a href="mailto:daniel@rowbyroh.com">email</a> &middot;
+        <a href="https://discord.com/users/rbrdelta">discord</a> &middot;
+        <a href="https://github.com/rbrdelta">github</a> &middot;
+        <a href="https://linkedin.com/in/drohh">linkedin</a> &middot;
+        <a href="/colophon">colophon</a>
+        <div style="margin-top: 0.5rem;">&copy; 2026 rowbyroh.com</div>
+    </footer>
+
+    <script src="/assets/js/scroll.js"></script>
+</body>
+</html>
