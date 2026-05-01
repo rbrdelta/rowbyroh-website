@@ -21,7 +21,7 @@
     },
     {
         "id": "fn-conversation-sync",
-        "title": "Field Note 01 — Conversation Sync",
+        "title": "Field Note 01 — Hidden Connector",
         "type": "field-note",
         "description": "Three surfaces, one backend. There is an API door — just not for me. Started with data portability, built the sync.",
         "date": "Apr 2026",
@@ -41,7 +41,7 @@
     },
     {
         "id": "fn-headless-parity",
-        "title": "Field Note 02 — Headless Parity",
+        "title": "Field Note 02 — Go a Level Deeper",
         "type": "field-note",
         "description": "Started with a bandwidth problem. Built a template. The spec is the highest-leverage point in agentic work — depth at the foundation compounds upward.",
         "date": "Apr 2026",
@@ -60,7 +60,7 @@
     },
     {
         "id": "fn-batch-approval",
-        "title": "Field Note 05 — Batch Approval",
+        "title": "Field Note 05 — How Can I Help?",
         "type": "field-note",
         "description": "When the model shows you its limitations, the right reaction is not frustration, but anticipation. The work isn't predicting harder; it's anticipating for the agent.",
         "date": "Apr 2026",
