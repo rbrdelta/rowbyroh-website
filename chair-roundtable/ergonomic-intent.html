@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ergonomic Intent — Chair Roundtable | rowbyroh</title>
+    <meta name="description" content="Part one of a fictional roundtable on first-principles chair design — ergonomics from the hip up, and who you are really designing for.">
+    <meta property="og:title" content="Ergonomic Intent — Chair Roundtable">
+    <meta property="og:description" content="The body sets everything: hip angle, the three critical angles, and the first real choice — who you build for.">
+    <meta property="og:url" content="https://rowbyroh.com/chair-roundtable/ergonomic-intent">
+    <meta property="og:type" content="article">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background: #f8f8f6;
+            color: #1a1a1a;
+            font-weight: 400;
+            line-height: 1.8;
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 3rem 2rem 4rem;
+        }
+
+        h1 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.3rem;
+        }
+
+        .page-subtitle {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.78rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .premise {
+            font-style: italic;
+            color: #555;
+            font-size: 0.88rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .roster {
+            margin-bottom: 2.5rem;
+        }
+        .roster h2 {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.8rem;
+        }
+
+        .roster ul {
+            list-style: none;
+            padding: 0;
+        }
+        .roster li {
+            font-size: 0.88rem;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+            font-weight: 400;
+        }
+        .roster li strong {
+            font-weight: 600;
+        }
+        .roster li em {
+            color: #888;
+            font-size: 0.82rem;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 2px;
+            background: #e84040;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+            opacity: 0.7;
+        }
+
+        /* Stage directions — narrative voice */
+        .stage {
+            font-style: italic;
+            color: #888;
+            font-size: 0.88rem;
+            margin: 1.8rem 0 1.2rem;
+            font-weight: 400;
+        }
+
+        p { margin-bottom: 1rem; font-size: 0.92rem; font-weight: 400; }
+
+        .me {
+            padding-left: 1rem;
+            border-left: 2px solid #1a1a1a;
+            margin: 1.4rem 0;
+        }
+        .me .name {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-weight: 600;
+            font-size: 0.72rem;
+            color: #1a1a1a;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .designer {
+            padding-left: 1rem;
+            border-left: 2px solid #ddd;
+            margin: 1.4rem 0;
+        }
+        .designer .name {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-weight: 500;
+            font-size: 0.72rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .designer p, .me p { margin-bottom: 0.6rem; }
+        .designer p:last-child, .me p:last-child { margin-bottom: 0; }
+
+        ol, ul {
+            padding-left: 1.3rem;
+            margin-bottom: 1rem;
+            font-size: 0.88rem;
+        }
+        li { margin-bottom: 0.4rem; }
+
+        .assignment {
+            background: #fafafa;
+            border: 1px solid #e8e8e8;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .assignment h3 {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.8rem;
+        }
+        .assignment ul {
+            list-style: none;
+            padding: 0;
+            font-size: 0.88rem;
+        }
+        .assignment li {
+            padding-left: 1.2rem;
+            position: relative;
+        }
+        .assignment li::before {
+            content: '\25A1';
+            position: absolute;
+            left: 0;
+            color: #888;
+        }
+
+        .questions {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+        }
+        .questions h2 {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.8rem;
+        }
+        .questions li {
+            color: #1a1a1a;
+            font-size: 0.88rem;
+        }
+
+        .post-meta {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.7rem;
+            color: #888;
+            margin-bottom: 0.3rem;
+            font-weight: 400;
+        }
+
+        .post-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.82rem;
+        }
+        .post-nav a {
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+        .post-nav a:hover { color: #e84040; }
+        .nav-prev::before { content: '\2190  '; }
+        .nav-next::after { content: '  \2192'; }
+
+        .post-footer {
+            margin-top: 2rem;
+            font-size: 0.78rem;
+            color: #888;
+        }
+        .post-footer a {
+            color: #888;
+            text-decoration: none;
+        }
+        .post-footer a:hover { color: #1a1a1a; }
+
+        .copyright {
+            margin-top: 4rem;
+            font-size: 0.6rem;
+            color: #888;
+            text-align: right;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 2rem 1.2rem 3rem; }
+            h1 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="breadcrumb"><a href="/">rowbyroh</a><span class="sep">/</span><a href="/archive">all work</a></nav>
+
+    <div class="post-meta">May 2026</div>
+    <h1>Ergonomic Intent</h1>
+    <div class="page-subtitle">Chair Roundtable &middot; Session 1 &middot; Part 1 of 3</div>
+    <p class="premise">Part one of a fictional roundtable with six of history&rsquo;s greatest chair designers. The mission: make quality furniture available to all. It starts with the body &mdash; what sitting asks of it, and who you are really designing for.</p>
+
+    <div class="roster">
+        <h2>The Table</h2>
+        <ul>
+            <li><strong>Michael Thonet</strong> <em>(1796&ndash;1871)</em> &mdash; No. 14 bistro chair. Democratic access through industrial elegance.</li>
+            <li><strong>Gerrit Rietveld</strong> <em>(1888&ndash;1964)</em> &mdash; Red and Blue Chair. A chair is an idea made physical.</li>
+            <li><strong>Charles Eames</strong> <em>(1907&ndash;1978)</em> &mdash; Shell Chairs, Lounge. The best for the most for the least.</li>
+            <li><strong>Hans Wegner</strong> <em>(1914&ndash;2007)</em> &mdash; The Chair, Wishbone. Joint as ornament. No back side.</li>
+            <li><strong>Jean Prouv&eacute;</strong> <em>(1901&ndash;1984)</em> &mdash; Standard Chair. Form follows force. Constructive logic.</li>
+            <li><strong>Jasper Morrison</strong> <em>(1959&ndash;present)</em> &mdash; Air Chair, Ply Chair. Super Normal &mdash; design that disappears.</li>
+        </ul>
+    </div>
+
+    <!-- TRANSCRIPT -->
+
+    <p class="stage">The six designers settle into their chairs. Thonet straightens. Morrison leans back. Wegner runs his thumb along the edge of the table, feeling the joint.</p>
+
+    <div class="designer">
+        <span class="name">Thonet</span>
+        <p>You say sitting implies intent &mdash; to eat, converse, relax, read. This is exactly right, and it is why I spent my life on the chair and not the bed. The bed receives you passively. The chair collaborates with your purpose. And your definition of quality &mdash; &ldquo;the culmination of intent at every step&rdquo; &mdash; I could not have said it better. This is what my No. 14 is. Every decision in that chair was intentional, and every intention was toward the same end: more people sitting well.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Morrison</span>
+        <p>You said quality &ldquo;exceeds the average standard of living in a way that draws more demand than is possible to create sufficient supply.&rdquo; Be careful. That is luxury positioning. The best chair doesn&rsquo;t create desire through scarcity. It creates satisfaction through rightness. My Air Chair costs very little. You can buy it anywhere. Nobody photographs it for magazines. And it is one of the most successful chairs ever made, because it works &mdash; indoors, outdoors, stacked, forgotten, rained on, sat in for hours. Quality that creates artificial scarcity is not quality. It&rsquo;s marketing.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Eames</span>
+        <p>I think you&rsquo;re both right, but I hear something important in what our friend said &mdash; &ldquo;long term thinking about the meaning of value and cost.&rdquo; Ray and I lived inside that question. Cost is what the maker pays. Price is what the buyer pays. Value is what the sitter receives over a lifetime. These three numbers should be as close together as possible. When cost and price diverge wildly, someone is being exploited &mdash; either the maker or the buyer. When price and value diverge, the design has failed. Your job, if you want to make chairs for everyone, is to collapse those three numbers toward each other.</p>
+    </div>
+
+    <p class="stage">Now, Hans Wegner leans forward:</p>
+
+    <div class="designer">
+        <span class="name">Wegner</span>
+        <p>You speak beautifully about intent and thoughtfulness. But I notice you said nothing about the body. You listed the purposes of sitting &mdash; eating, conversing, relaxing, reading &mdash; and each of those demands a different posture. The dining chair tips you slightly forward. The reading chair supports a recline. The conversational chair must allow you to shift, turn, gesture. Before you design anything, I need to know: which of these sitting purposes will you design for first, and can you describe what the body is actually doing in that posture? Not the mind&rsquo;s intent &mdash; the spine&rsquo;s position, the hip angle, where the weight falls.</p>
+    </div>
+
+    <div class="me">
+        <span class="name">Me</span>
+        <p>I have never really studied ergonomics &mdash; but if I were to break it down, it would start with the relationship between the hips and the feet. The hips have to be engaged, feet firmly on the ground for a dining chair or a meeting chair. The hips would relax and feet position can elevate, be supported by a secondary bar or be cross legged if this is a chaise or a lounge chair. That&rsquo;s the start, then I would think about posture, lumbar support, thoracic support or not, and how much of the neck and the head are supported or not.</p>
+    </div>
+
+    <p class="stage">Wegner nods slowly.</p>
+
+    <div class="designer">
+        <span class="name">Wegner</span>
+        <p>You have good instincts. You started at the foundation &mdash; the hip-foot relationship &mdash; and worked upward. This is correct. Most beginners start with the back, because that is where they feel pain. But pain in the back is almost always caused by failure at the seat. The seat is the foundation of everything.</p>
+        <p>Your distinction between engaged hips and relaxed hips &mdash; this is the fundamental fork in all chair design. I would sharpen it further: when the hips are engaged, the thighs slope downward from hip to knee. The seat height is at or just above knee height. The angle between torso and thigh is roughly 90 to 100 degrees. This is your dining chair, your work chair. When the hips relax, that angle opens &mdash; 105, 110, 120 degrees &mdash; and the seat drops below the knee. This is your lounge. Every decision that follows &mdash; back angle, lumbar depth, armrest height &mdash; cascades from that single angle at the hip.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Prouv&eacute;</span>
+        <p>Wegner is being poetic. Let me give you the engineering. There are three critical angles in any chair, and if you learn these, you can analyze every chair you ever sit in:</p>
+        <p>First, the seat angle &mdash; the tilt of the seat pan itself, typically 0 to 5 degrees for a task chair, up to 15 degrees for a lounge. Second, the back angle relative to the seat &mdash; 90 to 95 degrees for dining, 100 to 110 for relaxed sitting, beyond that you are designing a recliner. Third, the one most makers ignore &mdash; the seat height relative to the popliteal height, the distance from the floor to the crease behind the knee. Get this wrong by even two centimeters and the sitter feels pressure behind the thighs, blood flow restricts, and they stand up within twenty minutes without knowing why.</p>
+        <p>Know the forces. In a chair, the body&rsquo;s weight is the force.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Morrison</span>
+        <p>You framed lumbar, thoracic, and head support as a spectrum of &ldquo;how much.&rdquo; Reverse the question. Not &ldquo;how much support should I add?&rdquo; but &ldquo;what is the minimum structure that lets the body find its own comfort?&rdquo;</p>
+        <p>The human body is not static. We shift, we lean, we cross and uncross. A chair that dictates a single posture &mdash; no matter how ergonomically perfect that posture is &mdash; becomes a prison within thirty minutes. The best chairs give you a range of comfortable positions. My Ply Chair has almost no lumbar support in the traditional sense. What it has is a subtle curve and a slight flex in the plywood that lets you move within it. People sit in it for hours without thinking about it. That is the test.</p>
+    </div>
+
+    <p class="stage">Charles Eames taps the table:</p>
+
+    <div class="designer">
+        <span class="name">Eames</span>
+        <p>You said you haven&rsquo;t studied ergonomics, but you just reasoned your way to the hip-foot foundation on your own, which tells me you think from observation, not from textbooks. Good &mdash; Ray and I worked the same way. So here is my question for you, and it is a practical one: you now know that the hip angle is the master variable. A dining chair and a lounge chair are essentially two different machines for two different hip angles. If your mission is to make chairs available to everyone, and you had to choose just ONE of those two to start with &mdash; the upright or the reclined &mdash; which do you build first, and why?</p>
+        <p>Think about where the greatest unmet need is. Think about which one teaches you more as a maker. Think about which one people will actually use every day.</p>
+    </div>
+
+    <div class="me">
+        <span class="name">Me</span>
+        <p>I lean towards the lounge chair. From a practical cost consideration I know that&rsquo;s not correct. But the lounge chair is more valuable. Psychologically, people want a place to sit, so they can &ldquo;be at home&rdquo;. Eating is more specific and doesn&rsquo;t give you the same psychological sense of rest or comfort. A lounge can be versatile &mdash; you can relax, eat, work, add a cushion to change the seating angle and support profile. I think there&rsquo;s a reason why the IKEA Po&auml;ng chair is everywhere.</p>
+    </div>
+
+    <p class="stage">Eames smiles.</p>
+
+    <div class="designer">
+        <span class="name">Eames</span>
+        <p>You just did something interesting &mdash; you gave your answer, then immediately told us why it was wrong, then argued yourself back into it. That instinct to question your own reasoning in real time is valuable. Don&rsquo;t lose it.</p>
+        <p>But I must push back. You say the lounge chair is more versatile &mdash; that you can relax, eat, work from it. Have you tried to eat dinner at a proper table from a lounge chair? The hip angle is wrong. Your arms reach upward instead of forward. You hunch. You compensate. A lounge chair that tries to be a dining chair is a lounge chair that fails at both. Ray and I learned this the hard way &mdash; versatility is not the same as universality. Our shell chair succeeded because we didn&rsquo;t make one shape do everything. We made one shape accept different bases that changed its purpose.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Morrison</span>
+        <p>There is something correct in your instinct, even if the reasoning needs work. You mentioned the Po&auml;ng. Study it &mdash; one of the most important chairs of the last fifty years, and almost no designer will admit it. It is affordable. It is comfortable for long periods because the cantilevered frame has natural flex &mdash; the whole chair breathes with you. It ships flat. It is made from bent laminated birch, which Thonet here would appreciate. And nobody calls it beautiful. Nobody puts it in a magazine. It simply works, in millions of homes, across decades. That is Super Normal whether IKEA intended it or not.</p>
+        <p>The question is &mdash; why does the design world ignore it while celebrating chairs that cost fifty times more and serve people fifty times less?</p>
+    </div>
+
+    <p class="stage">Thonet leans forward:</p>
+
+    <div class="designer">
+        <span class="name">Thonet</span>
+        <p>Because I know this problem intimately. My No. 14 was the Po&auml;ng of the nineteenth century. It was everywhere &mdash; in every caf&eacute; from Vienna to Buenos Aires. And for exactly that reason, tastemakers dismissed it. When something is truly accessible, the elite must reject it to maintain distinction. This is not a design problem. It is a social problem. And you must decide early: are you designing for the approval of other designers, or for the person who comes home exhausted and needs somewhere good to sit? You cannot do both. I chose. Morrison chose. Eames chose. You must choose.</p>
+    </div>
+    <div id="post-nav" class="post-nav"></div>
+
+    <div class="post-footer">
+        <p><a href="/archive">All work</a></p>
+    </div>
+
+    <div class="copyright">rowbyroh.com &copy; 2026</div>
+
+    <script src="/assets/js/writing.js"></script>
+</body>
+</html>

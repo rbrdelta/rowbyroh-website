@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Process — Chair Roundtable | rowbyroh</title>
+    <meta name="description" content="Part three of a fictional roundtable on first-principles chair design — prototyping a chair from a small apartment with a hand saw, cardboard, and very little time.">
+    <meta property="og:title" content="Build Process — Chair Roundtable">
+    <meta property="og:description" content="Production paths, sketch-model-engineer, constraint as a forcing function, and the build-one-seat assignment.">
+    <meta property="og:url" content="https://rowbyroh.com/chair-roundtable/build-process">
+    <meta property="og:type" content="article">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background: #f8f8f6;
+            color: #1a1a1a;
+            font-weight: 400;
+            line-height: 1.8;
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 3rem 2rem 4rem;
+        }
+
+        h1 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.3rem;
+        }
+
+        .page-subtitle {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.78rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .premise {
+            font-style: italic;
+            color: #555;
+            font-size: 0.88rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .roster {
+            margin-bottom: 2.5rem;
+        }
+        .roster h2 {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.8rem;
+        }
+
+        .roster ul {
+            list-style: none;
+            padding: 0;
+        }
+        .roster li {
+            font-size: 0.88rem;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+            font-weight: 400;
+        }
+        .roster li strong {
+            font-weight: 600;
+        }
+        .roster li em {
+            color: #888;
+            font-size: 0.82rem;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 2px;
+            background: #e84040;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+            opacity: 0.7;
+        }
+
+        /* Stage directions — narrative voice */
+        .stage {
+            font-style: italic;
+            color: #888;
+            font-size: 0.88rem;
+            margin: 1.8rem 0 1.2rem;
+            font-weight: 400;
+        }
+
+        p { margin-bottom: 1rem; font-size: 0.92rem; font-weight: 400; }
+
+        .me {
+            padding-left: 1rem;
+            border-left: 2px solid #1a1a1a;
+            margin: 1.4rem 0;
+        }
+        .me .name {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-weight: 600;
+            font-size: 0.72rem;
+            color: #1a1a1a;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .designer {
+            padding-left: 1rem;
+            border-left: 2px solid #ddd;
+            margin: 1.4rem 0;
+        }
+        .designer .name {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-weight: 500;
+            font-size: 0.72rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .designer p, .me p { margin-bottom: 0.6rem; }
+        .designer p:last-child, .me p:last-child { margin-bottom: 0; }
+
+        ol, ul {
+            padding-left: 1.3rem;
+            margin-bottom: 1rem;
+            font-size: 0.88rem;
+        }
+        li { margin-bottom: 0.4rem; }
+
+        .assignment {
+            background: #fafafa;
+            border: 1px solid #e8e8e8;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .assignment h3 {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.8rem;
+        }
+        .assignment ul {
+            list-style: none;
+            padding: 0;
+            font-size: 0.88rem;
+        }
+        .assignment li {
+            padding-left: 1.2rem;
+            position: relative;
+        }
+        .assignment li::before {
+            content: '\25A1';
+            position: absolute;
+            left: 0;
+            color: #888;
+        }
+
+        .questions {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+        }
+        .questions h2 {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.8rem;
+        }
+        .questions li {
+            color: #1a1a1a;
+            font-size: 0.88rem;
+        }
+
+        .post-meta {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.7rem;
+            color: #888;
+            margin-bottom: 0.3rem;
+            font-weight: 400;
+        }
+
+        .post-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.82rem;
+        }
+        .post-nav a {
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+        .post-nav a:hover { color: #e84040; }
+        .nav-prev::before { content: '\2190  '; }
+        .nav-next::after { content: '  \2192'; }
+
+        .post-footer {
+            margin-top: 2rem;
+            font-size: 0.78rem;
+            color: #888;
+        }
+        .post-footer a {
+            color: #888;
+            text-decoration: none;
+        }
+        .post-footer a:hover { color: #1a1a1a; }
+
+        .copyright {
+            margin-top: 4rem;
+            font-size: 0.6rem;
+            color: #888;
+            text-align: right;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 2rem 1.2rem 3rem; }
+            h1 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="breadcrumb"><a href="/">rowbyroh</a><span class="sep">/</span><a href="/archive">all work</a></nav>
+
+    <div class="post-meta">May 2026</div>
+    <h1>Build Process</h1>
+    <div class="page-subtitle">Chair Roundtable &middot; Session 1 &middot; Part 3 of 3</div>
+    <p class="premise">Part three. Principles give way to practice: how to prototype a chair from a small apartment with a hand saw, some cardboard, and very little time.</p>
+
+    <div class="roster">
+        <h2>The Table</h2>
+        <ul>
+            <li><strong>Michael Thonet</strong> <em>(1796&ndash;1871)</em> &mdash; No. 14 bistro chair. Democratic access through industrial elegance.</li>
+            <li><strong>Gerrit Rietveld</strong> <em>(1888&ndash;1964)</em> &mdash; Red and Blue Chair. A chair is an idea made physical.</li>
+            <li><strong>Charles Eames</strong> <em>(1907&ndash;1978)</em> &mdash; Shell Chairs, Lounge. The best for the most for the least.</li>
+            <li><strong>Hans Wegner</strong> <em>(1914&ndash;2007)</em> &mdash; The Chair, Wishbone. Joint as ornament. No back side.</li>
+            <li><strong>Jean Prouv&eacute;</strong> <em>(1901&ndash;1984)</em> &mdash; Standard Chair. Form follows force. Constructive logic.</li>
+            <li><strong>Jasper Morrison</strong> <em>(1959&ndash;present)</em> &mdash; Air Chair, Ply Chair. Super Normal &mdash; design that disappears.</li>
+        </ul>
+    </div>
+
+    <!-- TRANSCRIPT -->
+
+    <p class="stage">The body and the material are settled &mdash; a low seat in pine, with a woven surface, for the person who lives, works, and eats in one room. Now the table turns to how you actually make it.</p>
+
+    <p class="stage">Thonet clears his throat:</p>
+
+    <div class="designer">
+        <span class="name">Thonet</span>
+        <p>We have talked about materials, ergonomics, the modern condition. Back to the beginning &mdash; making chairs available to all. You have ten years of woodworking. You know pine. You are thinking about woven surfaces and biodegradable materials. You clearly have both craft and conscience.</p>
+        <p>So now the most practical question any of us will ask you tonight: how do you intend to actually produce these chairs? One at a time in your own workshop? In batches with a small team? Through a manufacturer? Each path constrains your design in completely different ways. A hand-built chair can have complex joinery. A batch-produced chair needs jigs and repeatable processes. A manufactured chair must be designed for machines you may not own. Which path are you choosing, and how does that choice change the chair you just described to us?</p>
+    </div>
+
+    <div class="me">
+        <span class="name">Me</span>
+        <p>I don&rsquo;t want to remove the front stretcher. It is critical to have an undercarriage that can make the chair stronger over time with compression. The shape depends on the brief and situation (H shaped, staggered, etc). I simply said I want to get rid of the seam in the seat that makes the saddle a &ldquo;w&rdquo; instead of a &ldquo;u&rdquo;. Hope that clarifies.</p>
+        <p>Pine is the cheaper alternative. For mass produced quality pieces, I may lean towards Oak or Ash. Workable, extremely durable, can last for generations if handled, built and cared for properly. This production question is what I am wrestling with most &mdash; I live in a small NY apartment, limited space, tooling and time. I don&rsquo;t have the luxury of building a Windsor shoe from scratch or teaching myself greenwood techniques. So I would need to understand how to use everyday common materials from a hardware store lumber to make a stick chair, or how I can use mixed media &mdash; bent steel tubes at the local factory to test.</p>
+        <p>And that gets at my major question &mdash; how do you prototype? Is it by sketching? Making scaled models. Using CAD?</p>
+    </div>
+
+    <p class="stage">The table comes alive. This is the question they&rsquo;ve all been waiting for.</p>
+
+    <div class="designer">
+        <span class="name">Eames</span>
+        <p>Finally. You have arrived at the real work. Everyone wants to talk about philosophy and materials &mdash; Ray and I wanted to talk about process. And I will tell you exactly how we did it.</p>
+        <p>We did all three and we did them in a specific order. First, we sketched &mdash; not to make beautiful drawings, but to think with our hands. A sketch is a conversation with yourself. It takes thirty seconds and it tells you whether an idea has life in it or not. We filled thousands of pages with sketches that went nowhere, and that was the point. Second, we built models &mdash; rough, fast, ugly models. Our plywood splints started as shapes draped over a plaster cast of a leg. No precision. Just does this curve feel right against the body? Third, and only third, did we engineer for production.</p>
+        <p>The order matters. If you start with CAD, you are optimizing before you have discovered. If you start with a finished prototype, you have invested too much to abandon a bad idea. Sketch to discover. Model to test. Engineer to produce.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Prouv&eacute;</span>
+        <p>Eames is right about the sequence. But your real constraint is mine too. I did not start in a factory. I started in a metalworking shop in Nancy with a few tools and my hands. Your small apartment in New York is not a limitation &mdash; it is a forcing function.</p>
+        <p>You cannot build a full chair in that space, so do not try. Build components. Build one joint. Build one leg assembly. Build the seat and nothing else. Test each piece independently. A chair is an assembly of relationships &mdash; you do not need to build the whole thing to learn whether the seat-to-leg connection works. Take your pine or your oak, cut two pieces, and join them at the angle you intend for the back leg to meet the seat. Sit force on it. Does it flex? Does it hold? Does it feel right in your hand? You can do this on a workbench that fits in a closet.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Wegner</span>
+        <p>I made more than five hundred chairs and I will tell you my secret. I never began with a complete design. I began with a joint and a feeling. I would hold two pieces of wood together at an angle and ask &mdash; does this transition want to be sharp or does it want to flow? Then I would carve just that transition, that one moment where the pieces meet. Sometimes a whole chair grew from a single joint that felt right.</p>
+        <p>Your constraint is real &mdash; space, tools, time &mdash; but a joint needs only a saw, a chisel, and a piece of scrap wood. Start there.</p>
+        <p>What I will caution against is CAD as a starting point. CAD is seductive because it looks finished. You rotate the model, you render it, you believe you have designed a chair. You have not. You have designed a picture of a chair. Until your hands have felt the angle, until you have sat your weight on a joint, until you have heard wood creak under load &mdash; you do not yet know what you have. Use CAD later to communicate with a manufacturer. But in the beginning, think with wood, not with screens.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Morrison</span>
+        <p>I disagree with Wegner, partially. For someone in a small apartment with limited shop access, CAD has one advantage nobody here is acknowledging: you iterate without consuming material. You can design forty seat profiles in an evening and compare them side by side. You can test proportions at full scale on a screen before you commit a single board. The danger Wegner describes is real &mdash; do not mistake the render for the reality &mdash; but the solution is discipline, not avoidance. Use CAD for exploration, then build the three or four most promising options as physical prototypes. Do not build all forty.</p>
+        <p>And your instinct about hardware-store materials is right. Your first prototypes should cost almost nothing. Construction lumber pine. Dowels instead of turned spindles. Off-the-shelf steel tube if you want to test a hybrid frame. Each prototype should answer exactly one question. Does this angle work? Does this height feel right? Does this flex pattern support the lower back? If you try to answer five questions with one prototype, you learn nothing when it fails &mdash; you will not know which question produced the failure.</p>
+    </div>
+
+    <p class="stage">Morrison pauses, then looks at you directly.</p>
+
+    <div class="designer">
+        <span class="name">Morrison</span>
+        <p>You said you live in a small apartment and that limits your tooling and space. I understand this well &mdash; I designed my first chairs in a London flat that was not much bigger. But let me ask you something specific. Given your constraints, what tools do you actually have access to right now? And separately, is there a maker space, a shared shop, a local fabricator within reach? Because the answer changes everything about how we advise you on your first prototype. A man with a table saw and a drill press has a different path than a man with a hand saw and a workbench. Tell us what you are working with and we will tell you what to build first.</p>
+    </div>
+
+    <div class="me">
+        <span class="name">Me</span>
+        <p>I have a Japanese handsaw and a vintage Stanley jack plane. But I don&rsquo;t have a workbench or a holding solution. There is a shop I can pay for, but it is pricey. It has everything &mdash; chop saw, jointer, planer, drill press, table saw, dado stack, lathes, etc. Haven&rsquo;t researched metal fabricators in my area.</p>
+        <p>The other constraint is time &mdash; I have a little one so there&rsquo;s very little disposable time other than late at night when the shop is not open. So a lot of this can&rsquo;t be prototyping. It has to be more design, sketch, tape, glue type deal. I have fabric and project colored paper things so I can produce with cardboard and others.</p>
+    </div>
+
+    <p class="stage">The energy at the table shifts. The designers lean in &mdash; this is a constraint problem now, and constraint is where design actually happens.</p>
+
+    <div class="designer">
+        <span class="name">Eames</span>
+        <p>Now we are talking. You just described the exact conditions under which the best design happens. You have a Japanese saw, a jack plane, no bench, a toddler asleep in the next room, and cardboard. This is magnificent.</p>
+        <p>Do you know what Ray and I had when we started molding plywood in our apartment on Strathmore Drive? An oven, some wood scraps, and a homemade press we called the Kazam! machine. The Eames leg splint &mdash; which led to every molded plywood chair we ever made &mdash; was prototyped in a one-bedroom apartment. Your constraints are not obstacles to your mission. They are your design brief.</p>
+        <p>Cardboard is an extraordinary prototyping material and you should not think of it as a compromise. It bends. It folds. It holds shape when laminated. You can build a full-scale chair from corrugated cardboard in an evening, sit in it, feel the angles, adjust with scissors and tape, and iterate again the next night. Frank Gehry built an entire furniture line from cardboard &mdash; the Easy Edges series &mdash; and those were production pieces, not prototypes. At your stage, cardboard is better than wood because the cost of failure is zero. You can build and destroy five versions in the time it would take to make one joint in oak.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Prouv&eacute;</span>
+        <p>Listen to Eames about cardboard. But you need a method, not just encouragement.</p>
+        <p>Build what I call a force skeleton. Take heavy corrugated cardboard &mdash; double wall if you can find it &mdash; and cut the side profile of your chair. Just the side view. One piece. The back leg flowing up into the back, the seat connecting to the front leg. Cut two of these profiles and connect them with cross pieces at the seat depth and at the rail heights. You now have a three-dimensional frame that you can sit in.</p>
+        <p>It will flex. It will lean. It will probably collapse the first time. Good. Where it collapses is the lesson. That failure point is telling you where the forces concentrate. Reinforce that point, sit again, find the next failure. You are reverse-engineering the structure through destruction. This costs you nothing but cardboard and tape, and you can do it at midnight on your living room floor while the baby sleeps.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Wegner</span>
+        <p>The time constraint. I raised my children while designing chairs, so I know what it costs. The work does not stop when you leave the workshop.</p>
+        <p>Carry a small notebook. When you sit in a chair at a restaurant, sketch the profile from the side. Just the outline &mdash; thirty seconds. Note the seat height with your hand span. Note where your back makes contact and where it does not. Note whether your feet are flat or reaching. In six months you will have a library of chair profiles drawn from life, and you will begin to see the patterns &mdash; which proportions recur in the chairs that feel good, which angles fail. This is study that requires no tools, no shop, no space. Only attention. And it is the most valuable research you can do.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Morrison</span>
+        <p>The methods are all sound. But name where you actually are. This phase does not look like progress. It looks like sketching on scrap paper and bending cardboard and reading this conversation late at night. No chair yet. No product. No prototype a visitor would recognize as furniture.</p>
+        <p>This is where the design happens &mdash; absorbing principles, training your eye, failing with cheap materials. Everything after is execution. Do not rush past it because you feel pressure to produce something tangible. If you are not embarrassed by how crude it looks, you spent too long on it.</p>
+    </div>
+
+    <p class="stage">Thonet, who has been listening quietly, speaks last.</p>
+
+    <div class="designer">
+        <span class="name">Thonet</span>
+        <p>Your situation reminds me of my own beginning. I started bending wood in a small workshop in Boppard &mdash; no factory, no investors, just glue and heat and stubbornness. It took me fifteen years before the No. 14 existed. I am not telling you to wait fifteen years. I am telling you that the path from your apartment floor to ten thousand chairs is long, and every step on it teaches you something you cannot skip.</p>
+        <p>Enough about process. Back to the chair itself. You told us earlier you would choose a lounge as your first chair. You have described your material instincts &mdash; pine for prototyping, oak or ash for production, woven or bio-based surfaces for the seat. You have told us about the modern person living alone, the coffee table as the center of life, the blurring of work and rest. You have cardboard and a Japanese saw and late nights.</p>
+        <p>So here is your assignment from this table. Before our next session, build one thing. Not a chair &mdash; a seat. Just the seat. From cardboard, from scrap wood, from whatever you have. Make it the size and shape you believe is correct for the person you described &mdash; the one living alone, working from the couch, eating at the coffee table. Bring it back to us and tell us what you learned when you sat on it. We will know from your description whether you are ready for the next step.</p>
+        <p>Will you accept this assignment?</p>
+    </div>
+
+    <div class="me">
+        <span class="name">Me</span>
+        <p>Let&rsquo;s do it.</p>
+    </div>
+
+    <p class="stage">Thonet stands, places both hands flat on the table.</p>
+
+    <div class="designer">
+        <span class="name">Thonet</span>
+        <p>Good. Then we are agreed. Let me be specific about what we want from you. Do not overthink this. The seat should be roughly 16 to 18 inches wide, 15 to 17 inches deep. These are not rules &mdash; they are starting points based on the average human pelvis. If you are building for yourself first, measure from the outside of one hip to the other while seated and add two inches. That is your width.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Prouv&eacute;</span>
+        <p>And decide the height before you cut anything. You said this person sits at a coffee table. A standard coffee table is 16 to 18 inches high. If the seat is at the same height as the table surface, eating and working become impossible. If the seat is lower, you are reaching up to your coffee and your laptop, which destroys the shoulders within an hour. So your seat height should be at or just slightly above the table surface &mdash; meaning you are designing a low seat, somewhere between 12 and 15 inches off the ground. This is not a dining chair. This is not a standard lounge. This is something in between, and that is precisely why it does not exist yet.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Morrison</span>
+        <p>Laminate your cardboard. Single-wall corrugated is too weak for a seat test. Glue three or four layers together with the flute directions alternating &mdash; one running left to right, the next front to back. This gives you a rigid panel that can support your weight for long enough to learn something. If it collapses, that is data. Use packing tape for speed. White glue for anything you want to keep overnight.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Wegner</span>
+        <p>And when you sit on it &mdash; close your eyes. Do not look at what you built. Feel it. Where does the pressure concentrate? Where do you want to shift but cannot? Where does the edge bite into the back of your thigh? Open your eyes and mark those points with a pen. Those marks are your second iteration.</p>
+    </div>
+
+    <div class="designer">
+        <span class="name">Eames</span>
+        <p>One last thing. Take a photograph from the side while you are sitting on it. Have your wife take it if you can. You will not be able to assess your own posture from inside the experience. The photograph shows you what the chair is actually doing to your body versus what you think it is doing. Bring the photo and the marked-up seat back to this table and we will read it together.</p>
+    </div>
+
+    <p class="stage">The designers push their chairs back. Morrison gives a small nod. Wegner is already thinking about your joint problem. Prouv&eacute; is calculating your load angles. Rietveld, quiet all evening, is wondering what spatial idea this strange low seat will embody. The table will be here when you return.</p>
+
+    <!-- ASSIGNMENT -->
+    <div class="assignment">
+        <h3>The Assignment</h3>
+        <ul>
+            <li>Build a seat (not a full chair) from cardboard</li>
+            <li>Target: 16&ndash;18&Prime; wide, 15&ndash;17&Prime; deep, 12&ndash;15&Prime; high</li>
+            <li>Laminate 3&ndash;4 cardboard layers, alternating flute directions</li>
+            <li>Sit test with eyes closed, mark pressure points with pen</li>
+            <li>Get a side-view photograph while seated</li>
+            <li>Note: what did the body tell you?</li>
+        </ul>
+    </div>
+
+    <!-- OPEN QUESTIONS -->
+    <div class="questions">
+        <h2>Open Questions</h2>
+        <ul>
+            <li>How does the Po&auml;ng&rsquo;s cantilevered flex work structurally?</li>
+            <li>Best joints for a stick chair from hardware store lumber?</li>
+            <li>How did Risom&rsquo;s material separation principle evolve?</li>
+            <li>What plant-derived polymers are viable for furniture now?</li>
+            <li>Who works on the &ldquo;chair you grab 15 times a day&rdquo;?</li>
+            <li>Minimum viable tool kit for chair component prototyping?</li>
+        </ul>
+    </div>
+
+    <div id="post-nav" class="post-nav"></div>
+
+    <div class="post-footer">
+        <p><a href="/archive">All work</a></p>
+    </div>
+
+    <div class="copyright">rowbyroh.com &copy; 2026</div>
+
+    <script src="/assets/js/writing.js"></script>
+</body>
+</html>
