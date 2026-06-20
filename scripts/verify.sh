@@ -38,7 +38,6 @@ PAGES=(
     "/about"
     "/archive"
     "/colophon"
-    "/chair-roundtable"
     "/chair-roundtable/ergonomic-intent"
     "/chair-roundtable/material-values"
     "/chair-roundtable/build-process"
