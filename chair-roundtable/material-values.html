@@ -11,246 +11,23 @@
     <meta property="og:type" content="article">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'IBM Plex Mono', monospace;
-            background: #f8f8f6;
-            color: #1a1a1a;
-            font-weight: 400;
-            line-height: 1.8;
-            max-width: 680px;
-            margin: 0 auto;
-            padding: 3rem 2rem 4rem;
-        }
-
-        h1 {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 0.3rem;
-        }
-
-        .page-subtitle {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 0.78rem;
-            color: #888;
-            margin-bottom: 0.5rem;
-            font-weight: 400;
-        }
-
-        .premise {
-            font-style: italic;
-            color: #555;
-            font-size: 0.88rem;
-            font-weight: 400;
-            margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .roster {
-            margin-bottom: 2.5rem;
-        }
-        .roster h2 {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 0.8rem;
-        }
-
-        .roster ul {
-            list-style: none;
-            padding: 0;
-        }
-        .roster li {
-            font-size: 0.88rem;
-            margin-bottom: 0.5rem;
-            color: #1a1a1a;
-            font-weight: 400;
-        }
-        .roster li strong {
-            font-weight: 600;
-        }
-        .roster li em {
-            color: #888;
-            font-size: 0.82rem;
-        }
-
-        h2::before {
-            content: '';
-            display: inline-block;
-            width: 10px;
-            height: 2px;
-            background: #e84040;
-            margin-right: 0.5rem;
-            vertical-align: middle;
-            opacity: 0.7;
-        }
-
-        /* Stage directions — narrative voice */
-        .stage {
-            font-style: italic;
-            color: #888;
-            font-size: 0.88rem;
-            margin: 1.8rem 0 1.2rem;
-            font-weight: 400;
-        }
-
-        p { margin-bottom: 1rem; font-size: 0.92rem; font-weight: 400; }
-
-        .me {
-            padding-left: 1rem;
-            border-left: 2px solid #1a1a1a;
-            margin: 1.4rem 0;
-        }
-        .me .name {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-weight: 600;
-            font-size: 0.72rem;
-            color: #1a1a1a;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            display: block;
-            margin-bottom: 0.25rem;
-        }
-
-        .designer {
-            padding-left: 1rem;
-            border-left: 2px solid #ddd;
-            margin: 1.4rem 0;
-        }
-        .designer .name {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-weight: 500;
-            font-size: 0.72rem;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            display: block;
-            margin-bottom: 0.25rem;
-        }
-
-        .designer p, .me p { margin-bottom: 0.6rem; }
-        .designer p:last-child, .me p:last-child { margin-bottom: 0; }
-
-        ol, ul {
-            padding-left: 1.3rem;
-            margin-bottom: 1rem;
-            font-size: 0.88rem;
-        }
-        li { margin-bottom: 0.4rem; }
-
-        .assignment {
-            background: #fafafa;
-            border: 1px solid #e8e8e8;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-        }
-        .assignment h3 {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.8rem;
-        }
-        .assignment ul {
-            list-style: none;
-            padding: 0;
-            font-size: 0.88rem;
-        }
-        .assignment li {
-            padding-left: 1.2rem;
-            position: relative;
-        }
-        .assignment li::before {
-            content: '\25A1';
-            position: absolute;
-            left: 0;
-            color: #888;
-        }
-
-        .questions {
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #e0e0e0;
-        }
-        .questions h2 {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 0.8rem;
-        }
-        .questions li {
-            color: #1a1a1a;
-            font-size: 0.88rem;
-        }
-
-        .post-meta {
-            font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            font-size: 0.7rem;
-            color: #888;
-            margin-bottom: 0.3rem;
-            font-weight: 400;
-        }
-
-        .post-nav {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #e0e0e0;
-            font-size: 0.82rem;
-        }
-        .post-nav a {
-            color: #1a1a1a;
-            text-decoration: none;
-        }
-        .post-nav a:hover { color: #e84040; }
-        .nav-prev::before { content: '\2190  '; }
-        .nav-next::after { content: '  \2192'; }
-
-        .post-footer {
-            margin-top: 2rem;
-            font-size: 0.78rem;
-            color: #888;
-        }
-        .post-footer a {
-            color: #888;
-            text-decoration: none;
-        }
-        .post-footer a:hover { color: #1a1a1a; }
-
-        .copyright {
-            margin-top: 4rem;
-            font-size: 0.6rem;
-            color: #888;
-            text-align: right;
-        }
-
-        @media (max-width: 600px) {
-            body { padding: 2rem 1.2rem 3rem; }
-            h1 { font-size: 1.4rem; }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/writing.css">
+    <link rel="stylesheet" href="/assets/css/roundtable.css">
 </head>
-<body>
+<body class="writing-page">
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="scroll-progress-inner" id="scrollProgressInner"></div>
+
     <nav class="breadcrumb"><a href="/">rowbyroh</a><span class="sep">/</span><a href="/archive">all work</a></nav>
 
-    <div class="post-meta">May 2026</div>
-    <h1>Material Values</h1>
-    <div class="page-subtitle">Chair Roundtable &middot; Session 1 &middot; Part 2 of 3</div>
+    <div class="post-header">
+        <div class="post-meta">May 2026</div>
+        <h1>Material Values</h1>
+        <p class="post-subtitle">Chair Roundtable &middot; Session 1 &middot; Part 2 of 3</p>
+    </div>
+
     <p class="premise">Part two. The table turns from the body to the material &mdash; what a seat should be made of, and what that choice says about who you are building for.</p>
 
     <div class="roster">
@@ -265,7 +42,7 @@
         </ul>
     </div>
 
-    <!-- TRANSCRIPT -->
+    <article>
 
     <p class="stage">Earlier, the table settled the body: the hip angle sets everything, and the first chair worth building is the one people reach for without thinking. The conversation now turns to what a seat is made of.</p>
 
@@ -338,14 +115,17 @@
         <p>Pine says everything about your values. It says you are not designing for a showroom. It says you want the material cost low enough that the retail price stays accessible. It says you are willing to sacrifice the prestige of a hardwood for the reach of a softwood. Thonet did this with beech &mdash; it was the cheap wood of Central Europe, and he made it iconic. You could do the same with southern yellow pine if you respect it enough to let it be what it is rather than staining it to look like something more expensive.</p>
         <p>But I have a concern. Pine dents. Pine scratches. Pine shows every mark. In ten years, a pine chair will look used. Is this acceptable to you, or is it a problem? Because your answer reveals whether you are designing for the photograph or for the life.</p>
     </div>
+
+    </article>
+
     <div id="post-nav" class="post-nav"></div>
 
     <div class="post-footer">
-        <p><a href="/archive">All work</a></p>
+        <p>Built with Claude.</p>
+        <p style="margin-top: 0.5rem;"><a href="/archive">All work</a></p>
     </div>
 
-    <div class="copyright">rowbyroh.com &copy; 2026</div>
-
     <script src="/assets/js/writing.js"></script>
+    <script src="/assets/js/scroll.js"></script>
 </body>
 </html>
