@@ -29,3 +29,12 @@ Thumbs.db
 .idea
 *.swp
 *.swo
+
+# Claude Code session/worktree state — never belongs in git
+.claude/
+
+# Test artifacts (Playwright run output; keep tests/gate-b/__snapshots__ baselines)
+test-results/
+playwright-report/
+tests/gate-c/.audit-input.txt
+tests/gate-c/runs.jsonl

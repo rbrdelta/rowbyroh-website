@@ -5,7 +5,15 @@
   "main": "index.html",
   "scripts": {
     "dev": "live-server",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "serve": "npx --yes http-server -p 4321 -c-1 --silent .",
+    "test": "node --test tests/*.test.mjs",
+    "gate:a": "node tests/gate-a.mjs",
+    "gate:b": "playwright test --config tests/gate-b/playwright.config.mjs",
+    "gate:b:update": "playwright test --config tests/gate-b/playwright.config.mjs --update-snapshots",
+    "gate:c": "node tests/gate-c/run-gate-c.mjs",
+    "ship": "bash scripts/ship.sh",
+    "verify": "bash scripts/verify.sh"
   },
   "repository": {
     "type": "git",

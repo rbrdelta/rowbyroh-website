@@ -133,5 +133,24 @@
             "Prouvé's force skeleton — find the structure by where the cardboard collapses",
             "The assignment: build one seat from cardboard, sit it with eyes closed, photograph the posture"
         ]
+    },
+    {
+        "id": "essay-ai-pricing-market-maker",
+        "title": "Why Outcomes-Based AI Pricing Kills the Market Maker",
+        "type": "essay",
+        "description": "The pricing model you choose determines what kind of economy forms around your product. Outcomes-based pricing sounds fair — and it collapses the arbitrage spread where market makers create value.",
+        "date": "Mar 2026",
+        "tags": ["essay", "AI"],
+        "url": "/blog/ai-pricing-market-maker",
+        "published": true,
+        "status": "live",
+        "events": [
+            {"date": "2026-03-27", "action": "published"}
+        ],
+        "highlights": [
+            "Input-based pricing preserves the arbitrage spread; outcomes-based pricing collapses it",
+            "The market maker acquires the same input and derives more value — that delta is where ecosystems form",
+            "The window closes if models scale to full human context — an honest constraint on the thesis"
+        ]
     }
 ]

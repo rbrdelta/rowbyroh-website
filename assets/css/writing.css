@@ -248,9 +248,103 @@
     color: var(--zone-writing);
 }
 
+/* ---- Keep Reading (deep-dive module, populated by related.js) ---- */
+.keep-reading {
+    margin: 4rem 0 1.5rem;
+}
+
+.keep-reading .kr-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: lowercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 0 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--light);
+}
+
+.kr-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.kr-item {
+    border-left: 2px solid var(--light);
+    margin-bottom: 0.3rem;
+}
+
+.kr-item.zone-writing { border-left-color: var(--zone-writing); }
+.kr-item.zone-portfolio { border-left-color: var(--zone-portfolio); }
+.kr-item.zone-mono { border-left-color: var(--zone-mono); }
+
+.kr-item a {
+    display: block;
+    text-decoration: none;
+    padding: 0.7rem 0.9rem;
+    color: var(--text);
+    border-bottom: none;
+    transition: background 0.15s ease;
+}
+
+.kr-item a:hover {
+    background: var(--surface);
+}
+
+.kr-type {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 0.25rem;
+}
+
+.kr-type.zone-writing { color: var(--zone-writing); }
+.kr-type.zone-portfolio { color: var(--zone-portfolio); }
+.kr-type.zone-mono { color: var(--zone-mono); }
+
+.kr-item-title {
+    display: block;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.92rem;
+    line-height: 1.35;
+    margin-bottom: 0.2rem;
+}
+
+.kr-desc {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.kr-all {
+    display: inline-block;
+    margin-top: 1.1rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--zone-writing);
+    text-decoration: none;
+    border-bottom: none;
+}
+
+.kr-all:hover {
+    text-decoration: underline;
+}
+
 /* ---- RESPONSIVE ---- */
 @media (max-width: 600px) {
     .writing-page {
         padding: 2rem 1.2rem 3rem;
+    }
+
+    .keep-reading {
+        margin: 2.5rem 0 1rem;
     }
 }

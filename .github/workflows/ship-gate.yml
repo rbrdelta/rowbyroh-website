@@ -1,0 +1,44 @@
+name: ship-gate
+
+# Deterministic gates (0/A/B) on every PR and on pushes to non-production
+# branches. Gate C (agentic/voice) runs locally via the /ship runner — it is
+# advisory and needs the Claude CLI, so it is not wired into CI yet.
+
+on:
+  pull_request:
+  push:
+    branches-ignore: [main]
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Gate 0 — unit tests (logic + content schema)
+        run: node --test tests/*.test.mjs
+
+      - name: Gate A — structural / links / assets / reachability
+        run: node tests/gate-a.mjs
+
+      - name: Install Playwright + Chromium
+        run: |
+          npm install --no-save @playwright/test
+          npx playwright install --with-deps chromium
+
+      - name: Gate B — visual regression + e2e
+        run: npx playwright test --config tests/gate-b/playwright.config.mjs
+
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
