@@ -42,11 +42,14 @@ test('every published entry has a parseable event date', () => {
     }
 });
 
-test('the AI-pricing essay is registered (regression: was orphaned)', () => {
+test('the AI-pricing essay is registered as a draft (tracked, not surfaced)', () => {
+    // It is intentionally NOT published — parked for Daniel's own rewrite.
+    // Registered (so it is tracked, not a silent orphan) but published:false so
+    // it never surfaces in stream/archive/keep-reading.
     const essay = content.find(e => e.url === '/blog/ai-pricing-market-maker');
-    assert.ok(essay, 'ai-pricing essay must be in content.json so it is discoverable');
+    assert.ok(essay, 'ai-pricing essay must be registered in content.json');
     assert.equal(essay.type, 'essay');
-    assert.equal(essay.published, true);
+    assert.equal(essay.published, false, 'essay must stay unpublished until Daniel finishes it');
 });
 
 test('the roundtable series has three published episodes', () => {

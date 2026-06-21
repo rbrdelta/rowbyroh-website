@@ -142,10 +142,10 @@
         "date": "Mar 2026",
         "tags": ["essay", "AI"],
         "url": "/blog/ai-pricing-market-maker",
-        "published": true,
-        "status": "live",
+        "published": false,
+        "status": "draft",
         "events": [
-            {"date": "2026-03-27", "action": "published"}
+            {"date": "2026-03-27", "action": "drafted"}
         ],
         "highlights": [
             "Input-based pricing preserves the arbitrage spread; outcomes-based pricing collapses it",
