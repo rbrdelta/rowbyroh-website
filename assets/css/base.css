@@ -368,6 +368,21 @@ footer a {
 footer a:hover {
   color: var(--text);
 }
+/* Colophon — its own line, system voice, more prominent than contact links */
+footer a.footer-colophon {
+  display: block;
+  width: fit-content;
+  margin: 1rem 0 0.2rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--zone-mono);
+  border-bottom: 1px solid var(--light);
+  padding-bottom: 2px;
+}
+footer a.footer-colophon:hover {
+  color: var(--text);
+  border-color: var(--zone-mono);
+}
 
 /* Links */
 a {

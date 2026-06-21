@@ -38,7 +38,9 @@ PAGES=(
     "/about"
     "/archive"
     "/colophon"
-    "/chair-roundtable"
+    "/chair-roundtable/ergonomic-intent"
+    "/chair-roundtable/material-values"
+    "/chair-roundtable/build-process"
     "/blog/ai-pricing-market-maker"
     "/field-notes/conversation-sync"
     "/field-notes/headless-parity"
@@ -81,6 +83,10 @@ check_title "/field-notes/conversation-sync" "field-notes/conversation-sync.html
 check_title "/field-notes/headless-parity" "field-notes/headless-parity.html"
 check_title "/field-notes/batch-approval" "field-notes/batch-approval.html"
 check_title "/field-notes/memory-and-the-live-channel" "field-notes/memory-and-the-live-channel.html"
+check_title "/blog/ai-pricing-market-maker" "blog/ai-pricing-market-maker.html"
+check_title "/chair-roundtable/ergonomic-intent" "chair-roundtable/ergonomic-intent.html"
+check_title "/chair-roundtable/material-values" "chair-roundtable/material-values.html"
+check_title "/chair-roundtable/build-process" "chair-roundtable/build-process.html"
 
 # --- 3. Deploy commit matches origin/main ---
 echo ""
@@ -113,6 +119,7 @@ check_redirect() {
 }
 
 check_redirect "/writing" "/archive"
+check_redirect "/chair-roundtable" "/chair-roundtable/ergonomic-intent"
 
 # --- 5. Internal links (content.json) ---
 echo ""
@@ -132,7 +139,7 @@ done
 echo ""
 echo "6. External links"
 
-ext_links=$(grep -rohP 'href="(https://[^"]+)"' "$REPO_ROOT"/*.html "$REPO_ROOT"/blog/*.html "$REPO_ROOT"/field-notes/*.html 2>/dev/null | \
+ext_links=$(grep -rohP 'href="(https://[^"]+)"' "$REPO_ROOT"/*.html "$REPO_ROOT"/blog/*.html "$REPO_ROOT"/field-notes/*.html "$REPO_ROOT"/chair-roundtable/*.html 2>/dev/null | \
     grep -oP 'https://[^"]+' | grep -v 'fonts.google\|fonts.gstatic' | sort -u)
 
 for link in $ext_links; do

@@ -2,6 +2,7 @@
   "cleanUrls": true,
   "redirects": [
     { "source": "/writing", "destination": "/archive", "statusCode": 301 },
+    { "source": "/chair-roundtable", "destination": "/chair-roundtable/ergonomic-intent", "statusCode": 301 },
     { "source": "/drafts/:path*", "destination": "/404", "statusCode": 404 }
   ]
 }

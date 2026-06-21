@@ -26,16 +26,17 @@ Converged from 28-version exploration (archived as `v2-exploration` tag). **Cano
 - **Archive page:** `archive.html` shows all published items, supports `?tag=` URL param filtering
 
 ### Content Pages (Consumption Surfaces)
-- **Styles:** `assets/css/base.css` (shared) + page-specific CSS (`project.css`, `writing.css`)
-- **Portfolio pages:** Standalone HTML files at root (`obsidian-mcp.html`, `deadweight.html`, etc.)
-- **Blog posts:** In `blog/` directory
-- **Writing pages:** Root level (`chair-roundtable.html`)
-- **All breadcrumbs** point to `/` (homepage). No sub-section index pages — `/archive` is the only listing page.
+- **Styles:** `assets/css/base.css` (shared) + `writing.css` (+ `roundtable.css` for roundtables)
+- **Field Notes:** `field-notes/` directory · **Essays:** `blog/` · **Roundtables:** `chair-roundtable/` (serialized)
+- **Chrome contract (every content page):** breadcrumb `rowbyroh / all work` → `<article>` → **Keep Reading** module → "Built with Claude" → site footer. Enforced by Gate A. Full spec in `design/IA-SCHEMA.md`.
+- **No dead ends:** every content page ends in `#keep-reading` (`related.js`) — next-in-series + related + recent + "See all work". Breadcrumb goes up; Keep Reading goes deeper.
 
 ### Data Files
 | File | Purpose | Used by |
 |------|---------|---------|
-| `assets/data/content.json` | All content entries with `featured_for`, `events`, tags, descriptions | `stream.js` (homepage), `archive.js` (archive page), `writing.js` (blog post prev/next nav) |
+| `assets/data/content.json` | All content entries with `featured_for`, `events`, tags, descriptions, highlights | `stream.js` (homepage), `archive.js` (archive page), `related.js` (Keep Reading deep-dive module) |
+
+> `writing.js` is retired from live pages — the type-limited `#post-nav` prev/next was superseded by the unified `related.js` Keep Reading module (covers all content types).
 
 ## Site Design Rubric
 
@@ -82,31 +83,58 @@ Shared vocabulary, composed per page:
 
 ## Pages
 
+> **Canonical IA lives in `design/IA-SCHEMA.md`.** This table is the live-page index.
+
 | Page | Type | Status |
 |------|------|--------|
 | `index.html` | Homepage / Navigation | Live — aperture + logbook |
 | `archive.html` | Archive / All Work | Live |
-| `obsidian-mcp.html` | Portfolio | Live |
-| `agentic-stack.html` | Portfolio | Live |
-| `portfolio-analysis.html` | Portfolio | Live |
-| `deadweight.html` | Portfolio | Live |
-| `chair-roundtable.html` | Writing | Live |
-| `blog/reverse-engineering-claude-api.html` | Essay | Live |
-| `blog/vault-vs-memory.html` | Essay | Live |
-| `blog/ai-pricing-market-maker.html` | Essay | Live |
 | `about.html` | About | Live |
+| `colophon.html` | Colophon / System | Live |
+| `field-notes/conversation-sync.html` | Field Note | Live |
+| `field-notes/headless-parity.html` | Field Note | Live |
+| `field-notes/batch-approval.html` | Field Note | Live |
+| `field-notes/memory-and-the-live-channel.html` | Field Note | Live |
+| `blog/ai-pricing-market-maker.html` | Essay | Live |
+| `chair-roundtable/ergonomic-intent.html` | Roundtable (part 1) | Live |
+| `chair-roundtable/material-values.html` | Roundtable (part 2) | Live |
+| `chair-roundtable/build-process.html` | Roundtable (part 3) | Live |
+
+**Cancelled (in `drafts/cancelled/`, rewritten to `/404`, NOT live):** `obsidian-mcp`,
+`agentic-stack`, `portfolio-analysis`, `deadweight` (portfolio — return as Demos),
+`blog/reverse-engineering-claude-api`, `blog/vault-vs-memory` (essays). The
+content model is About / Field Notes / Essays / Roundtables; portfolio pieces
+return as interactive Demos, not static pages.
 
 ## Navigation Model
 
+Full spec: `design/IA-SCHEMA.md`. Summary:
 - **One listing page:** `/archive` — all published content, filterable by tag
-- **`/writing` redirects to `/archive`** (301 in vercel.json)
-- **All breadcrumbs** point to `/` (homepage) — no sub-section indexes
-- **Blog post footers** link to `/archive` ("All work")
-- **Homepage "all work"** links to `/archive`
+- **Breadcrumb (every content page):** `rowbyroh / all work` → `/` and `/archive`
+- **Keep Reading (every content page):** `#keep-reading` deep-dive module — next-in-series, related-by-tag, recent, and "See all work". No leaf is a dead end.
+- **Redirects (`vercel.json`):** `/writing → /archive`, `/chair-roundtable →` first episode, `/drafts/* → 404`
+- **Homepage tag filters:** `field-notes`, `infrastructure`, `AI`, `design`
 
-## QA Verification
+## Testing — the Ship Gate
 
-Run `./scripts/verify.sh` after every push. Checks: all pages 200, title fingerprints match source, deploy commit matches main, content.json URLs, external links, clean working tree.
+Run the full suite before any push: **`npm run ship`** (or `bash scripts/ship.sh`).
+The only human step is the final review-to-push decision on the printed package.
+
+| Gate | Command | Checks |
+|------|---------|--------|
+| **0 — Unit** | `npm test` | `related.js` ranking logic + `content.json` schema (`tests/*.test.mjs`) |
+| **A — Structural** | `npm run gate:a` | base.css linkage, asset/link resolution, no dead ends, content.json reachability, redirects, titles (`tests/gate-a.mjs`) — pre-deploy, local |
+| **B — Visual + e2e** | `npm run gate:b` | Playwright regression vs `tests/gate-b/__snapshots__` + nav/filter/redirect/deep-dive specs (desktop + mobile). Also runs in CI (`.github/workflows/ship-gate.yml`) |
+| **C — Voice/content** | `npm run gate:c` | Diff-scoped voice-fingerprint audit (advisory). Fingerprint: `design/VOICE-FINGERPRINT.md`. Runner + Workflow in `tests/gate-c/` |
+
+New baselines after intentional visual changes: `npm run gate:b:update`.
+
+## QA Verification (post-deploy)
+
+After the push lands, run `./scripts/verify.sh` (or `npm run verify`) — checks the
+**live** site: all pages 200, title fingerprints, deploy commit matches main,
+content.json URLs, external links, clean working tree. (Gates A/B/C are
+pre-deploy; verify.sh is post-deploy.)
 
 ## Known Gaps
 

@@ -1,0 +1,131 @@
+/* ---- ROUNDTABLE PAGES (chair-roundtable/*.html) ---- */
+/* Roundtable-specific components, built on base.css tokens + the writing-page
+   system. Loaded after base.css and writing.css. */
+
+/* Lede / premise */
+.writing-page .premise {
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+/* The Table — cast roster */
+.writing-page .roster {
+    background: var(--bg-light);
+    border: 1px solid var(--light);
+    padding: 1.25rem 1.5rem;
+    margin: 0 0 2.5rem;
+}
+.writing-page .roster h2 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--zone-writing);
+    margin: 0 0 0.9rem;
+    padding: 0;
+    border: none;
+}
+.writing-page .roster ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+.writing-page .roster li {
+    font-size: 0.82rem;
+    line-height: 1.55;
+    margin-bottom: 0.55rem;
+}
+.writing-page .roster li:last-child { margin-bottom: 0; }
+.writing-page .roster strong { font-weight: 600; color: var(--text); }
+.writing-page .roster em { font-style: normal; color: var(--muted); }
+
+/* Stage directions — italic narration between turns */
+.writing-page article .stage {
+    font-style: italic;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin: 1.9rem 0;
+}
+
+/* Speech blocks — shared frame */
+.writing-page article .designer,
+.writing-page article .me {
+    margin: 1.5rem 0;
+    padding-left: 1.1rem;
+    border-left: 2px solid var(--light);
+}
+/* Designer turns — zone-writing accent (the olive "writing" zone) */
+.writing-page article .designer {
+    border-left-color: var(--zone-writing);
+}
+/* Your turns — distinct accent + subtle fill so the reader's voice reads apart */
+.writing-page article .me {
+    border-left-color: var(--zone-portfolio);
+    background: var(--bg-light);
+    padding: 0.9rem 1.1rem 0.1rem;
+}
+.writing-page article .designer .name,
+.writing-page article .me .name {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+}
+.writing-page article .designer .name { color: var(--zone-writing); }
+.writing-page article .me .name { color: var(--zone-portfolio); }
+.writing-page article .designer p,
+.writing-page article .me p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 0.8rem;
+}
+.writing-page article .designer p:last-child,
+.writing-page article .me p:last-child { margin-bottom: 0; }
+
+/* Assignment + open questions — highlight boxes (part 3) */
+.writing-page article .assignment,
+.writing-page article .questions {
+    background: var(--bg-light);
+    border: 1px solid var(--light);
+    padding: 1.25rem 1.5rem;
+    margin: 2.5rem 0 0;
+}
+.writing-page article .assignment h3,
+.writing-page article .questions h2 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--zone-writing);
+    margin: 0 0 0.9rem;
+    padding: 0;
+    border: none;
+}
+.writing-page article .assignment ul,
+.writing-page article .questions ul {
+    margin-bottom: 0;
+    padding-left: 1.1rem;
+}
+.writing-page article .assignment li,
+.writing-page article .questions li {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 0.4rem;
+}
+.writing-page article .assignment li:last-child,
+.writing-page article .questions li:last-child { margin-bottom: 0; }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 600px) {
+    .writing-page .roster,
+    .writing-page article .assignment,
+    .writing-page article .questions { padding: 1rem 1.2rem; }
+}

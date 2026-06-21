@@ -76,5 +76,81 @@
             "log-tool-use.sh + approval-report.js — coverage report with suggested wildcards",
             "Wired into the session debrief — every close-out checks coverage"
         ]
+    },
+    {
+        "id": "rt-ergonomic-intent",
+        "title": "Chair Roundtable — Ergonomic Intent",
+        "type": "roundtable",
+        "description": "Part one of a fictional roundtable with six master chair designers. The body sets everything — hip angle, the three critical angles — and the first real choice is who you build for.",
+        "date": "May 2026",
+        "tags": ["roundtable", "design"],
+        "url": "/chair-roundtable/ergonomic-intent",
+        "published": true,
+        "status": "live",
+        "events": [
+            {"date": "2026-05-15", "action": "published"}
+        ],
+        "highlights": [
+            "Hip angle is the master variable — every other decision cascades from it",
+            "Prouvé's three critical angles: seat tilt, back angle, seat-to-popliteal height",
+            "Thonet's fork: design for other designers, or for the person who comes home exhausted"
+        ]
+    },
+    {
+        "id": "rt-material-values",
+        "title": "Chair Roundtable — Material Values",
+        "type": "roundtable",
+        "description": "Part two. Structure versus surface, the three material questions, and why choosing a humble wood like pine is a statement of values.",
+        "date": "May 2026",
+        "tags": ["roundtable", "design"],
+        "url": "/chair-roundtable/material-values",
+        "published": true,
+        "status": "live",
+        "events": [
+            {"date": "2026-05-20", "action": "published"}
+        ],
+        "highlights": [
+            "The three material questions: skin at one hour, aging at ten years, cost at ten thousand",
+            "Rietveld's spatial crisis — the chair must define a zone in an undifferentiated room",
+            "\"Vision without a supply chain is just philosophy\""
+        ]
+    },
+    {
+        "id": "rt-build-process",
+        "title": "Chair Roundtable — Build Process",
+        "type": "roundtable",
+        "description": "Part three. Principles give way to practice — production paths, the sketch-model-engineer sequence, and constraint as a forcing function.",
+        "date": "May 2026",
+        "tags": ["roundtable", "design"],
+        "url": "/chair-roundtable/build-process",
+        "published": true,
+        "status": "live",
+        "events": [
+            {"date": "2026-05-25", "action": "published"}
+        ],
+        "highlights": [
+            "Eames: sketch to discover, model to test, engineer to produce — in that order",
+            "Prouvé's force skeleton — find the structure by where the cardboard collapses",
+            "The assignment: build one seat from cardboard, sit it with eyes closed, photograph the posture"
+        ]
+    },
+    {
+        "id": "essay-ai-pricing-market-maker",
+        "title": "Why Outcomes-Based AI Pricing Kills the Market Maker",
+        "type": "essay",
+        "description": "The pricing model you choose determines what kind of economy forms around your product. Outcomes-based pricing sounds fair — and it collapses the arbitrage spread where market makers create value.",
+        "date": "Mar 2026",
+        "tags": ["essay", "AI"],
+        "url": "/blog/ai-pricing-market-maker",
+        "published": false,
+        "status": "draft",
+        "events": [
+            {"date": "2026-03-27", "action": "drafted"}
+        ],
+        "highlights": [
+            "Input-based pricing preserves the arbitrage spread; outcomes-based pricing collapses it",
+            "The market maker acquires the same input and derives more value — that delta is where ecosystems form",
+            "The window closes if models scale to full human context — an honest constraint on the thesis"
+        ]
     }
 ]
