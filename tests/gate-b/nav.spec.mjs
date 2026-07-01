@@ -7,6 +7,7 @@ const CONTENT_PAGES = [
     '/field-notes/batch-approval',
     '/field-notes/memory-and-the-live-channel',
     '/blog/ai-pricing-market-maker',
+    '/blog/an-earned-null',
     '/chair-roundtable/ergonomic-intent',
     '/chair-roundtable/material-values',
     '/chair-roundtable/build-process',

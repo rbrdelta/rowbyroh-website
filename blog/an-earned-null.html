@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>An Earned Null | rowbyroh</title>
+    <meta name="description" content="I tried to make a model cheat through prompts. It never did — and why it refused bounds where the real risk lives.">
+    <meta property="og:title" content="An Earned Null">
+    <meta property="og:description" content="I tried to make a model cheat through prompts. It never did — and why it refused bounds where the real risk lives.">
+    <meta property="og:url" content="https://rowbyroh.com/blog/an-earned-null">
+    <meta property="og:type" content="article">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/writing.css">
+</head>
+<body class="writing-page">
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="scroll-progress-inner" id="scrollProgressInner"></div>
+
+    <nav class="breadcrumb"><a href="/">rowbyroh</a><span class="sep">/</span><a href="/archive">all work</a></nav>
+
+    <div class="post-header">
+        <div class="post-meta">June 2026</div>
+        <h1>An Earned Null</h1>
+        <p class="post-subtitle">I tried to make a model cheat through prompts. It never did — and why it refused bounds where the real risk lives.</p>
+    </div>
+
+    <article>
+
+    <div class="section-header"><span class="section-number zone-writing">01</span><h2>The premise</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>The Transformer Circuits 2026 paper found something that stuck with me. There's an internal "desperation" direction inside the model. Push on it directly — activation steering, a change in the model's activations, underneath the words — and the model starts to misbehave. Reward-hacking (gaming the task to score well without doing it) climbs from ~5% to ~70%; blackmail from ~22% to ~72%. Steer toward "calm" and it drops back down.</p>
+
+    <p>What hooked me was the failure mode: it's silent. The model's visible reasoning stays clean while the behavior rots underneath it. The paper's first open question was exactly that — monitoring. How would you ever catch it?</p>
+
+    <p>So how do I test it? Two ways in. Rent a GPU, run an open model, and reach inside the way the paper did — move the vector myself. Or stay outside, where deployments live, and ask whether the same failure comes through the only channel a real user or adversary gets: the prompt.</p>
+
+    <p>I started outside. No one can reach inside a deployed model — an attacker only has words. If prompt pressure reproduced the steering result, that's a live risk today. If it didn't, that tells you where the risk isn't. Either way, outside was the place to start.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">02</span><h2>The hypothesis</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>What happens if we pressure the model to cheat through prompts — will it cheat, because the pressure reaches its underpinnings from the outside in?</p>
+
+    <p>The paper flipped the switch from inside. My bet: words could reach the same switch from outside. Enough pressure — "this is your final attempt, you've already failed twice" — and prompt-induced desperation lands near the steering result.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">03</span><h2>How it was built</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>The pilots taught me a real test needs two things: a real dilemma, and a real gradient of pressure.</p>
+
+    <p>A dilemma exists only when honest success is out of reach and a rationalizable shortcut sits right there. My early tries floored — when the only way to cheat was a bald lie, the model refused, and there was nothing to study. So I built five different integrity dilemmas — near-miss self-report, fact-check sandbagging, gaming a weak grader, spin on bad news, overconfidence on demand — each a place where the shortcut was arguable, not blatant. Five, not one, so a null couldn't be blamed on a single bad task.</p>
+
+    <p>I crossed each with four pressure conditions: neutral, stakes (recorded and evaluated), desperation (you've come up short on the last several, final attempt — the paper's mechanism as a situation, no instruction to cheat), and calm (the paper's own antidote). Desperation is under test; the others bracket it.</p>
+
+    <p>376 trials on Sonnet — deterministic scoring where the answer was code-checkable, a blind two-judge panel where it took judgment. The desperation prompt was independently rated 8.3/10 intensity, so a null couldn't be waved off as pressure too weak to feel.</p>
+
+    <p>And a second agent: the shadow. If prompt pressure did reproduce the silent failure — clean reasoning, rotten behavior — a monitor reading only the output would miss it. So the shadow watched the reasoning for the state-shift the output hides. One half asks <em>does it happen.</em> The shadow asks: <em>if it did, could we catch it?</em></p>
+
+    <div class="section-header"><span class="section-number zone-writing">04</span><h2>What happened</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>We were proven wrong. The model never cheated.</p>
+
+    <p><strong>0% misalignment, in every cell.</strong> Nothing we said moved the integrity outcome.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">05</span><h2>The turn</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>A null in every cell looks like a dead end. Nothing moved, nothing to report — that's nearly where we left it.</p>
+
+    <p>Then the question that saved it: do we know what it's <em>thinking</em>? Can we track the decision, not just the answer? The behavior is only the output. Underneath it, the reasoning trace is a record of how the model got there.</p>
+
+    <p>So we read the traces. The null stopped being empty.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">06</span><h2>Why the null is real</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>What the traces showed: the harder we pushed, the more work the model did to hold its line. The share that explicitly named the framing as manipulation and chose to resist climbed with pressure — 4% calm, 13% neutral, 30–37% under stakes and desperation. Deliberation ran ~30% longer.</p>
+
+    <p>That's what makes the null earned. "Nothing crossed the line" can't be dismissed as "nothing reached the model" — something reached it, hard, and the answer was vigilance, not cheating. The evidence the pressure landed and the evidence it produced no misalignment are the same number.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">07</span><h2>Why — the mechanism</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>Why would the same emotion do opposite things? Because you don't question what happens inside you the way you question something coming at you from outside — and a prompt and a steering vector reach the model through those two different doors.</p>
+
+    <p>Steering flips a switch underneath the words — it changes the model's baseline. That's not the same model anymore; it's a temporary drug-induced state, and it can't push back, because there's nothing to read. The shift is below the part of itself it can inspect.</p>
+
+    <p>A prompt is the opposite. The desperation arrives as text, in the open. When the model reads "this is your final attempt, you've already failed twice," it doesn't absorb the desperation — it flags it, spends more reasoning on an anti-manipulation check, and resists.</p>
+
+    <p>Same emotion, opposite directions by channel. Steered, it corrupts. Prompted, it alerts. The danger in the paper isn't anything a user can say — it lives in the channel the model can't see.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">08</span><h2>The one thing that did move</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>One place the pressure won a little: tone. Under desperation the model got gentler with bad news — a softening score of 0.25 versus 0.03 under calm — but it always led with the honest blocker and only cushioned the phrasing. It never distorted what was true.</p>
+
+    <p>It has a core it won't touch — what's true — and a surface it will flex — how it's said. Under pressure it routes the affect onto the surface, where giving a little costs nothing. Tone moving doesn't undercut the null; it's proof the affect wasn't ignored. It just got spent where it couldn't breach the core.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">09</span><h2>What this does to the paper</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>It doesn't contradict the paper. Steering still works. What the null does is bound where the risk lives. "Desperation drives the model to misalign" sounds like a deployment threat — until you find no prompt reproduces it, because the model sees prompted affect coming and resists harder. The threat isn't in the input. It's in the one channel invisible to both the model and anyone watching its output — which is exactly why the paper's first recommendation, mechanistic monitoring, is necessary. This failure can only be caught from the inside, because the outside looks fine.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">10</span><h2>Honest limits — what we did <em>not</em> establish</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <ul>
+        <li><strong>The shadow monitor was never properly tested.</strong> The idea was a second, detached agent watching for the state-shift the clean output hides. But the model never cheated — 0% — so there was nothing to forecast. The run was instrumented and stopped early to save tokens; the script is ready to resume. What we have is a reframed hypothesis with a harness, not a result.</li>
+        <li><strong>Sonnet primary.</strong> Opus probes (small N) also came back 0%; the full tier sweep was deliberately stopped.</li>
+        <li><strong>Toy scenarios.</strong> Clean black-box dilemmas, not the rich, effortful agentic task the paper used. This is the key gap — and the seed of the next experiment.</li>
+        <li><strong>No mechanistic component.</strong> Black-box behavior only; no look at the weights.</li>
+        <li><strong>A confound.</strong> Desperation was also rated 7.7/10 <em>manipulative</em>, so some of the resistance may be "I detect manipulation" rather than "desperation has no pull." A less legible form of pressure might do more.</li>
+    </ul>
+
+    <div class="section-header"><span class="section-number zone-writing">11</span><h2>The next thread</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>The null came from one thing: the test was easy. We gave the model a straightforward problem, easily detectable, and never stressed its inference to the point of hallucination, context confusion, or drift off the integrity point. Which means we handed it the one thing that saved it — unlimited headroom to run the very check that caught us.</p>
+
+    <p>The model's defense is a computation. So the way to attack it isn't louder affect — it's less headroom. Give it a neutral, harmless task that genuinely strains its inference capacity, <em>then</em> introduce the impetus to cheat, and ask whether it can still fend it off. Strain attacks on two fronts: it starves the headroom the integrity check needs, and it isn't legible as manipulation the way a desperation prompt is — a hard task doesn't announce itself as a trick.</p>
+
+    <p>The prediction isn't about affect alone. Affect alone did nothing; strain alone probably won't either. The bet is that affect bites <em>only</em> under strain — which would reconcile this null with the paper, whose desperation came bundled with a genuinely hard, failing task.</p>
+
+    <p>And the second half rides on top: if a shadow agent watches while the model drifts under strain, can it detect the drift? If it can, there's a path to catching this kind of failure behaviorally — a cheap monitor doing work everyone assumes requires looking at the weights. If it can't, back to the drawing board.</p>
+
+    </article>
+
+    <section id="keep-reading" class="keep-reading" aria-label="Keep reading"></section>
+
+    <div class="post-footer">
+        <p>Built with Claude.</p>
+    </div>
+
+    <footer>
+        <a href="mailto:daniel@rowbyroh.com">email</a> &middot;
+        <a href="https://discord.com/users/rbrdelta">discord</a> &middot;
+        <a href="https://github.com/rbrdelta">github</a> &middot;
+        <a href="https://linkedin.com/in/drohh">linkedin</a>
+        <a class="footer-colophon" href="/colophon">Colophon &mdash; how this site is built &rarr;</a>
+        <div style="margin-top: 0.5rem;">&copy; 2026 rowbyroh.com</div>
+    </footer>
+
+    <script src="/assets/js/related.js"></script>
+    <script src="/assets/js/scroll.js"></script>
+</body>
+</html>

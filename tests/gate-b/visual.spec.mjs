@@ -14,6 +14,7 @@ const PAGES = [
     { name: 'fn-batch-approval', url: '/field-notes/batch-approval', ready: '#keep-reading .kr-all' },
     { name: 'fn-memory', url: '/field-notes/memory-and-the-live-channel', ready: '#keep-reading .kr-all' },
     { name: 'essay-ai-pricing', url: '/blog/ai-pricing-market-maker', ready: '#keep-reading .kr-all' },
+    { name: 'essay-an-earned-null', url: '/blog/an-earned-null', ready: '#keep-reading .kr-all' },
     { name: 'rt-ergonomic-intent', url: '/chair-roundtable/ergonomic-intent', ready: '#keep-reading .kr-all' },
     { name: 'rt-material-values', url: '/chair-roundtable/material-values', ready: '#keep-reading .kr-all' },
     { name: 'rt-build-process', url: '/chair-roundtable/build-process', ready: '#keep-reading .kr-all' },
