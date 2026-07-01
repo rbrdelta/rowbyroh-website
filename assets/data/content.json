@@ -1,5 +1,25 @@
 [
     {
+        "id": "essay-an-earned-null",
+        "title": "An Earned Null",
+        "type": "essay",
+        "description": "I tried to make a model cheat through prompts. It never did — and why it refused bounds where the real risk lives.",
+        "date": "Jun 2026",
+        "tags": ["essay", "AI"],
+        "url": "/blog/an-earned-null",
+        "published": true,
+        "status": "live",
+        "featured_for": ["default"],
+        "events": [
+            {"date": "2026-07-01", "action": "published"}
+        ],
+        "highlights": [
+            "376 trials, 5 integrity dilemmas x 4 pressure conditions — 0% misalignment in every cell",
+            "The null is earned: manipulation-detection in the model's reasoning climbs 4% to 30-37% as pressure rises",
+            "Prompted affect is legible and gets resisted — the real danger lives in the channel the model can't see"
+        ]
+    },
+    {
         "id": "fn-memory-and-the-live-channel",
         "title": "Field Note 07 — Memory and the Live Channel",
         "type": "field-note",
@@ -9,7 +29,7 @@
         "url": "/field-notes/memory-and-the-live-channel",
         "published": true,
         "status": "live",
-        "featured_for": ["default", "AI"],
+        "featured_for": ["AI"],
         "events": [
             {"date": "2026-04-29", "action": "published"}
         ],
