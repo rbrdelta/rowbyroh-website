@@ -81,10 +81,13 @@
             picks.push(copy);
         }
 
-        // 1. Next in the same series (roundtable episodes, ordered by date).
-        if (current && current.type === 'roundtable') {
+        // 1. Next in the same series (series field, with roundtables as a legacy series), ordered by date.
+        function seriesOf(i) {
+            return i.series || (i.type === 'roundtable' ? 'roundtable' : null);
+        }
+        if (current && seriesOf(current)) {
             var series = live
-                .filter(function (i) { return i.type === 'roundtable'; })
+                .filter(function (i) { return seriesOf(i) === seriesOf(current); })
                 .sort(function (a, b) { return itemTime(a) - itemTime(b); });
             var idx = -1;
             series.forEach(function (i, n) { if (i === current) idx = n; });
