@@ -8,6 +8,7 @@ const CONTENT_PAGES = [
     '/field-notes/memory-and-the-live-channel',
     '/blog/ai-pricing-market-maker',
     '/blog/an-earned-null',
+    '/blog/cost-of-verification',
     '/chair-roundtable/ergonomic-intent',
     '/chair-roundtable/material-values',
     '/chair-roundtable/build-process',

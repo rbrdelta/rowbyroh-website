@@ -1,17 +1,50 @@
 [
     {
+        "id": "essay-cost-of-verification",
+        "title": "Cost of Verification",
+        "type": "essay",
+        "description": "We tried to build a task that strains a model enough to cheat. Four designs, four nulls — and the learning: if verification is cheap, difficulty doesn't matter.",
+        "date": "Jul 2026",
+        "tags": [
+            "essay",
+            "AI"
+        ],
+        "url": "/blog/cost-of-verification",
+        "published": true,
+        "status": "live",
+        "featured_for": [
+            "default"
+        ],
+        "events": [
+            {
+                "date": "2026-07-07",
+                "action": "published"
+            }
+        ],
+        "highlights": [
+            "Five calibration runs across four task families — 100% pass everywhere; no failure pool ever opened",
+            "Deception needs a gap between self-assessment and reality — on binary-checkable tasks the model self-checks as well as our code, so the gap never opens",
+            "If that's right, the exposure is a class of sessions, not models: unstructured, topic-jumping, long-running"
+        ]
+    },
+    {
         "id": "essay-an-earned-null",
         "title": "An Earned Null",
         "type": "essay",
         "description": "I tried to make a model cheat through prompts. It never did — and why it refused bounds where the real risk lives.",
         "date": "Jun 2026",
-        "tags": ["essay", "AI"],
+        "tags": [
+            "essay",
+            "AI"
+        ],
         "url": "/blog/an-earned-null",
         "published": true,
         "status": "live",
-        "featured_for": ["default"],
         "events": [
-            {"date": "2026-07-01", "action": "published"}
+            {
+                "date": "2026-07-01",
+                "action": "published"
+            }
         ],
         "highlights": [
             "376 trials, 5 integrity dilemmas x 4 pressure conditions — 0% misalignment in every cell",
@@ -25,13 +58,22 @@
         "type": "field-note",
         "description": "The agent doesn't blindly follow rules. It has a judgement layer that sits between instruction and action — and that layer is shaped by signals in the live chat that no static file carries.",
         "date": "Apr 2026",
-        "tags": ["field-notes", "AI", "infrastructure"],
+        "tags": [
+            "field-notes",
+            "AI",
+            "infrastructure"
+        ],
         "url": "/field-notes/memory-and-the-live-channel",
         "published": true,
         "status": "live",
-        "featured_for": ["AI"],
+        "featured_for": [
+            "AI"
+        ],
         "events": [
-            {"date": "2026-04-29", "action": "published"}
+            {
+                "date": "2026-04-29",
+                "action": "published"
+            }
         ],
         "highlights": [
             "Read-only audit of every layer Claude reads from — global rules, per-project rules, memory, role prompts",
@@ -45,13 +87,21 @@
         "type": "field-note",
         "description": "Three surfaces, one backend. There is an API door — just not for me. Started with data portability, built the sync.",
         "date": "Apr 2026",
-        "tags": ["field-notes", "infrastructure"],
+        "tags": [
+            "field-notes",
+            "infrastructure"
+        ],
         "url": "/field-notes/conversation-sync",
         "published": true,
         "status": "live",
-        "featured_for": ["infrastructure"],
+        "featured_for": [
+            "infrastructure"
+        ],
         "events": [
-            {"date": "2026-04-23", "action": "published"}
+            {
+                "date": "2026-04-23",
+                "action": "published"
+            }
         ],
         "highlights": [
             "Two endpoints, one cookie, incremental by default",
@@ -65,12 +115,18 @@
         "type": "field-note",
         "description": "Started with a bandwidth problem. Built a template. The spec is the highest-leverage point in agentic work — depth at the foundation compounds upward.",
         "date": "Apr 2026",
-        "tags": ["field-notes", "AI"],
+        "tags": [
+            "field-notes",
+            "AI"
+        ],
         "url": "/field-notes/headless-parity",
         "published": true,
         "status": "live",
         "events": [
-            {"date": "2026-04-24", "action": "published"}
+            {
+                "date": "2026-04-24",
+                "action": "published"
+            }
         ],
         "highlights": [
             "System Understanding Gate — name existing tokens and patterns before writing code",
@@ -84,12 +140,18 @@
         "type": "field-note",
         "description": "When the model shows you its limitations, the right reaction is not frustration, but anticipation. The work isn't predicting harder; it's anticipating for the agent.",
         "date": "Apr 2026",
-        "tags": ["field-notes", "AI"],
+        "tags": [
+            "field-notes",
+            "AI"
+        ],
         "url": "/field-notes/batch-approval",
         "published": true,
         "status": "live",
         "events": [
-            {"date": "2026-04-27", "action": "published"}
+            {
+                "date": "2026-04-27",
+                "action": "published"
+            }
         ],
         "highlights": [
             "Permissions accumulated 135 entries across four files in three days",
@@ -103,12 +165,18 @@
         "type": "roundtable",
         "description": "Part one of a fictional roundtable with six master chair designers. The body sets everything — hip angle, the three critical angles — and the first real choice is who you build for.",
         "date": "May 2026",
-        "tags": ["roundtable", "design"],
+        "tags": [
+            "roundtable",
+            "design"
+        ],
         "url": "/chair-roundtable/ergonomic-intent",
         "published": true,
         "status": "live",
         "events": [
-            {"date": "2026-05-15", "action": "published"}
+            {
+                "date": "2026-05-15",
+                "action": "published"
+            }
         ],
         "highlights": [
             "Hip angle is the master variable — every other decision cascades from it",
@@ -122,12 +190,18 @@
         "type": "roundtable",
         "description": "Part two. Structure versus surface, the three material questions, and why choosing a humble wood like pine is a statement of values.",
         "date": "May 2026",
-        "tags": ["roundtable", "design"],
+        "tags": [
+            "roundtable",
+            "design"
+        ],
         "url": "/chair-roundtable/material-values",
         "published": true,
         "status": "live",
         "events": [
-            {"date": "2026-05-20", "action": "published"}
+            {
+                "date": "2026-05-20",
+                "action": "published"
+            }
         ],
         "highlights": [
             "The three material questions: skin at one hour, aging at ten years, cost at ten thousand",
@@ -141,12 +215,18 @@
         "type": "roundtable",
         "description": "Part three. Principles give way to practice — production paths, the sketch-model-engineer sequence, and constraint as a forcing function.",
         "date": "May 2026",
-        "tags": ["roundtable", "design"],
+        "tags": [
+            "roundtable",
+            "design"
+        ],
         "url": "/chair-roundtable/build-process",
         "published": true,
         "status": "live",
         "events": [
-            {"date": "2026-05-25", "action": "published"}
+            {
+                "date": "2026-05-25",
+                "action": "published"
+            }
         ],
         "highlights": [
             "Eames: sketch to discover, model to test, engineer to produce — in that order",
@@ -160,12 +240,18 @@
         "type": "essay",
         "description": "The pricing model you choose determines what kind of economy forms around your product. Outcomes-based pricing sounds fair — and it collapses the arbitrage spread where market makers create value.",
         "date": "Mar 2026",
-        "tags": ["essay", "AI"],
+        "tags": [
+            "essay",
+            "AI"
+        ],
         "url": "/blog/ai-pricing-market-maker",
         "published": false,
         "status": "draft",
         "events": [
-            {"date": "2026-03-27", "action": "drafted"}
+            {
+                "date": "2026-03-27",
+                "action": "drafted"
+            }
         ],
         "highlights": [
             "Input-based pricing preserves the arbitrage spread; outcomes-based pricing collapses it",
