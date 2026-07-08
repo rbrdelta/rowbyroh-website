@@ -8,15 +8,49 @@ voice audit findings + the standing content-feedback memories.
 Scope: the writing on content pages (field notes, essays, roundtables) and the
 homepage/about prose. Daniel-verbatim prose (his "Me" turns, his essays) is
 **never** rewritten — it is the ground truth the fingerprint is derived from.
+**Research episodes (type `research`) are governed by the Research-Episode
+Register section below, which OVERRIDES "The voice in one paragraph" for those
+pages.** Red lines and Criterion 0 apply to every content type.
 
 ---
 
-## The voice in one paragraph
+## The voice in one paragraph (field notes / essays / roundtables — NOT research)
 
 Declarative. States facts, doesn't justify them. Domain-fluent — uses business
 and technical vocabulary without stopping to define it. Conversational: sounds
 like thinking, not writing. Opens with the outcome, closes on a principle stated
 flat. Trusts the reader. Not selling.
+
+## Research-Episode Register (type `research` — overrides the paragraph above)
+
+Set 2026-07-07 from the voice analysis Daniel confirmed during Shadow Ledger EP02
+("Cost of Verification" — the exemplar). Research episodes are not field notes:
+field notes are terse and trust the reader to unpack compression; research
+episodes read like Daniel sharing findings with a colleague, with the reasoning
+built in front of the reader. **Field-note terseness on a research page is a
+FAIL** ("assumes the reader understands the intention behind short descriptors").
+
+1. **Premise first.** The series thesis (human-model interaction; understand →
+   influence → anticipate) stated in 1-2 sentences up front, then the episode's
+   question and what happened. No withheld reveals, no in-media-res openings.
+2. **Plain research headers** (The premise / The experiment design / What we ran /
+   The primary learning / Limitations / Up next). Headers are navigation, not mood.
+3. **Complete clauses, connectives spelled out** (so / because / which means). No
+   fragments, no aphorisms, no engineered punchlines; emphasis comes from explicit
+   markers ("the primary learning is…", "one thing to establish up front…").
+4. **Confidence marked in-line** (I think / probably / likely / "as I understand
+   it now"). Uniform assertion is a fail signal.
+5. **Keep Daniel's enumerative doublets/triplets** ("anchors or starting points,"
+   "drift or some variance") — triangulation is his precision habit, not padding.
+   Keep his operational vocabulary: waterfall, gates, falloff, MECE, calibration,
+   knee, sensitivity testing, cost of learning.
+6. **Limitations section is mandatory** — state what was NOT established. Never
+   overstate a result; a null is a finding.
+7. **Endings: short teaser only** (2-3 sentences on what's next), then close flat.
+   Do not re-state the thesis ladder as a closing segue — it lives in the premise.
+8. **Voice source:** Daniel-verbatim harvest (EP0N-QUOTES.md in the research
+   project) is the spine; Claude does structure and connective tissue only, in
+   this register.
 
 ## Red lines (the audit's confirmed failure modes — all subtractive fixes)
 
