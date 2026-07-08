@@ -74,6 +74,11 @@ Slot rules for every series member:
    never reversed.
 5. Every member carries the `series` field — `related.js` ranks next-in-series
    from it.
+6. **No label duplication.** A series title already names its body of work, so
+   series items render no type label on cards (archive, aperture, Keep Reading,
+   research list). Labels appear only when they add information: non-series
+   items (the type) and functional overrides ("next in this series"). The
+   full-strength zone border + zone-colored date are the color carriers.
 
 ## 3. Content-page chrome contract
 

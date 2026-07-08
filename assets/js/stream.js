@@ -57,10 +57,13 @@
         var article = document.createElement('article');
         article.className = 'aperture ' + zone;
 
+        // A series title already names its body of work — the type label
+        // only appears when it adds information (non-series items).
         article.innerHTML =
-            '<div class="aperture-header">' +
-                '<span class="aperture-type ' + zone + '">' + escapeHtml(item.type) + '</span>' +
-            '</div>' +
+            (item.series ? '' :
+                '<div class="aperture-header">' +
+                    '<span class="aperture-type ' + zone + '">' + escapeHtml(item.type) + '</span>' +
+                '</div>') +
             '<h2 class="aperture-title">' + escapeHtml(item.title) + '</h2>' +
             '<p class="aperture-theme">' + escapeHtml(item.description || '') + '</p>' +
             '<a href="' + escapeHtml(item.url) + '" class="aperture-link">Read &rarr;</a>';

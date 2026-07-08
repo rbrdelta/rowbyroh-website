@@ -81,13 +81,15 @@
                 a.classList.add('filtered-out');
             }
 
+            // A series title already names its body of work — the type label
+            // only appears when it adds information (non-series items).
             a.innerHTML =
                 '<div class="archive-item-header">' +
-                    '<span class="archive-type ' + zone + '">' + escapeHtml(item.type) + '</span>' +
+                    (item.series ? '' : '<span class="archive-type ' + zone + '">' + escapeHtml(item.type) + '</span>') +
                     '<span class="archive-title">' + escapeHtml(item.title) + '</span>' +
                 '</div>' +
                 '<span class="archive-desc">' + escapeHtml(item.description || '') + '</span>' +
-                '<span class="archive-date">' + formatMonth(latestEventDate(item)) + '</span>';
+                '<span class="archive-date ' + zone + '">' + formatMonth(latestEventDate(item)) + '</span>';
 
             container.appendChild(a);
         });

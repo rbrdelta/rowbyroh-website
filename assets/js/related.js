@@ -137,10 +137,13 @@
         var html = '<h2 class="kr-title">keep reading</h2><ul class="kr-list">';
         picks.forEach(function (i) {
             var z = zoneClass(i);
+            // Functional labels ("next in this series") always show; the type
+            // label only when the title doesn't already name its series.
+            var label = i._label || (i.series ? '' : typeLabel(i.type));
             html +=
                 '<li class="kr-item ' + z + '">' +
                     '<a href="' + esc(i.url) + '">' +
-                        '<span class="kr-type ' + z + '">' + esc(i._label || typeLabel(i.type)) + '</span>' +
+                        (label ? '<span class="kr-type ' + z + '">' + esc(label) + '</span>' : '') +
                         '<span class="kr-item-title">' + esc(i.title) + '</span>' +
                         '<span class="kr-desc">' + esc(i.description || '') + '</span>' +
                     '</a>' +

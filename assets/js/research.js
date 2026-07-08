@@ -44,11 +44,10 @@
                 a.className = 'archive-item zone-research';
                 a.innerHTML =
                     '<div class="archive-item-header">' +
-                        '<span class="archive-type zone-research">' + escapeHtml(item.type) + '</span>' +
                         '<span class="archive-title">' + escapeHtml(item.title) + '</span>' +
                     '</div>' +
                     '<span class="archive-desc">' + escapeHtml(item.description || '') + '</span>' +
-                    '<span class="archive-date">' + formatMonth(latestEventDate(item)) + '</span>';
+                    '<span class="archive-date zone-research">' + formatMonth(latestEventDate(item)) + '</span>';
                 container.appendChild(a);
             });
         })
