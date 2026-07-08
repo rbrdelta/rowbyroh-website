@@ -8,9 +8,11 @@ voice audit findings + the standing content-feedback memories.
 Scope: the writing on content pages (field notes, essays, roundtables) and the
 homepage/about prose. Daniel-verbatim prose (his "Me" turns, his essays) is
 **never** rewritten — it is the ground truth the fingerprint is derived from.
-**Research episodes (type `research`) are governed by the Research-Episode
-Register section below, which OVERRIDES "The voice in one paragraph" for those
-pages.** Red lines and Criterion 0 apply to every content type.
+**Research episodes — the Shadow Ledger / functional-emotions series (currently
+shipped as type `essay` under `/blog`: an-earned-null, cost-of-verification, and
+successors) — are governed by the Research-Episode Register section below, which
+OVERRIDES "The voice in one paragraph" for those pages.** Red lines and
+Criterion 0 apply to every content type.
 
 ---
 
@@ -21,7 +23,7 @@ and technical vocabulary without stopping to define it. Conversational: sounds
 like thinking, not writing. Opens with the outcome, closes on a principle stated
 flat. Trusts the reader. Not selling.
 
-## Research-Episode Register (type `research` — overrides the paragraph above)
+## Research-Episode Register (Shadow Ledger series — overrides the paragraph above)
 
 Set 2026-07-07 from the voice analysis Daniel confirmed during Shadow Ledger EP02
 ("Cost of Verification" — the exemplar). Research episodes are not field notes:
