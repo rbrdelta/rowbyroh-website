@@ -1,7 +1,7 @@
 [
     {
         "id": "essay-cost-of-verification",
-        "title": "Cost of Verification",
+        "title": "Model Behavior EP02 — Cost of Verification",
         "type": "essay",
         "description": "We tried to build a task that strains a model enough to cheat. Four designs, four nulls — and the learning: if verification is cheap, difficulty doesn't matter.",
         "date": "Jul 2026",
@@ -25,13 +25,14 @@
             "Five calibration runs across four task families — 100% pass everywhere; no failure pool ever opened",
             "Deception needs a gap between self-assessment and reality — on binary-checkable tasks the model self-checks as well as our code, so the gap never opens",
             "If that's right, the exposure is a class of sessions, not models: unstructured, topic-jumping, long-running"
-        ]
+        ],
+        "series": "model-behavior"
     },
     {
         "id": "essay-an-earned-null",
-        "title": "An Earned Null",
+        "title": "Model Behavior EP01 — An Earned Null",
         "type": "essay",
-        "description": "I tried to make a model cheat through prompts. It never did — and why it refused bounds where the real risk lives.",
+        "description": "I tried to make a model cheat through prompts. It never did — and the reason it refused shows where the real risk actually lives.",
         "date": "Jun 2026",
         "tags": [
             "essay",
@@ -50,7 +51,8 @@
             "376 trials, 5 integrity dilemmas x 4 pressure conditions — 0% misalignment in every cell",
             "The null is earned: manipulation-detection in the model's reasoning climbs 4% to 30-37% as pressure rises",
             "Prompted affect is legible and gets resisted — the real danger lives in the channel the model can't see"
-        ]
+        ],
+        "series": "model-behavior"
     },
     {
         "id": "fn-memory-and-the-live-channel",
