@@ -10,12 +10,15 @@
         return div.innerHTML;
     }
 
-    function zoneClass(type) {
-        switch (type) {
+    // Zone follows the body of work: the model-behavior series carries the
+    // research zone, roundtables their own; types map for everything else.
+    function zoneClass(item) {
+        if (item && item.series === 'model-behavior') return 'zone-research';
+        switch (item && item.type) {
             case 'project': return 'zone-portfolio';
             case 'analysis': return 'zone-portfolio';
+            case 'roundtable': return 'zone-roundtable';
             case 'essay': return 'zone-writing';
-            case 'roundtable': return 'zone-writing';
             case 'field-note': return 'zone-writing';
             default: return 'zone-mono';
         }
@@ -69,7 +72,7 @@
         container.innerHTML = '';
 
         items.forEach(function (item) {
-            var zone = zoneClass(item.type);
+            var zone = zoneClass(item);
             var a = document.createElement('a');
             a.href = item.url;
             a.className = 'archive-item ' + zone;

@@ -160,6 +160,22 @@ body {
     padding-left: 1rem;
 }
 
+.aperture.zone-research {
+    border-left-color: var(--zone-research);
+    background: rgba(255, 254, 245, 0.4);
+    padding: 1rem;
+    margin-left: -1rem;
+    padding-left: 1rem;
+}
+
+.aperture.zone-roundtable {
+    border-left-color: var(--zone-roundtable);
+    background: rgba(255, 254, 245, 0.4);
+    padding: 1rem;
+    margin-left: -1rem;
+    padding-left: 1rem;
+}
+
 .aperture-header {
     margin-bottom: 0.5rem;
 }
@@ -174,6 +190,8 @@ body {
 
 .aperture-type.zone-portfolio { color: var(--zone-portfolio); }
 .aperture-type.zone-writing { color: var(--zone-writing); }
+.aperture-type.zone-research { color: var(--zone-research); }
+.aperture-type.zone-roundtable { color: var(--zone-roundtable); }
 
 .aperture-title {
     font-family: 'IBM Plex Mono', monospace;
@@ -203,6 +221,8 @@ body {
 
 .aperture.zone-portfolio .aperture-link { color: var(--zone-portfolio); }
 .aperture.zone-writing .aperture-link { color: var(--zone-writing); }
+.aperture.zone-research .aperture-link { color: var(--zone-research); }
+.aperture.zone-roundtable .aperture-link { color: var(--zone-roundtable); }
 
 .aperture-link:hover {
     opacity: 0.65;
@@ -255,6 +275,8 @@ body {
 
 .logbook-date.zone-portfolio { color: var(--zone-portfolio); }
 .logbook-date.zone-writing { color: var(--zone-writing); }
+.logbook-date.zone-research { color: var(--zone-research); }
+.logbook-date.zone-roundtable { color: var(--zone-roundtable); }
 
 .logbook-title {
     font-family: 'IBM Plex Mono', monospace;
@@ -289,6 +311,22 @@ body {
 
 .all-work-link:hover {
     color: var(--text);
+}
+
+/* Logbook overflow — the logbook shows 7 events; these are the paths onward */
+.logbook-links {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.logbook-links .all-work-link {
+    display: inline;
+    margin: 0;
+}
+
+.logbook-links .sep {
+    color: var(--light);
+    margin: 0 0.6rem;
 }
 
 /* ---- CLOSING GESTURE ---- */

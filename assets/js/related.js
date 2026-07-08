@@ -18,13 +18,17 @@
 })(typeof self !== 'undefined' ? self : this, function () {
 
     // Mirror stream.js zone mapping so the module reads as native chrome.
-    function zoneClass(type) {
-        switch (type) {
+    // Zone follows the body of work: the model-behavior series carries the
+    // research zone, roundtables their own; types map for everything else.
+    function zoneClass(item) {
+        if (item && item.series === 'model-behavior') return 'zone-research';
+        switch (item && item.type) {
             case 'project':
             case 'analysis':
                 return 'zone-portfolio';
-            case 'essay':
             case 'roundtable':
+                return 'zone-roundtable';
+            case 'essay':
             case 'field-note':
                 return 'zone-writing';
             default:
@@ -132,7 +136,7 @@
         if (!picks.length) return allLink;
         var html = '<h2 class="kr-title">keep reading</h2><ul class="kr-list">';
         picks.forEach(function (i) {
-            var z = zoneClass(i.type);
+            var z = zoneClass(i);
             html +=
                 '<li class="kr-item ' + z + '">' +
                     '<a href="' + esc(i.url) + '">' +

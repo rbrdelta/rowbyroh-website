@@ -6,7 +6,6 @@ const CONTENT_PAGES = [
     '/field-notes/headless-parity',
     '/field-notes/batch-approval',
     '/field-notes/memory-and-the-live-channel',
-    '/blog/ai-pricing-market-maker',
     '/blog/an-earned-null',
     '/blog/cost-of-verification',
     '/chair-roundtable/ergonomic-intent',
@@ -57,6 +56,23 @@ test('keep-reading links navigate to a real page (deep dive works)', async ({ pa
     await page.locator('#keep-reading .kr-item a').first().click();
     await expect(page).toHaveURL(/\/(field-notes|blog|chair-roundtable)\//);
     await expect(page.locator('article')).toBeVisible();
+});
+
+test('research hub lists the model-behavior episodes in series order', async ({ page }) => {
+    await page.goto('/research');
+    const items = page.locator('#research-list .archive-item');
+    await expect(items.first()).toBeVisible();
+    await expect(items.first().locator('.archive-title')).toContainText('EP01');
+    await expect(items.nth(1).locator('.archive-title')).toContainText('EP02');
+});
+
+test('post-meta series label routes to the body of work', async ({ page }) => {
+    await page.goto('/blog/cost-of-verification');
+    await expect(page.locator('.post-meta a')).toHaveAttribute('href', '/research');
+    await page.goto('/field-notes/conversation-sync');
+    await expect(page.locator('.post-meta a')).toHaveAttribute('href', '/archive?tag=field-notes');
+    await page.goto('/chair-roundtable/ergonomic-intent');
+    await expect(page.locator('.post-meta a')).toHaveAttribute('href', '/archive?tag=roundtable');
 });
 
 test('redirect: /chair-roundtable -> first episode', async ({ page }) => {
