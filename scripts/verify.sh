@@ -38,10 +38,10 @@ PAGES=(
     "/about"
     "/archive"
     "/colophon"
+    "/research"
     "/chair-roundtable/ergonomic-intent"
     "/chair-roundtable/material-values"
     "/chair-roundtable/build-process"
-    "/blog/ai-pricing-market-maker"
     "/blog/an-earned-null"
     "/blog/cost-of-verification"
     "/field-notes/conversation-sync"
@@ -85,7 +85,7 @@ check_title "/field-notes/conversation-sync" "field-notes/conversation-sync.html
 check_title "/field-notes/headless-parity" "field-notes/headless-parity.html"
 check_title "/field-notes/batch-approval" "field-notes/batch-approval.html"
 check_title "/field-notes/memory-and-the-live-channel" "field-notes/memory-and-the-live-channel.html"
-check_title "/blog/ai-pricing-market-maker" "blog/ai-pricing-market-maker.html"
+check_title "/research" "research.html"
 check_title "/blog/an-earned-null" "blog/an-earned-null.html"
 check_title "/blog/cost-of-verification" "blog/cost-of-verification.html"
 check_title "/chair-roundtable/ergonomic-intent" "chair-roundtable/ergonomic-intent.html"
@@ -127,15 +127,32 @@ check_redirect "/chair-roundtable" "/chair-roundtable/ergonomic-intent"
 
 # --- 5. Internal links (content.json) ---
 echo ""
-echo "5. content.json URLs"
+echo "5. content.json URLs (published live, parked dark)"
 
-urls=$(grep -oP '"url":\s*"[^"]*"' "$REPO_ROOT/assets/data/content.json" | grep -oP '"/[^"]*"' | tr -d '"')
+urls=$(node -e '
+    const c = require(process.argv[1]);
+    for (const e of c.filter(e => e.published)) console.log(e.url);
+' "$REPO_ROOT/assets/data/content.json")
 for url in $urls; do
     status=$(curl -s -o /dev/null -w "%{http_code}" "${SITE}${url}")
     if [[ "$status" == "200" ]]; then
         pass "$url ($status)"
     else
         fail "$url ($status)"
+    fi
+done
+
+# Unpublished entries must NOT be reachable — parked means dark.
+dark_urls=$(node -e '
+    const c = require(process.argv[1]);
+    for (const e of c.filter(e => !e.published)) console.log(e.url);
+' "$REPO_ROOT/assets/data/content.json")
+for url in $dark_urls; do
+    status=$(curl -s -o /dev/null -w "%{http_code}" "${SITE}${url}")
+    if [[ "$status" == "404" ]]; then
+        pass "$url stays dark ($status)"
+    else
+        fail "$url is parked but publicly reachable ($status)"
     fi
 done
 

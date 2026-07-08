@@ -81,7 +81,8 @@
             "Read-only audit of every layer Claude reads from — global rules, per-project rules, memory, role prompts",
             "First run flagged a commit/push contradiction loading every session",
             "Made the case for a second design problem: live-channel discipline"
-        ]
+        ],
+        "series": "field-notes"
     },
     {
         "id": "fn-conversation-sync",
@@ -109,7 +110,8 @@
             "Two endpoints, one cookie, incremental by default",
             "Cron every 8h; key rotation surfaces cleanly when the session expires",
             "Surface assignment is a running decision, not a one-time call"
-        ]
+        ],
+        "series": "field-notes"
     },
     {
         "id": "fn-headless-parity",
@@ -134,7 +136,8 @@
             "System Understanding Gate — name existing tokens and patterns before writing code",
             "Integration Check — verify no new values, no new patterns before commit",
             "D2 shipped in one commit instead of three"
-        ]
+        ],
+        "series": "field-notes"
     },
     {
         "id": "fn-batch-approval",
@@ -159,14 +162,15 @@
             "Permissions accumulated 135 entries across four files in three days",
             "log-tool-use.sh + approval-report.js — coverage report with suggested wildcards",
             "Wired into the session debrief — every close-out checks coverage"
-        ]
+        ],
+        "series": "field-notes"
     },
     {
         "id": "rt-ergonomic-intent",
-        "title": "Chair Roundtable — Ergonomic Intent",
+        "title": "Chair Roundtable 01 — Ergonomic Intent",
         "type": "roundtable",
-        "description": "Part one of a fictional roundtable with six master chair designers. The body sets everything — hip angle, the three critical angles — and the first real choice is who you build for.",
-        "date": "May 2026",
+        "description": "A fictional roundtable with six master chair designers. The body sets everything — hip angle, the three critical angles — and the first real choice is who you build for.",
+        "date": "Mar 2026",
         "tags": [
             "roundtable",
             "design"
@@ -176,7 +180,7 @@
         "status": "live",
         "events": [
             {
-                "date": "2026-05-15",
+                "date": "2026-03-16",
                 "action": "published"
             }
         ],
@@ -184,14 +188,15 @@
             "Hip angle is the master variable — every other decision cascades from it",
             "Prouvé's three critical angles: seat tilt, back angle, seat-to-popliteal height",
             "Thonet's fork: design for other designers, or for the person who comes home exhausted"
-        ]
+        ],
+        "series": "chair-roundtable"
     },
     {
         "id": "rt-material-values",
-        "title": "Chair Roundtable — Material Values",
+        "title": "Chair Roundtable 02 — Material Values",
         "type": "roundtable",
-        "description": "Part two. Structure versus surface, the three material questions, and why choosing a humble wood like pine is a statement of values.",
-        "date": "May 2026",
+        "description": "Structure versus surface, the three material questions, and why choosing a humble wood like pine is a statement of values.",
+        "date": "Apr 2026",
         "tags": [
             "roundtable",
             "design"
@@ -201,7 +206,7 @@
         "status": "live",
         "events": [
             {
-                "date": "2026-05-20",
+                "date": "2026-04-26",
                 "action": "published"
             }
         ],
@@ -209,13 +214,14 @@
             "The three material questions: skin at one hour, aging at ten years, cost at ten thousand",
             "Rietveld's spatial crisis — the chair must define a zone in an undifferentiated room",
             "\"Vision without a supply chain is just philosophy\""
-        ]
+        ],
+        "series": "chair-roundtable"
     },
     {
         "id": "rt-build-process",
-        "title": "Chair Roundtable — Build Process",
+        "title": "Chair Roundtable 03 — Build Process",
         "type": "roundtable",
-        "description": "Part three. Principles give way to practice — production paths, the sketch-model-engineer sequence, and constraint as a forcing function.",
+        "description": "Principles give way to practice — production paths, the sketch-model-engineer sequence, and constraint as a forcing function.",
         "date": "May 2026",
         "tags": [
             "roundtable",
@@ -226,7 +232,7 @@
         "status": "live",
         "events": [
             {
-                "date": "2026-05-25",
+                "date": "2026-05-11",
                 "action": "published"
             }
         ],
@@ -234,7 +240,8 @@
             "Eames: sketch to discover, model to test, engineer to produce — in that order",
             "Prouvé's force skeleton — find the structure by where the cardboard collapses",
             "The assignment: build one seat from cardboard, sit it with eyes closed, photograph the posture"
-        ]
+        ],
+        "series": "chair-roundtable"
     },
     {
         "id": "essay-ai-pricing-market-maker",

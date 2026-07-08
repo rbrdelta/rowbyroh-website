@@ -22,12 +22,13 @@ const FIXTURE = [
     { id: 'draft1', title: 'Draft', type: 'essay', url: '/blog/secret', tags: ['essay'], published: false },
 ];
 
-test('zoneClass maps types to the design-system zones', () => {
-    assert.equal(R.zoneClass('field-note'), 'zone-writing');
-    assert.equal(R.zoneClass('roundtable'), 'zone-writing');
-    assert.equal(R.zoneClass('essay'), 'zone-writing');
-    assert.equal(R.zoneClass('project'), 'zone-portfolio');
-    assert.equal(R.zoneClass('unknown'), 'zone-mono');
+test('zoneClass maps bodies of work to the design-system zones', () => {
+    assert.equal(R.zoneClass({ type: 'field-note' }), 'zone-writing');
+    assert.equal(R.zoneClass({ type: 'roundtable' }), 'zone-roundtable');
+    assert.equal(R.zoneClass({ type: 'essay' }), 'zone-writing');
+    assert.equal(R.zoneClass({ type: 'essay', series: 'model-behavior' }), 'zone-research');
+    assert.equal(R.zoneClass({ type: 'project' }), 'zone-portfolio');
+    assert.equal(R.zoneClass({ type: 'unknown' }), 'zone-mono');
 });
 
 test('roundtable surfaces the next episode in the series first', () => {

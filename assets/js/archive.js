@@ -10,12 +10,15 @@
         return div.innerHTML;
     }
 
-    function zoneClass(type) {
-        switch (type) {
+    // Zone follows the body of work: the model-behavior series carries the
+    // research zone, roundtables their own; types map for everything else.
+    function zoneClass(item) {
+        if (item && item.series === 'model-behavior') return 'zone-research';
+        switch (item && item.type) {
             case 'project': return 'zone-portfolio';
             case 'analysis': return 'zone-portfolio';
+            case 'roundtable': return 'zone-roundtable';
             case 'essay': return 'zone-writing';
-            case 'roundtable': return 'zone-writing';
             case 'field-note': return 'zone-writing';
             default: return 'zone-mono';
         }
@@ -69,7 +72,7 @@
         container.innerHTML = '';
 
         items.forEach(function (item) {
-            var zone = zoneClass(item.type);
+            var zone = zoneClass(item);
             var a = document.createElement('a');
             a.href = item.url;
             a.className = 'archive-item ' + zone;
@@ -78,13 +81,15 @@
                 a.classList.add('filtered-out');
             }
 
+            // A series title already names its body of work — the type label
+            // only appears when it adds information (non-series items).
             a.innerHTML =
                 '<div class="archive-item-header">' +
-                    '<span class="archive-type ' + zone + '">' + escapeHtml(item.type) + '</span>' +
+                    (item.series ? '' : '<span class="archive-type ' + zone + '">' + escapeHtml(item.type) + '</span>') +
                     '<span class="archive-title">' + escapeHtml(item.title) + '</span>' +
                 '</div>' +
                 '<span class="archive-desc">' + escapeHtml(item.description || '') + '</span>' +
-                '<span class="archive-date">' + formatMonth(latestEventDate(item)) + '</span>';
+                '<span class="archive-date ' + zone + '">' + formatMonth(latestEventDate(item)) + '</span>';
 
             container.appendChild(a);
         });

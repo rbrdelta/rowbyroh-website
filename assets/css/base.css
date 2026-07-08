@@ -14,9 +14,18 @@
   --zone-portfolio: #b84233;
   --zone-writing: #8a7d3c;
   --zone-mono: #555;
+  --zone-research: #b84233;   /* research series — flagship, carries the oxide red */
+  --zone-roundtable: #6e4523; /* chair roundtable — walnut */
   --red-line: #e84040;
   --quote-bg: #fefefe;
 }
+
+/* Page-level zone override — color follows the body of work.
+   On writing-family pages --zone-writing acts as the page's active zone token;
+   these body classes re-point it so shared components (section numbers,
+   pull quotes, roster) pick up the right accent without per-element edits. */
+body.zone-research { --zone-writing: var(--zone-research); }
+body.zone-roundtable { --zone-writing: var(--zone-roundtable); }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 

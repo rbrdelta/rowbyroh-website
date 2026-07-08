@@ -8,7 +8,7 @@ Converged from 28-version exploration (archived as `v2-exploration` tag). **Cano
 
 - **Shared foundation:** `assets/css/base.css` — CSS variables, zone colors, typography, warm concrete background (#faf9f6), red notebook margin lines. All content pages link this.
 - **Fonts:** IBM Plex Sans (author voice — body text, orientation), IBM Plex Mono (system voice — titles, code, metadata)
-- **Zone colors:** Portfolio = oxide red (#b84233), Writing = ochre (#8a7d3c), System = mono (#555)
+- **Zone colors:** color follows the body of work — Research (model-behavior series) = oxide red (#b84233), Writing/field notes = ochre (#8a7d3c), Roundtable = walnut (#6e4523), Portfolio (parked, returns as Demos) = oxide red, System = mono (#555). Zone resolution is series-first, then type (`zoneClass` in stream/archive/related.js); content pages re-point `--zone-writing` via body class (`zone-research`, `zone-roundtable`).
 - **Color:** All text in #1a1a1a. Labels/metadata in #555 or #888. Red (#e84040) as sole accent, used structurally (margin lines, section dashes, scroll indicator).
 - **Aesthetic:** "Back of the napkin to real life." Organic, not over-designed. Raw edge (body border on homepage).
 - **CSS:** Vanilla only. No frameworks, no Tailwind, no preprocessors.
@@ -34,7 +34,7 @@ Converged from 28-version exploration (archived as `v2-exploration` tag). **Cano
 ### Data Files
 | File | Purpose | Used by |
 |------|---------|---------|
-| `assets/data/content.json` | All content entries with `featured_for`, `events`, tags, descriptions, highlights | `stream.js` (homepage), `archive.js` (archive page), `related.js` (Keep Reading deep-dive module) |
+| `assets/data/content.json` | All content entries with `featured_for`, `events`, `series`, tags, descriptions, highlights | `stream.js` (homepage), `archive.js` (archive page), `related.js` (Keep Reading deep-dive module), `research.js` (/research episode list) |
 
 > `writing.js` is retired from live pages — the type-limited `#post-nav` prev/next was superseded by the unified `related.js` Keep Reading module (covers all content types).
 
@@ -89,22 +89,26 @@ Shared vocabulary, composed per page:
 |------|------|--------|
 | `index.html` | Homepage / Navigation | Live — aperture + logbook |
 | `archive.html` | Archive / All Work | Live |
+| `research.html` | Research hub (Model Behavior) | Live — thesis + episode list |
 | `about.html` | About | Live |
 | `colophon.html` | Colophon / System | Live |
-| `field-notes/conversation-sync.html` | Field Note | Live |
-| `field-notes/headless-parity.html` | Field Note | Live |
-| `field-notes/batch-approval.html` | Field Note | Live |
-| `field-notes/memory-and-the-live-channel.html` | Field Note | Live |
-| `blog/ai-pricing-market-maker.html` | Essay | Live |
-| `chair-roundtable/ergonomic-intent.html` | Roundtable (part 1) | Live |
-| `chair-roundtable/material-values.html` | Roundtable (part 2) | Live |
-| `chair-roundtable/build-process.html` | Roundtable (part 3) | Live |
+| `field-notes/conversation-sync.html` | Field Note 01 | Live |
+| `field-notes/headless-parity.html` | Field Note 02 | Live |
+| `field-notes/batch-approval.html` | Field Note 05 | Live |
+| `field-notes/memory-and-the-live-channel.html` | Field Note 07 | Live |
+| `blog/an-earned-null.html` | Essay (Model Behavior EP01) | Live |
+| `blog/cost-of-verification.html` | Essay (Model Behavior EP02) | Live |
+| `chair-roundtable/ergonomic-intent.html` | Chair Roundtable 01 | Live |
+| `chair-roundtable/material-values.html` | Chair Roundtable 02 | Live |
+| `chair-roundtable/build-process.html` | Chair Roundtable 03 | Live |
 
 **Cancelled (in `drafts/cancelled/`, rewritten to `/404`, NOT live):** `obsidian-mcp`,
 `agentic-stack`, `portfolio-analysis`, `deadweight` (portfolio — return as Demos),
-`blog/reverse-engineering-claude-api`, `blog/vault-vs-memory` (essays). The
-content model is About / Field Notes / Essays / Roundtables; portfolio pieces
-return as interactive Demos, not static pages.
+`blog/reverse-engineering-claude-api`, `blog/vault-vs-memory` (essays), and
+`blog/ai-pricing-market-maker` (parked for Daniel's rewrite — stays registered
+in content.json as `published: false`; verify.sh asserts its URL stays dark).
+The content model is About / Field Notes / Essays / Roundtables; portfolio
+pieces return as interactive Demos, not static pages.
 
 ## Navigation Model
 

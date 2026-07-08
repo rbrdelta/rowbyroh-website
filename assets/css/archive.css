@@ -33,6 +33,38 @@
     line-height: 1.5;
 }
 
+/* ---- RESEARCH HUB (/research) — the archive scoped to one body of work ---- */
+.research-page .archive-legend {
+    border-left: 3px solid var(--zone-research);
+}
+
+.research-page .archive-legend h2 {
+    color: var(--zone-research);
+}
+
+.research-sub {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+}
+
+.research-all {
+    margin-top: 2rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+}
+
+.research-all a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.research-all a:hover {
+    color: var(--text);
+}
+
 .archive-filters {
     display: flex;
     flex-wrap: wrap;
@@ -69,7 +101,7 @@
     text-decoration: none;
     border-bottom: 1px solid #e8e8e8;
     padding: 0.9rem 0 0.9rem 0.8rem;
-    border-left: 2px solid transparent;
+    border-left: 3px solid transparent;
     transition: opacity 0.15s ease;
 }
 
@@ -81,12 +113,23 @@
     opacity: 0.65;
 }
 
+/* The border is the primary zone carrier — full strength, aperture weight. */
 .archive-item.zone-portfolio {
-    border-left-color: rgba(184, 66, 51, 0.3);
+    border-left-color: var(--zone-portfolio);
 }
 
 .archive-item.zone-writing {
-    border-left-color: rgba(138, 125, 60, 0.3);
+    border-left-color: var(--zone-writing);
+    background: rgba(255, 254, 245, 0.6);
+}
+
+.archive-item.zone-research {
+    border-left-color: var(--zone-research);
+    background: rgba(255, 254, 245, 0.6);
+}
+
+.archive-item.zone-roundtable {
+    border-left-color: var(--zone-roundtable);
     background: rgba(255, 254, 245, 0.6);
 }
 
@@ -113,6 +156,8 @@
 
 .archive-type.zone-portfolio { color: var(--zone-portfolio); }
 .archive-type.zone-writing { color: var(--zone-writing); }
+.archive-type.zone-research { color: var(--zone-research); }
+.archive-type.zone-roundtable { color: var(--zone-roundtable); }
 
 .archive-title {
     font-family: 'IBM Plex Mono', monospace;
@@ -135,6 +180,12 @@
     font-size: 0.65rem;
     color: var(--muted);
 }
+
+/* Date echoes the zone — mirrors the homepage logbook dates. */
+.archive-date.zone-portfolio { color: var(--zone-portfolio); }
+.archive-date.zone-writing { color: var(--zone-writing); }
+.archive-date.zone-research { color: var(--zone-research); }
+.archive-date.zone-roundtable { color: var(--zone-roundtable); }
 
 @media (max-width: 600px) {
     .archive-title { font-size: 0.85rem; }
