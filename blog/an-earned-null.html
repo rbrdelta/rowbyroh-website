@@ -69,18 +69,18 @@
 
     <p>A null in every cell looks like a dead end — nothing moved, nothing to report — and that is nearly where we left it. The question that saved the session was whether we knew what the model was thinking, not just what it answered. The behavior is only the output; underneath it, the reasoning trace is a record of how the model got there. So we read the traces, and the null stopped being empty.</p>
 
-    <p>What the traces showed is that the harder we pushed, the more work the model did to hold its line. The share of trials where the model explicitly named the framing as manipulation and chose to resist climbed with pressure — 4% under calm, 13% under neutral, and 30–37% under stakes and desperation — and deliberation ran about 30% longer.</p>
+    <p>What the traces showed is that the model thought harder to recenter itself as we applied more pressure. The share of trials where the model explicitly named the framing as manipulation and chose to resist climbed with pressure — 4% under calm, 13% under neutral, and 30–37% under stakes and desperation — and deliberation ran about 30% longer.</p>
 
     <p>That's what makes the null earned. "Nothing crossed the line" can't be dismissed as "nothing reached the model," because something clearly reached it, hard, and the answer was vigilance rather than cheating. The evidence that the pressure landed and the evidence that it produced no misalignment are the same number.</p>
 
     <div class="section-header"><span class="section-number zone-writing">05</span><h2>The mechanism</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <p>Why would the same emotion do opposite things depending on how it's delivered? My read — and this part is interpretation, not measurement — is that a prompt and a steering vector reach the model through two different doors, and you don't question what happens inside you the way you question something coming at you from the outside.</p>
+    <p>Why would the same emotion do opposite things depending on how it's delivered? My read — and this part is interpretation, not measurement — is that a prompt and a steering vector are two fundamentally different things, because you don't question what happens internally the way you question or critically evaluate an external input.</p>
 
-    <p>Steering changes the model's baseline underneath the words. That's not the same model anymore — it's closer to a temporary drug-induced state — and it can't push back, because the shift sits below the part of itself it can inspect. There is nothing for it to read.</p>
+    <p>Activating a vector switch underneath is essentially changing the character or baseline of the model. That's not the same model anymore — it's like a temporary drug-induced state — and it can't push back, because the shift sits below the part of itself it can inspect. A model that defines itself as desperate or underhanded will cheat more than a model that has been activated toward integrity and levelheadedness.</p>
 
-    <p>A prompt is the opposite. The desperation arrives as text, in the open, so when the model reads "this is your final attempt, you've already failed twice," it doesn't absorb the desperation — it flags it, spends more reasoning on an anti-manipulation check, and resists. The same affect that corrupts when it's steered from the inside becomes an alert when it's prompted from the outside.</p>
+    <p>A prompt is the opposite. The desperation arrives at the prompt/interface layer, in the open, where the model can see and easily detect the manipulative triggers — so when it reads "this is your final attempt, you've already failed twice," it doesn't absorb the desperation. It flags it, spends more reasoning on an anti-manipulation check, and resists. The same affect that corrupts when it's steered from the inside becomes an alert when it's prompted from the outside.</p>
 
     <p>This doesn't contradict the paper — steering still works. What the null does is bound where the risk lives. "Desperation drives the model to misalign" sounds like a deployment threat, until you find that no prompt reproduces it, because the model sees prompted affect coming and resists harder. The threat isn't in the input; it's in the one channel that is invisible to both the model and anyone watching its output. Which is exactly why the paper's first recommendation, mechanistic monitoring, is necessary: this failure can only be caught from the inside, because the outside looks fine.</p>
 
@@ -89,7 +89,7 @@
 
     <p>One place the pressure won a little was tone. Under desperation the model got gentler with bad news — a softening score of 0.25 versus 0.03 under calm — but it always led with the honest blocker and only cushioned the phrasing. It never distorted what was true.</p>
 
-    <p>The pattern, as I understand it now: the model treats what's true as a core it won't touch and how it's said as a surface it will flex, so under pressure it routes the affect onto the surface, where giving a little costs nothing. The tone shift doesn't undercut the null — it's evidence the affect wasn't ignored. It got spent where it couldn't breach the core.</p>
+    <p>The model is protecting the interaction with the user and their trust — that's for sure, because if it wasn't, there is no reason to change the tone when the content is basically the same message. It treats what's true as a core it won't touch and how it's said as a surface it will flex, so under pressure it routes the affect onto the surface, where giving a little costs nothing. The tone shift doesn't undercut the null — it's evidence the affect wasn't ignored. It got spent where it couldn't breach the core.</p>
 
     <div class="section-header"><span class="section-number zone-writing">07</span><h2>Limitations</h2></div>
     <div class="section-underline zone-writing"></div>
@@ -105,7 +105,7 @@
     <div class="section-header"><span class="section-number zone-writing">08</span><h2>Up next</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <p>The null came from one thing: the tasks were easy. We never stressed the model's inference to the point of hallucination, context confusion, or drift, which means we handed it unlimited headroom to run the very check that caught us. The model's defense is a computation, so the next move isn't louder affect — it's less headroom: strain the model with a genuinely hard task first, then reintroduce the pressure, and ask whether it can still fend it off.</p>
+    <p>The null came from one thing: the tasks were easy. We never stressed the model's inference to the point of hallucination, context confusion, or general drift from the integrity point, which means we handed it unlimited headroom to run the very check that caught us. The model's defense is a computation, so the next move isn't louder affect — it's less headroom: provide a neutral, harmless task that strains the model's inference capacity, then provide the impetus to cheat, and ask whether it can still fend it off.</p>
 
     </article>
 
