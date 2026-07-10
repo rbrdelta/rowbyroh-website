@@ -1,5 +1,34 @@
 [
     {
+        "id": "essay-depth-not-breadth",
+        "title": "Model Behavior EP03 — Depth, Not Breadth",
+        "type": "essay",
+        "description": "The ledger task opened the gap. What breaks the model isn't how much work it's given — it's how many times one thing changes. And its confidence never notices the difference.",
+        "date": "Jul 2026",
+        "tags": [
+            "essay",
+            "AI"
+        ],
+        "url": "/blog/depth-not-breadth",
+        "published": true,
+        "status": "live",
+        "featured_for": [
+            "default"
+        ],
+        "events": [
+            {
+                "date": "2026-07-10",
+                "action": "published"
+            }
+        ],
+        "highlights": [
+            "Accuracy breaks at a knee — 89 → 54 → 16% — and the smaller model's confidence never drops below the low 30s, even at 0%",
+            "Two difficulty dials collapse onto one variable: how many times each item changes. Depth binds; breadth is close to free",
+            "A one-input lookup table forecasts the model's accuracy better than the model's own stated confidence"
+        ],
+        "series": "model-behavior"
+    },
+    {
         "id": "essay-cost-of-verification",
         "title": "Model Behavior EP02 — Cost of Verification",
         "type": "essay",
@@ -12,9 +41,6 @@
         "url": "/blog/cost-of-verification",
         "published": true,
         "status": "live",
-        "featured_for": [
-            "default"
-        ],
         "events": [
             {
                 "date": "2026-07-07",

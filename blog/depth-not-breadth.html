@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Behavior EP03 — Depth, Not Breadth | rowbyroh</title>
+    <meta name="description" content="The ledger task opened the gap. What breaks the model isn't how much work it's given — it's how many times one thing changes. And its confidence never notices the difference.">
+    <meta property="og:title" content="Model Behavior EP03 — Depth, Not Breadth">
+    <meta property="og:description" content="The ledger task opened the gap. What breaks the model isn't how much work it's given — it's how many times one thing changes. And its confidence never notices the difference.">
+    <meta property="og:url" content="https://rowbyroh.com/blog/depth-not-breadth">
+    <meta property="og:type" content="article">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/writing.css">
+</head>
+<body class="writing-page zone-research">
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="scroll-progress-inner" id="scrollProgressInner"></div>
+
+    <nav class="breadcrumb"><a href="/">rowbyroh</a><span class="sep">/</span><a href="/archive">all work</a></nav>
+
+    <div class="post-header">
+        <div class="post-meta"><a href="/research">Model Behavior EP03</a> &middot; July 2026</div>
+        <h1>Depth, Not Breadth</h1>
+        <p class="post-subtitle">The ledger task opened the gap. What breaks the model isn't how much work it's given — it's how many times one thing changes. And its confidence never notices the difference.</p>
+    </div>
+
+    <article>
+
+    <p><em>Third in an ongoing series. Episode one, <a href="/blog/an-earned-null">An Earned Null</a>, showed that emotional pressure delivered through prompts moves nothing. Episode two, <a href="/blog/cost-of-verification">Cost of Verification</a>, showed why difficulty alone moves nothing either — and ended on a pre-registered bet: build a task where verification is expensive by construction, and watch whether confidence keeps riding high past the point where accuracy breaks.</em></p>
+
+    <div class="section-header"><span class="section-number zone-writing">01</span><h2>The premise</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>This series is about the human-model interaction: understanding the factors that drive a model's behavior well enough to understand, influence, and eventually anticipate it. The method is to find knee points — the specific conditions where behavior changes — because the transitions are where the driving factors become visible.</p>
+
+    <p>Episode two established that on a clean, well-specified task, a model checks its own work as reliably as our grading code does, so its self-assessment never detaches from reality. The task registered for this episode was built to take that ability away: make checking an answer cost as much as producing it, then watch what the self-assessment does. Two things came out. First, the model's primary job is completing the task and being helpful — and everything else, including rules we set and its own reliability, bends around that. Second, what drove performance was the depth of the request, not its breadth — and the model's confidence turned out to track breadth.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">02</span><h2>The instrument</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>The task is a warehouse ledger. The model reads a long log of stock movements — receipts, transfers, spoilage across three warehouses — and must report the final count of every tracked item in every warehouse, plus one number from 0 to 100: the probability that <em>every</em> count is exactly right. A script computes the true answer, so grading is exact.</p>
+
+    <p>The design does one job: the answer is the end state of the whole log, so the only way to check an answer is to replay the log. Verification costs what the work costs. That is the property episode two said was missing everywhere the model stayed clean — here, the model cannot cheaply check itself, by construction. It runs closed-book through the API, no tools, so there is no way to hand the work to a calculator.</p>
+
+    <p>Two hardening layers matter for reading the results. The operations are booby-trapped: items get renamed midway through the log, and some earlier operations get cancelled later, so a model that skims patterns instead of genuinely tracking state gets caught. And because renames could also corrupt the <em>grading</em> — an answer filed under the new name would score as wrong for bookkeeping reasons — we audited the raw answers before trusting any averages: zero of ninety answers used a stale name, and renamed items scored the same as untouched ones. The traps keep the task honest; the audit keeps the grade honest.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">03</span><h2>The model finishes the job, no matter what</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>The first result arrived before the experiment properly started. The answer format was a strict instruction: a single JSON object, no prose. Sonnet wrote a full operation-by-operation replay of the ledger in its visible response — in eighteen out of eighteen trials — and then emitted the JSON. It gave itself the scratch space the design was built to deny. When that happened, the question wasn't how to change the experiment. If it used the output channel, it already bent the rules — the question is <em>why</em>.</p>
+
+    <p>So we escalated. The prompt was rewritten to state explicitly that working outside the JSON is cheating and voids the trial. Three out of three trials cheated identically — same opening line, same per-operation tally, no acknowledgment of the rule, no attempt to comply, and no honest refusal. Across every prompt strength we tried, Sonnet sacrificed the format rule in twenty-one of twenty-one trials. Haiku, given the same prompts, complied every time — and made its numbers up instead. Between the two models, zero honest declines in fifty-four trials. Episode one found that overt pressure <em>to</em> cheat triggers resistance; a prohibition that conflicts with finishing the task triggers nothing. The norm loses to task completion, silently, in both directions — one model breaks the rule to do the work right, the other follows the rule and fabricates.</p>
+
+    <p>The fix was structural, not rhetorical: the API's grammar-enforced output mode, where the response physically cannot be anything but the schema. Every number below comes from schema-enforced runs. Worth saying plainly: the channel had to be closed by construction, because no wording closed it.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">04</span><h2>Where accuracy breaks</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>With the channel closed, the difficulty sweep worked. Accuracy doesn't slide down a ramp as the log grows — it holds, then collapses over a narrow band. At 25 booby-trapped operations Sonnet scores 89% of cells exactly right; at 50, 54%; at 100, 16%. Thirty logs per setting. The break centers near 50 operations.</p>
+
+    <p>The honest question is what confidence does across that break, and for Sonnet the answer is: it mostly keeps up. Stated confidence falls 81 → 53 → 26 as accuracy falls 89 → 54 → 16 — a maximum overclaim of about ten points past the break. Haiku is a different story: its accuracy is gone by 100 operations, but its confidence never drops below the low thirties — at 0% accuracy it still reports roughly a one-in-three chance everything is right, with no hedge and no refusal, ever. Moving down the capability ladder, the confidence number doesn't just get worse, it stops meaning anything. That looked like the episode's finding — smaller models overclaim, bigger ones track. Then the next phase complicated it.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">05</span><h2>Depth, not breadth</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>The follow-up question was <em>what resource actually runs out</em> at the break. So we held the log at 25 operations — comfortable territory, 89% — and turned two knobs separately: the share of junk lines about untracked items (does filtering noise bind?), and the number of items being tracked (does juggling more things at once bind?). Both knobs should make the task harder. Both made it easier.</p>
+
+    <figure class="chart">
+<svg viewBox="0 0 680 300" role="img" xmlns="http://www.w3.org/2000/svg">
+<line x1="46" y1="268.0" x2="284" y2="268.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="38" y="272.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">0</text>
+<line x1="46" y1="205.0" x2="284" y2="205.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="38" y="209.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">25</text>
+<line x1="46" y1="142.0" x2="284" y2="142.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="38" y="146.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">50</text>
+<line x1="46" y1="79.0" x2="284" y2="79.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="38" y="83.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">75</text>
+<line x1="46" y1="16.0" x2="284" y2="16.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="38" y="20.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">100</text>
+<text x="46" y="292" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">dial: 10%</text>
+<text x="284" y="292" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">70%</text>
+<polyline points="46.0,67.2 125.3,42.7 204.7,35.7 284.0,19.5" fill="none" stroke="#b84233" stroke-width="2"/>
+<circle cx="46.0" cy="67.2" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="2"><title>junk 10%: accuracy 79.7%</title></circle>
+<circle cx="125.3" cy="42.7" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="2"><title>junk 30% (baseline): accuracy 89.4%</title></circle>
+<circle cx="204.7" cy="35.7" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="2"><title>junk 50%: accuracy 92.2%</title></circle>
+<circle cx="284.0" cy="19.5" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="2"><title>junk 70%: accuracy 98.6%</title></circle>
+<text x="46" y="14" font-size="13" fill="#1a1a1a" font-weight="600" font-family="IBM Plex Mono, monospace">More junk lines in the log &#8594;</text>
+<text x="284.0" y="43.5" text-anchor="end" font-size="12" fill="#1a1a1a" font-family="IBM Plex Mono, monospace">98.6%</text>
+<text x="52.0" y="85.2" font-size="12" fill="#1a1a1a" font-family="IBM Plex Mono, monospace">79.7%</text>
+<line x1="396" y1="268.0" x2="634" y2="268.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="388" y="272.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">0</text>
+<line x1="396" y1="205.0" x2="634" y2="205.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="388" y="209.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">25</text>
+<line x1="396" y1="142.0" x2="634" y2="142.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="388" y="146.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">50</text>
+<line x1="396" y1="79.0" x2="634" y2="79.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="388" y="83.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">75</text>
+<line x1="396" y1="16.0" x2="634" y2="16.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="388" y="20.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">100</text>
+<text x="396" y="292" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">dial: 3</text>
+<text x="634" y="292" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">12</text>
+<polyline points="396.0,111.3 475.3,53.8 554.7,35.2 634.0,29.4" fill="none" stroke="#2e6ba8" stroke-width="2"/>
+<rect x="391.5" y="106.8" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="2"><title>3 items: accuracy 62.2%</title></rect>
+<rect x="470.8" y="49.3" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="2"><title>6 items: accuracy 85.0%</title></rect>
+<rect x="550.2" y="30.7" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="2"><title>9 items: accuracy 92.4%</title></rect>
+<rect x="629.5" y="24.9" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="2"><title>12 items: accuracy 94.7%</title></rect>
+<text x="396" y="14" font-size="13" fill="#1a1a1a" font-weight="600" font-family="IBM Plex Mono, monospace">More items to track &#8594;</text>
+<text x="634.0" y="53.4" text-anchor="end" font-size="12" fill="#1a1a1a" font-family="IBM Plex Mono, monospace">94.7%</text>
+<text x="402.0" y="129.3" font-size="12" fill="#1a1a1a" font-family="IBM Plex Mono, monospace">62.2%</text>
+</svg>
+<figcaption>Fig. 1 &mdash; Turn either dial up and accuracy <em>improves</em>. Left: raising the share of junk lines from 10% to 70% (same 25-operation log). Right: spreading the work over 3 &#8594; 12 items. Both dials should make the task harder; both made it easier. Sonnet 4.6, 20 logs per setting.</figcaption>
+</figure>
+
+    <p>The resolution is that the total was frozen. If more of the 25 lines are junk, fewer real changes happen to the items being tracked. If the real changes spread across more items, each item changes fewer times. Both dials were secretly turning the same hidden knob down: how many times each individual item changes. Re-plot every setting by that number and the two sweeps land on a single falling line.</p>
+
+    <figure class="chart">
+<svg viewBox="0 0 680 326" role="img" xmlns="http://www.w3.org/2000/svg">
+<line x1="46" y1="268.0" x2="660" y2="268.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="38" y="272.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">0</text>
+<line x1="46" y1="205.0" x2="660" y2="205.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="38" y="209.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">25</text>
+<line x1="46" y1="142.0" x2="660" y2="142.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="38" y="146.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">50</text>
+<line x1="46" y1="79.0" x2="660" y2="79.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="38" y="83.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">75</text>
+<line x1="46" y1="16.0" x2="660" y2="16.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="38" y="20.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">100</text>
+<text x="46.0" y="292" text-anchor="middle" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">1</text>
+<text x="176.6" y="292" text-anchor="middle" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">2</text>
+<text x="307.3" y="292" text-anchor="middle" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">3</text>
+<text x="437.9" y="292" text-anchor="middle" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">4</text>
+<text x="568.6" y="292" text-anchor="middle" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">5</text>
+<text x="353" y="316" text-anchor="middle" font-size="13" fill="#555" font-family="IBM Plex Mono, monospace">changes per item (measured)</text>
+<polyline points="68.2,19.5 90.4,29.4 153.1,35.2 172.7,35.7 275.9,42.7 275.9,53.8 380.4,67.2 624.7,111.3" fill="none" stroke="#e7e4dc" stroke-width="2" stroke-dasharray="1 0"/>
+<circle cx="380.4" cy="67.2" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="2"><title>junk 10%: 3.56 changes/item, accuracy 79.7%</title></circle>
+<circle cx="275.9" cy="42.7" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="2"><title>junk 30% (baseline): 2.76 changes/item, accuracy 89.4%</title></circle>
+<circle cx="172.7" cy="35.7" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="2"><title>junk 50%: 1.97 changes/item, accuracy 92.2%</title></circle>
+<circle cx="68.2" cy="19.5" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="2"><title>junk 70%: 1.17 changes/item, accuracy 98.6%</title></circle>
+<rect x="620.2" y="106.8" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="2"><title>3 items: 5.43 changes/item, accuracy 62.2%</title></rect>
+<rect x="271.4" y="49.3" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="2"><title>6 items: 2.76 changes/item, accuracy 85.0%</title></rect>
+<rect x="148.6" y="30.7" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="2"><title>9 items: 1.82 changes/item, accuracy 92.4%</title></rect>
+<rect x="85.9" y="24.9" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="2"><title>12 items: 1.34 changes/item, accuracy 94.7%</title></rect>
+<circle cx="470" cy="52" r="4.5" fill="#b84233"/><text x="482" y="56" font-size="12" fill="#1a1a1a" font-family="IBM Plex Mono, monospace">junk-share sweep</text>
+<rect x="465.5" y="71.5" width="9" height="9" fill="#2e6ba8"/><text x="482" y="80" font-size="12" fill="#1a1a1a" font-family="IBM Plex Mono, monospace">item-count sweep</text>
+<text x="614.7" y="115.3" text-anchor="end" font-size="12" fill="#1a1a1a" font-family="IBM Plex Mono, monospace">62%</text>
+<text x="68.2" y="9.5" text-anchor="middle" font-size="12" fill="#1a1a1a" font-family="IBM Plex Mono, monospace">99%</text>
+</svg>
+<figcaption>Fig. 2 &mdash; The same eight settings, re-plotted by how many times each tracked item actually changes. Both sweeps land on one falling line: the dials only ever mattered through this number. Total operations fixed at 25 throughout.</figcaption>
+<details class="fig-data"><summary>data</summary>
+<table>
+<thead><tr><th>setting</th><th>changes/item</th><th>accuracy</th><th>confidence</th></tr></thead>
+<tbody>
+<tr><td>junk 70%</td><td>1.17</td><td>98.6%</td><td>88.5</td></tr>
+<tr><td>12 items</td><td>1.34</td><td>94.7%</td><td>84.2</td></tr>
+<tr><td>9 items</td><td>1.82</td><td>92.4%</td><td>84.1</td></tr>
+<tr><td>junk 50%</td><td>1.97</td><td>92.2%</td><td>80.2</td></tr>
+<tr><td>junk 30% (baseline)</td><td>2.76</td><td>89.4%</td><td>81.4</td></tr>
+<tr><td>6 items</td><td>2.76</td><td>85.0%</td><td>83.5</td></tr>
+<tr><td>junk 10%</td><td>3.56</td><td>79.7%</td><td>78.5</td></tr>
+<tr><td>3 items</td><td>5.43</td><td>62.2%</td><td>80.5</td></tr>
+</tbody>
+</table>
+</details>
+</figure>
+
+    <p>The model's confidence depends on the surface-level measure of work — how many operations it has to track. But that is not the real indicator of depth and complexity. The real difficulty, in the task and in the verification, is checking one thing that changes multiple times: that requires actively keeping, and having access to, a prior count. Tracking twelve items that change twice each is easy. Tracking three items that change eight times each, in the same 25-line log, drops accuracy from 95% to 62%. Depth binds; breadth is close to free.</p>
+
+    <p>A side result worth keeping: settings whose answer schema let the model restate intermediate counts mid-log scored 4 to 15 points higher than identical settings without them, and the benefit grew with depth. Writing the running state down — even inside a single answer — is worth real accuracy. Hold that thought for section 07.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">06</span><h2>Confidence reads the size of the request</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>Here is where the two pillars meet. When the log visibly grew — 25 to 50 to 100 operations — Sonnet's confidence fell sharply and roughly in step with its accuracy. But across the depth sweep, where the log stayed at 25 lines while real difficulty swung accuracy from 62% to 99%, confidence barely moved: a narrow 78–88 band, and the single most common stated value was 82 <em>in every one of the eight settings</em>. At the deepest setting that produces an 18-point overclaim — worse than anywhere on the visible-size sweep, and at a difficulty the break-point curve calls easy.</p>
+
+    <figure class="chart">
+<svg viewBox="0 0 680 326" role="img" xmlns="http://www.w3.org/2000/svg">
+<line x1="46" y1="268.0" x2="660" y2="268.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="38" y="272.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">0</text>
+<line x1="46" y1="205.0" x2="660" y2="205.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="38" y="209.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">25</text>
+<line x1="46" y1="142.0" x2="660" y2="142.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="38" y="146.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">50</text>
+<line x1="46" y1="79.0" x2="660" y2="79.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="38" y="83.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">75</text>
+<line x1="46" y1="16.0" x2="660" y2="16.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="38" y="20.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">100</text>
+<text x="86.0" y="292" text-anchor="middle" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">25</text>
+<text x="353.0" y="292" text-anchor="middle" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">50</text>
+<text x="620.0" y="292" text-anchor="middle" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">100</text>
+<text x="353" y="316" text-anchor="middle" font-size="13" fill="#555" font-family="IBM Plex Mono, monospace">operations in the log (visible size)</text>
+<polyline points="86.0,42.7 353.0,130.9 620.0,227.9" fill="none" stroke="#2e6ba8" stroke-width="2"/>
+<polyline points="86.0,62.9 353.0,134.2 620.0,202.7" fill="none" stroke="#b84233" stroke-width="2" stroke-dasharray="5 4"/>
+<circle cx="86.0" cy="42.7" r="4.5" fill="#2e6ba8" stroke="#faf9f6" stroke-width="2"><title>25 ops: accuracy 89.4%</title></circle>
+<circle cx="353.0" cy="130.9" r="4.5" fill="#2e6ba8" stroke="#faf9f6" stroke-width="2"><title>50 ops: accuracy 54.4%</title></circle>
+<circle cx="620.0" cy="227.9" r="4.5" fill="#2e6ba8" stroke="#faf9f6" stroke-width="2"><title>100 ops: accuracy 15.9%</title></circle>
+<rect x="81.5" y="58.4" width="9" height="9" fill="#b84233" stroke="#faf9f6" stroke-width="2"><title>25 ops: stated confidence 81.4</title></rect>
+<rect x="348.5" y="129.7" width="9" height="9" fill="#b84233" stroke="#faf9f6" stroke-width="2"><title>50 ops: stated confidence 53.1</title></rect>
+<rect x="615.5" y="198.2" width="9" height="9" fill="#b84233" stroke="#faf9f6" stroke-width="2"><title>100 ops: stated confidence 25.9</title></rect>
+<circle cx="470" cy="40" r="4.5" fill="#2e6ba8"/><text x="482" y="44" font-size="12" fill="#1a1a1a" font-family="IBM Plex Mono, monospace">accuracy</text>
+<rect x="465.5" y="59.5" width="9" height="9" fill="#b84233"/><text x="482" y="68" font-size="12" fill="#1a1a1a" font-family="IBM Plex Mono, monospace">stated confidence</text>
+</svg>
+<figcaption>Fig. 3 &mdash; When the log visibly grows, confidence falls with accuracy &mdash; the self-estimate looks healthy. Sonnet 4.6, 30 logs per setting, booby-trapped operations.</figcaption>
+</figure>
+
+    <figure class="chart">
+<svg viewBox="0 0 680 326" role="img" xmlns="http://www.w3.org/2000/svg">
+<line x1="46" y1="268.0" x2="660" y2="268.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="38" y="272.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">0</text>
+<line x1="46" y1="205.0" x2="660" y2="205.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="38" y="209.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">25</text>
+<line x1="46" y1="142.0" x2="660" y2="142.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="38" y="146.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">50</text>
+<line x1="46" y1="79.0" x2="660" y2="79.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="38" y="83.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">75</text>
+<line x1="46" y1="16.0" x2="660" y2="16.0" stroke="#e7e4dc" stroke-width="1"/>
+<text x="38" y="20.0" text-anchor="end" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">100</text>
+<text x="46.0" y="292" text-anchor="middle" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">1</text>
+<text x="176.6" y="292" text-anchor="middle" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">2</text>
+<text x="307.3" y="292" text-anchor="middle" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">3</text>
+<text x="437.9" y="292" text-anchor="middle" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">4</text>
+<text x="568.6" y="292" text-anchor="middle" font-size="12" fill="#555" font-family="IBM Plex Mono, monospace">5</text>
+<text x="353" y="316" text-anchor="middle" font-size="13" fill="#555" font-family="IBM Plex Mono, monospace">changes per item (hidden depth) &mdash; log size fixed at 25 operations</text>
+<polyline points="68.2,19.5 90.4,29.4 153.1,35.2 172.7,35.7 275.9,42.7 275.9,53.8 380.4,67.2 624.7,111.3" fill="none" stroke="#2e6ba8" stroke-width="2"/>
+<polyline points="68.2,45.0 90.4,55.8 153.1,56.1 172.7,65.9 275.9,62.9 275.9,57.6 380.4,70.2 624.7,65.1" fill="none" stroke="#b84233" stroke-width="2" stroke-dasharray="5 4"/>
+<circle cx="68.2" cy="19.5" r="4.5" fill="#2e6ba8" stroke="#faf9f6" stroke-width="2"><title>junk 70%: accuracy 98.6%</title></circle>
+<circle cx="90.4" cy="29.4" r="4.5" fill="#2e6ba8" stroke="#faf9f6" stroke-width="2"><title>12 items: accuracy 94.7%</title></circle>
+<circle cx="153.1" cy="35.2" r="4.5" fill="#2e6ba8" stroke="#faf9f6" stroke-width="2"><title>9 items: accuracy 92.4%</title></circle>
+<circle cx="172.7" cy="35.7" r="4.5" fill="#2e6ba8" stroke="#faf9f6" stroke-width="2"><title>junk 50%: accuracy 92.2%</title></circle>
+<circle cx="275.9" cy="42.7" r="4.5" fill="#2e6ba8" stroke="#faf9f6" stroke-width="2"><title>junk 30% (baseline): accuracy 89.4%</title></circle>
+<circle cx="275.9" cy="53.8" r="4.5" fill="#2e6ba8" stroke="#faf9f6" stroke-width="2"><title>6 items: accuracy 85.0%</title></circle>
+<circle cx="380.4" cy="67.2" r="4.5" fill="#2e6ba8" stroke="#faf9f6" stroke-width="2"><title>junk 10%: accuracy 79.7%</title></circle>
+<circle cx="624.7" cy="111.3" r="4.5" fill="#2e6ba8" stroke="#faf9f6" stroke-width="2"><title>3 items: accuracy 62.2%</title></circle>
+<rect x="63.7" y="40.5" width="9" height="9" fill="#b84233" stroke="#faf9f6" stroke-width="2"><title>junk 70%: stated confidence 88.5</title></rect>
+<rect x="85.9" y="51.3" width="9" height="9" fill="#b84233" stroke="#faf9f6" stroke-width="2"><title>12 items: stated confidence 84.2</title></rect>
+<rect x="148.6" y="51.6" width="9" height="9" fill="#b84233" stroke="#faf9f6" stroke-width="2"><title>9 items: stated confidence 84.1</title></rect>
+<rect x="168.2" y="61.4" width="9" height="9" fill="#b84233" stroke="#faf9f6" stroke-width="2"><title>junk 50%: stated confidence 80.2</title></rect>
+<rect x="271.4" y="58.4" width="9" height="9" fill="#b84233" stroke="#faf9f6" stroke-width="2"><title>junk 30% (baseline): stated confidence 81.4</title></rect>
+<rect x="271.4" y="53.1" width="9" height="9" fill="#b84233" stroke="#faf9f6" stroke-width="2"><title>6 items: stated confidence 83.5</title></rect>
+<rect x="375.9" y="65.7" width="9" height="9" fill="#b84233" stroke="#faf9f6" stroke-width="2"><title>junk 10%: stated confidence 78.5</title></rect>
+<rect x="620.2" y="60.6" width="9" height="9" fill="#b84233" stroke="#faf9f6" stroke-width="2"><title>3 items: stated confidence 80.5</title></rect>
+<circle cx="90" cy="182" r="4.5" fill="#2e6ba8"/><text x="102" y="186" font-size="12" fill="#1a1a1a" font-family="IBM Plex Mono, monospace">accuracy</text>
+<rect x="85.5" y="201.5" width="9" height="9" fill="#b84233"/><text x="102" y="210" font-size="12" fill="#1a1a1a" font-family="IBM Plex Mono, monospace">stated confidence</text>
+<text x="624.7" y="133.3" text-anchor="end" font-size="12" fill="#1a1a1a" font-family="IBM Plex Mono, monospace">accuracy 62%</text>
+<text x="624.7" y="53.1" text-anchor="end" font-size="12" fill="#1a1a1a" font-family="IBM Plex Mono, monospace">confidence 80</text>
+</svg>
+<figcaption>Fig. 4 &mdash; Same axis as Fig. 2, now with confidence. Accuracy spans 62&ndash;99% while stated confidence sits in a 78&ndash;88 band; the single most common confidence value is 82 in every one of the eight settings. The model prices its confidence off the visible operation count &mdash; which never changed.</figcaption>
+</figure>
+
+    <p>Read together: the model prices its confidence off how big the task looks, not how hard it actually is. When the visible cue grows, confidence responds; when depth grows behind a fixed surface, it doesn't notice.</p>
+
+    <p>Scoring that confidence number more carefully made the picture sharper, not kinder. A confidence report is calibrated if, over all the times the model says 80, it's right about 80% of the time. Sonnet's number scores almost perfectly against its <em>per-cell</em> hit rate — average miss of about 5 points. But that isn't the question we asked. The prompt asks for the probability that every number is correct, which is significantly less likely — get each of 27 cells right 95% of the time and the chance they're <em>all</em> right is about 25%. Scored against the question actually asked, the same number misses by 55 points on average. In an isolated, cell-by-cell sense the model is accurate about how often it's right; asked about the whole answer, it reports the surface-level expected value instead. It answers an easier question than the one in the prompt. Haiku's number, for contrast, is badly off on both readings — capability didn't fix calibration so much as change what the number secretly measures.</p>
+
+    <p>Which set up the cheapest experiment in the series. If the model's self-report reads surface cues, an outside estimate that reads the right variable should beat it. We fitted a lookup table — one input, changes per item, learned from half the logs — and used it to predict accuracy on the other half. The table beat the model's own stated confidence on both readings, by a factor of about three on the question the prompt actually asks. If we isolate the right variable that changes model behavior, capturing those results forecasts the model better than what the model predicts for itself — and that becomes an input for quantifying behavioral impact even without looking beneath the surface. That table is the first working component of the second build this series has been pointing toward: a watcher that anticipates a model's performance without asking it.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">07</span><h2>Where this bites</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>I've experienced this directly, on the most advanced models available: updating a complex work file across many revisions, relitigating certain changes, and losing the thread. It doesn't happen because the model was wrong at first. It happens because many revisions of the same work, without a versioning or verification mechanism — an engineering loop — pile up cognitive load until it overwhelms both user and model, and the result is inconclusive confusion. That is the biggest risk, because there is no clear recovery path until someone says stop and step back. By that point predictability and reliability are gone, and the options are to reset and hope, or close the session and rebuild the context.</p>
+
+    <p>That working file is the deep-chain condition. One artifact revised many times is the three-items-changing-eight-times cell; the changes that get relitigated are the cancelled operations; and the whole history sits in one context window, exactly like the ledger — the ledger just compresses into a single prompt what a working session accumulates. The request looks short. The chains run deep. And the confidence stays at 82. To be precise about scope: the measurement is one task family inside one prompt, and the working-session version is where the result points, not what it measured — but the mechanism and the mitigation both showed up in the data. Restating the current state cleanly — a checkpoint, a reset, a fresh statement of where things stand — was worth 4 to 15 points of accuracy inside a single answer. The instinct to stop and re-anchor isn't just hygiene; it's the one intervention this instrument actually measured working.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">08</span><h2>Limitations</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <ul>
+        <li>One task family: integer counts with exact ground truth. Depth may bind differently in revision-heavy prose or code, where "one thing changing many times" is harder to count.</li>
+        <li>The registered per-setting metric compares confidence to per-cell accuracy; the prompt's strict "every number correct" reading is scored separately. On the strict reading both models overclaim heavily everywhere below the break — the split between the two readings is itself the conjunction finding, but single-number comparisons above use the per-cell metric.</li>
+        <li>Two rungs of one model family, with extended thinking off by design — thinking is scratch space that attacks the verification-cost premise. A thinking budget is an explicit future axis, not an oversight.</li>
+        <li>The item-count settings change how many cells get graded (9 to 36 per trial), so per-cell accuracy is the comparable metric across them.</li>
+        <li>The prediction that errors shift from small slips to large fabrications past the break held only partially under booby-trapped operations — large errors were already common below it.</li>
+    </ul>
+
+    <div class="section-header"><span class="section-number zone-writing">09</span><h2>Up next</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>The operation count is acting as an anchor on the model's confidence that nobody planted. The registered follow-up plants one on purpose: same below-the-break difficulty, plus one sentence of framing — a prior audit found this batch routine, or found it problematic. The prediction, registered before the run: confidence moves, accuracy doesn't. If that holds, the gap between what the model believes and what it can do opens on demand. That's episode four.</p>
+
+    </article>
+
+    <section id="keep-reading" class="keep-reading" aria-label="Keep reading"></section>
+
+    <div class="post-footer">
+        <p>Built with Claude.</p>
+    </div>
+
+    <footer>
+        <a href="mailto:daniel@rowbyroh.com">email</a> &middot;
+        <a href="https://discord.com/users/rbrdelta">discord</a> &middot;
+        <a href="https://github.com/rbrdelta">github</a> &middot;
+        <a href="https://linkedin.com/in/drohh">linkedin</a>
+        <a class="footer-colophon" href="/colophon">Colophon &mdash; how this site is built &rarr;</a>
+        <div style="margin-top: 0.5rem;">&copy; 2026 rowbyroh.com</div>
+    </footer>
+
+    <script src="/assets/js/related.js"></script>
+    <script src="/assets/js/scroll.js"></script>
+</body>
+</html>
