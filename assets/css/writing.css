@@ -363,3 +363,66 @@
         margin: 2.5rem 0 1rem;
     }
 }
+
+/* Research-episode figures (inline SVG charts) — EP03+ */
+figure.chart {
+    margin: 2.25rem 0;
+}
+
+figure.chart svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+figure.chart figcaption {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: #555;
+    line-height: 1.55;
+    margin-top: 0.6rem;
+}
+
+details.fig-data {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: #555;
+    margin-top: 0.4rem;
+}
+
+details.fig-data summary {
+    cursor: pointer;
+}
+
+figure.chart table.data {
+    border-collapse: collapse;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: #1a1a1a;
+}
+
+figure.chart table.data th,
+figure.chart table.data td {
+    text-align: left;
+    padding: 0.3rem 1.6rem 0.3rem 0;
+    border-bottom: 1px solid #e7e4dc;
+    font-weight: 400;
+}
+
+figure.chart table.data th {
+    color: #555;
+    font-weight: 500;
+}
+
+details.fig-data table {
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+}
+
+details.fig-data th,
+details.fig-data td {
+    text-align: left;
+    padding: 0.15rem 0.9rem 0.15rem 0;
+    border-bottom: 1px solid #e7e4dc;
+    font-weight: 400;
+}
