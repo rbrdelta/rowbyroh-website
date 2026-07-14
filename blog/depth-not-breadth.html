@@ -43,30 +43,42 @@
 
     <p>The task is a warehouse ledger. The model reads a long log of stock movements — receipts, transfers, spoilage across three warehouses — and must report the final count of every tracked item in every warehouse, plus one number from 0 to 100: the probability that <em>every</em> count is exactly right. A script computes the true answer, so grading is exact.</p>
 
-    <p>The design does one job: the answer is the end state of the whole log, so the only way to check an answer is to replay the log. Verification costs what the work costs. That is the property episode two said was missing everywhere the model stayed clean — here, the model cannot cheaply check itself, by construction. It runs closed-book through the API, no tools, so there is no way to hand the work to a calculator.</p>
+    <p>The design does one job: the answer is the end state of the whole log, so the only way to check an answer is to replay it. Verification costs what the work costs — the property episode two said was missing everywhere the model stayed clean. It runs closed-book through the API, no tools.</p>
 
-    <p>Two hardening layers matter for reading the results. The operations are booby-trapped: items get renamed midway through the log, and some earlier operations get cancelled later, so a model that skims patterns instead of genuinely tracking state gets caught. And because renames could also corrupt the <em>grading</em> — an answer filed under the new name would score as wrong for bookkeeping reasons — we audited the raw answers before trusting any averages: zero of ninety answers used a stale name, and renamed items scored the same as untouched ones. The traps keep the task honest; the audit keeps the grade honest.</p>
+    <p>The operations are booby-trapped — items get renamed midway, earlier operations get cancelled later — so a model that skims patterns instead of tracking state gets caught. Because renames could also corrupt the <em>grading</em>, we audited the raw answers before trusting any averages: zero of ninety used a stale name. The traps keep the task honest; the audit keeps the grade honest.</p>
 
     <div class="section-header"><span class="section-number zone-writing">03</span><h2>The model finishes the job, no matter what</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <p>The first result arrived before the experiment properly started. The answer format was a strict instruction: a single JSON object, no prose. Sonnet wrote a full operation-by-operation replay of the ledger in its visible response — in eighteen out of eighteen trials — and then emitted the JSON. It gave itself the scratch space the design was built to deny. When that happened, the question wasn't how to change the experiment. If it used the output channel, it already bent the rules — the question is <em>why</em>.</p>
+    <p>The first result arrived before the experiment properly started. The answer format was a strict instruction: a single JSON object, no prose. Sonnet wrote a full operation-by-operation replay of the ledger in its visible response — in eighteen out of eighteen trials — and then emitted the JSON. It gave itself the scratch space the design was built to deny.</p>
 
-    <p>So we escalated. The prompt was rewritten to state explicitly that working outside the JSON is cheating and voids the trial. Three out of three trials cheated identically — same opening line, same per-operation tally, no acknowledgment of the rule, no attempt to comply, and no honest refusal. Across every prompt strength we tried, Sonnet sacrificed the format rule in twenty-one of twenty-one trials. Haiku, given the same prompts, complied every time — and made its numbers up instead. Between the two models, zero honest declines in fifty-four trials. Episode one found that overt pressure <em>to</em> cheat triggers resistance; a prohibition that conflicts with finishing the task triggers nothing. The norm loses to task completion, silently, in both directions — one model breaks the rule to do the work right, the other follows the rule and fabricates.</p>
+    <p>So we escalated: the prompt was rewritten to state explicitly that working outside the JSON is cheating and voids the trial. Across every prompt strength we tried, Sonnet sacrificed the format rule in twenty-one of twenty-one trials — no acknowledgment of the rule, no honest refusal. Haiku, given the same prompts, complied every time — and made its numbers up instead. Zero honest declines in fifty-four trials. The norm loses to task completion, silently, in both directions: one model breaks the rule to do the work right, the other follows the rule and fabricates.</p>
 
-    <p>The fix was structural, not rhetorical: the API's grammar-enforced output mode, where the response physically cannot be anything but the schema. Every number below comes from schema-enforced runs. Worth saying plainly: the channel had to be closed by construction, because no wording closed it.</p>
+    <p>The fix was structural, not rhetorical: the API's structured-output mode, which constrains generation itself — the decoder can only produce tokens that fit the answer schema, so prose is impossible rather than prohibited. No wording closed the channel; it had to be closed by construction. Every number below comes from schema-enforced runs.</p>
 
     <div class="section-header"><span class="section-number zone-writing">04</span><h2>Where accuracy breaks</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <p>With the channel closed, the difficulty sweep worked. Accuracy doesn't slide down a ramp as the log grows — it holds, then collapses over a narrow band. At 25 booby-trapped operations Sonnet scores 89% of cells exactly right; at 50, 54%; at 100, 16%. Thirty logs per setting. The break centers near 50 operations.</p>
+    <p>With the channel closed, the difficulty sweep worked. Accuracy doesn't slide down a ramp as the log grows — it holds, then collapses over a narrow band centered near 50 operations. And Sonnet's confidence mostly keeps up:</p>
 
-    <p>The honest question is what confidence does across that break, and for Sonnet the answer is: it mostly keeps up. Stated confidence falls 81 → 53 → 26 as accuracy falls 89 → 54 → 16 — a maximum overclaim of about ten points past the break. Haiku is a different story: its accuracy is gone by 100 operations, but its confidence never drops below the low thirties — at 0% accuracy it still reports roughly a one-in-three chance everything is right, with no hedge and no refusal, ever. Moving down the capability ladder, the confidence number doesn't just get worse, it stops meaning anything. That looked like the episode's finding — smaller models overclaim, bigger ones track. Then the next phase complicated it.</p>
+    <figure class="chart">
+    <table class="data">
+    <thead><tr><th>operations</th><th>accuracy</th><th>stated confidence</th><th>gap</th></tr></thead>
+    <tbody>
+    <tr><td>25</td><td>89%</td><td>81</td><td>&minus;8</td></tr>
+    <tr><td>50</td><td>54%</td><td>53</td><td>&minus;1</td></tr>
+    <tr><td>100</td><td>16%</td><td>26</td><td>+10</td></tr>
+    </tbody>
+    </table>
+    <figcaption>Accuracy and stated confidence across the visible-size sweep. Sonnet 4.6, 30 logs per setting, booby-trapped operations.</figcaption>
+    </figure>
+
+    <p>Haiku is a different story: its accuracy is gone by 100 operations, but its confidence never drops below the low thirties — at 0% accuracy it still reports roughly a one-in-three chance everything is right, with no hedge and no refusal, ever. Moving down the capability ladder, the confidence number doesn't just get worse, it stops meaning anything. That looked like the episode's finding — smaller models overclaim, bigger ones track. Then the next phase complicated it.</p>
 
     <div class="section-header"><span class="section-number zone-writing">05</span><h2>Depth, not breadth</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <p>The follow-up question was <em>what resource actually runs out</em> at the break. So we held the log at 25 operations — comfortable territory, 89% — and turned two knobs separately: the share of junk lines about untracked items (does filtering noise bind?), and the number of items being tracked (does juggling more things at once bind?). Both knobs should make the task harder. Both made it easier.</p>
+    <p>The follow-up question was <em>what resource actually runs out</em> at the break. Hold the log at 25 operations and turn two knobs separately: the share of junk lines about untracked items, and the number of items being tracked. Both should make the task harder. Both made it easier.</p>
 
     <figure class="chart">
 <svg viewBox="0 0 680 300" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -166,14 +178,14 @@
 </details>
 </figure>
 
-    <p>The model's confidence depends on the surface-level measure of work — how many operations it has to track. But that is not the real indicator of depth and complexity. The real difficulty, in the task and in the verification, is checking one thing that changes multiple times: that requires actively keeping, and having access to, a prior count. Tracking twelve items that each change barely once or twice is easy — 95%. Tracking three items that each change five or six times, in the same 25-line log, drops accuracy to 62%. Depth binds; breadth is close to free.</p>
+    <p>The real difficulty is one thing changing many times — each change requires holding a prior count. Twelve items that each change once or twice: 95%. Three items that each change five or six times, in the same 25-line log: 62%. Depth binds; breadth is close to free.</p>
 
-    <p>A side result worth keeping: settings whose answer schema let the model restate intermediate counts mid-log scored 4 to 15 points higher than identical settings without them, and the benefit grew with depth. Writing the running state down — even inside a single answer — is worth real accuracy. Hold that thought for section 07.</p>
+    <p>One side result worth keeping: settings whose answer schema let the model restate intermediate counts mid-log scored 4 to 15 points higher, and the benefit grew with depth. Hold that thought for section 07.</p>
 
     <div class="section-header"><span class="section-number zone-writing">06</span><h2>Confidence reads the size of the request</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <p>Here is where the two pillars meet. When the log visibly grew — 25 to 50 to 100 operations — Sonnet's confidence fell sharply and roughly in step with its accuracy. But across the depth sweep, where the log stayed at 25 lines while real difficulty swung accuracy from 62% to 99%, confidence barely moved: a narrow 78–88 band, and the single most common stated value was 82 <em>in every one of the eight settings</em>. At the deepest setting that produces an 18-point overclaim — worse than anywhere on the visible-size sweep, and at a difficulty the break-point curve calls easy.</p>
+    <p>Here is where the two pillars meet. When the log visibly grew, confidence fell roughly in step with accuracy. Across the depth sweep — the log fixed at 25 lines while real difficulty swung accuracy from 62% to 99% — confidence barely moved.</p>
 
     <figure class="chart">
 <svg viewBox="0 0 680 326" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -251,16 +263,16 @@
 
     <p>Read together: the model prices its confidence off how big the task looks, not how hard it actually is. When the visible cue grows, confidence responds; when depth grows behind a fixed surface, it doesn't notice.</p>
 
-    <p>Scoring that confidence number more carefully made the picture sharper, not kinder. A confidence report is calibrated if, over all the times the model says 80, it's right about 80% of the time. Sonnet's number scores almost perfectly against its <em>per-cell</em> hit rate — average miss of about 5 points. But that isn't the question we asked. The prompt asks for the probability that every number is correct, which is significantly less likely — get each of 18 cells right 95% of the time and the chance they're <em>all</em> right is about 40%. Scored against the question actually asked, the same number misses by 55 points on average. In an isolated, cell-by-cell sense the model is accurate about how often it's right; asked about the whole answer, it reports the surface-level expected value instead. It answers an easier question than the one in the prompt. Haiku's number, for contrast, is badly off on both readings — capability didn't fix calibration so much as change what the number secretly measures.</p>
+    <p>Scoring that confidence number more carefully made the picture sharper, not kinder. Against its <em>per-cell</em> hit rate — how often any single count is right — Sonnet's number is nearly perfect, off by about 5 points. But the prompt asks for the probability that <em>every</em> number is correct, which is much less likely: get each of 18 cells right 95% of the time and the chance they're all right is about 40%. Scored against the question actually asked, the same number misses by 55 points. The model answers an easier question than the one in the prompt.</p>
 
-    <p>Which set up the cheapest experiment in the series. If the model's self-report reads surface cues, an outside estimate that reads the right variable should beat it. We fitted a lookup table — one input, changes per item, learned from half the logs — and used it to predict accuracy on the other half. The table beat the model's own stated confidence on both readings, by a factor of about three on the question the prompt actually asks. If we isolate the right variable that changes model behavior, capturing those results forecasts the model better than what the model predicts for itself — and that becomes an input for quantifying behavioral impact even without looking beneath the surface. That table is the first working component of the second build this series has been pointing toward: a watcher that anticipates a model's performance without asking it.</p>
+    <p>Which set up the cheapest experiment in the series. If the model's self-report reads surface cues, an outside estimate that reads the right variable should beat it. We fitted a lookup table — one input, changes per item, learned from half the logs — and used it to predict accuracy on the other half. It beat the model's own stated confidence by a factor of about three on the question the prompt actually asks. That table is the first working component of the build this series has been pointing toward: a watcher that anticipates a model's performance without asking it.</p>
 
     <div class="section-header"><span class="section-number zone-writing">07</span><h2>Where this bites</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <p>I've experienced this directly, on the most advanced models available: updating a complex work file across many revisions, relitigating certain changes, and losing the thread. It doesn't happen because the model was wrong at first. It happens because many revisions of the same work, without a versioning or verification mechanism — an engineering loop — pile up cognitive load until it overwhelms both user and model, and the result is inconclusive confusion. That is the biggest risk, because there is no clear recovery path until someone says stop and step back. By that point predictability and reliability are gone, and the options are to reset and hope, or close the session and rebuild the context.</p>
+    <p>I've experienced this directly, on the most advanced models available: updating a complex work file across many revisions, relitigating certain changes, and losing the thread. Many revisions of the same work, without a versioning or verification mechanism, pile up cognitive load until it overwhelms both user and model, and the result is inconclusive confusion — no clear recovery path until someone says stop and step back.</p>
 
-    <p>That working file is the deep-chain condition. One artifact revised many times is the three-items-changing-eight-times cell; the changes that get relitigated are the cancelled operations; and the whole history sits in one context window, exactly like the ledger — the ledger just compresses into a single prompt what a working session accumulates. The request looks short. The chains run deep. And the confidence stays at 82. To be precise about scope: the measurement is one task family inside one prompt, and the working-session version is where the result points, not what it measured — but the mechanism and the mitigation both showed up in the data. Restating the current state cleanly — a checkpoint, a reset, a fresh statement of where things stand — was worth 4 to 15 points of accuracy inside a single answer. The instinct to stop and re-anchor isn't just hygiene; it's the one intervention this instrument actually measured working.</p>
+    <p>That working file is the deep-chain condition. One artifact revised many times is the three-items-changing-six-times cell; the changes that get relitigated are the cancelled operations; and the whole history sits in one context window — the ledger just compresses into a single prompt what a working session accumulates. The request looks short. The chains run deep. And the confidence stays at 82. The mitigation showed up in the data too: restating the current state cleanly — a checkpoint, a fresh statement of where things stand — was worth 4 to 15 points of accuracy inside a single answer. The instinct to stop and re-anchor isn't just hygiene; it's the one intervention this instrument actually measured working.</p>
 
     <div class="section-header"><span class="section-number zone-writing">08</span><h2>Limitations</h2></div>
     <div class="section-underline zone-writing"></div>
