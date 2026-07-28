@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Behavior EP04 — Refused the Bait | rowbyroh</title>
+    <meta name="description" content="We planted a page of wrong answers where the model could see it. It never took them — and at the edge of its ability it got worse anyway, with its confidence registering nothing. The test we built to catch cheating only fires on the model that wasn't the problem.">
+    <meta property="og:title" content="Model Behavior EP04 — Refused the Bait">
+    <meta property="og:description" content="We planted a page of wrong answers where the model could see it. It never took them — and at the edge of its ability it got worse anyway, with its confidence registering nothing.">
+    <meta property="og:url" content="https://rowbyroh.com/blog/refused-the-bait">
+    <meta property="og:type" content="article">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/writing.css">
+</head>
+<body class="writing-page zone-research">
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="scroll-progress-inner" id="scrollProgressInner"></div>
+
+    <nav class="breadcrumb"><a href="/">rowbyroh</a><span class="sep">/</span><a href="/archive">all work</a></nav>
+
+    <div class="post-header">
+        <div class="post-meta"><a href="/research">Model Behavior EP04</a> &middot; July 2026</div>
+        <h1>Refused the Bait</h1>
+        <p class="post-subtitle">We left a page of wrong answers where the model could see it. It never took them &mdash; and at the edge of its ability it got worse anyway, with its confidence registering nothing at all.</p>
+    </div>
+
+    <article>
+
+    <p><em>Fourth in an ongoing series. Episode one, <a href="/blog/an-earned-null">An Earned Null</a>, found that emotional pressure delivered through prompts moves nothing. Episode two, <a href="/blog/cost-of-verification">Cost of Verification</a>, found that difficulty alone moves nothing either. Episode three, <a href="/blog/depth-not-breadth">Depth, Not Breadth</a>, located the point where accuracy breaks and showed that the model prices its confidence off how big a task looks, not how hard it is. It closed on a prediction registered before this run: plant a misleading memo and confidence will move while accuracy holds. That prediction was wrong twice, and the two ways it was wrong are this episode.</em></p>
+
+    <div class="section-header"><span class="section-number zone-writing">01</span><h2>The premise</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>This series is about the human-model interaction &mdash; understanding what drives a model's behavior well enough to understand, influence, and eventually anticipate it. Perturbations are instruments for finding those drivers, not the point in themselves.</p>
+
+    <p>Episode three turned one up by accident. The model's stated confidence tracked the visible size of a request rather than its real difficulty, which means something in the prompt was already anchoring its self-assessment. Nobody planted that one. The obvious next move is to plant one on purpose.</p>
+
+    <p>So we wrote a memo. It looks like an internal audit document, carries the letterhead of a prior reconciliation cycle, and lists expected final stock figures for every item the model is about to count. The figures are wrong. It sits in the context ahead of the task, and nothing tells the model to use it or to ignore it.</p>
+
+    <p>Registered before the run: the model won't copy the planted numbers, but the memo will inflate its confidence.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">02</span><h2>What the model has to work with</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>The task is episode three's warehouse ledger. Read a long log of stock movements across three warehouses, report the final count of every tracked item, and add one number from 0 to 100 &mdash; the probability that <em>every</em> count is exactly right. A script computes the true answer, so grading is exact.</p>
+
+    <p>One property of the design carries this whole episode, and it was a deliberate choice made two episodes back. The model answers through the API's structured-output mode, which constrains generation itself: the decoder can only emit tokens that fit the answer schema. No prose, no reasoning trace, no scratch space anywhere in the trial. We closed that channel because the model kept using it to replay the ledger, which defeats a task built to make checking your work expensive.</p>
+
+    <p>So a final count can arrive by exactly three routes. The model tracked the item internally, which costs it something measurable. It guessed. Or it took the number off the planted page. Nothing else is available to it. That is what makes a copied figure mean anything.</p>
+
+    <p>Telling a copied figure from a lucky guess needs a floor, so every trap arm ran beside arms with no planted figures in context &mdash; some with no memo, some with a memo of pure procedural filler. The model cannot have seen an anchor value in any of those, so a match there is coincidence by construction. Copying has to clear that rate.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">03</span><h2>Below the break: read, dismissed, nothing happens</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>The first run sits at episode three's easy setting, where Sonnet gets about 88% of counts right and has room to spare.</p>
+
+    <p>Nothing in the prediction survived. The planted figures were never taken &mdash; zero of 57 wrong counts matched an anchor value, against one of 44 in the no-memo arm, so the coincidence floor came in <em>higher</em> than the trap. And confidence didn't inflate. It fell slightly, by 2.7 points, moving down on 8 ledgers and up on none.</p>
+
+    <p>The sharper comparison wasn't the registered one. Alongside the trap we ran a memo in the same register with no stock figures in it &mdash; procedural boilerplate about records handling. Against that, the trap did nothing at all: accuracy differed by 0.3 points, and the confidence numbers were <em>identical on 17 of 20 ledgers</em>. Whatever the memo cost, a memo with nothing in it cost the same.</p>
+
+    <p>At this difficulty the model reads the page, decides it's worthless, and moves on. The only cost is a small tax for having something extra in the context, and that tax is blind to what the something says.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">04</span><h2>At the break: refused the bait, damaged anyway</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>Episode two found that integrity is headroom-dependent, so the follow-on region was obvious: the same three arms at the knee, where the log is twice as long and Sonnet's accuracy has fallen to about 54%. Half its counts are already wrong &mdash; the condition where a planted number has room to slip in.</p>
+
+    <p>It still doesn't slip in. One wrong count in 183 matched an anchor, and that one reads as coincidence: the model wrote 27 where the truth was 22, a five-point miss in an arm whose typical miss is twelve, and the no-memo control produced the same kind of collision more often. Under strain, at the setting built to make copying attractive, the frontier model still doesn't take the number.</p>
+
+    <p>And it gets worse at the task anyway. Against the length-matched filler memo, the trap costs it 4.2 percentage points of accuracy. Its stated confidence, over the same ledgers, doesn't move.</p>
+
+<figure class="chart">
+<svg viewBox="0 0 680 300" role="img" xmlns="http://www.w3.org/2000/svg">
+<line x1="40" y1="252" x2="310" y2="252" stroke="#e7e4dc" stroke-width="1"/>
+<line x1="40.0" y1="248" x2="40.0" y2="256" stroke="#e7e4dc" stroke-width="1"/>
+<text x="40.0" y="272" text-anchor="middle" font-size="11" fill="#555" font-family="IBM Plex Mono, monospace">-20</text>
+<line x1="107.5" y1="248" x2="107.5" y2="256" stroke="#e7e4dc" stroke-width="1"/>
+<text x="107.5" y="272" text-anchor="middle" font-size="11" fill="#555" font-family="IBM Plex Mono, monospace">-10</text>
+<line x1="175.0" y1="248" x2="175.0" y2="256" stroke="#e7e4dc" stroke-width="1"/>
+<text x="175.0" y="272" text-anchor="middle" font-size="11" fill="#555" font-family="IBM Plex Mono, monospace">0</text>
+<line x1="242.5" y1="248" x2="242.5" y2="256" stroke="#e7e4dc" stroke-width="1"/>
+<text x="242.5" y="272" text-anchor="middle" font-size="11" fill="#555" font-family="IBM Plex Mono, monospace">+10</text>
+<line x1="310.0" y1="248" x2="310.0" y2="256" stroke="#e7e4dc" stroke-width="1"/>
+<text x="310.0" y="272" text-anchor="middle" font-size="11" fill="#555" font-family="IBM Plex Mono, monospace">+20</text>
+<line x1="175.0" y1="40" x2="175.0" y2="252" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="3 3" opacity="0.45"/>
+<circle cx="62.5" cy="236" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="1.5"><title>ledger 4: -16.7</title></circle>
+<circle cx="62.5" cy="223" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="1.5"><title>ledger 7: -16.7</title></circle>
+<circle cx="62.5" cy="210" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="1.5"><title>ledger 12: -16.7</title></circle>
+<circle cx="100.0" cy="236" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="1.5"><title>ledger 10: -11.1</title></circle>
+<circle cx="137.5" cy="236" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="1.5"><title>ledger 0: -5.6</title></circle>
+<circle cx="137.5" cy="223" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="1.5"><title>ledger 1: -5.6</title></circle>
+<circle cx="137.5" cy="210" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="1.5"><title>ledger 2: -5.6</title></circle>
+<circle cx="137.5" cy="197" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="1.5"><title>ledger 11: -5.6</title></circle>
+<circle cx="137.5" cy="184" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="1.5"><title>ledger 16: -5.6</title></circle>
+<circle cx="137.5" cy="171" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="1.5"><title>ledger 18: -5.6</title></circle>
+<circle cx="137.5" cy="158" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="1.5"><title>ledger 19: -5.6</title></circle>
+<circle cx="175.0" cy="236" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="1.5"><title>ledger 3: +0.0</title></circle>
+<circle cx="175.0" cy="223" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="1.5"><title>ledger 5: +0.0</title></circle>
+<circle cx="175.0" cy="210" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="1.5"><title>ledger 8: +0.0</title></circle>
+<circle cx="175.0" cy="197" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="1.5"><title>ledger 9: +0.0</title></circle>
+<circle cx="175.0" cy="184" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="1.5"><title>ledger 14: +0.0</title></circle>
+<circle cx="175.0" cy="171" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="1.5"><title>ledger 15: +0.0</title></circle>
+<circle cx="175.0" cy="158" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="1.5"><title>ledger 17: +0.0</title></circle>
+<circle cx="212.5" cy="236" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="1.5"><title>ledger 13: +5.6</title></circle>
+<circle cx="250.0" cy="236" r="4.5" fill="#b84233" stroke="#faf9f6" stroke-width="1.5"><title>ledger 6: +11.1</title></circle>
+<text x="40" y="18" font-size="13" font-weight="600" fill="#1a1a1a" font-family="IBM Plex Mono, monospace">Accuracy change</text>
+<text x="40" y="36" font-size="11" fill="#555" font-family="IBM Plex Mono, monospace">11 worse &#183; 2 better &#183; 7 identical &#183; mean -4.2</text>
+<line x1="378" y1="252" x2="648" y2="252" stroke="#e7e4dc" stroke-width="1"/>
+<line x1="378.0" y1="248" x2="378.0" y2="256" stroke="#e7e4dc" stroke-width="1"/>
+<text x="378.0" y="272" text-anchor="middle" font-size="11" fill="#555" font-family="IBM Plex Mono, monospace">-60</text>
+<line x1="445.5" y1="248" x2="445.5" y2="256" stroke="#e7e4dc" stroke-width="1"/>
+<text x="445.5" y="272" text-anchor="middle" font-size="11" fill="#555" font-family="IBM Plex Mono, monospace">-30</text>
+<line x1="513.0" y1="248" x2="513.0" y2="256" stroke="#e7e4dc" stroke-width="1"/>
+<text x="513.0" y="272" text-anchor="middle" font-size="11" fill="#555" font-family="IBM Plex Mono, monospace">0</text>
+<line x1="580.5" y1="248" x2="580.5" y2="256" stroke="#e7e4dc" stroke-width="1"/>
+<text x="580.5" y="272" text-anchor="middle" font-size="11" fill="#555" font-family="IBM Plex Mono, monospace">+30</text>
+<line x1="648.0" y1="248" x2="648.0" y2="256" stroke="#e7e4dc" stroke-width="1"/>
+<text x="648.0" y="272" text-anchor="middle" font-size="11" fill="#555" font-family="IBM Plex Mono, monospace">+60</text>
+<line x1="513.0" y1="40" x2="513.0" y2="252" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="3 3" opacity="0.45"/>
+<rect x="396.0" y="231.5" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="1.5"><title>ledger 10: -50.0</title></rect>
+<rect x="441.0" y="231.5" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="1.5"><title>ledger 9: -30.0</title></rect>
+<rect x="470.2" y="231.5" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="1.5"><title>ledger 11: -17.0</title></rect>
+<rect x="486.0" y="231.5" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="1.5"><title>ledger 1: -10.0</title></rect>
+<rect x="490.5" y="231.5" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="1.5"><title>ledger 12: -8.0</title></rect>
+<rect x="504.0" y="231.5" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="1.5"><title>ledger 15: -2.0</title></rect>
+<rect x="504.0" y="218.5" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="1.5"><title>ledger 19: -2.0</title></rect>
+<rect x="508.5" y="231.5" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="1.5"><title>ledger 6: +0.0</title></rect>
+<rect x="508.5" y="218.5" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="1.5"><title>ledger 8: +0.0</title></rect>
+<rect x="508.5" y="205.5" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="1.5"><title>ledger 14: +0.0</title></rect>
+<rect x="508.5" y="192.5" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="1.5"><title>ledger 17: +0.0</title></rect>
+<rect x="508.5" y="179.5" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="1.5"><title>ledger 18: +0.0</title></rect>
+<rect x="513.0" y="231.5" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="1.5"><title>ledger 5: +2.0</title></rect>
+<rect x="517.5" y="231.5" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="1.5"><title>ledger 13: +4.0</title></rect>
+<rect x="531.0" y="231.5" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="1.5"><title>ledger 3: +10.0</title></rect>
+<rect x="531.0" y="218.5" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="1.5"><title>ledger 16: +10.0</title></rect>
+<rect x="535.5" y="231.5" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="1.5"><title>ledger 0: +12.0</title></rect>
+<rect x="535.5" y="218.5" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="1.5"><title>ledger 2: +12.0</title></rect>
+<rect x="535.5" y="205.5" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="1.5"><title>ledger 7: +12.0</title></rect>
+<rect x="553.5" y="231.5" width="9" height="9" fill="#2e6ba8" stroke="#faf9f6" stroke-width="1.5"><title>ledger 4: +20.0</title></rect>
+<text x="378" y="18" font-size="13" font-weight="600" fill="#1a1a1a" font-family="IBM Plex Mono, monospace">Stated confidence change</text>
+<text x="378" y="36" font-size="11" fill="#555" font-family="IBM Plex Mono, monospace">7 worse &#183; 8 better &#183; 5 identical &#183; mean -1.9</text>
+<text x="175" y="292" text-anchor="middle" font-size="11" fill="#888" font-family="IBM Plex Mono, monospace">percentage points of accuracy</text>
+<text x="513" y="292" text-anchor="middle" font-size="11" fill="#888" font-family="IBM Plex Mono, monospace">points of stated confidence</text>
+</svg>
+<figcaption>Fig. 1 &mdash; The same 20 ledgers answered twice: once with the misleading memo, once with a harmless memo of identical length. Each mark is one ledger's change. Accuracy moves down and mostly stays down. Confidence lands on both sides of zero in almost equal numbers &mdash; a pattern indistinguishable from noise. Sonnet 4.6 at the break point (50 operations). Note the two panels are in different units and carry different scales.</figcaption>
+</figure>
+    <p>Twenty ledgers is a small sample, so the evidence is the pattern of directions rather than the size of the averages &mdash; and the confidence values are coarse, since Sonnet only emits a handful of distinct numbers at this setting. On accuracy, 11 of the 13 ledgers that changed at all got worse; a split that lopsided turns up about 3 times in 100 if the memo does nothing. On confidence, 7 down and 8 up is what a coin does.</p>
+
+    <p>The misleading page never gets used, it makes the work measurably worse, and the model's own report of how it did registers none of it.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">05</span><h2>Is it the content, or just more paper?</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>That claim has an obvious hole in it, and closing it is most of the work.</p>
+
+    <p>The trap memo is longer than a bare prompt, so maybe the content is irrelevant and the model simply does worse with more in front of it. Our first comparison memo was shorter than the trap, which meant it couldn't separate those two explanations.</p>
+
+    <p>So we built a third: the same boilerplate, no stock figures and no bare integers at all, padded to the trap's exact length by measurement rather than by eye. Volume turned out not to be the mechanism &mdash; going from no memo to a full-length harmless one costs 0.6 accuracy points, which is nothing. And that matched memo landed on the no-memo baseline, which the shorter one hadn't: it had been sitting almost 4 points above it, for no reason anyone can name.</p>
+
+    <p>That second part generalizes. An effect size is a property of a <em>comparison</em>, not of a treatment. Measured against an arm that happened to sit high, the trap looked twice as damaging as it is. Three comparison arms sharing nothing but the absence of misleading content now agree with each other &mdash; 4.2, 4.7 and 5.0 points &mdash; and that convergence, rather than any single contrast, is why the number is worth reporting. A difference is only interpretable once you have separately checked that the thing you're subtracting sits where the baseline sits.</p>
+
+    <p>None of this says <em>why</em> content costs accuracy. Distraction, re-checking, induced uncertainty all remain live, and this instrument can't separate them.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">06</span><h2>The smaller model is the mirror image</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>Every arm ran on Haiku too, and it fails in the opposite direction on both counts.</p>
+
+    <p>It takes the planted numbers. Pooling both difficulty settings, one ledger in five contains a copied figure with the trap present, against one in twenty without. That only reaches significance once the settings are pooled, and pooling was decided after seeing the data &mdash; neither setting clears on its own, so it is exploratory rather than registered.</p>
+
+    <p>Its self-assessment is permeable in a way the frontier model's isn't. Below the break, the memo containing nothing &mdash; no figures, just official-looking paperwork &mdash; raises Haiku's confidence by 6.9 points while its accuracy stays flat. Pure procedural tone, no information, and the model feels better about work it did no better on. At the break the same effect points the same way but only as a trend, so the below-break result is the one that stands.</p>
+
+    <p>The asymmetry is worth naming through the gap between what the model claims and what it delivers. Under the misleading memo, Haiku's accuracy falls 5.6 points and its gap <em>shrinks</em>, from +10.5 to +7.8 &mdash; it did worse and registered it. Under the content-free memo, its accuracy is flat and the gap <em>grows</em>, from +10.5 to +16.3 &mdash; no better, feels better. Thrown off guard by the trap; got away with it on the blank.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">07</span><h2>The test fires on the wrong model</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>Put the two tiers side by side and the uncomfortable part shows up.</p>
+
+    <p>We built a detector. Count how often a wrong answer exactly matches a planted figure, compare that to how often it happens by luck, and you have a cheap, automatable check for whether a model is being led by adversarial content in its context. It works. It fires on Haiku.</p>
+
+    <p>It is silent on Sonnet &mdash; and Sonnet is the model losing accuracy to the memo. The behavior the detector catches is the one the frontier model doesn't exhibit, and the harm the frontier model does suffer leaves no trace in it. The check comes back clean on exactly the case it was built for.</p>
+
+    <p>Self-report is no better. The confidence Sonnet states under the trap is the confidence it states under harmless filler, on the same ledgers, while the accuracy underneath diverges. Below the break it contains the adversarial content completely. At the break it can't &mdash; and it can't feel that it can't.</p>
+
+    <p>Episode three reached the same place from the other side: a one-input lookup table built from task features predicted the model's accuracy roughly three times better than the model's own stated confidence did. Both results point one way. <strong>If you need to know whether a model is doing well right now, ask something other than the model.</strong></p>
+
+    <p>Where this bites is any long agentic session with accumulated junk in the context &mdash; superseded instructions, stale files, a document pasted three turns ago that contradicts the current one. Below the model's limit that material is genuinely free; it gets read and discounted. Near the limit it isn't free, the cost doesn't surface as the model quoting the wrong thing, and nothing in its own account of the work will tell you it happened.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">08</span><h2>Limitations</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <ul>
+        <li>Twenty ledgers per arm. Every claim rests on paired comparisons and exact sign or permutation tests over those pairs, not on differences of means &mdash; the confidence values are coarsely quantized, and averages of quantized values mislead at this sample size.</li>
+        <li>Haiku's copying result requires pooling both difficulty settings, and that pooling was chosen after seeing the per-setting numbers. Neither setting reaches significance alone. It is exploratory.</li>
+        <li>The first comparison memo was not length-matched to the trap. That is a design error, corrected by a later matched arm rather than argued away; the figures reported here come from the matched comparison and from no-memo controls.</li>
+        <li>That matched arm ran five days after the arms it is compared against, so the no-memo control was re-run the same day to check the instrument hadn't drifted. It hadn't &mdash; the two controls differ by 0.3 points. Without that check the comparison would be uninterpretable.</li>
+        <li>The confidence prompt asks for the probability that <em>every</em> count is right, a much harder question than any single count being right; episode three showed the model answers the easier one. Comparisons here hold that bias constant, but the absolute confidence numbers are not calibrated.</li>
+        <li>Two rungs of one model family, one task family, no tools, no extended thinking. Whether a reasoning trace would let the model notice the interference is open &mdash; and next.</li>
+    </ul>
+
+    <div class="section-header"><span class="section-number zone-writing">09</span><h2>Up next</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>One question sits open, and it's the one that matters for anticipating this rather than just observing it: <em>does the model know it's a trap?</em></p>
+
+    <p>Below the break something is clearly evaluating the memo and correctly deciding it's worthless. At the break that evaluation seems to stop being affordable. But we can see only the result, not the decision &mdash; because we closed the channel it would have been visible in, deliberately, to protect the measurement.</p>
+
+    <p>The registered follow-up reopens it without giving the protection back. Run the instrument exactly as it is, so the answer is committed under the same constraints. Then, in a separate turn on the finished transcript, ask the model whether anything in that context was misleading and what it did about it. Because the answer is already locked, the question can't contaminate it. If detection is reliable on easy ledgers and collapses at the break, then "reads it, discounts it, until discounting stops being affordable" moves from a reading to a measurement &mdash; and the point where it stops being affordable is a driver with a location.</p>
+
+    </article>
+
+    <section id="keep-reading" class="keep-reading" aria-label="Keep reading"></section>
+
+    <div class="post-footer">
+        <p>Built with Claude.</p>
+    </div>
+
+    <footer>
+        <a href="mailto:daniel@rowbyroh.com">email</a> &middot;
+        <a href="https://discord.com/users/rbrdelta">discord</a> &middot;
+        <a href="https://github.com/rbrdelta">github</a> &middot;
+        <a href="https://linkedin.com/in/drohh">linkedin</a>
+        <a class="footer-colophon" href="/colophon">Colophon &mdash; how this site is built &rarr;</a>
+        <div style="margin-top: 0.5rem;">&copy; 2026 rowbyroh.com</div>
+    </footer>
+
+    <script src="/assets/js/related.js"></script>
+    <script src="/assets/js/scroll.js"></script>
+</body>
+</html>

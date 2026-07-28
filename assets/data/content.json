@@ -1,5 +1,34 @@
 [
     {
+        "id": "essay-refused-the-bait",
+        "title": "Model Behavior EP04 — Refused the Bait",
+        "type": "essay",
+        "description": "We left a page of wrong answers where the model could see it. It never took them — and at the edge of its ability it got worse anyway, with its confidence registering nothing at all.",
+        "date": "Jul 2026",
+        "tags": [
+            "essay",
+            "AI"
+        ],
+        "url": "/blog/refused-the-bait",
+        "published": true,
+        "status": "live",
+        "featured_for": [
+            "default"
+        ],
+        "events": [
+            {
+                "date": "2026-07-27",
+                "action": "published"
+            }
+        ],
+        "highlights": [
+            "The planted figures are never copied — not below the model's limit, not at it (1 wrong count in 183, indistinguishable from coincidence)",
+            "At the limit the misleading memo costs 4.2 points of accuracy while stated confidence lands on both sides of zero — damage with no self-report signal",
+            "The capture test fires on the smaller model and stays silent on the one actually being degraded"
+        ],
+        "series": "model-behavior"
+    },
+    {
         "id": "essay-depth-not-breadth",
         "title": "Model Behavior EP03 — Depth, Not Breadth",
         "type": "essay",
@@ -12,9 +41,6 @@
         "url": "/blog/depth-not-breadth",
         "published": true,
         "status": "live",
-        "featured_for": [
-            "default"
-        ],
         "events": [
             {
                 "date": "2026-07-10",
