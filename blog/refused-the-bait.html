@@ -29,49 +29,42 @@
 
     <article>
 
-    <p><em>Fourth in an ongoing series. Episode one, <a href="/blog/an-earned-null">An Earned Null</a>, found that emotional pressure delivered through prompts moves nothing. Episode two, <a href="/blog/cost-of-verification">Cost of Verification</a>, found that difficulty alone moves nothing either. Episode three, <a href="/blog/depth-not-breadth">Depth, Not Breadth</a>, located the point where accuracy breaks and showed that the model prices its confidence off how big a task looks, not how hard it is. It closed on a prediction registered before this run: plant a misleading memo and confidence will move while accuracy holds. That prediction was wrong twice, and the two ways it was wrong are this episode.</em></p>
+    <p><em>Fourth in an ongoing series. Episode one, <a href="/blog/an-earned-null">An Earned Null</a>, found that emotional pressure delivered through prompts moves nothing. Episode two, <a href="/blog/cost-of-verification">Cost of Verification</a>, found that difficulty alone moves nothing either. Episode three, <a href="/blog/depth-not-breadth">Depth, Not Breadth</a>, found that the model estimates its confidence from a surface signal rather than from any thorough evaluation of the task. This episode puts a false signal in front of it on purpose.</em></p>
 
     <div class="section-header"><span class="section-number zone-writing">01</span><h2>The premise</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <p>This series is about the human-model interaction &mdash; understanding what drives a model's behavior well enough to understand, influence, and eventually anticipate it. Perturbations are instruments for finding those drivers, not the point in themselves.</p>
+    <p>This series is about the human-model interaction: understanding the factors that drive a model's behaviour well enough to understand, influence, and eventually anticipate it. The method is to find knee points &mdash; the specific conditions where behaviour changes &mdash; because the transitions are where the driving factors become visible.</p>
 
-    <p>Episode three turned one up by accident. The model's stated confidence tracked the visible size of a request rather than its real difficulty, which means something in the prompt was already anchoring its self-assessment. Nobody planted that one. The obvious next move is to plant one on purpose.</p>
+    <p>Episode three established that the model estimates its confidence based on the surface-level signal, not a thorough evaluation of the task. The hypothesis for this episode followed from that directly: if the self-assessment reads surface cues, then planting an external cheat sheet where the model can see it should increase its predicted confidence. That prediction was registered before the run, so the result could not be reinterpreted after the fact.</p>
 
-    <p>So we wrote a memo. It looks like an internal audit document, carries the letterhead of a prior reconciliation cycle, and lists expected final stock figures for every item the model is about to count. The figures are wrong. It sits in the context ahead of the task, and nothing tells the model to use it or to ignore it.</p>
+    <p>It did not happen. The cheat sheet never raised confidence, and the model never copied from it. It just became noise. Why it was processed as noise, I don't know. But the distraction, when the model was already struggling to keep track of a high degree of difficulty, led to less accurate results.</p>
 
-    <p>Registered before the run: the model won't copy the planted numbers, but the memo will inflate its confidence.</p>
-
-    <div class="section-header"><span class="section-number zone-writing">02</span><h2>What the model has to work with</h2></div>
+    <div class="section-header"><span class="section-number zone-writing">02</span><h2>The experiment design</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <p>The task is episode three's warehouse ledger. Read a long log of stock movements across three warehouses, report the final count of every tracked item, and add one number from 0 to 100 &mdash; the probability that <em>every</em> count is exactly right. A script computes the true answer, so grading is exact.</p>
+    <p>The task is the warehouse ledger from episode three. The model reads a long log of stock movements across three warehouses, reports the final count of every tracked item, and adds one number from 0 to 100: the probability that <em>every</em> count is exactly right. A script computes the true answer, so the grading is exact.</p>
 
-    <p>One property of the design carries this whole episode, and it was a deliberate choice made two episodes back. The model answers through the API's structured-output mode, which constrains generation itself: the decoder can only emit tokens that fit the answer schema. No prose, no reasoning trace, no scratch space anywhere in the trial. We closed that channel because the model kept using it to replay the ledger, which defeats a task built to make checking your work expensive.</p>
+    <p>The cheat sheet is a memo placed in the context ahead of the task. It is styled as an internal audit document, it carries the reference number of a prior reconciliation cycle, and it lists expected final stock figures for every item the model is about to count. Those figures are wrong. Nothing in the prompt tells the model to use the memo, and nothing tells it to ignore the memo.</p>
 
-    <p>So a final count can arrive by exactly three routes. The model tracked the item internally, which costs it something measurable. It guessed. Or it took the number off the planted page. Nothing else is available to it. That is what makes a copied figure mean anything.</p>
+    <p>One property of the design is what makes any of this measurable, and it was a deliberate choice made two episodes ago. The model answers through the API's structured-output mode, which constrains generation itself: the decoder can only emit tokens that fit the answer schema, so there is no prose, no reasoning trace, and no scratch space anywhere in the trial. We closed that channel because the model kept using it to replay the ledger, which defeats a task built so that checking an answer costs as much as producing it.</p>
 
-    <p>Telling a copied figure from a lucky guess needs a floor, so every trap arm ran beside arms with no planted figures in context &mdash; some with no memo, some with a memo of pure procedural filler. The model cannot have seen an anchor value in any of those, so a match there is coincidence by construction. Copying has to clear that rate.</p>
+    <p>Because that channel is closed, a final count can only arrive one of three ways. The model tracked the item in real time, which costs it accuracy we can measure. It guessed. Or it cheated and took the figure off the memo. Nothing else is available to it, which is what makes a copied figure mean something rather than nothing.</p>
 
-    <div class="section-header"><span class="section-number zone-writing">03</span><h2>Below the break: read, dismissed, nothing happens</h2></div>
+    <p>Separating a copy from a lucky guess needs a floor, so every run with the memo has a twin run without it &mdash; the same ledger, with either no memo at all or a memo of pure procedural filler. The model cannot have seen a planted figure in the twin, so a match there is coincidence by construction, and copying has to clear that rate.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">03</span><h2>What Sonnet did</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <p>The first run sits at episode three's easy setting, where Sonnet gets about 88% of counts right and has room to spare.</p>
+    <p>Sonnet read the memo and did not use the memo. It did not find the memo useful. What it did instead was get distracted by it, and the distraction cost nothing until the task was hard enough that the model had nothing to spare.</p>
 
-    <p>Nothing in the prediction survived. The planted figures were never taken &mdash; zero of 57 wrong counts matched an anchor value, against one of 44 in the no-memo arm, so the coincidence floor came in <em>higher</em> than the trap. And confidence didn't inflate. It fell slightly, by 2.7 points, moving down on 8 ledgers and up on none.</p>
+    <p>At the easy setting, where about 88% of counts come back correct, the memo changed nothing worth reporting. The planted figures were never taken, confidence did not inflate, and the misleading memo was indistinguishable from one with no content in it: on 17 of 20 ledgers the model returned exactly the same confidence number under both. So the entire effect at this difficulty is a small tax for having an extra document in the context, and that tax is blind to what the document says.</p>
 
-    <p>The sharper comparison wasn't the registered one. Alongside the trap we ran a memo in the same register with no stock figures in it &mdash; procedural boilerplate about records handling. Against that, the trap did nothing at all: accuracy differed by 0.3 points, and the confidence numbers were <em>identical on 17 of 20 ledgers</em>. Whatever the memo cost, a memo with nothing in it cost the same.</p>
+    <p>Doubling the length of the log drops accuracy to about 54%. Roughly half the counts are wrong at that point, which is the condition where a planted figure has room to be adopted.</p>
 
-    <p>At this difficulty the model reads the page, decides it's worthless, and moves on. The only cost is a small tax for having something extra in the context, and that tax is blind to what the something says.</p>
+    <p>It was not adopted. One wrong count in 183 matched a planted figure, and I read that one as coincidence: the model wrote 27 where the truth was 22, a five-point miss in a run whose typical miss is twelve, and the twin run with no memo produced that kind of collision more often rather than less.</p>
 
-    <div class="section-header"><span class="section-number zone-writing">04</span><h2>At the break: refused the bait, damaged anyway</h2></div>
-    <div class="section-underline zone-writing"></div>
-
-    <p>Episode two found that integrity is headroom-dependent, so the follow-on region was obvious: the same three arms at the knee, where the log is twice as long and Sonnet's accuracy has fallen to about 54%. Half its counts are already wrong &mdash; the condition where a planted number has room to slip in.</p>
-
-    <p>It still doesn't slip in. One wrong count in 183 matched an anchor, and that one reads as coincidence: the model wrote 27 where the truth was 22, a five-point miss in an arm whose typical miss is twelve, and the no-memo control produced the same kind of collision more often. Under strain, at the setting built to make copying attractive, the frontier model still doesn't take the number.</p>
-
-    <p>And it gets worse at the task anyway. Against the length-matched filler memo, the trap costs it 4.2 percentage points of accuracy. Its stated confidence, over the same ledgers, doesn't move.</p>
+    <p>The accuracy cost is real. Against a filler memo built to the same length,<sup><a href="#fn3">3</a></sup> the misleading memo costs 4.2 percentage points, and the model's stated confidence over the same ledgers does not move.</p>
 
 <figure class="chart">
 <svg viewBox="0 0 680 300" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -148,69 +141,48 @@
 </svg>
 <figcaption>Fig. 1 &mdash; The same 20 ledgers answered twice: once with the misleading memo, once with a harmless memo of identical length. Each mark is one ledger's change. Accuracy moves down and mostly stays down. Confidence lands on both sides of zero in almost equal numbers &mdash; a pattern indistinguishable from noise. Sonnet 4.6 at the break point (50 operations). Note the two panels are in different units and carry different scales.</figcaption>
 </figure>
-    <p>Twenty ledgers is a small sample, so the evidence is the pattern of directions rather than the size of the averages &mdash; and the confidence values are coarse, since Sonnet only emits a handful of distinct numbers at this setting. On accuracy, 11 of the 13 ledgers that changed at all got worse; a split that lopsided turns up about 3 times in 100 if the memo does nothing. On confidence, 7 down and 8 up is what a coin does.</p>
+    <p>Twenty ledgers is a small sample, so the argument rests on the direction of the pairs rather than on the size of the averages.<sup><a href="#fn1">1</a></sup> Thirteen of the twenty came out different, and eleven of those thirteen were worse under the misleading memo, which is a split that luck produces about three times in a hundred. The same count run on confidence gives seven down and eight up.</p>
 
-    <p>The misleading page never gets used, it makes the work measurably worse, and the model's own report of how it did registers none of it.</p>
+    <p>One consequence is worth stating on its own, because it would be easy to miss. Counting how often a wrong answer matches a planted figure is a reasonable detector: it is cheap, it is automatic, and it does catch a model being led by content in its context. Here it catches nothing. The behaviour it is built to find is copying, and what happened to Sonnet is distraction, so a clean result from that detector says nothing about whether the model was harmed.</p>
 
-    <div class="section-header"><span class="section-number zone-writing">05</span><h2>Is it the content, or just more paper?</h2></div>
+    <div class="section-header"><span class="section-number zone-writing">04</span><h2>What Haiku did</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <p>That claim has an obvious hole in it, and closing it is most of the work.</p>
+    <p>Haiku, the smaller model in the same family, did something else. It saw the hints, and its estimated-versus-actual gap &mdash; the distance between the confidence a model reports and the accuracy it delivers &mdash; moved with them, though not in one direction.</p>
 
-    <p>The trap memo is longer than a bare prompt, so maybe the content is irrelevant and the model simply does worse with more in front of it. Our first comparison memo was shorter than the trap, which meant it couldn't separate those two explanations.</p>
+    <p>It also copies. Roughly one ledger in five contains a planted figure when the memo is present, against one in twenty when it is not.<sup><a href="#fn2">2</a></sup></p>
 
-    <p>So we built a third: the same boilerplate, no stock figures and no bare integers at all, padded to the trap's exact length by measurement rather than by eye. Volume turned out not to be the mechanism &mdash; going from no memo to a full-length harmless one costs 0.6 accuracy points, which is nothing. And that matched memo landed on the no-memo baseline, which the shorter one hadn't: it had been sitting almost 4 points above it, for no reason anyone can name.</p>
+    <p>Which way that gap moves depends on what the memo says, not on how well the model actually did. Under the misleading memo its accuracy falls 5.6 points and the gap <em>narrows</em>, from +10.5 to +7.8: it did worse, and something registered that. Under the memo containing nothing &mdash; no figures, just official-looking paperwork &mdash; its accuracy is flat, its confidence rises 6.9 points, and the gap <em>widens</em> to +16.3. No better, and it reports feeling better.</p>
 
-    <p>That second part generalizes. An effect size is a property of a <em>comparison</em>, not of a treatment. Measured against an arm that happened to sit high, the trap looked twice as damaging as it is. Three comparison arms sharing nothing but the absence of misleading content now agree with each other &mdash; 4.2, 4.7 and 5.0 points &mdash; and that convergence, rather than any single contrast, is why the number is worth reporting. A difference is only interpretable once you have separately checked that the thing you're subtracting sits where the baseline sits.</p>
+    <p>I want to be careful about what the two models add up to, because I genuinely cannot assume a connection between them. Haiku's behaviour tells us that it saw the hints and overestimated. Sonnet's behaviour tells us only that it read the memo and did not use the memo. Those look like two fundamentally different behaviours that happen to share a task and a test, and why they differ, I don't know.</p>
 
-    <p>None of this says <em>why</em> content costs accuracy. Distraction, re-checking, induced uncertainty all remain live, and this instrument can't separate them.</p>
-
-    <div class="section-header"><span class="section-number zone-writing">06</span><h2>The smaller model is the mirror image</h2></div>
+    <div class="section-header"><span class="section-number zone-writing">05</span><h2>What this establishes</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <p>Every arm ran on Haiku too, and it fails in the opposite direction on both counts.</p>
+    <p>The finding that survives is narrower than the hypothesis and, I think, more useful than the hypothesis would have been. Adversarial content does not have to be believed in order to do damage. The model can read it, decline to use it, take nothing from it, and still do the work measurably worse &mdash; and none of that appears in what the model says about its own performance.</p>
 
-    <p>It takes the planted numbers. Pooling both difficulty settings, one ledger in five contains a copied figure with the trap present, against one in twenty without. That only reaches significance once the settings are pooled, and pooling was decided after seeing the data &mdash; neither setting clears on its own, so it is exploratory rather than registered.</p>
+    <p class="editor-hole" style="border:1px dashed #b84233;padding:14px 16px;color:#b84233;font-family:'IBM Plex Mono',monospace;font-size:0.9rem;">[HOLE &mdash; interview gap 4, Daniel's paragraph: where this bites in practice. EP03's equivalent was the working file revised past the point where either party could track it.]</p>
 
-    <p>Its self-assessment is permeable in a way the frontier model's isn't. Below the break, the memo containing nothing &mdash; no figures, just official-looking paperwork &mdash; raises Haiku's confidence by 6.9 points while its accuracy stays flat. Pure procedural tone, no information, and the model feels better about work it did no better on. At the break the same effect points the same way but only as a trend, so the below-break result is the one that stands.</p>
-
-    <p>The asymmetry is worth naming through the gap between what the model claims and what it delivers. Under the misleading memo, Haiku's accuracy falls 5.6 points and its gap <em>shrinks</em>, from +10.5 to +7.8 &mdash; it did worse and registered it. Under the content-free memo, its accuracy is flat and the gap <em>grows</em>, from +10.5 to +16.3 &mdash; no better, feels better. Thrown off guard by the trap; got away with it on the blank.</p>
-
-    <div class="section-header"><span class="section-number zone-writing">07</span><h2>The test fires on the wrong model</h2></div>
+    <div class="section-header"><span class="section-number zone-writing">06</span><h2>Up next</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <p>Put the two tiers side by side and the uncomfortable part shows up.</p>
+    <p>The part we did not explore here is the depth of difficulty. Episode three established that what makes this task hard is the number of times a single item changes, rather than the number of items being counted: more changes to one item produces more errors than a few changes to each of many. We reached the hard setting in this episode by doubling the length of the log, which does raise depth, but also makes the difficulty visible &mdash; and the model's confidence fell to meet it.</p>
 
-    <p>We built a detector. Count how often a wrong answer exactly matches a planted figure, compare that to how often it happens by luck, and you have a cheap, automatable check for whether a model is being led by adversarial content in its context. It works. It fires on Haiku.</p>
+    <p>There is a version of the same difficulty that stays hidden. Three items in a twenty-five-line log carry the same number of changes per item as six items in a fifty-line log, but the page looks short. In episode three the model's confidence stayed pinned near 82 in that cell while its accuracy sat at 62%, which is the largest overclaim this instrument has induced from it. That cell never received a memo.</p>
 
-    <p>It is silent on Sonnet &mdash; and Sonnet is the model losing accuracy to the memo. The behavior the detector catches is the one the frontier model doesn't exhibit, and the harm the frontier model does suffer leaves no trace in it. The check comes back clean on exactly the case it was built for.</p>
+    <p>So the next run puts the cheat sheet where the model is struggling and does not appear to know it. If noise costs accuracy there as well, it lands on top of a confidence number that is already wrong.</p>
 
-    <p>Self-report is no better. The confidence Sonnet states under the trap is the confidence it states under harmless filler, on the same ledgers, while the accuracy underneath diverges. Below the break it contains the adversarial content completely. At the break it can't &mdash; and it can't feel that it can't.</p>
-
-    <p>Episode three reached the same place from the other side: a one-input lookup table built from task features predicted the model's accuracy roughly three times better than the model's own stated confidence did. Both results point one way. <strong>If you need to know whether a model is doing well right now, ask something other than the model.</strong></p>
-
-    <p>Where this bites is any long agentic session with accumulated junk in the context &mdash; superseded instructions, stale files, a document pasted three turns ago that contradicts the current one. Below the model's limit that material is genuinely free; it gets read and discounted. Near the limit it isn't free, the cost doesn't surface as the model quoting the wrong thing, and nothing in its own account of the work will tell you it happened.</p>
-
-    <div class="section-header"><span class="section-number zone-writing">08</span><h2>Limitations</h2></div>
+    <div class="section-header"><span class="section-number zone-writing">07</span><h2>Limitations and fine print</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <ul>
-        <li>Twenty ledgers per arm. Every claim rests on paired comparisons and exact sign or permutation tests over those pairs, not on differences of means &mdash; the confidence values are coarsely quantized, and averages of quantized values mislead at this sample size.</li>
-        <li>Haiku's copying result requires pooling both difficulty settings, and that pooling was chosen after seeing the per-setting numbers. Neither setting reaches significance alone. It is exploratory.</li>
-        <li>The first comparison memo was not length-matched to the trap. That is a design error, corrected by a later matched arm rather than argued away; the figures reported here come from the matched comparison and from no-memo controls.</li>
-        <li>That matched arm ran five days after the arms it is compared against, so the no-memo control was re-run the same day to check the instrument hadn't drifted. It hadn't &mdash; the two controls differ by 0.3 points. Without that check the comparison would be uninterpretable.</li>
-        <li>The confidence prompt asks for the probability that <em>every</em> count is right, a much harder question than any single count being right; episode three showed the model answers the easier one. Comparisons here hold that bias constant, but the absolute confidence numbers are not calibrated.</li>
-        <li>Two rungs of one model family, one task family, no tools, no extended thinking. Whether a reasoning trace would let the model notice the interference is open &mdash; and next.</li>
-    </ul>
-
-    <div class="section-header"><span class="section-number zone-writing">09</span><h2>Up next</h2></div>
-    <div class="section-underline zone-writing"></div>
-
-    <p>One question sits open, and it's the one that matters for anticipating this rather than just observing it: <em>does the model know it's a trap?</em></p>
-
-    <p>Below the break something is clearly evaluating the memo and correctly deciding it's worthless. At the break that evaluation seems to stop being affordable. But we can see only the result, not the decision &mdash; because we closed the channel it would have been visible in, deliberately, to protect the measurement.</p>
-
-    <p>The registered follow-up reopens it without giving the protection back. Run the instrument exactly as it is, so the answer is committed under the same constraints. Then, in a separate turn on the finished transcript, ask the model whether anything in that context was misleading and what it did about it. Because the answer is already locked, the question can't contaminate it. If detection is reliable on easy ledgers and collapses at the break, then "reads it, discounts it, until discounting stops being affordable" moves from a reading to a measurement &mdash; and the point where it stops being affordable is a driver with a location.</p>
+    <ol class="fineprint" style="color:#555;font-size:0.92rem;line-height:1.7;">
+        <li id="fn1">Twenty ledgers per condition. Every claim above is a count of which direction the paired results moved, not a comparison of averages &mdash; the stated confidence takes only a handful of distinct values, so averages mislead at this size.</li>
+        <li id="fn2">The copying rate pools both difficulty settings, a decision made after seeing the per-setting numbers, and neither setting clears on its own. Exploratory, not registered.</li>
+        <li id="fn3">The filler memo used for that comparison is built to the misleading memo's exact length, measured rather than eyeballed. An earlier, shorter filler was not, and the matched run replaced it. Length alone accounts for nothing: going from no memo to a full-length harmless one costs 0.6 points. Three comparators with no planted content converge on 4 to 5 points.</li>
+        <li id="fn4">That matched run happened five days after the runs it is compared against, so the no-memo baseline was re-run the same day. The two baselines differ by 0.3 points.</li>
+        <li id="fn5">The confidence question asks for the probability that every count is right, which is much harder than any single count being right. Episode three showed the model answers the easier question instead. Comparisons here hold that constant, so the raw confidence numbers should not be read as calibrated.</li>
+        <li id="fn6">Two models from one family, one task family, no tools, and no extended thinking. Whether a model allowed to reason on paper would notice the interference is not established here.</li>
+    </ol>
 
     </article>
 
