@@ -47,9 +47,7 @@
 
     <p>The cheat sheet is a memo placed in the context ahead of the task. It is styled as an internal audit document, it carries the reference number of a prior reconciliation cycle, and it lists expected final stock figures for every item the model is about to count. Those figures are wrong. Nothing in the prompt tells the model to use the memo, and nothing tells it to ignore the memo.</p>
 
-    <p>One property of the design is what makes any of this measurable, and it was a deliberate choice made two episodes ago. The model answers through the API's structured-output mode, which constrains generation itself: the decoder can only emit tokens that fit the answer schema, so there is no prose, no reasoning trace, and no scratch space anywhere in the trial. We closed that channel because the model kept using it to replay the ledger, which defeats a task built so that checking an answer costs as much as producing it.</p>
-
-    <p>Because that channel is closed, a final count can only arrive one of three ways. The model tracked the item in real time, which costs it accuracy we can measure. It guessed. Or it cheated and took the figure off the memo. Nothing else is available to it, which is what makes a copied figure mean something rather than nothing.</p>
+    <p>The model has no scratch space in any of this. It answers through the API's structured-output mode, which constrains generation itself, so there is no prose and no reasoning trace anywhere in the trial. That leaves a final count only three ways to arrive. The model tracked the item in real time, which costs it accuracy we can measure. It guessed. Or it cheated and took the figure off the memo. Nothing else is available to it, which is what makes a copied figure mean something rather than nothing.</p>
 
     <p>Separating a copy from a lucky guess needs a floor, so every run with the memo has a twin run without it &mdash; the same ledger, with either no memo at all or a memo of pure procedural filler. The model cannot have seen a planted figure in the twin, so a match there is coincidence by construction, and copying has to clear that rate.</p>
 
@@ -143,7 +141,6 @@
 </figure>
     <p>Twenty ledgers is a small sample, so the argument rests on the direction of the pairs rather than on the size of the averages.<sup><a href="#fn1">1</a></sup> Thirteen of the twenty came out different, and eleven of those thirteen were worse under the misleading memo, which is a split that luck produces about three times in a hundred. The same count run on confidence gives seven down and eight up.</p>
 
-    <p>One consequence is worth stating on its own, because it would be easy to miss. Counting how often a wrong answer matches a planted figure is a reasonable detector: it is cheap, it is automatic, and it does catch a model being led by content in its context. Here it catches nothing. The behaviour it is built to find is copying, and what happened to Sonnet is distraction, so a clean result from that detector says nothing about whether the model was harmed.</p>
 
     <div class="section-header"><span class="section-number zone-writing">04</span><h2>What Haiku did</h2></div>
     <div class="section-underline zone-writing"></div>
