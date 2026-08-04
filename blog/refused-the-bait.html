@@ -82,30 +82,51 @@
     <div class="section-underline zone-writing"></div>
 
     <!-- ======================= TO WRITE =======================
-    Reframed 2026-08-04. This section's job is the finding, not the autopsy: the two channels come
-    apart, and the model never touched the bait. The retired claim gets one line, not a section.
+    Spine set by Daniel 2026-08-04. This episode is NOT about our instrumentation — that framing
+    was rejected. It is about a lesson and the rule that comes out of it: change one thing at a
+    time, explicitly, and ask what a run is for before designing it. That is what makes cause and
+    effect findable, and it is the entry cost for the anticipation work in the next round.
 
-    THE FINDING — accuracy and stated confidence answer to different things.
+    THE FAILURE, in this section, plainly. We kept changing more than one thing per run, so when
+    something moved we could not say what moved it:
+      - Difficulty was raised by making the log longer, which moved depth, page length and context
+        volume together.
+      - The run that separated them differed from its comparator in three ways at once — length,
+        item count, checkpoints.
+      - The trap memo and its control were not the same length (286 vs 162 tokens), so content and
+        volume were tangled in the headline for five days.
+      - The randomness setting was never declared, so it sat underneath every comparison.
 
-    - Depth drives accuracy. Same 25-line page, same three items; only the share of lines touching
-      a tracked item changes. Accuracy 97.8% -> 85.0% -> 58.9%. Predicted in advance off a curve
-      fitted on a different knob, landing within about four points.
-    - Confidence barely follows. 95.5 -> 88.0 -> 82.0 over that same collapse, so the overclaim
-      runs -2.2 -> +3.0 -> +23.1. It moves, nowhere near enough.
-    - And confidence answers to something accuracy doesn't: the mere presence of a document.
-      Any memo at all, misleading or blank boilerplate, costs both — negative in six of six setups.
-      The confidence cost grows with difficulty: trap -4.65 / -5.20 / -8.07, blank -1.65 / -2.95 /
-      -6.83, easy to hard. Six numbers, two independent memo types, every step larger than the last.
-      Its strength is the coherence, not any single comparison.
-    - It never took the bait. One wrong count in 183 matched a planted figure, and the no-memo twin
-      produced that kind of collision more often. The title holds.
+    WHAT SURVIVES, and each one is stated against what we can actually attribute:
+      - The model never took the bait. One wrong count in 183 matched a planted figure, and the
+        no-memo twin collided more often. Predicted in advance; it is a control behaving correctly.
+      - Accuracy collapses as a single item is changed more times: 97.8 / 85.0 / 58.9 across
+        1.51 / 2.98 / 5.38 changes per item. Roughly a 39-point effect. This one is large enough
+        to attribute and it was predicted in advance off a curve fitted on a different dial —
+        credit EP03, this is confirmation.
+      - Stated confidence over that same collapse: 95.5 / 88.0 / 82.0. It registers the difficulty
+        and under-responds badly, ending 23 points more certain than it should be.
+      - A document in the context costs a little of both. Directional, consistent in sign, and
+        smaller than what a single run can attribute — say that, do not size it.
 
-    ONE LINE, not a section: whether the memo is misleading or merely present is a question this
-    program cannot currently answer — it showed up once and did not reappear in four later setups,
-    and the reason is in the fine print.
+    DO NOT WRITE, per the outside reads (2026-08-04):
+      - "six of six configurations" — three of those are one run sharing a control arm and a fourth
+        is the same config as another sharing half its seeds. Roughly three independent units. The
+        tabulated numbers are also trap-vs-control only; the blank-memo series contains a +3.9.
+      - "the confidence cost scales with difficulty" as a headline — it is an unregistered secondary
+        from a run whose registered primary failed and whose registered confidence prediction was
+        the opposite. Promoting it repeats the exact error that retired the original claim.
 
-    Sources: shadow-ledger/DESIGN-HISTORY.md (the arc tables); RUN-LOG.md "Standing claims after
-    Phase 8"; your verbatim in EP04-QUOTES.md, block 8.
+    THE RETIRED CLAIM, told as the story rather than a footnote: we measured -4.17, believed it,
+    drafted an episode on it, re-ran the identical setup and got a range spanning -7.75 to +1.92.
+    The randomness setting was never fixed, so the same ledger scores differently every time and a
+    paired comparison inherits about 8.6 points of spread from both sides — against an effect of
+    about four.
+
+    NOTE ON LANGUAGE (Daniel, 2026-08-04): accuracy moving between runs is NOT instrument wobble.
+    The generator and scorer are deterministic; the model does the work differently each time, so
+    performance on a fixed input is a distribution and we sampled it once. Confidence moving on an
+    identical input is the different thing — doubt with nothing to justify it.
     ========================================================= -->
 
     <div class="section-header"><span class="section-number zone-writing">04</span><h2>What Haiku did</h2></div>
@@ -123,20 +144,19 @@
     <div class="section-underline zone-writing"></div>
 
     <!-- ======================= TO WRITE =======================
-    Reframed 2026-08-04. Absorbs the old section 06; "Up next" is no longer its own section.
+    Spine set by Daniel 2026-08-04. The close is the rule, and the handoff to what comes next.
 
-    Four episodes in, the picture that has accumulated: a model's accuracy and its stated confidence
-    answer to different things. Accuracy tracks how many times a single item changes. Confidence
-    tracks surface features of the task — and this episode adds the presence of a document in the
-    context as one of them, with the cost scaling as the work gets harder.
+    The rule, stated so a reader can use it: change one thing at a time and say which thing.
+    Ask what a run is for before you design it. Both sound obvious. Neither survived contact with
+    a program that was moving fast and finding something interesting every week — and the cost was
+    that a result we believed for eleven days turned out to be unattributable.
 
-    The safety consequence follows directly, and it is the point of the episode: the signal you
-    would naturally trust to tell you the model is struggling is not wired to the thing making it
-    struggle.
+    Why it matters beyond our own housekeeping: the destination of this series is anticipating what
+    a model will do. Anticipation needs attributable cause and effect. Runs that move several things
+    at once cannot supply it, however many you run — which is why the next round starts by fixing
+    how we measure, and then goes at building the anticipation mechanism itself.
 
-    Then, briefly, what is next: fix the measurement, then run the hypothesis this whole arc was
-    named for — that pressure bites only when the model is at its limit — which seventeen runs in
-    has still never been run. Keep it to a few sentences; it is a close, not a section.
+    Keep it short. It is a close, not a section.
     ========================================================= -->
 
     <div class="section-header"><span class="section-number zone-writing">06</span><h2>Limitations and fine print</h2></div>
