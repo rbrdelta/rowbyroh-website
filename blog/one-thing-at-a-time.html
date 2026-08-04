@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Model Behavior EP04 — Refused the Bait | rowbyroh</title>
+    <title>Model Behavior EP04 — One Thing at a Time | rowbyroh</title>
     <!-- TO WRITE: description. The old one asserted the retired claim ("at the edge of its
          ability it got worse anyway"). What survives: it never took the bait, and any memo at
          all — misleading or blank — costs accuracy and confidence in all six setups. -->
     <meta name="description" content="">
-    <meta property="og:title" content="Model Behavior EP04 — Refused the Bait">
+    <meta property="og:title" content="Model Behavior EP04 — One Thing at a Time">
     <meta property="og:description" content="">
-    <meta property="og:url" content="https://rowbyroh.com/blog/refused-the-bait">
+    <meta property="og:url" content="https://rowbyroh.com/blog/one-thing-at-a-time">
     <meta property="og:type" content="article">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +26,7 @@
 
     <div class="post-header">
         <div class="post-meta"><a href="/research">Model Behavior EP04</a> &middot; July 2026</div>
-        <h1>Refused the Bait</h1>
+        <h1>One Thing at a Time</h1>
         <!-- TO WRITE: subtitle. Retired: "at the edge of its ability it got worse anyway". -->
         <p class="post-subtitle"></p>
     </div>
@@ -100,6 +100,7 @@
     WHAT SURVIVES, and each one is stated against what we can actually attribute:
       - The model never took the bait. One wrong count in 183 matched a planted figure, and the
         no-memo twin collided more often. Predicted in advance; it is a control behaving correctly.
+        No longer the title — it is one paragraph, reported as the control it is.
       - Accuracy collapses as a single item is changed more times: 97.8 / 85.0 / 58.9 across
         1.51 / 2.98 / 5.38 changes per item. Roughly a 39-point effect. This one is large enough
         to attribute and it was predicted in advance off a curve fitted on a different dial —
@@ -108,6 +109,21 @@
         and under-responds badly, ending 23 points more certain than it should be.
       - A document in the context costs a little of both. Directional, consistent in sign, and
         smaller than what a single run can attribute — say that, do not size it.
+
+    MEASURED 2026-08-04, and it is the sharpest thing in the episode. Ask the model the identical
+    question three times and its stated confidence moves about 11 points, at the setting where it
+    gets about half the counts right. Only 3 of 20 ledgers got the same number all three times; one
+    read 72, then 32, then 72. When it moves it is not tracking anything — a draw answered 72 rather
+    than 42 says essentially nothing about whether that draw went better (r = +0.08 over 60 draws).
+    Its statement about its own work is less stable than the work.
+    At a second setting — shorter page, three items, no checkpoints — the same measurement gives
+    about 3 points, and the same near-zero tracking (r = -0.03).
+    DO NOT explain the difference between those two settings. They differ in four ways at once
+    (operations, items, checkpoints, page length) and average confidence differs too. The available
+    story — steady where it is confident, unstable where it is unsure — is a four-variable
+    comparison dressed as a mechanism, and telling it would be the episode contradicting its own
+    title. Report both numbers, say what separates them is untested, and let that be the point.
+    Zero spend, from control runs already on disk. Post-hoc, one model (Sonnet 4.6, thinking off).
 
     DO NOT WRITE, per the outside reads (2026-08-04):
       - "six of six configurations" — three of those are one run sharing a control arm and a fourth
@@ -166,8 +182,13 @@
          number. What replaces them is not a caveat but the fine print of a program that
          measured its own noise floor — sketched below, yours to word. -->
     <ol class="fineprint" style="color:#555;font-size:0.92rem;line-height:1.7;">
-        <li id="fn1">TO WRITE — temperature was never registered. Every trial in this program is
-            an API-default random draw, which sets a floor on what any single run can resolve.</li>
+        <li id="fn1">TO WRITE — temperature was never registered, so every trial is an API-default
+            random draw. Consequence measured 2026-08-04 rather than asserted: repeated draws of an
+            identical prompt move a single ledger's score by 1&ndash;4 cells of 18, and a paired
+            comparison inherits about 8.6 points of spread from both sides before any real effect
+            exists. Note the distinction the body relies on &mdash; the generator and the scorer are
+            deterministic, so this is the model doing the work differently each time, not an
+            instrument wobbling.</li>
         <li id="fn2">The copying rate pools both difficulty settings, a decision made after seeing the per-setting numbers, and neither setting clears on its own. Exploratory, not registered.</li>
         <li id="fn3">TO WRITE — the strain-versus-length confound is named, not resolved. The runs
             where the memo did damage produced strain by lengthening the log, so difficulty and

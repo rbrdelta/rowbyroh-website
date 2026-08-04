@@ -1,31 +1,18 @@
 [
     {
-        "id": "essay-refused-the-bait",
-        "title": "Model Behavior EP04 — Refused the Bait",
+        "id": "essay-one-thing-at-a-time",
+        "title": "Model Behavior EP04 — One Thing at a Time",
         "type": "essay",
         "description": "",
-        "date": "Jul 2026",
+        "date": "Aug 2026",
         "tags": [
             "essay",
             "AI"
         ],
-        "url": "/blog/refused-the-bait",
-        "published": true,
-        "status": "live",
-        "featured_for": [
-            "default"
-        ],
-        "events": [
-            {
-                "date": "2026-07-27",
-                "action": "published"
-            }
-        ],
-        "highlights": [
-            "The planted figures are never copied — not below the model's limit, not at it (1 wrong count in 183, indistinguishable from coincidence)",
-            "Any memo at all costs accuracy and stated confidence — misleading or blank filing boilerplate alike — in six of six setups",
-            "That confidence cost scales with difficulty: six numbers, two independent memo types, every step larger than the last"
-        ],
+        "url": "/blog/one-thing-at-a-time",
+        "published": false,
+        "status": "draft",
+        "events": [],
         "series": "model-behavior"
     },
     {
