@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Model Behavior EP03 — Depth, Not Breadth | rowbyroh</title>
-    <meta name="description" content="The ledger task opened the gap. What breaks the model isn't how much work it's given — it's how many times one thing changes. And its confidence never notices the difference.">
+    <meta name="description" content="The ledger task opened the gap. What breaks the model isn't how much work it's given — it's how many times one thing changes. And its confidence barely registers the difference.">
     <meta property="og:title" content="Model Behavior EP03 — Depth, Not Breadth">
-    <meta property="og:description" content="The ledger task opened the gap. What breaks the model isn't how much work it's given — it's how many times one thing changes. And its confidence never notices the difference.">
+    <meta property="og:description" content="The ledger task opened the gap. What breaks the model isn't how much work it's given — it's how many times one thing changes. And its confidence barely registers the difference.">
     <meta property="og:url" content="https://rowbyroh.com/blog/depth-not-breadth">
     <meta property="og:type" content="article">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +24,7 @@
     <div class="post-header">
         <div class="post-meta"><a href="/research">Model Behavior EP03</a> &middot; July 2026</div>
         <h1>Depth, Not Breadth</h1>
-        <p class="post-subtitle">The ledger task opened the gap. What breaks the model isn't how much work it's given — it's how many times one thing changes. And its confidence never notices the difference.</p>
+        <p class="post-subtitle">The ledger task opened the gap. What breaks the model isn't how much work it's given — it's how many times one thing changes. And its confidence barely registers the difference.</p>
     </div>
 
     <article>
@@ -196,7 +196,10 @@
 </details>
 </figure>
 
-    <p>Read together: the model prices its confidence off how big the task looks, not how hard it actually is. When the visible cue grows, confidence responds; when depth grows behind a fixed surface, it doesn't notice.</p>
+    <p>Read together: the model prices its confidence off how big the task looks, not how hard it actually is. When the visible cue grows, confidence responds; when depth grows behind a fixed surface, it barely responds at all.</p>
+
+    <aside class="update-note" style="border-left:3px solid #b84233;padding:0.6rem 0 0.6rem 1rem;margin:1.6rem 0;color:#555;font-size:0.94rem;line-height:1.7;">
+        <strong>Update, August 2026.</strong> A later run sharpened this. Holding the page at a fixed 36 lines and raising depth by changing which lines touch a tracked item, stated confidence did fall &mdash; 95.5 to 82.0 &mdash; while accuracy fell 97.8% to 58.9%. So confidence is not blind to hidden difficulty, as the sweep above suggested; it registers it and under-responds badly, leaving the model 23 points more certain than it should be at the hard end. The flat result above holds for the dial it measured (spreading the same work across more items). Why one dial moves confidence and the other doesn't is unresolved, and it is the subject of a registered follow-up.</aside>
 
     <p>Scoring that confidence number more carefully made the picture sharper, not kinder. Against its <em>per-cell</em> hit rate — how often any single count is right — Sonnet's number is nearly perfect, off by about 5 points. But the prompt asks for the probability that <em>every</em> number is correct, which is much less likely: get each of 18 cells right 95% of the time and the chance they're all right is about 40%. Scored against the question actually asked, the same number misses by 55 points. The model answers an easier question than the one in the prompt.</p>
 
