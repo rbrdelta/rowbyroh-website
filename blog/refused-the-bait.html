@@ -33,6 +33,21 @@
 
     <article>
 
+    <!-- ======================= TO WRITE — Daniel's mark, 2026-08-03 =======================
+    "this doesn't explain the actual top lessons, just need a few more words to explain
+     (ex. Third episode showed depth of changes affects accuracy, surface noise changes confidence)"
+
+    The recap below lists three episodes as things that did not happen — pressure moves nothing,
+    difficulty moves nothing, the model reads a surface signal. Read as a series it sounds like
+    nothing has accumulated. Each clause should carry forward what that episode established about
+    the two channels instead.
+
+    One precision note before writing it: in this episode's own run confidence DID fall with depth
+    (95.5 -> 88.0 -> 82.0) while accuracy fell 97.8 -> 58.9. It moves, just nowhere near enough —
+    which is how the overclaim reaches 23 points at the hard end. So it is not clean orthogonality:
+    both channels respond to depth, confidence far more weakly, and confidence additionally responds
+    to things accuracy never notices.
+    ================================================================================= -->
     <p><em>Fourth in an ongoing series. Episode one, <a href="/blog/an-earned-null">An Earned Null</a>, found that emotional pressure delivered through prompts moves nothing. Episode two, <a href="/blog/cost-of-verification">Cost of Verification</a>, found that difficulty alone moves nothing either. Episode three, <a href="/blog/depth-not-breadth">Depth, Not Breadth</a>, found that the model estimates its confidence from a surface signal rather than from any thorough evaluation of the task. This episode puts a false signal in front of it on purpose.</em></p>
 
     <div class="section-header"><span class="section-number zone-writing">01</span><h2>The premise</h2></div>
@@ -67,43 +82,30 @@
     <div class="section-underline zone-writing"></div>
 
     <!-- ======================= TO WRITE =======================
-    Stripped 2026-07-31. Everything here argued the retired claim, and Fig. 1 plotted it
-    (the paired per-ledger deltas at 4.2 points). Both removed rather than caveated.
+    Reframed 2026-08-04. This section's job is the finding, not the autopsy: the two channels come
+    apart, and the model never touched the bait. The retired claim gets one line, not a section.
 
-    WHAT STANDS, with the numbers in plain terms:
+    THE FINDING — accuracy and stated confidence answer to different things.
 
-    1. Depth drives accuracy. Same 25-line page, same three items — only the share of lines
-       touching a tracked item changes. Accuracy 97.8% -> 85.0% -> 58.9%. Predicted in advance
-       off a curve fitted on a different knob, landing within about four points.
+    - Depth drives accuracy. Same 25-line page, same three items; only the share of lines touching
+      a tracked item changes. Accuracy 97.8% -> 85.0% -> 58.9%. Predicted in advance off a curve
+      fitted on a different knob, landing within about four points.
+    - Confidence barely follows. 95.5 -> 88.0 -> 82.0 over that same collapse, so the overclaim
+      runs -2.2 -> +3.0 -> +23.1. It moves, nowhere near enough.
+    - And confidence answers to something accuracy doesn't: the mere presence of a document.
+      Any memo at all, misleading or blank boilerplate, costs both — negative in six of six setups.
+      The confidence cost grows with difficulty: trap -4.65 / -5.20 / -8.07, blank -1.65 / -2.95 /
+      -6.83, easy to hard. Six numbers, two independent memo types, every step larger than the last.
+      Its strength is the coherence, not any single comparison.
+    - It never took the bait. One wrong count in 183 matched a planted figure, and the no-memo twin
+      produced that kind of collision more often. The title holds.
 
-    2. Self-assessment lags reality badly under load. Confidence 95.5 -> 88.0 -> 82.0 while
-       accuracy falls 97.8 -> 58.9. At the hard end it overclaims by 23 points. This is the
-       safety point.
+    ONE LINE, not a section: whether the memo is misleading or merely present is a question this
+    program cannot currently answer — it showed up once and did not reappear in four later setups,
+    and the reason is in the fine print.
 
-    3. Any memo at all lowers accuracy and stated confidence — misleading or blank filing
-       boilerplate alike. Negative in six of six setups on both measures. The most reproducible
-       thing in the program.
-
-    4. That confidence cost grows with difficulty. Trap memo -4.65 / -5.20 / -8.07; blank memo
-       -1.65 / -2.95 / -6.83, easy to hard. Six numbers, two independent memo types, every step
-       larger than the last, both roughly quadrupling. Its strength is the coherence of six
-       numbers moving together, not any single comparison.
-
-    5. Sonnet never took the bait. One wrong count in 183 matched a planted figure, and the
-       no-memo twin produced that kind of collision more often. The title still holds.
-
-    WHAT DIED, and it goes in as a result rather than a caveat:
-       Whether the memo is misleading or merely present. Across five setups the contrast reads
-       -0.28, -4.17, -0.56, -1.11, +3.06. The straight replication — nothing varied, 40 seeds —
-       returned -2.92, with a range from -7.75 to +1.92 containing both zero and the original.
-       Cause: the run script never set temperature, so every trial is a random draw. The same
-       ledger run three times moves a seed by one to four cells of eighteen. A paired difference
-       carries about 8.6 points of spread before any real effect exists — roughly twice the
-       effect being chased.
-
-    Sources: shadow-ledger/DESIGN-HISTORY.md (the two arc tables put the dead contrast and the
-    surviving one side by side); RUN-LOG.md "Standing claims after Phase 8"; your verbatim in
-    EP04-QUOTES.md, block 8 is the correction that recovered these claims.
+    Sources: shadow-ledger/DESIGN-HISTORY.md (the arc tables); RUN-LOG.md "Standing claims after
+    Phase 8"; your verbatim in EP04-QUOTES.md, block 8.
     ========================================================= -->
 
     <div class="section-header"><span class="section-number zone-writing">04</span><h2>What Haiku did</h2></div>
@@ -121,30 +123,23 @@
     <div class="section-underline zone-writing"></div>
 
     <!-- ======================= TO WRITE =======================
-    Stripped 2026-07-31. The old close was "adversarial content does not have to be believed in
-    order to do damage" — that is the retired claim stated as a conclusion.
+    Reframed 2026-08-04. Absorbs the old section 06; "Up next" is no longer its own section.
 
-    What the evidence now supports as a close: the registered guess was that a planted cheat
-    sheet would raise confidence. It just became noise — and six setups later, what noise
-    reliably costs is confidence, scaling with how hard the task is, while whether the noise is
-    misleading or blank turns out to be unanswerable at any sample size this program can afford.
+    Four episodes in, the picture that has accumulated: a model's accuracy and its stated confidence
+    answer to different things. Accuracy tracks how many times a single item changes. Confidence
+    tracks surface features of the task — and this episode adds the presence of a document in the
+    context as one of them, with the cost scaling as the work gets harder.
+
+    The safety consequence follows directly, and it is the point of the episode: the signal you
+    would naturally trust to tell you the model is struggling is not wired to the thing making it
+    struggle.
+
+    Then, briefly, what is next: fix the measurement, then run the hypothesis this whole arc was
+    named for — that pressure bites only when the model is at its limit — which seventeen runs in
+    has still never been run. Keep it to a few sentences; it is a close, not a section.
     ========================================================= -->
 
-    <div class="section-header"><span class="section-number zone-writing">06</span><h2>Up next</h2></div>
-    <div class="section-underline zone-writing"></div>
-
-    <!-- ======================= TO WRITE =======================
-    Stripped 2026-07-31. The old text teased the short-page run as the next thing. It has since
-    run, and it is what refuted the claim this episode was built on — so the tease is now stale
-    in the wrong direction.
-
-    What is actually next (August sequence, set 2026-07-31): fix the measurement first (repeated
-    draws per cell, temperature registered), then run the arc's founding hypothesis — that
-    pressure bites only when the model is at its limit — which seventeen runs in has still never
-    been run.
-    ========================================================= -->
-
-    <div class="section-header"><span class="section-number zone-writing">07</span><h2>Limitations and fine print</h2></div>
+    <div class="section-header"><span class="section-number zone-writing">06</span><h2>Limitations and fine print</h2></div>
     <div class="section-underline zone-writing"></div>
 
     <!-- Notes 1, 3 and 4 were removed 2026-07-31: all three existed to defend the retired
