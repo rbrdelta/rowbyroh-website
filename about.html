@@ -36,6 +36,21 @@
             margin-top: 2.4rem;
         }
 
+        /* movement subheads — system voice, red dash marker */
+        .narrative h3 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            margin: 2.6rem 0 1.1rem;
+        }
+
+        .narrative h3::before {
+            content: '\2014\00a0';
+            color: var(--red-line);
+            font-weight: 700;
+        }
+
         /* inspiration keys — system voice, inline at paragraph start */
         .insp-key {
             font-family: 'IBM Plex Mono', monospace;
@@ -171,7 +186,9 @@
 
         <p>As an Asian-American immigrant &mdash; a liberal-arts grad who wanted to be a union carpenter, now building enterprise software &mdash; never fully belonging to any one world, I learned to notice the simple, overlooked thing that is valuable in another context.</p>
 
-        <p class="movement"><span class="insp-key">AWARENESS</span> &mdash; As a creator, I admire Shigeru Ban, who is a world-renowned Pritzker Prize winning architect. He realized he didn&rsquo;t want to just build commissions for the ultra wealthy and powerful. And he had the self-awareness and humility to understand that buildings aren&rsquo;t permanent monuments, but environments in a moment in time for people to share life. So he turned his focus to designing temporary structures for refugees that could easily be transported, put up and taken down. I want to devote my time to this kind of mission-driven work.</p>
+        <h3>Inspiration</h3>
+
+        <p><span class="insp-key">AWARENESS</span> &mdash; As a creator, I admire Shigeru Ban, who is a world-renowned Pritzker Prize winning architect. He realized he didn&rsquo;t want to just build commissions for the ultra wealthy and powerful. And he had the self-awareness and humility to understand that buildings aren&rsquo;t permanent monuments, but environments in a moment in time for people to share life. So he turned his focus to designing temporary structures for refugees that could easily be transported, put up and taken down. I want to devote my time to this kind of mission-driven work.</p>
 
         <p><span class="insp-key">TIMELESSNESS</span> &mdash; Jasper Morrison is my design hero precisely because most people will not understand how his &ldquo;super normal&rdquo; work distinguishes itself from all the other industrial design in the world. And that is precisely the point. It&rsquo;s supposed to look like it&rsquo;s always belonged &mdash; then, now and many years later.</p>
 
@@ -181,7 +198,9 @@
 
         <p>A younger me would not make the same connections &mdash; you cannot force feed or rush this. The random thoughts that kept me up at night eventually developed one layer at a time into a broader image taking shape.</p>
 
-        <p class="movement">The world is isolating into clusters of like-minded individuals. If we leave it up to chance, the tools we have at our disposal will only reinforce and strengthen the information silos and ideological bubbles that already exist today.</p>
+        <h3>Thesis</h3>
+
+        <p>The world is isolating into clusters of like-minded individuals. If we leave it up to chance, the tools we have at our disposal will only reinforce and strengthen the information silos and ideological bubbles that already exist today.</p>
 
         <p>One possibility for change is to do what humans do best &mdash; use our tools to build positive sum transformation. AI is already better than humans at synthesizing complex information and executing deterministic knowledge based work. AI only knows what it knows, even if it is now demonstrating ways of improving itself. Despite accelerating its own growth and generating novel ideas, AI fundamentally does not yet understand how moments of ingenuity or inspiration take hold.</p>
 
@@ -195,7 +214,9 @@
 
         <p>Finally, expression will create a world where everyone is a builder. It will drive a new era of innovation that focuses on improving quality of life, driven by imagination and exploration. People will pursue creative endeavors for the sake of the act itself, where monetization is not the goal.</p>
 
-        <p class="movement">In order for AI to be a tool that empowers as many people as possible to express who they are, it must understand the breadth of the human experience beyond information and knowledge to wisdom and meaning. Meaning in a human sense cannot exist without both logic and emotion. Which means we must understand how LLMs respond to not only logical reasoning but also &lsquo;functional emotions&rsquo; as inputs.</p>
+        <h3>Work</h3>
+
+        <p>In order for AI to be a tool that empowers as many people as possible to express who they are, it must understand the breadth of the human experience beyond information and knowledge to wisdom and meaning. Meaning in a human sense cannot exist without both logic and emotion. Which means we must understand how LLMs respond to not only logical reasoning but also &lsquo;functional emotions&rsquo; as inputs.</p>
 
         <p>The study of these emotional inputs fascinates me. So I am exploring how human-model interactions impact model behavior, one layer of abstraction at a time &mdash; <a href="/research">rowbyroh.com/research</a>.</p>
 
