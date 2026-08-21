@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | rowbyroh</title>
-    <meta name="description" content="I've never been able to keep up with my own ideas. This is the record of my practice.">
+    <meta name="description" content="The common thread I have noticed in my work is that I connect the dots between two unrelated worlds.">
     <meta property="og:title" content="About | rowbyroh">
-    <meta property="og:description" content="I've never been able to keep up with my own ideas. This is the record of my practice.">
+    <meta property="og:description" content="The common thread I have noticed in my work is that I connect the dots between two unrelated worlds.">
     <meta property="og:url" content="https://rowbyroh.com/about">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,9 +31,51 @@
             margin-bottom: 0;
         }
 
-        .narrative p.closing {
-            margin-top: 2rem;
-            font-weight: 500;
+        /* movement breaks — space, no labels; the prose carries the turns */
+        .narrative p.movement {
+            margin-top: 2.4rem;
+        }
+
+        /* movement subheads — system voice, red dash marker */
+        .narrative h3 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            margin: 2.6rem 0 1.1rem;
+        }
+
+        .narrative h3::before {
+            content: '\2014\00a0';
+            color: var(--red-line);
+            font-weight: 700;
+        }
+
+        /* inspiration keys — system voice, inline at paragraph start */
+        .insp-key {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            color: var(--zone-portfolio);
+            margin-right: 0.35rem;
+        }
+
+        .narrative p.inspires {
+            font-style: italic;
+            font-weight: 600;
+            font-size: 0.92rem;
+            margin-top: 1.8rem;
+        }
+
+        .narrative a {
+            color: var(--zone-portfolio);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(184, 66, 51, 0.35);
+        }
+
+        .narrative a:hover {
+            border-bottom-color: var(--zone-portfolio);
         }
 
         /* ---- TENETS ---- */
@@ -109,26 +151,6 @@
             border-bottom-color: var(--zone-portfolio);
         }
 
-        /* ---- COLOPHON ---- */
-        .colophon {
-            font-size: 0.7rem;
-            color: var(--muted);
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--light);
-            line-height: 1.6;
-        }
-
-        .colophon a {
-            color: var(--zone-mono);
-            text-decoration: none;
-            border-bottom: 1px solid var(--light);
-        }
-        .colophon a:hover {
-            color: var(--text);
-            border-color: var(--text);
-        }
-
         /* ---- RESPONSIVE ---- */
         @media (max-width: 600px) {
             .narrative p {
@@ -160,11 +182,47 @@
         </div>
         <div class="section-underline zone-portfolio"></div>
 
-        <p>I want to solve really hard problems. For a long time, I didn't understand them or couldn't articulate them. Looking back, the throughline is clear: I move between domains. I connect things that seem unrelated. I bring technology into legacy industries. I see the needs of people on the fringes. Everyone deserves affordable housing, and furniture that spans generations and holds memories. Everyone deserves mobility — to see the world and interact with it. Everyone deserves an education built on expression and environment, not just facts and reasoning.</p>
+        <p>The common thread I have noticed in my work is that I connect the dots between two unrelated worlds &mdash; taking inspiration from modular furniture to scale freight pricing systems or applying supply/demand dynamics to reframe recruiting CRM strategy.</p>
 
-        <p>I spent 15 years as an employee. I learned that my ideas never fit, because the only person who can see these problems and connect the opportunity the way I do is me.</p>
+        <p>As an Asian-American immigrant &mdash; a liberal-arts grad who wanted to be a union carpenter, now building enterprise software &mdash; never fully belonging to any one world, I learned to notice the simple, overlooked thing that is valuable in another context.</p>
 
-        <p>It's all possible now because AI is the thought partner I never had. The values I learned over those 15 years feel perfectly suited for this moment. The constraint is the brief. Judgment is more valuable than ever. This is a record of my practice.</p>
+        <h3>Inspiration</h3>
+
+        <p><span class="insp-key">AWARENESS</span> &mdash; As a creator, I admire Shigeru Ban, who is a world-renowned Pritzker Prize winning architect. He realized he didn&rsquo;t want to just build commissions for the ultra wealthy and powerful. And he had the self-awareness and humility to understand that buildings aren&rsquo;t permanent monuments, but environments in a moment in time for people to share life. So he turned his focus to designing temporary structures for refugees that could easily be transported, put up and taken down. I want to devote my time to this kind of mission-driven work.</p>
+
+        <p><span class="insp-key">TIMELESSNESS</span> &mdash; Jasper Morrison is my design hero precisely because most people will not understand how his &ldquo;super normal&rdquo; work distinguishes itself from all the other industrial design in the world. And that is precisely the point. It&rsquo;s supposed to look like it&rsquo;s always belonged &mdash; then, now and many years later.</p>
+
+        <p><span class="insp-key">RESOURCEFULNESS</span> &mdash; My first brief in architecture studio was to design a light sconce. And instead of using fancy milling techniques or acrylic panels, I wondered out loud how the popsicle sticks on my desk could be reused to make something compelling. I ended up building a harness using popsicle sticks and steel wires that supported the light bulb housing. As an object, it looked like nothing. But when you turned on the switch, the light cast these weird arrays &mdash; shadow lines and sticks crossing each other in random directions.</p>
+
+        <p class="inspires">What inspires me is to help others, by exploring the overlooked gaps and corners to bring something valuable that stands the test of time.</p>
+
+        <p>A younger me would not make the same connections &mdash; you cannot force feed or rush this. The random thoughts that kept me up at night eventually developed one layer at a time into a broader image taking shape.</p>
+
+        <h3>Thesis</h3>
+
+        <p>The world is isolating into clusters of like-minded individuals. If we leave it up to chance, the tools we have at our disposal will only reinforce and strengthen the information silos and ideological bubbles that already exist today.</p>
+
+        <p>One possibility for change is to do what humans do best &mdash; use our tools to build positive sum transformation. AI is already better than humans at synthesizing complex information and executing deterministic knowledge based work. AI only knows what it knows, even if it is now demonstrating ways of improving itself. Despite accelerating its own growth and generating novel ideas, AI fundamentally does not yet understand how moments of ingenuity or inspiration take hold.</p>
+
+        <p>If imagination is the constraint, it is critical that we empower upcoming generations to express themselves. Drawing and visual media should be a means of communication taught to everyone, not a specialized skill set for the most gifted &ldquo;artists&rdquo;. Music and performing arts should be taught as a means to master body language and our communication skills, not just to judge who can hit the highest note or gain the most views.</p>
+
+        <p>Unlocking a new generation who is more adept at expressing oneself will drive immense benefits.</p>
+
+        <p>First, expression is sharing. It fosters openness and community. And the more you put out into the world, the more people you can touch and bring together.</p>
+
+        <p>Second, expression affirms independent thinking. It rejects group think. Differing opinions are acceptable because everyone is unique, which enhances compassion and increases diverse dialogue.</p>
+
+        <p>Finally, expression will create a world where everyone is a builder. It will drive a new era of innovation that focuses on improving quality of life, driven by imagination and exploration. People will pursue creative endeavors for the sake of the act itself, where monetization is not the goal.</p>
+
+        <h3>Work</h3>
+
+        <p>In order for AI to be a tool that empowers as many people as possible to express who they are, it must understand the breadth of the human experience beyond information and knowledge to wisdom and meaning. Meaning in a human sense cannot exist without both logic and emotion. Which means we must understand how LLMs respond to not only logical reasoning but also &lsquo;functional emotions&rsquo; as inputs.</p>
+
+        <p>The study of these emotional inputs fascinates me. So I am exploring how human-model interactions impact model behavior, one layer of abstraction at a time &mdash; <a href="/research">rowbyroh.com/research</a>.</p>
+
+        <p>At the surface, I am curious how my word choices or the shape of a conversation can produce measurable changes in a model&rsquo;s output. Below the surface, the field of interpretability in its early phases has already produced fascinating work on understanding the impact of functional emotions in LLMs. Are there ways an LLM can interpret audio beyond transcripts into tone, rhythm &mdash; the intended emotion behind a piece of music? And will that ability help us better understand, influence and anticipate how to best work with these models?</p>
+
+        <p class="movement">So in summary, I want to equip more people who may be displaced with the means to adapt and find a new home &mdash; literally and metaphorically &mdash; in this changing world. From an immigrant child who moved schools every year to an evolving career stitched together across various domains, I understand what it feels like to have my identity uprooted and to be forced to reinvent myself over and over again from zero.</p>
     </div>
 
     <!-- ---- TENETS ---- -->
