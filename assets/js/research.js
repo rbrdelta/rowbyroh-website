@@ -1,7 +1,8 @@
-// research.js — /research hub (Model Behavior series)
-// Renders the episode list from content.json in series order (oldest first —
+// research.js — /research hub (one list per track, keyed by data-series)
+// Renders each track's episode list from content.json in series order (oldest first —
 // a series reads forward). Single source of truth: an episode registered with
-// series "model-behavior" appears here automatically.
+// a series appears under its track automatically. ?drafts also lists drafts
+// (branch previews only — drafts never reach main unpublished pages' readers).
 
 (function () {
     'use strict';
@@ -28,27 +29,27 @@
     fetch('/assets/data/content.json')
         .then(function (res) { return res.json(); })
         .then(function (content) {
-            var container = document.getElementById('research-list');
-            if (!container) return;
-
-            var episodes = content.filter(function (item) {
-                return item.published && item.series === 'model-behavior';
-            });
-            episodes.sort(function (a, b) {
-                return latestEventDate(a).localeCompare(latestEventDate(b));
-            });
-
-            episodes.forEach(function (item) {
-                var a = document.createElement('a');
-                a.href = item.url;
-                a.className = 'archive-item zone-research';
-                a.innerHTML =
-                    '<div class="archive-item-header">' +
-                        '<span class="archive-title">' + escapeHtml(item.title) + '</span>' +
-                    '</div>' +
-                    '<span class="archive-desc">' + escapeHtml(item.description || '') + '</span>' +
-                    '<span class="archive-date zone-research">' + formatMonth(latestEventDate(item)) + '</span>';
-                container.appendChild(a);
+            var showDrafts = /[?&]drafts\b/.test(location.search);
+            document.querySelectorAll('.research-track .archive-list[data-series]').forEach(function (container) {
+                var series = container.getAttribute('data-series');
+                var episodes = content.filter(function (item) {
+                    return item.series === series && (item.published || (showDrafts && item.status === 'draft'));
+                });
+                episodes.sort(function (a, b) {
+                    return (latestEventDate(a) || '9999').localeCompare(latestEventDate(b) || '9999') || a.title.localeCompare(b.title);
+                });
+                episodes.forEach(function (item) {
+                    var a = document.createElement('a');
+                    a.href = item.url;
+                    a.className = 'archive-item zone-research';
+                    a.innerHTML =
+                        '<div class="archive-item-header">' +
+                            '<span class="archive-title">' + escapeHtml(item.title) + '</span>' +
+                        '</div>' +
+                        '<span class="archive-desc">' + escapeHtml(item.description || '') + '</span>' +
+                        '<span class="archive-date zone-research">' + (item.published ? formatMonth(latestEventDate(item)) : 'draft') + '</span>';
+                    container.appendChild(a);
+                });
             });
         })
         .catch(function () {

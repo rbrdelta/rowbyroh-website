@@ -49,6 +49,45 @@
     margin-top: 0.3rem;
 }
 
+/* Tracks — one per series under the shared thesis. The kicker + h2 mark the
+   track; the question line says what it asks before the episodes do. */
+.research-track {
+    margin: 2.4rem 0 0;
+}
+
+.research-track-kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin: 0;
+}
+
+.research-track h2 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--zone-research);
+    margin: 0.2rem 0 0.3rem;
+}
+
+.research-track-q {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0 0 0.3rem;
+}
+
+.research-track-approach {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 0.82rem;
+    color: #555;
+    margin: 0 0 0.9rem;
+    max-width: 62ch;
+}
+
 .research-all {
     margin-top: 2rem;
     font-family: 'IBM Plex Mono', monospace;

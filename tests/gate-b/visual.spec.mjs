@@ -9,7 +9,7 @@ const PAGES = [
     { name: 'about', url: '/about', ready: 'footer' },
     { name: 'archive', url: '/archive', ready: '#archive-list .archive-item' },
     { name: 'colophon', url: '/colophon', ready: '.closing-strip' },
-    { name: 'research', url: '/research', ready: '#research-list .archive-item' },
+    { name: 'research', url: '/research', ready: '.research-track .archive-item' },
     { name: 'fn-conversation-sync', url: '/field-notes/conversation-sync', ready: '#keep-reading .kr-all' },
     { name: 'fn-headless-parity', url: '/field-notes/headless-parity', ready: '#keep-reading .kr-all' },
     { name: 'fn-batch-approval', url: '/field-notes/batch-approval', ready: '#keep-reading .kr-all' },

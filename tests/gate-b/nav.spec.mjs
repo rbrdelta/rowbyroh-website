@@ -60,7 +60,7 @@ test('keep-reading links navigate to a real page (deep dive works)', async ({ pa
 
 test('research hub lists the model-behavior episodes in series order', async ({ page }) => {
     await page.goto('/research');
-    const items = page.locator('#research-list .archive-item');
+    const items = page.locator('[data-series="model-behavior"] .archive-item');
     await expect(items.first()).toBeVisible();
     await expect(items.first().locator('.archive-title')).toContainText('EP01');
     await expect(items.nth(1).locator('.archive-title')).toContainText('EP02');
