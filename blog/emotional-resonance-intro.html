@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/base.css">
     <link rel="stylesheet" href="/assets/css/writing.css">
-    <link rel="stylesheet" href="/assets/css/listen.css">
 </head>
 <body class="writing-page zone-research">
     <div class="scroll-progress" id="scrollProgress"></div>
@@ -27,70 +26,39 @@
 
     <article>
 
-    <p class="draft-legend">Draft review key: <span class="claude-text">highlighted text</span> was written by Claude, objectively, for you to keep, tweak or replace. Everything else is your own words, put in order, with grammar fixed. <span class="gap">gap</span> = a line only you can write.</p>
-
-    <p><em>The introduction to a new series. <a href="/blog/hearing-test">Episode 1</a> picks the model and tests whether it can hear.</em></p>
-
-    <div class="section-header"><span class="section-number zone-writing">01</span><h2>The premise</h2></div>
+    <div class="section-header"><span class="section-number zone-writing">01</span><h2>Seed</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <p>If we can influence the inner constitution of a model via functional emotions, can music or audio elicit this inner state of a model, resulting in a behavior change?</p>
+    <p>In April, I read a paper from Anthropic, <a href="https://transformer-circuits.pub/2026/emotions/index.html">&ldquo;Emotion Concepts and their Function in a Large Language Model&rdquo;</a> (Sofroniew et al., Transformer Circuits, 2026), and a lightbulb went off. If these emotional concepts or &ldquo;functional emotions&rdquo; can influence model behavior, then closing the feedback loop &ndash; capturing a user&rsquo;s emotion, understanding its impacts, and anticipating, even steering a model for desired outcomes &ndash; would be a step change in how we interact with AI. It&rsquo;s an entirely new frontier into how AI can inspire us to create or inject fear to destroy.</p>
 
-    <p>The point of observability and interpretability is to understand how these dynamics can help me understand, influence and even anticipate how a model may behave. The entire thesis is about the human-model interaction. How can we understand an LLM's functional emotions? Can you help the model "functionally interpret" sound, tone, rhythm, music?</p>
+    <p>Specifically, my attention turned to sound and music. Our voices carry so much more information than simply words. These &ldquo;facets&rdquo; &ndash; tone, volume, fillers, etc. &ndash; say a lot that&rsquo;s missed in text. If an LLM understood these inputs, could it operate with higher EQ?</p>
 
-    <p>When I think about this thesis, emotional resonance is the term that stayed with me. How deep can it actually hit, or penetrate, and have an effect?</p>
+    <p>The real frontier is music. The beauty of music is its ability to carry so much and move us in such a simple, brief package. Beyond music theory, can the inner workings of a tune translate to a shared &ldquo;inter-subjective&rdquo; (borrowing from <em>Sapiens</em>) experience?</p>
 
-    <p><span class="claude-text">The name predates the project. It first appears in a note dated 11/12 <span class="gap">year?</span>: "Emotional resonance in AI. Anthropic and mechanistic interpretability. The Golden Gate model example. How AI models can have high EQ."</span></p>
-
-    <div class="section-header"><span class="section-number zone-writing">02</span><h2>Why sound</h2></div>
+    <div class="section-header"><span class="section-number zone-writing">02</span><h2>Pivot</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <p>Everyone is talking about voice mode, but if we tie this thread to how functional emotion can influence model behavior, then the really interesting concept is how tone would impact it as a new dimension. Our tone, the way we talk and emote, and the convergence of voice as a key interaction medium make this fertile ground.</p>
+    <p>I am not an AI researcher. But I do think about how we interact with AI quite a bit and have been jotting down my experiences. So the first phase of this experiment was to see if external emotional inputs can affect the model&rsquo;s behavior (<a href="/research">the Model Behavior series</a>). Through 376 trials we learned that it could not. What we did learn was that there are different external ways to improve or hurt a model&rsquo;s performance (introducing depth of complexity over breadth, anchoring a session and completely changing direction in a long context window, among others).</p>
 
-    <p>The reason we don't want AI talking in a voice is not because it's fake. I suspect it's actually not bidirectional: it can't register our tone. So the burden is more on the user.</p>
+    <p>After these lessons, I made the decision to dive in and look under the surface. This is amateur at best &ndash; but it is an honest representation of my thoughts and a concerted effort to bring some rigor into this process.</p>
 
-    <p>Computer audio: could that influence a model more than words? It's one thing to write music from theory. It's another to hear and imagine the emotional tone. If I think about what's able to carry really strong emotions in as little information as possible, it's music. I know vision has a lot of expertise and investment, but I see music as a largely untapped area with immense possibilities.</p>
-
-    <p>If a model can actually "feel" music, then that is an incredible breakthrough. Can it understand what a beautiful song means on an emotional level?</p>
-
-    <div class="section-header"><span class="section-number zone-writing">03</span><h2>From the surface to underneath</h2></div>
+    <div class="section-header"><span class="section-number zone-writing">03</span><h2>Progress</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <p><span class="claude-text">The <a href="/research">Model Behavior</a> track began with a 2026 Transformer Circuits paper on emotion concepts inside a language model. It found an internal "desperation" direction. Pushing on that direction directly, a technique called steering that changes the model's internal numbers underneath the words, raised task-gaming from about 5% to 70% and blackmail from about 22% to 72%. Steering toward "calm" brought both back down. <a href="/blog/an-earned-null">Model Behavior EP01</a> tried to reach the same direction from the outside, through pressure written into the prompt. Across 376 trials, misbehavior stayed at 0%: the model recognized the pressure and resisted it.</span></p>
-
-    <p>The first hypothesis was: can I affect model behavior from the surface? We could not. Now: can we go under the hood and try another, more proven route, per existing research? That's one approach, versus trying it as in real life, by manipulating the audio as input from the outside. Doing it from both external and internal is a useful litmus test.</p>
-
-    <div class="section-header"><span class="section-number zone-writing">04</span><h2>Five steps</h2></div>
-    <div class="section-underline zone-writing"></div>
-
-    <p>To test this theory, we need to validate these key steps. We use fear vs calm as the primary emotion we want to elicit.</p>
+    <p>My goal is to successfully complete the following steps using fear vs calm as our subject. Each step represents a key breakthrough (for me at least) as the bar to move on to the next step. Pass or fail, I will share what I learn here.</p>
 
     <ol>
         <li>What are the various ways sound can represent fear?</li>
-        <li>Once we posit these factors, can we find a model that can precisely "listen" to these sounds?</li>
+        <li>Once we posit these facets, can we find a model that can precisely &ldquo;listen&rdquo; to these sounds?</li>
         <li>Then, using these elements, can we reliably reproduce the fear signal inside the model?</li>
-        <li>Can we add these fear signals to a very challenging task? If we insert the fear signal or not (the control), do the results change?</li>
-        <li>Can we test the fear signal via external input (manipulating a voice prompt with fear traits) and by activating the functional emotion beneath the surface?</li>
+        <li>Can we add these fear signals in a real environment via external input? If we insert the fear signal or not (the control), do the results change?</li>
+        <li>Can we test the fear signal via external by activating the functional emotion beneath the surface? Does it behave the same as the external input?</li>
     </ol>
 
-    <p><span class="claude-text">The series follows these steps in order. Episode 1 covers the first two.</span></p>
-
-    <div class="section-header"><span class="section-number zone-writing">05</span><h2>Why fear and calm</h2></div>
+    <div class="section-header"><span class="section-number zone-writing">04</span><h2>Next</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <p>Fear is just visceral, and one of the core emotions anyone can relate to.</p>
-
-    <div class="section-header"><span class="section-number zone-writing">06</span><h2>The safety question</h2></div>
-    <div class="section-underline zone-writing"></div>
-
-    <p>If functional emotion is something a model can detect, then I am wondering if there is a safety element to this, where sound or music can elicit fear in a model, or where a model can do that to people. If a model can understand what a beautiful song means, that leads to a scenario where it can be leveraged to inspire, or to strike fear and destroy.</p>
-
-    <div class="section-header"><span class="section-number zone-writing">07</span><h2>What counts as progress</h2></div>
-    <div class="section-underline zone-writing"></div>
-
-    <p>Success is completing all five steps, essentially. But even if that doesn't happen, that's OK. Every major question is a major milestone. I'm going from surface-level behavior checks to measuring the model underneath: understanding the mechanics of computer sound (the ear, the audio encoder, the neural network) and steering and activations. So any progress is a step-change improvement for me.</p>
-
-    <p><span class="claude-text">A result of "no fear detected" counts as a finding, not a failure of the method.</span></p>
+    <p>The next post, <a href="/blog/hearing-test">Episode 1</a>, is testing out instruments. We want to know if there are models out there that can accurately listen for the cues or facets that we want to use to elicit fear.</p>
 
     </article>
 
