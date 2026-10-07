@@ -104,7 +104,7 @@
         if (current && seriesOf(current)) {
             var series = live
                 .filter(function (i) { return seriesOf(i) === seriesOf(current); })
-                .sort(function (a, b) { return itemTime(a) - itemTime(b); });
+                .sort(function (a, b) { return itemTime(a) - itemTime(b) || a.title.localeCompare(b.title); });
             var idx = -1;
             series.forEach(function (i, n) { if (i === current) idx = n; });
             if (idx > -1 && idx < series.length - 1) {

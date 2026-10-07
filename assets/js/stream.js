@@ -92,7 +92,7 @@
             }
         });
         events.sort(function (a, b) {
-            return b.date.localeCompare(a.date);
+            return b.date.localeCompare(a.date) || b.title.localeCompare(a.title);
         });
         return events.slice(0, 7);
     }

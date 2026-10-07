@@ -108,7 +108,7 @@
 
             // Sort by most recent event date descending
             published.sort(function (a, b) {
-                return latestEventDate(b).localeCompare(latestEventDate(a));
+                return latestEventDate(b).localeCompare(latestEventDate(a)) || b.title.localeCompare(a.title);
             });
 
             var tags = collectTags(published);
