@@ -113,3 +113,28 @@
     font-size: 0.7rem;
     color: #888;
 }
+
+/* Review markers (drafts only — Gate A refuses a published page carrying any).
+   .claude-text = objective text Claude wrote; .gap = needs Daniel's words. */
+.draft-legend {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: #555;
+    border: 1px dashed var(--light);
+    padding: 0.5rem 0.8rem;
+    margin: 0 0 1.5rem;
+}
+
+.claude-text,
+.draft-legend .claude-text {
+    background: #efe8d6;
+    box-shadow: -0.4rem 0 0 #efe8d6;
+}
+
+.gap {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--red-line);
+    border: 1px dashed var(--red-line);
+    padding: 0 0.3rem;
+}

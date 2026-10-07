@@ -130,8 +130,8 @@ for (const rel of pages.filter(isContentPage)) {
 // A published page must not still carry an unfilled prose slot (.draft-slot).
 for (const e of content.filter(e => e.published)) {
     const f = routeToFile(e.url);
-    if (f && /class="draft-slot"/.test(readFileSync(f, 'utf8'))) fail(`${e.url} is published but still has a draft-slot (unwritten prose)`);
-    else pass(`${e.url} has no draft-slot`);
+    if (f && /class="(draft-slot|claude-text|gap|draft-legend)"/.test(readFileSync(f, "utf8"))) fail(`${e.url} is published but still carries a draft marker (draft-slot / claude-text / gap / draft-legend)`);
+    else pass(`${e.url} has no draft markers`);
 }
 
 // ---- 6. Redirect targets exist -----------------------------------------

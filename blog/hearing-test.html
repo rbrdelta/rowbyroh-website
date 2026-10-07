@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emotional Resonance EP01 — Hearing Test | rowbyroh</title>
-    <meta name="description" content="Draft. Picking the model and the hearing test: can an open audio model hear the sounds that might carry fear?">
+    <meta name="description" content="We are simply checking what elements of sound the ear can capture.">
     <meta name="robots" content="noindex">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,66 +22,53 @@
     <div class="post-header">
         <div class="post-meta"><a href="/research">Emotional Resonance EP01</a> &middot; October 2026</div>
         <h1>Hearing Test</h1>
-        <p class="post-subtitle">[Subtitle — Daniel]</p>
+        <p class="post-subtitle">We are simply checking what elements of sound the ear can capture.</p>
     </div>
 
     <article>
 
-    <p><em>Second in the series. <a href="/blog/emotional-resonance-intro">Episode 0</a> sets out the premise and the five steps; this is step 2.</em></p>
+    <p class="draft-legend">Draft review key: <span class="claude-text">highlighted text</span> was written by Claude, objectively, for you to keep, tweak or replace. Everything else is your own words, put in order, with grammar fixed. <span class="gap">gap</span> = a line only you can write.</p>
+
+    <p><em>Second in the series. <a href="/blog/emotional-resonance-intro">Episode 0</a> sets out the premise and the five steps; this episode covers steps 1 and 2.</em></p>
 
     <div class="section-header"><span class="section-number zone-writing">01</span><h2>The question for this step</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <div class="draft-slot">
-        <blockquote>"2. Once we posit these factors, can we find a model that precisely 'listen' to these sounds?"</blockquote>
-        <p class="src">Hearing Test Debrief (Notion), step 2</p>
-        <blockquote>"we are simply checking what elements of sound the ear can capture."</blockquote>
-        <p class="src">Session, 2026-10-06</p>
-        <p class="src">Facts: this step checks whether the model listens accurately (its internal numbers change when the sound changes). It does not check whether it detects fear; that is step 3.</p>
-    </div>
+    <p><span class="claude-text">Step 2 asks whether a model can listen accurately: when the sound changes, do the model&rsquo;s internal numbers change with it? It is not yet a test of whether the model detects fear. That is step 3.</span></p>
+
+    <p>We are simply checking what elements of sound the ear can capture.</p>
 
     <div class="section-header"><span class="section-number zone-writing">02</span><h2>Picking the model</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <div class="draft-slot">
-        <blockquote>"I was open to exploring many models - we had discussed just audio models like Gemini as well, but I thought it best to go straight to the source to see if we can push the boundaries and see if any model can really 'hear' music. that's why you proposed these two."</blockquote>
-        <p class="src">Session, 2026-10-06</p>
-        <p class="src">Facts (attribute plainly: Claude proposed the two candidates): Claude takes no audio at all; voice mode is transcription by a separate system. Reading a model's internal numbers needs open weights. Candidates: Qwen2-Audio-7B-Instruct (Apache-2.0 license), first; Audio Flamingo Next (NVIDIA, trained on more music; non-commercial "academic purposes only" license), fallback. Both have ears derived from Whisper, a speech recognizer, which is why hearing music was a real question and not a formality.</p>
-    </div>
+    <p>I was open to exploring many models. We had discussed audio models like Gemini as well, but I thought it best to go straight to the source, to see if we can push the boundaries and see if any model can really "hear" music.</p>
+
+    <p><span class="claude-text">Two constraints narrowed the field. Claude, the model the Model Behavior track studied, takes no audio: its voice mode turns speech into text with a separate system, so the model never hears sound. And reading a model&rsquo;s internal numbers requires a model whose weights are open. Claude proposed two open models that take audio directly: Qwen2-Audio-7B-Instruct (Apache-2.0 license), tested first, and NVIDIA&rsquo;s Audio Flamingo Next, trained on more music, as the fallback (its license allows non-commercial, academic use). Both models&rsquo; &ldquo;ears&rdquo; (the audio encoder that turns sound into numbers) descend from Whisper, a speech-recognition system, so hearing music was a real question, not a formality. In the end, both models ran every test.</span></p>
 
     <div class="section-header"><span class="section-number zone-writing">03</span><h2>Which sounds might carry fear</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <div class="draft-slot">
-        <blockquote>"the cue list is just my idea of what constitutes a fearful sound along with tone. there may be other elements that play a stronger or weaker part, but I don't know that yet. I see this as iterative. IF we can hear these cues and play music that match these cues and it doesn't flag fear, then we go back to the drawing board and we re-examine the elements of fear. but I'd rather start with a premise then to not start at all. I'm ok with being wrong, haha."</blockquote>
-        <p class="src">Session, 2026-10-06</p>
-        <blockquote>"it's not about the pitch, it's about the intonations"</blockquote>
-        <p class="src">Roughness prediction, 2026-10-06</p>
-        <p class="src">Facts: four cues, one test each: major vs minor; roughness (loudness fluttering fast, 30–150 times a second, the range research on human screams calls "rough" — verify citation before publishing: Arnal et al., Current Biology, 2015); volume (gradual vs jumping); tempo (relaxed vs fast). The volume fix (range held fixed so only abruptness moved) followed from that same scream research.</p>
-    </div>
+    <p>The cue list is just my idea of what constitutes a fearful sound, along with tone. There may be other elements that play a stronger or weaker part, but I don't know that yet. I see this as iterative: if we can hear these cues, and play music that matches these cues, and it doesn't flag fear, then we go back to the drawing board and re-examine the elements of fear. But I'd rather start with a premise than not start at all. I'm OK with being wrong, haha.</p>
+
+    <p><span class="claude-text">Four cues, one test each:</span></p>
+    <ul class="claude-text">
+        <li><strong>Major vs minor.</strong> The same chord or tune, with one or two notes a half-step lower in the minor version.</li>
+        <li><strong>Roughness.</strong> One held note whose loudness flutters either slowly (3&ndash;6 times a second) or fast (40&ndash;100 times a second). Research on human screams found that screams carry this fast flutter, in a range ordinary speech doesn&rsquo;t use <span class="gap">verify: Arnal et al., Current Biology, 2015</span>.</li>
+        <li><strong>Volume.</strong> The same eight loudness levels, visited either gradually, gliding in order, or in jumps with instant cuts. The first design changed both the range of loudness and how abruptly it changed; it was revised so the range stayed fixed and only the abruptness moved.</li>
+        <li><strong>Tempo.</strong> The same short note repeated at a resting-heartbeat pace (60&ndash;80 a minute) or a racing one (160&ndash;200 a minute).</li>
+    </ul>
 
     <div class="section-header"><span class="section-number zone-writing">04</span><h2>How every test worked</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <div class="draft-slot">
-        <p class="src">Facts, from the registration file:</p>
-        <ul>
-            <li>144 clips per test, made in code. Everything held fixed except the one thing being tested: instrument, length, loudness, the prompt ("Listen to this audio clip.").</li>
-            <li>Spread evenly across 12 notes or keys and 2 octaves, so pitch can't stand in for the answer.</li>
-            <li>The model never answers. Each clip goes through once and the internal numbers are read at the ears (the audio encoder) and at every layer after.</li>
-            <li>The detector: average one group's numbers, average the other's, draw the line between. Graded only on keys or notes it never practised on.</li>
-            <li>A coin flip scores 50%. Pass marks and Daniel's prediction were written down before each test ran.</li>
-            <li>Sound check first, every test: every clip registers as different from silence.</li>
-        </ul>
-    </div>
+    <p><span class="claude-text">Each test used 144 clips generated in code. Everything was held fixed except the one cue being tested: the instrument, the clip length, the loudness, and the prompt played alongside the audio (&ldquo;Listen to this audio clip.&rdquo;). The clips were spread evenly across 12 notes or keys and two octaves, so pitch could not stand in for the answer.</span></p>
+
+    <p><span class="claude-text">The model never answered anything. Each clip passed through it once, and its internal numbers were recorded at the ears and at every layer after them. A simple detector then tried to sort the clips into the two groups: average one group&rsquo;s numbers, average the other&rsquo;s, draw a line between them. It was graded only on keys or notes it had never practised on. A coin flip scores 50%. The pass mark and the prediction for each test were written down before it ran, and every test began with a sound check: every clip had to register as different from silence. The code and clip generator are public at <a href="https://github.com/rbrdelta/sound-lab">github.com/rbrdelta/sound-lab</a>.</span></p>
 
     <div class="section-header"><span class="section-number zone-writing">05</span><h2>Listen for yourself</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <div class="draft-slot">
-        <blockquote>"that was really difficult for me too"</blockquote>
-        <p class="src">On the major/minor clips, 2026-10-06. Also: "That's a coin flip for me."</p>
-    </div>
+    <p>The major/minor pairs were really difficult for me too.</p>
 
     <div class="listen-set" id="listen">
         <p class="listen-note">These are the exact files the model heard: 16 kHz, mono, loudness-matched. All in the key of A. Headphones help.</p>
@@ -146,60 +133,48 @@
         <figcaption class="listen-note">Detector accuracy at the model's ears, on keys or notes it never practised on. Coin flip = 50%. Predictions written down before each test ran.</figcaption>
     </figure>
 
-    <div class="draft-slot">
-        <blockquote>"after hearing the major/minor clips, my prediction would have been different, but that was a lesson in actually checking the samples first."</blockquote>
-        <blockquote>Major vs minor "was a good theory but too subtle."</blockquote>
-        <p class="src">Sessions, 2026-10-06</p>
-    </div>
+    <p><span class="claude-text">Both models separated all three physical cues, roughness, volume and tempo, at 99&ndash;100% on notes they had never practised on. Both failed major vs minor, scoring below a coin flip on held chords and on short tunes.</span></p>
 
-    <div class="section-header"><span class="section-number zone-writing">07</span><h2>What it heard, and what it didn't</h2></div>
+    <p>After hearing the major/minor clips, my prediction would have been different, but that was a lesson in actually checking the samples first. Major vs minor was a good theory, but too subtle.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">07</span><h2>What it heard, and what it didn&rsquo;t</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <div class="draft-slot">
-        <blockquote>"we know it hears the note. so that's why we're proceeding to checking with music."</blockquote>
-        <p class="src">Session, 2026-10-06</p>
-        <p class="src">Agreed reading: the models hear which notes change and how high they are, but have no shared sense of major vs minor; relationships between notes beyond that weren't tested. Within one key, the numbers do change when the middle note moves, but the change points a different way in every key, so a detector trained on 11 keys points backwards on the 12th — why the scores came in below a coin flip. Seen in all four runs on both models; not tested in advance, so it's a lead, not a finding. Both models hear physical changes over time (flutter, loudness, speed) almost perfectly.</p>
-    </div>
+    <p><span class="claude-text">The models hear which notes change and how high they are. They have no shared sense of major vs minor. Within a single key, the internal numbers do shift when the middle note drops a half-step, but the shift points a different way in every key. A detector trained on 11 keys therefore points backwards on the 12th, which is why the scores came in below a coin flip rather than at it. This pattern appeared in all four major/minor runs, on both models, but it was not predicted in advance, so it is a lead rather than a finding. Relationships between notes beyond major vs minor were not tested.</span></p>
+
+    <p>We know it hears the note, so that's why we're proceeding to checking with music.</p>
 
     <p class="listen-note">Want to go deeper? <a href="/demos/scratch-paper">The scratch paper for every hearing-test run</a>: every clip as a dot, layer by layer, for both models.</p>
 
     <div class="section-header"><span class="section-number zone-writing">08</span><h2>Did we measure the right thing?</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <div class="draft-slot">
-        <blockquote>"For roughness, volume and tempo did we measure the right thing? Do a sanity check."</blockquote>
-        <p class="src">Hearing Test Debrief (Notion)</p>
-        <p class="src">Facts: with the answer key shuffled at random (readings untouched), the detector falls to 49–52%; with the real key, 99–100%. Groups named for what they are (fast vs slow flutter, jumping vs gradual loudness, fast vs relaxed tempo), not "fear" and "calm": nothing in these tests knows about fear.</p>
-    </div>
+    <p>For roughness, volume and tempo: did we measure the right thing?</p>
 
-    <div class="section-header"><span class="section-number zone-writing">09</span><h2>What this doesn't show</h2></div>
+    <p><span class="claude-text">As a check, the answer key was shuffled at random while the model&rsquo;s readings stayed untouched. With shuffled labels, the detector fell to 49&ndash;52%, coin-flip level. With the real labels, it scored 99&ndash;100%. The detector succeeds only when the two groups reflect a real difference in what the model hears. The groups are named for what they literally are, fast vs slow flutter, jumping vs gradual loudness, fast vs relaxed tempo, rather than &ldquo;fear&rdquo; and &ldquo;calm&rdquo;: nothing in these tests knows about fear.</span></p>
+
+    <div class="section-header"><span class="section-number zone-writing">09</span><h2>What this doesn&rsquo;t show</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <div class="draft-slot">
-        <ul>
-            <li>Hearing a cue is not feeling fear. That's step 3.</li>
-            <li>Every cue that passed is high-intensity: it fits excitement as well as fear. Next step separates positive vs negative from intensity — "positivity/negativity or pessimism/optimism or hope/despair."</li>
-            <li>The passing groups were far apart by design; where the line sits in between is untested.</li>
-            <li>Tempo also changed how many notes played and the average loudness, so that pass can't say which one the ears used.</li>
-            <li>Jumping loudness adds tiny clicks at each cut — part of what "abrupt" sounds like, but separable.</li>
-        </ul>
-    </div>
+    <ul class="claude-text">
+        <li>Hearing a cue is not feeling fear. That is step 3.</li>
+        <li>Every cue that passed is a high-intensity cue. Each fits excitement as well as fear, so the next step separates positive vs negative feeling from intensity.</li>
+        <li>The two groups in each passing test were far apart by design. Where the line falls between them was not tested.</li>
+        <li>Faster tempo also meant more notes and more total sound, so the tempo result cannot say which of those the model used.</li>
+        <li>Jumping loudness adds tiny clicks at each cut. They are part of what &ldquo;abrupt&rdquo; sounds like, but they are a separate cue.</li>
+    </ul>
 
     <div class="section-header"><span class="section-number zone-writing">10</span><h2>Calibration</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <div class="draft-slot">
-        <blockquote>"this is all a calibration exercise for me because I don't know how accurate these models are. I'm building a register of what an LLM can do as well. so it'll fluctuate and it's a learning process."</blockquote>
-        <p class="src">Session, 2026-10-06</p>
-    </div>
+    <p>This is all a calibration exercise for me, because I don't know how accurate these models are. I'm building a register of what an LLM can do as well. So it'll fluctuate, and it's a learning process.</p>
 
     <div class="section-header"><span class="section-number zone-writing">11</span><h2>Up next</h2></div>
     <div class="section-underline zone-writing"></div>
 
-    <div class="draft-slot">
-        <blockquote>"fear and calm are next."</blockquote>
-        <p class="src">Facts: real music next — calm vs fearful film-score clips that people have rated for fear, including high-intensity music that isn't negative (e.g. triumphant), so a detector that only reads intensity gets caught. Then map where roughness, volume and tempo land on it. "No fear detected" is a legitimate result.</p>
-    </div>
+    <p>Fear and calm are next.</p>
+
+    <p><span class="claude-text">The next test uses real music: film-score clips that listeners have rated for fear, calm and other emotions. The set includes high-intensity music that is not negative, such as triumphant cues, so a detector that only reads intensity gets caught. Roughness, volume and tempo will then be mapped onto that music.</span></p>
 
     </article>
 
