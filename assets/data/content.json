@@ -1,5 +1,37 @@
 [
     {
+        "date": "Oct 2026",
+        "events": [],
+        "published": false,
+        "series": "sound",
+        "status": "draft",
+        "tags": [
+            "essay",
+            "AI"
+        ],
+        "type": "essay",
+        "id": "essay-sound-ep0",
+        "title": "[Series name] EP00 — Introduction",
+        "url": "/blog/sound-ep0",
+        "description": "Draft. If a model has functional emotions, can music reach them?"
+    },
+    {
+        "date": "Oct 2026",
+        "events": [],
+        "published": false,
+        "series": "sound",
+        "status": "draft",
+        "tags": [
+            "essay",
+            "AI"
+        ],
+        "type": "essay",
+        "id": "essay-sound-ep1",
+        "title": "[Series name] EP01 — Can It Hear?",
+        "url": "/blog/sound-ep1",
+        "description": "Draft. Picking the model and the hearing test."
+    },
+    {
         "id": "essay-depth-not-breadth",
         "title": "Model Behavior EP03 — Depth, Not Breadth",
         "type": "essay",

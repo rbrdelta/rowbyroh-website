@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Series name] EP01 — Can It Hear? | rowbyroh</title>
+    <meta name="description" content="Draft. Picking the model and the hearing test: can an open audio model hear the sounds that might carry fear?">
+    <meta name="robots" content="noindex">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/writing.css">
+    <link rel="stylesheet" href="/assets/css/listen.css">
+</head>
+<body class="writing-page zone-research">
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="scroll-progress-inner" id="scrollProgressInner"></div>
+
+    <nav class="breadcrumb"><a href="/">rowbyroh</a><span class="sep">/</span><a href="/archive">all work</a></nav>
+
+    <div class="post-header">
+        <div class="post-meta">[Series name] EP01 &middot; October 2026</div>
+        <h1>[Title — Daniel]</h1>
+        <p class="post-subtitle">[Subtitle — Daniel]</p>
+    </div>
+
+    <article>
+
+    <p><em>Second in the series. <a href="/blog/sound-ep0">Episode 0</a> sets out the premise and the five steps; this is step 2.</em></p>
+
+    <div class="section-header"><span class="section-number zone-writing">01</span><h2>The question for this step</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <div class="draft-slot">
+        <blockquote>"2. Once we posit these factors, can we find a model that precisely 'listen' to these sounds?"</blockquote>
+        <p class="src">Hearing Test Debrief (Notion), step 2</p>
+        <blockquote>"we are simply checking what elements of sound the ear can capture."</blockquote>
+        <p class="src">Session, 2026-10-06</p>
+        <p class="src">Facts: this step checks whether the model listens accurately (its internal numbers change when the sound changes). It does not check whether it detects fear; that is step 3.</p>
+    </div>
+
+    <div class="section-header"><span class="section-number zone-writing">02</span><h2>Picking the model</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <div class="draft-slot">
+        <blockquote>"I was open to exploring many models - we had discussed just audio models like Gemini as well, but I thought it best to go straight to the source to see if we can push the boundaries and see if any model can really 'hear' music. that's why you proposed these two."</blockquote>
+        <p class="src">Session, 2026-10-06</p>
+        <p class="src">Facts (attribute plainly: Claude proposed the two candidates): Claude takes no audio at all; voice mode is transcription by a separate system. Reading a model's internal numbers needs open weights. Candidates: Qwen2-Audio-7B-Instruct (Apache-2.0 license), first; Audio Flamingo Next (NVIDIA, trained on more music; non-commercial "academic purposes only" license), fallback. Both have ears derived from Whisper, a speech recognizer, which is why hearing music was a real question and not a formality.</p>
+    </div>
+
+    <div class="section-header"><span class="section-number zone-writing">03</span><h2>Which sounds might carry fear</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <div class="draft-slot">
+        <blockquote>"the cue list is just my idea of what constitutes a fearful sound along with tone. there may be other elements that play a stronger or weaker part, but I don't know that yet. I see this as iterative. IF we can hear these cues and play music that match these cues and it doesn't flag fear, then we go back to the drawing board and we re-examine the elements of fear. but I'd rather start with a premise then to not start at all. I'm ok with being wrong, haha."</blockquote>
+        <p class="src">Session, 2026-10-06</p>
+        <blockquote>"it's not about the pitch, it's about the intonations"</blockquote>
+        <p class="src">Roughness prediction, 2026-10-06</p>
+        <p class="src">Facts: four cues, one test each: major vs minor; roughness (loudness fluttering fast, 30–150 times a second, the range research on human screams calls "rough" — verify citation before publishing: Arnal et al., Current Biology, 2015); volume (gradual vs jumping); tempo (relaxed vs fast). The volume fix (range held fixed so only abruptness moved) followed from that same scream research.</p>
+    </div>
+
+    <div class="section-header"><span class="section-number zone-writing">04</span><h2>How every test worked</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <div class="draft-slot">
+        <p class="src">Facts, from the registration file:</p>
+        <ul>
+            <li>144 clips per test, made in code. Everything held fixed except the one thing being tested: instrument, length, loudness, the prompt ("Listen to this audio clip.").</li>
+            <li>Spread evenly across 12 notes or keys and 2 octaves, so pitch can't stand in for the answer.</li>
+            <li>The model never answers. Each clip goes through once and the internal numbers are read at the ears (the audio encoder) and at every layer after.</li>
+            <li>The detector: average one group's numbers, average the other's, draw the line between. Graded only on keys or notes it never practised on.</li>
+            <li>A coin flip scores 50%. Pass marks and Daniel's prediction were written down before each test ran.</li>
+            <li>Sound check first, every test: every clip registers as different from silence.</li>
+        </ul>
+    </div>
+
+    <div class="section-header"><span class="section-number zone-writing">05</span><h2>Listen for yourself</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <div class="draft-slot">
+        <blockquote>"that was really difficult for me too"</blockquote>
+        <p class="src">On the major/minor clips, 2026-10-06. Also: "That's a coin flip for me."</p>
+    </div>
+
+    <div class="listen-set">
+        <p class="listen-note">These are the exact files the model heard: 16 kHz, mono, loudness-matched. All in the key of A. Headphones help.</p>
+
+        <div class="listen-pair" data-target="minor" data-target-label="minor">
+            <h3>Major vs minor — held chord</h3>
+            <p class="listen-q">Same chord, middle note a half-step apart.</p>
+            <audio data-name="major" src="/assets/audio/sound-ep1/chord-major.wav"></audio>
+            <audio data-name="minor" src="/assets/audio/sound-ep1/chord-minor.wav"></audio>
+            <div class="listen-reveal" hidden><span class="listen-verdict"></span> The detector reading the model's ears, on keys it never practised on: Qwen 39%, Audio Flamingo 42%.</div>
+        </div>
+
+        <div class="listen-pair" data-target="minor" data-target-label="minor">
+            <h3>Major vs minor — short tune</h3>
+            <p class="listen-q">Same 8-note tune; minor lowers two notes a half-step.</p>
+            <audio data-name="major" src="/assets/audio/sound-ep1/tune-major.wav"></audio>
+            <audio data-name="minor" src="/assets/audio/sound-ep1/tune-minor.wav"></audio>
+            <div class="listen-reveal" hidden><span class="listen-verdict"></span> Qwen 36%, Audio Flamingo 34%.</div>
+        </div>
+
+        <div class="listen-pair" data-target="fast" data-target-label="the fast flutter">
+            <h3>Roughness</h3>
+            <p class="listen-q">One held note; the loudness swings 4.5 or 70 times a second.</p>
+            <audio data-name="slow" src="/assets/audio/sound-ep1/flutter-slow.wav"></audio>
+            <audio data-name="fast" src="/assets/audio/sound-ep1/flutter-fast.wav"></audio>
+            <div class="listen-reveal" hidden><span class="listen-verdict"></span> Qwen 100%, Audio Flamingo 100%.</div>
+        </div>
+
+        <div class="listen-pair" data-target="jumping" data-target-label="the jumping loudness">
+            <h3>Volume</h3>
+            <p class="listen-q">The same 8 loudness levels, visited in order with glides, or out of order with cuts.</p>
+            <audio data-name="gradual" src="/assets/audio/sound-ep1/volume-gradual.wav"></audio>
+            <audio data-name="jumping" src="/assets/audio/sound-ep1/volume-jumping.wav"></audio>
+            <div class="listen-reveal" hidden><span class="listen-verdict"></span> Qwen 100%, Audio Flamingo 100%.</div>
+        </div>
+
+        <div class="listen-pair" data-target="fast" data-target-label="the fast tempo">
+            <h3>Tempo</h3>
+            <p class="listen-q">The same short note repeated 70 or 180 times a minute.</p>
+            <audio data-name="relaxed" src="/assets/audio/sound-ep1/tempo-relaxed.wav"></audio>
+            <audio data-name="fast" src="/assets/audio/sound-ep1/tempo-fast.wav"></audio>
+            <div class="listen-reveal" hidden><span class="listen-verdict"></span> Qwen 99%, Audio Flamingo 100%.</div>
+        </div>
+    </div>
+
+    <div class="section-header"><span class="section-number zone-writing">06</span><h2>What happened</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <figure class="chart">
+        <table class="data">
+            <thead>
+                <tr><th>Test</th><th>My prediction</th><th>Qwen</th><th>Audio Flamingo</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Major vs minor, held chord</td><td>~60%; "won't do much better than Qwen"</td><td>39%</td><td>42%</td></tr>
+                <tr><td>Major vs minor, short tune</td><td>Better than a coin flip; over 60%</td><td>36%</td><td>34%</td></tr>
+                <tr><td>Roughness</td><td>"very visible"</td><td>100%</td><td>100%</td></tr>
+                <tr><td>Volume</td><td>70%</td><td>100%</td><td>100%</td></tr>
+                <tr><td>Tempo</td><td>100%</td><td>99%</td><td>100%</td></tr>
+            </tbody>
+        </table>
+        <figcaption class="listen-note">Detector accuracy at the model's ears, on keys or notes it never practised on. Coin flip = 50%. Predictions written down before each test ran.</figcaption>
+    </figure>
+
+    <div class="draft-slot">
+        <blockquote>"after hearing the major/minor clips, my prediction would have been different, but that was a lesson in actually checking the samples first."</blockquote>
+        <blockquote>Major vs minor "was a good theory but too subtle."</blockquote>
+        <p class="src">Sessions, 2026-10-06</p>
+    </div>
+
+    <div class="section-header"><span class="section-number zone-writing">07</span><h2>What it heard, and what it didn't</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <div class="draft-slot">
+        <blockquote>"we know it hears the note. so that's why we're proceeding to checking with music."</blockquote>
+        <p class="src">Session, 2026-10-06</p>
+        <p class="src">Agreed reading: the models hear which notes change and how high they are, but have no shared sense of major vs minor; relationships between notes beyond that weren't tested. Within one key, the numbers do change when the middle note moves, but the change points a different way in every key, so a detector trained on 11 keys points backwards on the 12th — why the scores came in below a coin flip. Seen in all four runs on both models; not tested in advance, so it's a lead, not a finding. Both models hear physical changes over time (flutter, loudness, speed) almost perfectly.</p>
+    </div>
+
+    <p class="listen-note">Want to go deeper? <a href="/lab/scratch-paper">The scratch paper for every hearing-test run</a>: every clip as a dot, layer by layer, for both models.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">08</span><h2>Did we measure the right thing?</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <div class="draft-slot">
+        <blockquote>"For roughness, volume and tempo did we measure the right thing? Do a sanity check."</blockquote>
+        <p class="src">Hearing Test Debrief (Notion)</p>
+        <p class="src">Facts: with the answer key shuffled at random (readings untouched), the detector falls to 49–52%; with the real key, 99–100%. Groups named for what they are (fast vs slow flutter, jumping vs gradual loudness, fast vs relaxed tempo), not "fear" and "calm": nothing in these tests knows about fear.</p>
+    </div>
+
+    <div class="section-header"><span class="section-number zone-writing">09</span><h2>What this doesn't show</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <div class="draft-slot">
+        <ul>
+            <li>Hearing a cue is not feeling fear. That's step 3.</li>
+            <li>Every cue that passed is high-intensity: it fits excitement as well as fear. Next step separates positive vs negative from intensity — "positivity/negativity or pessimism/optimism or hope/despair."</li>
+            <li>The passing groups were far apart by design; where the line sits in between is untested.</li>
+            <li>Tempo also changed how many notes played and the average loudness, so that pass can't say which one the ears used.</li>
+            <li>Jumping loudness adds tiny clicks at each cut — part of what "abrupt" sounds like, but separable.</li>
+        </ul>
+    </div>
+
+    <div class="section-header"><span class="section-number zone-writing">10</span><h2>Calibration</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <div class="draft-slot">
+        <blockquote>"this is all a calibration exercise for me because I don't know how accurate these models are. I'm building a register of what an LLM can do as well. so it'll fluctuate and it's a learning process."</blockquote>
+        <p class="src">Session, 2026-10-06</p>
+    </div>
+
+    <div class="section-header"><span class="section-number zone-writing">11</span><h2>Up next</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <div class="draft-slot">
+        <blockquote>"fear and calm are next."</blockquote>
+        <p class="src">Facts: real music next — calm vs fearful film-score clips that people have rated for fear, including high-intensity music that isn't negative (e.g. triumphant), so a detector that only reads intensity gets caught. Then map where roughness, volume and tempo land on it. "No fear detected" is a legitimate result.</p>
+    </div>
+
+    </article>
+
+    <section id="keep-reading" class="keep-reading" aria-label="Keep reading"></section>
+
+    <div class="post-footer">
+        <p>Built with Claude.</p>
+    </div>
+
+    <footer>
+        <a href="mailto:daniel@rowbyroh.com">email</a> &middot;
+        <a href="https://discord.com/users/rbrdelta">discord</a> &middot;
+        <a href="https://github.com/rbrdelta">github</a> &middot;
+        <a href="https://linkedin.com/in/drohh">linkedin</a>
+        <a class="footer-colophon" href="/colophon">Colophon &mdash; how this site is built &rarr;</a>
+        <div style="margin-top: 0.5rem;">&copy; 2026 rowbyroh.com</div>
+    </footer>
+
+    <script src="/assets/js/listen.js"></script>
+    <script src="/assets/js/related.js"></script>
+    <script src="/assets/js/scroll.js"></script>
+</body>
+</html>

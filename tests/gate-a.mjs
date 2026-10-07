@@ -34,7 +34,7 @@ const pages = walk(ROOT).map(p => relative(ROOT, p)).sort();
 // Content pages = anything under field-notes/, blog/, chair-roundtable/.
 const isContentPage = (rel) => /^(field-notes|blog|chair-roundtable)\//.test(rel);
 // Top-level pages allowed to carry supplemental inline <style> blocks.
-const INLINE_STYLE_OK = new Set(['about.html', 'colophon.html']);
+const INLINE_STYLE_OK = new Set(['about.html', 'colophon.html', 'lab/scratch-paper.html']);
 
 const vercel = JSON.parse(readFileSync(join(ROOT, 'vercel.json'), 'utf8'));
 const redirects = (vercel.redirects || []).map(r => r.source.replace(/\/$/, ''));
@@ -125,6 +125,13 @@ for (const rel of pages.filter(isContentPage)) {
     registered.has(route)
         ? pass(`${route} registered`)
         : fail(`${route} is a live content page but is NOT in content.json (orphaned from stream/archive)`);
+}
+
+// A published page must not still carry an unfilled prose slot (.draft-slot).
+for (const e of content.filter(e => e.published)) {
+    const f = routeToFile(e.url);
+    if (f && /class="draft-slot"/.test(readFileSync(f, 'utf8'))) fail(`${e.url} is published but still has a draft-slot (unwritten prose)`);
+    else pass(`${e.url} has no draft-slot`);
 }
 
 // ---- 6. Redirect targets exist -----------------------------------------

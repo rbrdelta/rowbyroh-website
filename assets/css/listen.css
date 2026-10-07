@@ -1,0 +1,115 @@
+/* listen.css — listen-and-guess pairs for the sound series.
+   Each .listen-pair holds two clips in random order; the reader guesses,
+   then sees the answer and what the model's ears scored. */
+
+.listen-set {
+    margin: 2rem 0;
+}
+
+.listen-pair {
+    border-left: 3px solid var(--zone-writing);
+    background: var(--bg-light);
+    padding: 1rem 1.2rem;
+    margin: 1.2rem 0;
+}
+
+.listen-pair h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #555;
+    margin: 0 0 0.4rem;
+}
+
+.listen-pair .listen-q {
+    margin: 0 0 0.8rem;
+}
+
+.listen-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+}
+
+.listen-row button {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    padding: 0.45rem 0.9rem;
+    border: 1px solid var(--light);
+    background: var(--bg);
+    color: var(--text);
+    cursor: pointer;
+    min-height: 44px;
+}
+
+.listen-row button:hover,
+.listen-row button:focus-visible {
+    border-color: var(--zone-writing);
+}
+
+.listen-row button[aria-pressed="true"] {
+    border-color: var(--zone-writing);
+    background: var(--surface);
+}
+
+.listen-row .listen-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: #555;
+    flex-basis: 100%;
+}
+
+.listen-reveal {
+    font-size: 0.85rem;
+    margin: 0.6rem 0 0;
+}
+
+.listen-reveal[hidden] {
+    display: none;
+}
+
+.listen-reveal .listen-verdict {
+    font-weight: 600;
+}
+
+.listen-note {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: #555;
+}
+
+/* Prose slots — Daniel writes these. Source material sits inside, quoted
+   verbatim. Gate A refuses to pass a published page that still has one. */
+.draft-slot {
+    border: 1px dashed var(--zone-writing);
+    padding: 0.8rem 1rem;
+    margin: 1rem 0;
+    background: var(--bg-light);
+}
+
+.draft-slot::before {
+    content: 'Daniel writes this section — source material below';
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--zone-writing);
+    margin-bottom: 0.5rem;
+}
+
+.draft-slot blockquote {
+    margin: 0.5rem 0;
+    padding-left: 0.8rem;
+    border-left: 2px solid var(--light);
+    font-size: 0.85rem;
+}
+
+.draft-slot .src {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: #888;
+}
