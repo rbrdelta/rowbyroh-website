@@ -1,7 +1,7 @@
 // related.js — "Keep reading" module for content pages.
 // Renders into #keep-reading from content.json. Promotes deep dives and
 // guarantees no dead end: next-in-series first (roundtables), then related
-// by shared tag, then most recent — always ending with a path to /archive.
+// by shared tag, then anything else — the latter two in random order — always ending with a path to /archive.
 // Replaces the type-limited #post-nav prev/next (writing.js) on content pages.
 //
 // The ranking logic (pickRelated) is a pure function, exported for unit tests
@@ -21,7 +21,7 @@
     // Zone follows the body of work: the model-behavior series carries the
     // research zone, roundtables their own; types map for everything else.
     function zoneClass(item) {
-        if (item && item.series === 'model-behavior') return 'zone-research';
+        if (item && (item.series === 'model-behavior' || item.series === 'emotional-resonance')) return 'zone-research';
         switch (item && item.type) {
             case 'project':
             case 'analysis':
@@ -61,10 +61,22 @@
         return (u || '').replace(/\/$/, '');
     }
 
-    // Pure: given all content entries + the current page url, return up to
-    // `limit` ranked suggestions. Each pick may carry a `_label` override.
-    function pickRelated(all, currentUrl, limit) {
+    // Fisher-Yates on a copy. `rng` defaults to Math.random; tests inject one.
+    function shuffle(list, rng) {
+        var a = list.slice();
+        for (var n = a.length - 1; n > 0; n--) {
+            var j = Math.floor(rng() * (n + 1));
+            var t = a[n]; a[n] = a[j]; a[j] = t;
+        }
+        return a;
+    }
+
+    // Given all content entries + the current page url, return up to `limit`
+    // suggestions. Next-in-series is fixed; everything after it is random
+    // (shared-tag items first, then the rest). Each pick may carry a `_label`.
+    function pickRelated(all, currentUrl, limit, rng) {
         limit = limit || 3;
+        rng = rng || Math.random;
         var live = all.filter(function (i) {
             return i.published !== false && i.status !== 'draft';
         });
@@ -104,19 +116,13 @@
         var broad = { 'field-notes': 1, 'roundtable': 1, 'essay': 1 };
         if (current) {
             var mine = (current.tags || []).filter(function (t) { return !broad[t]; });
-            others
-                .filter(function (i) {
-                    return (i.tags || []).some(function (t) { return mine.indexOf(t) > -1; });
-                })
-                .sort(function (a, b) { return itemTime(b) - itemTime(a); })
-                .forEach(function (i) { add(i); });
+            shuffle(others.filter(function (i) {
+                return (i.tags || []).some(function (t) { return mine.indexOf(t) > -1; });
+            }), rng).forEach(function (i) { add(i); });
         }
 
-        // 3. Fill remaining slots with the most recent other content.
-        others
-            .slice()
-            .sort(function (a, b) { return itemTime(b) - itemTime(a); })
-            .forEach(function (i) { add(i); });
+        // 3. Fill remaining slots with other content, in random order.
+        shuffle(others, rng).forEach(function (i) { add(i); });
 
         return picks.slice(0, limit);
     }
@@ -171,6 +177,7 @@
         zoneClass: zoneClass,
         typeLabel: typeLabel,
         itemTime: itemTime,
+        shuffle: shuffle,
         pickRelated: pickRelated,
         buildHtml: buildHtml,
         render: render

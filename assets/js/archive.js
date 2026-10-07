@@ -13,7 +13,7 @@
     // Zone follows the body of work: the model-behavior series carries the
     // research zone, roundtables their own; types map for everything else.
     function zoneClass(item) {
-        if (item && item.series === 'model-behavior') return 'zone-research';
+        if (item && (item.series === 'model-behavior' || item.series === 'emotional-resonance')) return 'zone-research';
         switch (item && item.type) {
             case 'project': return 'zone-portfolio';
             case 'analysis': return 'zone-portfolio';

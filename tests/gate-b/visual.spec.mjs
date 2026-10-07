@@ -21,6 +21,15 @@ const PAGES = [
     { name: 'rt-build-process', url: '/chair-roundtable/build-process', ready: '#keep-reading .kr-all' },
 ];
 
+// Keep Reading picks are random in production; pin Math.random to a fixed
+// sequence so the snapshots stay deterministic.
+test.beforeEach(async ({ page }) => {
+    await page.addInitScript(() => {
+        let seed = 42;
+        Math.random = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
+    });
+});
+
 for (const p of PAGES) {
     test(`visual: ${p.name}`, async ({ page }) => {
         await page.goto(p.url, { waitUntil: 'networkidle' });

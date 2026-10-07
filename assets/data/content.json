@@ -7,12 +7,14 @@
         "status": "draft",
         "tags": [
             "essay",
-            "AI"
+            "AI",
+            "interpretability"
         ],
         "type": "essay",
         "id": "essay-emotional-resonance-intro",
         "featured_for": [
-            "default"
+            "default",
+            "interpretability"
         ],
         "title": "Emotional Resonance EP00 — Intro",
         "url": "/blog/emotional-resonance-intro",
@@ -26,7 +28,8 @@
         "status": "draft",
         "tags": [
             "essay",
-            "AI"
+            "AI",
+            "interpretability"
         ],
         "type": "essay",
         "id": "essay-hearing-test",
