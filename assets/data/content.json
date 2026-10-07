@@ -28,9 +28,9 @@
     {
         "date": "Oct 2026",
         "events": [],
-        "published": false,
+        "published": true,
         "series": "emotional-resonance",
-        "status": "draft",
+        "status": "live",
         "tags": [
             "essay",
             "AI",
@@ -40,7 +40,7 @@
         "id": "essay-hearing-test",
         "title": "Emotional Resonance EP01 — Hearing Test",
         "url": "/blog/hearing-test",
-        "description": "We are simply checking what elements of sound the ear can capture."
+        "description": "Can you hear me now?"
     },
     {
         "id": "essay-depth-not-breadth",
