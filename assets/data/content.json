@@ -10,9 +10,9 @@
             "AI"
         ],
         "type": "essay",
-        "id": "essay-sound-ep0",
-        "title": "Emotional Resonance EP00 — Introduction",
-        "url": "/blog/sound-ep0",
+        "id": "essay-emotional-resonance-intro",
+        "title": "Emotional Resonance EP00 — Intro",
+        "url": "/blog/emotional-resonance-intro",
         "description": "Draft. If a model has functional emotions, can music reach them?"
     },
     {
@@ -26,9 +26,9 @@
             "AI"
         ],
         "type": "essay",
-        "id": "essay-sound-ep1",
-        "title": "Emotional Resonance EP01 — Can It Hear?",
-        "url": "/blog/sound-ep1",
+        "id": "essay-hearing-test",
+        "title": "Emotional Resonance EP01 — Hearing Test",
+        "url": "/blog/hearing-test",
         "description": "Draft. Picking the model and the hearing test."
     },
     {
