@@ -1,10 +1,15 @@
 [
     {
         "date": "Oct 2026",
-        "events": [],
-        "published": false,
+        "events": [
+            {
+                "date": "2026-10-07",
+                "action": "published"
+            }
+        ],
+        "published": true,
         "series": "emotional-resonance",
-        "status": "draft",
+        "status": "live",
         "tags": [
             "essay",
             "AI",
@@ -50,9 +55,6 @@
         "url": "/blog/depth-not-breadth",
         "published": true,
         "status": "live",
-        "featured_for": [
-            "default"
-        ],
         "events": [
             {
                 "date": "2026-07-10",
