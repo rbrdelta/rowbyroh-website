@@ -34,7 +34,10 @@ const pages = walk(ROOT).map(p => relative(ROOT, p)).sort();
 // Content pages = anything under field-notes/, blog/, chair-roundtable/.
 const isContentPage = (rel) => /^(field-notes|blog|chair-roundtable)\//.test(rel);
 // Top-level pages allowed to carry supplemental inline <style> blocks.
-const INLINE_STYLE_OK = new Set(['about.html', 'colophon.html', 'scratch-paper.html']);
+const INLINE_STYLE_OK = new Set(['about.html', 'colophon.html']);
+// Standalone companions: separate pieces of work hosted on the site, opened in
+// a new tab from their episode, deliberately NOT in the site design system.
+const STANDALONE = new Set(['lab/scratch-paper.html']);
 
 const vercel = JSON.parse(readFileSync(join(ROOT, 'vercel.json'), 'utf8'));
 const redirects = (vercel.redirects || []).map(r => r.source.replace(/\/$/, ''));
@@ -63,6 +66,7 @@ function attrs(html, re) {
 // ---- 1. Design-system linkage ------------------------------------------
 head('1. Design-system linkage (base.css + no orphan inline style)');
 for (const rel of pages) {
+    if (STANDALONE.has(rel)) { pass(`${rel} standalone companion (exempt)`); continue; }
     const html = readFileSync(join(ROOT, rel), 'utf8');
     if (/href="[^"]*assets\/css\/base\.css"/.test(html)) pass(`${rel} links base.css`);
     else fail(`${rel} does not link base.css (design-system orphan)`);
