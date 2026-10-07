@@ -35,6 +35,9 @@ const pages = walk(ROOT).map(p => relative(ROOT, p)).sort();
 const isContentPage = (rel) => /^(field-notes|blog|chair-roundtable)\//.test(rel);
 // Top-level pages allowed to carry supplemental inline <style> blocks.
 const INLINE_STYLE_OK = new Set(['about.html', 'colophon.html']);
+// Standalone companions: separate pieces of work hosted on the site, opened in
+// a new tab from their episode, deliberately NOT in the site design system.
+const STANDALONE = new Set(['lab/scratch-paper.html']);
 
 const vercel = JSON.parse(readFileSync(join(ROOT, 'vercel.json'), 'utf8'));
 const redirects = (vercel.redirects || []).map(r => r.source.replace(/\/$/, ''));
@@ -63,6 +66,7 @@ function attrs(html, re) {
 // ---- 1. Design-system linkage ------------------------------------------
 head('1. Design-system linkage (base.css + no orphan inline style)');
 for (const rel of pages) {
+    if (STANDALONE.has(rel)) { pass(`${rel} standalone companion (exempt)`); continue; }
     const html = readFileSync(join(ROOT, rel), 'utf8');
     if (/href="[^"]*assets\/css\/base\.css"/.test(html)) pass(`${rel} links base.css`);
     else fail(`${rel} does not link base.css (design-system orphan)`);
@@ -125,6 +129,13 @@ for (const rel of pages.filter(isContentPage)) {
     registered.has(route)
         ? pass(`${route} registered`)
         : fail(`${route} is a live content page but is NOT in content.json (orphaned from stream/archive)`);
+}
+
+// A published page must not still carry an unfilled prose slot (.draft-slot).
+for (const e of content.filter(e => e.published)) {
+    const f = routeToFile(e.url);
+    if (f && /class="(draft-slot|claude-text|gap|draft-legend)"/.test(readFileSync(f, "utf8"))) fail(`${e.url} is published but still carries a draft marker (draft-slot / claude-text / gap / draft-legend)`);
+    else pass(`${e.url} has no draft markers`);
 }
 
 // ---- 6. Redirect targets exist -----------------------------------------

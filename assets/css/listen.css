@@ -1,0 +1,96 @@
+/* listen.css — inline audio samples and draft review markers (sound series). */
+
+/* Inline play buttons — they sit inside the same figure/table language as the
+   results chart, so audio reads as data, not as a widget. */
+button.play {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--zone-writing);
+    background: none;
+    border: none;
+    border-bottom: 1px solid currentColor;
+    padding: 0.35rem 0;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+button.play::before {
+    content: '\25B8\FE0E\00a0';
+}
+
+button.play[aria-pressed="true"] {
+    color: var(--text);
+}
+
+button.play[aria-pressed="true"]::before {
+    content: '\25A0\FE0E\00a0';
+}
+
+button.play:focus-visible {
+    outline: 2px solid var(--zone-writing);
+    outline-offset: 2px;
+}
+
+.listen-note {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: #555;
+}
+
+/* Prose slots — Daniel writes these. Source material sits inside, quoted
+   verbatim. Gate A refuses to pass a published page that still has one. */
+.draft-slot {
+    border: 1px dashed var(--zone-writing);
+    padding: 0.8rem 1rem;
+    margin: 1rem 0;
+    background: var(--bg-light);
+}
+
+.draft-slot::before {
+    content: 'Daniel writes this section — source material below';
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--zone-writing);
+    margin-bottom: 0.5rem;
+}
+
+.draft-slot blockquote {
+    margin: 0.5rem 0;
+    padding-left: 0.8rem;
+    border-left: 2px solid var(--light);
+    font-size: 0.85rem;
+}
+
+.draft-slot .src {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: #888;
+}
+
+/* Review markers (drafts only — Gate A refuses a published page carrying any).
+   .claude-text = objective text Claude wrote; .gap = needs Daniel's words. */
+.draft-legend {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: #555;
+    border: 1px dashed var(--light);
+    padding: 0.5rem 0.8rem;
+    margin: 0 0 1.5rem;
+}
+
+.claude-text,
+.draft-legend .claude-text {
+    background: #efe8d6;
+    box-shadow: -0.4rem 0 0 #efe8d6;
+}
+
+.gap {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--red-line);
+    border: 1px dashed var(--red-line);
+    padding: 0 0.3rem;
+}

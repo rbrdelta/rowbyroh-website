@@ -89,7 +89,10 @@ Shared vocabulary, composed per page:
 |------|------|--------|
 | `index.html` | Homepage / Navigation | Live — aperture + logbook |
 | `archive.html` | Archive / All Work | Live |
-| `research.html` | Research hub (Model Behavior) | Live — thesis + episode list |
+| `research.html` | Research hub — two tracks (Emotional Resonance, Model Behavior) | Live — shared thesis + per-track episode lists (`?drafts` shows drafts) |
+| `blog/emotional-resonance-intro.html` | Essay (Emotional Resonance EP00) | Live |
+| `drafts/hearing-test.html` | Essay (Emotional Resonance EP01) | Draft — Daniel's pass pending; move to `blog/` at publish |
+| `lab/scratch-paper.html` | Standalone companion (sound-lab viewer, own design) | Live, unlisted — linked from EP01 |
 | `about.html` | About | Live |
 | `colophon.html` | Colophon / System | Live |
 | `field-notes/conversation-sync.html` | Field Note 01 | Live |

@@ -9,7 +9,7 @@ const PAGES = [
     { name: 'about', url: '/about', ready: 'footer' },
     { name: 'archive', url: '/archive', ready: '#archive-list .archive-item' },
     { name: 'colophon', url: '/colophon', ready: '.closing-strip' },
-    { name: 'research', url: '/research', ready: '#research-list .archive-item' },
+    { name: 'research', url: '/research', ready: '.research-track .archive-item' },
     { name: 'fn-conversation-sync', url: '/field-notes/conversation-sync', ready: '#keep-reading .kr-all' },
     { name: 'fn-headless-parity', url: '/field-notes/headless-parity', ready: '#keep-reading .kr-all' },
     { name: 'fn-batch-approval', url: '/field-notes/batch-approval', ready: '#keep-reading .kr-all' },
@@ -20,6 +20,15 @@ const PAGES = [
     { name: 'rt-material-values', url: '/chair-roundtable/material-values', ready: '#keep-reading .kr-all' },
     { name: 'rt-build-process', url: '/chair-roundtable/build-process', ready: '#keep-reading .kr-all' },
 ];
+
+// Keep Reading picks are random in production; pin Math.random to a fixed
+// sequence so the snapshots stay deterministic.
+test.beforeEach(async ({ page }) => {
+    await page.addInitScript(() => {
+        let seed = 42;
+        Math.random = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
+    });
+});
 
 for (const p of PAGES) {
     test(`visual: ${p.name}`, async ({ page }) => {

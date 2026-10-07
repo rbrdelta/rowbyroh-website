@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotional Resonance EP01 — Hearing Test | rowbyroh</title>
+    <meta name="description" content="We are simply checking what elements of sound the ear can capture.">
+    <meta name="robots" content="noindex">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/writing.css">
+    <link rel="stylesheet" href="/assets/css/listen.css">
+</head>
+<body class="writing-page zone-research">
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="scroll-progress-inner" id="scrollProgressInner"></div>
+
+    <nav class="breadcrumb"><a href="/">rowbyroh</a><span class="sep">/</span><a href="/archive">all work</a></nav>
+
+    <div class="post-header">
+        <div class="post-meta"><a href="/research">Emotional Resonance EP01</a> &middot; October 2026</div>
+        <h1>Hearing Test</h1>
+        <p class="post-subtitle">We are simply checking what elements of sound the ear can capture.</p>
+    </div>
+
+    <article>
+
+    <p class="draft-legend">Draft review key: <span class="claude-text">highlighted text</span> was written by Claude, objectively, for you to keep, tweak or replace. Everything else is your own words, put in order, with grammar fixed. <span class="gap">gap</span> = a line only you can write.</p>
+
+    <p><em>Second in the series. <a href="/blog/emotional-resonance-intro">Episode 0</a> sets out the premise and the five steps; this episode covers steps 1 and 2.</em></p>
+
+    <div class="section-header"><span class="section-number zone-writing">01</span><h2>The question for this step</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p><span class="claude-text">Step 2 asks whether a model can listen accurately: when the sound changes, do the model&rsquo;s internal numbers change with it? It is not yet a test of whether the model detects fear. That is step 3.</span></p>
+
+    <p>We are simply checking what elements of sound the ear can capture.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">02</span><h2>Picking the model</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>I was open to exploring many models. We had discussed audio models like Gemini as well, but I thought it best to go straight to the source, to see if we can push the boundaries and see if any model can really "hear" music.</p>
+
+    <p><span class="claude-text">Two constraints narrowed the field. Claude, the model the Model Behavior track studied, takes no audio: its voice mode turns speech into text with a separate system, so the model never hears sound. And reading a model&rsquo;s internal numbers requires a model whose weights are open. Claude proposed two open models that take audio directly: Qwen2-Audio-7B-Instruct (Apache-2.0 license), tested first, and NVIDIA&rsquo;s Audio Flamingo Next, trained on more music, as the fallback (its license allows non-commercial, academic use). Both models&rsquo; &ldquo;ears&rdquo; (the audio encoder that turns sound into numbers) descend from Whisper, a speech-recognition system, so hearing music was a real question, not a formality. In the end, both models ran every test.</span></p>
+
+    <div class="section-header"><span class="section-number zone-writing">03</span><h2>Which sounds might carry fear</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>The cue list is just my idea of what constitutes a fearful sound, along with tone. There may be other elements that play a stronger or weaker part, but I don't know that yet. I see this as iterative: if we can hear these cues, and play music that matches these cues, and it doesn't flag fear, then we go back to the drawing board and re-examine the elements of fear. But I'd rather start with a premise than not start at all. I'm OK with being wrong, haha.</p>
+
+    <p><span class="claude-text">Four cues, one test each:</span></p>
+    <ul class="claude-text">
+        <li><strong>Major vs minor.</strong> The same chord or tune, with one or two notes a half-step lower in the minor version.</li>
+        <li><strong>Roughness.</strong> One held note whose loudness flutters either slowly (3&ndash;6 times a second) or fast (40&ndash;100 times a second). Research on human screams found that screams carry this fast flutter, in a range ordinary speech doesn&rsquo;t use <span class="gap">verify: Arnal et al., Current Biology, 2015</span>.</li>
+        <li><strong>Volume.</strong> The same eight loudness levels, visited either gradually, gliding in order, or in jumps with instant cuts. The first design changed both the range of loudness and how abruptly it changed; it was revised so the range stayed fixed and only the abruptness moved.</li>
+        <li><strong>Tempo.</strong> The same short note repeated at a resting-heartbeat pace (60&ndash;80 a minute) or a racing one (160&ndash;200 a minute).</li>
+    </ul>
+
+    <div class="section-header"><span class="section-number zone-writing">04</span><h2>How every test worked</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p><span class="claude-text">Each test used 144 clips generated in code. Everything was held fixed except the one cue being tested: the instrument, the clip length, the loudness, and the prompt played alongside the audio (&ldquo;Listen to this audio clip.&rdquo;). The clips were spread evenly across 12 notes or keys and two octaves, so pitch could not stand in for the answer.</span></p>
+
+    <p><span class="claude-text">The model never answered anything. Each clip passed through it once, and its internal numbers were recorded at the ears and at every layer after them. A simple detector then tried to sort the clips into the two groups: average one group&rsquo;s numbers, average the other&rsquo;s, draw a line between them. It was graded only on keys or notes it had never practised on. A coin flip scores 50%. The pass mark and the prediction for each test were written down before it ran, and every test began with a sound check: every clip had to register as different from silence. The code and clip generator are public at <a href="https://github.com/rbrdelta/sound-lab">github.com/rbrdelta/sound-lab</a>.</span></p>
+
+    <div class="section-header"><span class="section-number zone-writing">05</span><h2>Listen for yourself</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>The major/minor pairs were really difficult for me too.</p>
+
+    <figure class="chart listen">
+        <table class="data">
+            <thead>
+                <tr><th>Test</th><th>A sample of what the model heard</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Major vs minor</td><td><button type="button" class="play" data-src="/assets/audio/sound-ep1/chord-major.wav">major</button> <button type="button" class="play" data-src="/assets/audio/sound-ep1/chord-minor.wav">minor</button></td></tr>
+                <tr><td>Roughness</td><td><button type="button" class="play" data-src="/assets/audio/sound-ep1/flutter-slow.wav">slow flutter</button> <button type="button" class="play" data-src="/assets/audio/sound-ep1/flutter-fast.wav">fast flutter</button></td></tr>
+            </tbody>
+        </table>
+        <figcaption class="listen-note"><span class="claude-text">The exact files the models heard: 16 kHz, mono, loudness-matched, key of A. Headphones help.</span></figcaption>
+    </figure>
+
+    <div class="section-header"><span class="section-number zone-writing">06</span><h2>What happened</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <figure class="chart">
+        <table class="data">
+            <thead>
+                <tr><th>Test</th><th>My prediction</th><th>Qwen</th><th>Audio Flamingo</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Major vs minor, held chord</td><td>~60%; "won't do much better than Qwen"</td><td>39%</td><td>42%</td></tr>
+                <tr><td>Major vs minor, short tune</td><td>Better than a coin flip; over 60%</td><td>36%</td><td>34%</td></tr>
+                <tr><td>Roughness</td><td>"very visible"</td><td>100%</td><td>100%</td></tr>
+                <tr><td>Volume</td><td>70%</td><td>100%</td><td>100%</td></tr>
+                <tr><td>Tempo</td><td>100%</td><td>99%</td><td>100%</td></tr>
+            </tbody>
+        </table>
+        <figcaption class="listen-note">Detector accuracy at the model's ears, on keys or notes it never practised on. Coin flip = 50%. Predictions written down before each test ran.</figcaption>
+    </figure>
+
+    <p><span class="claude-text">Both models separated all three physical cues, roughness, volume and tempo, at 99&ndash;100% on notes they had never practised on. Both failed major vs minor, scoring below a coin flip on held chords and on short tunes.</span></p>
+
+    <p>After hearing the major/minor clips, my prediction would have been different, but that was a lesson in actually checking the samples first. Major vs minor was a good theory, but too subtle.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">07</span><h2>What it heard, and what it didn&rsquo;t</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p><span class="claude-text">Read with the same simple detector, the models&rsquo; ears appear to register which notes change and how high they are, but carry no shared sense of major vs minor. Within a single key, the internal numbers do shift when the middle note drops a half-step, but the shift points a different way in every key. A detector trained on 11 keys therefore points backwards on the 12th, which is why the scores came in below a coin flip rather than at it. This pattern appeared in all four major/minor runs, on both models, but it was not predicted in advance, so it is a lead rather than a finding. Relationships between notes beyond major vs minor were not tested.</span></p>
+
+    <p>We know it hears the note, so that's why we're proceeding to checking with music.</p>
+
+    <p class="listen-note">Want to go deeper? <a href="/lab/scratch-paper" target="_blank" rel="noopener">The scratch paper for every hearing-test run</a> (opens in a new tab): every clip as a dot, layer by layer, for both models.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">08</span><h2>Did we measure the right thing?</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>For roughness, volume and tempo: did we measure the right thing?</p>
+
+    <p><span class="claude-text">As a check, the answer key was shuffled at random while the model&rsquo;s readings stayed untouched. With shuffled labels, the detector fell to 49&ndash;52%, coin-flip level. With the real labels, it scored 99&ndash;100%. The detector succeeds only when the two groups reflect a real difference in what the model hears. The groups are named for what they literally are, fast vs slow flutter, jumping vs gradual loudness, fast vs relaxed tempo, rather than &ldquo;fear&rdquo; and &ldquo;calm&rdquo;: nothing in these tests knows about fear.</span></p>
+
+    <div class="section-header"><span class="section-number zone-writing">09</span><h2>What this doesn&rsquo;t show</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <ul class="claude-text">
+        <li>Hearing a cue is not feeling fear. That is step 3.</li>
+        <li>Every cue that passed is a high-intensity cue. Each fits excitement as well as fear, so the next step separates positive vs negative feeling from intensity.</li>
+        <li>The two groups in each passing test were far apart by design. Where the line falls between them was not tested.</li>
+        <li>Faster tempo also meant more notes and more total sound, so the tempo result cannot say which of those the model used.</li>
+        <li>Jumping loudness adds tiny clicks at each cut. They are part of what &ldquo;abrupt&rdquo; sounds like, but they are a separate cue.</li>
+    </ul>
+
+    <div class="section-header"><span class="section-number zone-writing">10</span><h2>Calibration</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>This is all a calibration exercise for me, because I don't know how accurate these models are. I'm building a register of what an LLM can do as well. So it'll fluctuate, and it's a learning process.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">11</span><h2>Up next</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>Fear and calm are next.</p>
+
+    <p><span class="claude-text">The next test uses real music: film-score clips that listeners have rated for fear, calm and other emotions. The set includes high-intensity music that is not negative, such as triumphant cues, so a detector that only reads intensity gets caught. Roughness, volume and tempo will then be mapped onto that music.</span></p>
+
+    </article>
+
+    <section id="keep-reading" class="keep-reading" aria-label="Keep reading"></section>
+
+    <div class="post-footer">
+        <p>Built with Claude.</p>
+    </div>
+
+    <footer>
+        <a href="mailto:daniel@rowbyroh.com">email</a> &middot;
+        <a href="https://discord.com/users/rbrdelta">discord</a> &middot;
+        <a href="https://github.com/rbrdelta">github</a> &middot;
+        <a href="https://linkedin.com/in/drohh">linkedin</a>
+        <a class="footer-colophon" href="/colophon">Colophon &mdash; how this site is built &rarr;</a>
+        <div style="margin-top: 0.5rem;">&copy; 2026 rowbyroh.com</div>
+    </footer>
+
+    <script src="/assets/js/listen.js"></script>
+    <script src="/assets/js/related.js"></script>
+    <script src="/assets/js/scroll.js"></script>
+</body>
+</html>

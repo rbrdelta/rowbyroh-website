@@ -27,6 +27,7 @@ test('zoneClass maps bodies of work to the design-system zones', () => {
     assert.equal(R.zoneClass({ type: 'roundtable' }), 'zone-roundtable');
     assert.equal(R.zoneClass({ type: 'essay' }), 'zone-writing');
     assert.equal(R.zoneClass({ type: 'essay', series: 'model-behavior' }), 'zone-research');
+    assert.equal(R.zoneClass({ type: 'essay', series: 'emotional-resonance' }), 'zone-research');
     assert.equal(R.zoneClass({ type: 'project' }), 'zone-portfolio');
     assert.equal(R.zoneClass({ type: 'unknown' }), 'zone-mono');
 });
@@ -86,4 +87,31 @@ test('buildHtml escapes interpolated content', () => {
     const html = R.buildHtml([{ url: '/x', type: 'essay', title: '<script>x</script>', description: 'a & b' }]);
     assert.ok(!html.includes('<script>x</script>'));
     assert.match(html, /&amp; b/);
+});
+
+// Seeded generator so the random order is reproducible in tests.
+function seeded(seed) {
+    return function () { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
+}
+
+test('picks after next-in-series are random, not newest-first', () => {
+    const orders = new Set();
+    for (let s = 1; s <= 20; s++) {
+        orders.add(R.pickRelated(FIXTURE, '/chair-roundtable/build-process', 5, seeded(s)).map(p => p.url).join());
+    }
+    assert.ok(orders.size > 1, 'different seeds should give different orders');
+});
+
+test('next-in-series stays first whatever the shuffle', () => {
+    for (let s = 1; s <= 20; s++) {
+        const picks = R.pickRelated(FIXTURE, '/chair-roundtable/ergonomic-intent', 3, seeded(s));
+        assert.equal(picks[0].url, '/chair-roundtable/material-values');
+    }
+});
+
+test('shared-tag picks still come before unrelated ones', () => {
+    for (let s = 1; s <= 20; s++) {
+        const picks = R.pickRelated(FIXTURE, '/field-notes/headless-parity', 3, seeded(s));
+        assert.equal(picks[0].url, '/blog/ai-pricing-market-maker');
+    }
 });
