@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotional Resonance EP01 — Hearing Test | rowbyroh</title>
+    <meta name="description" content="Can you hear me now?">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/writing.css">
+    <link rel="stylesheet" href="/assets/css/listen.css">
+</head>
+<body class="writing-page zone-research">
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="scroll-progress-inner" id="scrollProgressInner"></div>
+
+    <nav class="breadcrumb"><a href="/">rowbyroh</a><span class="sep">/</span><a href="/archive">all work</a></nav>
+
+    <div class="post-header">
+        <div class="post-meta"><a href="/research">Emotional Resonance EP01</a> &middot; October 2026</div>
+        <h1>Hearing Test</h1>
+        <p class="post-subtitle">&ldquo;Can you hear me now?&rdquo;</p>
+    </div>
+
+    <article>
+
+    <p><em>Emotional Resonance asks whether sound can reach a model&rsquo;s &ldquo;functional emotions&rdquo;: patterns of behavior modeled on human emotions, driven by the model&rsquo;s internal representations of emotions like fear, as described in <a href="https://transformer-circuits.pub/2026/emotions/index.html">Anthropic&rsquo;s research</a>. The term does not imply that the model experiences emotions.</em></p>
+
+    <div class="section-header"><span class="section-number zone-writing">01</span><h2>Intro</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>To learn about this experiment series, <a href="/blog/emotional-resonance-intro">start here</a>. This episode is about how we tested the hearing capabilities of audio-trained models.</p>
+
+    <p>Can a model actually hear various elements of sound? In order to test this, we needed the right tools for the job. The top three requirements, after discussing with Claude: first, it had to be trained on sound, not just converted to text; two, it had to be open source so that we could observe the model weights; and three, it had to be small enough that I could run it without breaking the bank with a rented GPU. In the end, Claude recommended Qwen2-Audio and Audio Flamingo, open-weight models specifically trained on hearing.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">02</span><h2>The experiment</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>The first experiment was testing whether a single chord, minor or major, could be detected. To avoid cheating or copying, we had to provide enough range of options so that each test could be unique. Based on these considerations, here&rsquo;s what we decided:</p>
+
+    <ul>
+        <li>144 clips, spread across 12 keys and 2 octaves, so pitch can&rsquo;t give away the answer.</li>
+        <li>The same length, loudness and instrument on every clip; only major vs minor changes.</li>
+        <li>A simple program (the detector) learns to sort the clips on 11 keys and is graded on the 12th.</li>
+        <li>Claude also ran shuffle tests, scrambling the answer key to make sure the results weren&rsquo;t an accident.</li>
+    </ul>
+
+    <div class="section-header"><span class="section-number zone-writing">03</span><h2>First test</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>In planning sessions, we had discussed using fear as our primary emotion that we wanted to replicate. And a known way to distinguish between something fearful and not is music in major and minor chords. It turns out the big problem was that I did not know a major versus a minor chord is the same chord, with just a half-step difference. The differences were so subtle, and I ignored Claude&rsquo;s suggestion to listen to the sample clips first, foolishly predicting 60% accuracy, better than a coin flip. I was way off. Qwen got it right only 39% of the time across 144 clips; Audio Flamingo, 42%. Even when we followed up, positing that a single chord was insufficient compared to a real-life tune and played four-second clips of major versus minor tunes, the results were no better: Qwen 36%, Audio Flamingo 34%.</p>
+
+    <figure class="chart listen">
+        <table class="data">
+            <tbody>
+                <tr><td>Major vs minor</td><td><button type="button" class="play" data-src="/assets/audio/sound-ep1/chord-major.wav">major</button> <button type="button" class="play" data-src="/assets/audio/sound-ep1/chord-minor.wav">minor</button></td></tr>
+            </tbody>
+        </table>
+        <figcaption class="listen-note">Can you tell the difference?</figcaption>
+    </figure>
+
+    <p>The redeeming factor from this test was the scratch paper. It showed us that even if we could not detect the subtle major versus minor changes, it did register a shift when the notes changed, so the tonal change is captured (more on that later).</p>
+
+    <p><em>If you want to see the inner workings of the model, here is the model&rsquo;s &ldquo;<a href="/lab/scratch-paper">scratch paper</a>&rdquo;.</em></p>
+
+    <div class="section-header"><span class="section-number zone-writing">04</span><h2>Intensity</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>Going back to the drawing board, I considered what makes the sound fearful to me. It was tone, along with volume and tempo, and the general roughness, as Claude put it, based on research from <a href="https://doi.org/10.1016/j.cub.2015.06.043">this study</a> (Arnal et al., <em>Current Biology</em>, 2015). Using these intensity elements, the listening tests passed with flying colors: they were nearly perfect in almost every range.</p>
+
+    <figure class="chart listen">
+        <table class="data">
+            <thead>
+                <tr><th>Test</th><th>The two groups</th><th>My prediction</th><th>Qwen</th><th>Audio Flamingo</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Roughness</td><td>One held note whose loudness flutters slowly (3&ndash;6 times a second) <button type="button" class="play" data-src="/assets/audio/sound-ep1/flutter-slow.wav">slow</button> or fast (40&ndash;100) <button type="button" class="play" data-src="/assets/audio/sound-ep1/flutter-fast.wav">fast</button></td><td>&ldquo;very visible&rdquo;</td><td>100%</td><td>100%</td></tr>
+                <tr><td>Volume</td><td>The same eight loudness levels, gliding in order or jumping with instant cuts</td><td>70%</td><td>100%</td><td>100%</td></tr>
+                <tr><td>Tempo</td><td>The same short note at 60&ndash;80 a minute or 160&ndash;200 a minute</td><td>100%</td><td>99%</td><td>100%</td></tr>
+            </tbody>
+        </table>
+        <figcaption class="listen-note">How often each model sorted the clips into the right group, on notes it hadn&rsquo;t heard during practice. Guessing scores 50%; with the answers scrambled, scores fell to about 50%.</figcaption>
+    </figure>
+
+    <p>Three limitations: the two groups in each test were far apart by design, so where the line between them falls wasn&rsquo;t tested. And faster tempo also meant more notes, so the tempo result can&rsquo;t say which of the two the model picked up on. And these tests show that the two groups sound different to the model, not that it has a single signal for tempo, roughness or volume.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">05</span><h2>Takeaways</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>So we learned that the model can&rsquo;t detect half-step changes in chords, but it does catch tonal changes, and can detect volume, tempo and roughness. Having captured these &ldquo;elements,&rdquo; now comes the true test of seeing if this will all come together. Real music won&rsquo;t have just major/minor chords. It won&rsquo;t register these intensity values all in the same direction, and high intensity does not necessarily equate to fear: as <a href="https://doi.org/10.1177/0305735610362821">the paper</a> shows, positive intensity equals happiness, negative intensity points to fear. So as we test real music clips, the next tests will show us what a fear register looks like in real life, and hopefully give us hints as to which elements truly represent fear as functional emotion.</p>
+
+    </article>
+
+    <section id="keep-reading" class="keep-reading" aria-label="Keep reading"></section>
+
+    <div class="post-footer">
+        <p>Built with Claude.</p>
+    </div>
+
+    <footer>
+        <a href="mailto:daniel@rowbyroh.com">email</a> &middot;
+        <a href="https://discord.com/users/rbrdelta">discord</a> &middot;
+        <a href="https://github.com/rbrdelta">github</a> &middot;
+        <a href="https://linkedin.com/in/drohh">linkedin</a>
+        <a class="footer-colophon" href="/colophon">Colophon &mdash; how this site is built &rarr;</a>
+        <div style="margin-top: 0.5rem;">&copy; 2026 rowbyroh.com</div>
+    </footer>
+
+    <script src="/assets/js/listen.js"></script>
+    <script src="/assets/js/related.js"></script>
+    <script src="/assets/js/scroll.js"></script>
+</body>
+</html>
