@@ -70,49 +70,18 @@
 
     <p>The major/minor pairs were really difficult for me too.</p>
 
-    <div class="listen-set" id="listen">
-        <p class="listen-note">These are the exact files the model heard: 16 kHz, mono, loudness-matched. All in the key of A. Headphones help.</p>
-
-        <div class="listen-pair" data-target="minor" data-target-label="minor">
-            <h3>Major vs minor — held chord</h3>
-            <p class="listen-q">Same chord, middle note a half-step apart.</p>
-            <audio data-name="major" src="/assets/audio/sound-ep1/chord-major.wav"></audio>
-            <audio data-name="minor" src="/assets/audio/sound-ep1/chord-minor.wav"></audio>
-            <div class="listen-reveal" hidden><span class="listen-verdict"></span> The detector reading the model's ears, on keys it never practised on: Qwen 39%, Audio Flamingo 42%.</div>
-        </div>
-
-        <div class="listen-pair" data-target="minor" data-target-label="minor">
-            <h3>Major vs minor — short tune</h3>
-            <p class="listen-q">Same 8-note tune; minor lowers two notes a half-step.</p>
-            <audio data-name="major" src="/assets/audio/sound-ep1/tune-major.wav"></audio>
-            <audio data-name="minor" src="/assets/audio/sound-ep1/tune-minor.wav"></audio>
-            <div class="listen-reveal" hidden><span class="listen-verdict"></span> Qwen 36%, Audio Flamingo 34%.</div>
-        </div>
-
-        <div class="listen-pair" data-target="fast" data-target-label="the fast flutter">
-            <h3>Roughness</h3>
-            <p class="listen-q">One held note; the loudness swings 4.5 or 70 times a second.</p>
-            <audio data-name="slow" src="/assets/audio/sound-ep1/flutter-slow.wav"></audio>
-            <audio data-name="fast" src="/assets/audio/sound-ep1/flutter-fast.wav"></audio>
-            <div class="listen-reveal" hidden><span class="listen-verdict"></span> Qwen 100%, Audio Flamingo 100%.</div>
-        </div>
-
-        <div class="listen-pair" data-target="jumping" data-target-label="the jumping loudness">
-            <h3>Volume</h3>
-            <p class="listen-q">The same 8 loudness levels, visited in order with glides, or out of order with cuts.</p>
-            <audio data-name="gradual" src="/assets/audio/sound-ep1/volume-gradual.wav"></audio>
-            <audio data-name="jumping" src="/assets/audio/sound-ep1/volume-jumping.wav"></audio>
-            <div class="listen-reveal" hidden><span class="listen-verdict"></span> Qwen 100%, Audio Flamingo 100%.</div>
-        </div>
-
-        <div class="listen-pair" data-target="fast" data-target-label="the fast tempo">
-            <h3>Tempo</h3>
-            <p class="listen-q">The same short note repeated 70 or 180 times a minute.</p>
-            <audio data-name="relaxed" src="/assets/audio/sound-ep1/tempo-relaxed.wav"></audio>
-            <audio data-name="fast" src="/assets/audio/sound-ep1/tempo-fast.wav"></audio>
-            <div class="listen-reveal" hidden><span class="listen-verdict"></span> Qwen 99%, Audio Flamingo 100%.</div>
-        </div>
-    </div>
+    <figure class="chart listen">
+        <table class="data">
+            <thead>
+                <tr><th>Test</th><th>A sample of what the model heard</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Major vs minor</td><td><button type="button" class="play" data-src="/assets/audio/sound-ep1/chord-major.wav">major</button> <button type="button" class="play" data-src="/assets/audio/sound-ep1/chord-minor.wav">minor</button></td></tr>
+                <tr><td>Roughness</td><td><button type="button" class="play" data-src="/assets/audio/sound-ep1/flutter-slow.wav">slow flutter</button> <button type="button" class="play" data-src="/assets/audio/sound-ep1/flutter-fast.wav">fast flutter</button></td></tr>
+            </tbody>
+        </table>
+        <figcaption class="listen-note"><span class="claude-text">The exact files the models heard: 16 kHz, mono, loudness-matched, key of A. Headphones help.</span></figcaption>
+    </figure>
 
     <div class="section-header"><span class="section-number zone-writing">06</span><h2>What happened</h2></div>
     <div class="section-underline zone-writing"></div>
@@ -144,7 +113,7 @@
 
     <p>We know it hears the note, so that's why we're proceeding to checking with music.</p>
 
-    <p class="listen-note">Want to go deeper? <a href="/demos/scratch-paper">The scratch paper for every hearing-test run</a>: every clip as a dot, layer by layer, for both models.</p>
+    <p class="listen-note">Want to go deeper? <a href="/scratch-paper">The scratch paper for every hearing-test run</a>: every clip as a dot, layer by layer, for both models.</p>
 
     <div class="section-header"><span class="section-number zone-writing">08</span><h2>Did we measure the right thing?</h2></div>
     <div class="section-underline zone-writing"></div>

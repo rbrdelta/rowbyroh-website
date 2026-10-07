@@ -34,7 +34,7 @@ const pages = walk(ROOT).map(p => relative(ROOT, p)).sort();
 // Content pages = anything under field-notes/, blog/, chair-roundtable/.
 const isContentPage = (rel) => /^(field-notes|blog|chair-roundtable)\//.test(rel);
 // Top-level pages allowed to carry supplemental inline <style> blocks.
-const INLINE_STYLE_OK = new Set(['about.html', 'colophon.html', 'demos/scratch-paper.html']);
+const INLINE_STYLE_OK = new Set(['about.html', 'colophon.html', 'scratch-paper.html']);
 
 const vercel = JSON.parse(readFileSync(join(ROOT, 'vercel.json'), 'utf8'));
 const redirects = (vercel.redirects || []).map(r => r.source.replace(/\/$/, ''));
