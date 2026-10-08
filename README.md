@@ -1,43 +1,17 @@
 # rowbyroh.com
 
-Personal portfolio website showcasing my work and projects.
+Source for [rowbyroh.com](https://rowbyroh.com): research on how people and AI models
+interact, plus field notes on building with Claude Code.
 
-## 🚀 Live Site
-[rowbyroh.com](https://rowbyroh.com)
+- **Research:** [rowbyroh.com/research](https://rowbyroh.com/research) — the Emotional Resonance
+  (sound) and Model Behavior series. Experiment code: [sound-lab](https://github.com/rbrdelta/sound-lab).
+- **Field notes:** [rowbyroh.com/archive?tag=field-notes](https://rowbyroh.com/archive?tag=field-notes)
+- **How the site is built:** [rowbyroh.com/colophon](https://rowbyroh.com/colophon)
 
-## 💻 Local Development
+Static HTML, CSS and vanilla JS on Vercel. Content index lives in `assets/data/content.json`.
+
 ```bash
-git clone git@github.com:YOUR_USERNAME/rowbyroh-website.git
-cd rowbyroh-website
-# Open with Live Server in VS Code
-
-🔧 Tech Stack
-Frontend: HTML5, CSS3
-Hosting: Vercel
-Domain: Custom domain via Hover
-Version Control: Git/GitHub
-
-📁 Project Structure
-rowbyroh-website/
-├── index.html          # Main homepage
-├── assets/
-│   └── css/
-│       └── style.css   # Stylesheet
-├── docs/               # Documentation
-├── .gitignore         # Git ignore rules
-├── package.json       # Project configuration
-└── README.md          # This file
-
-🚀 Deployment
-Automatically deploys to Vercel on push to main branch
-Custom domain configured: rowbyroh.com
-
-📝 Future Plans
-Add backend functionality
-Implement contact form
-Add project showcase section
-
-🛠️ Development
-Built with modern HTML/CSS
-Responsive design
-Clean, minimal aesthetic
+npm test            # unit tests
+npm run ship        # full pre-push gate (structural, visual, voice)
+./scripts/verify.sh # post-deploy check against the live site
+```

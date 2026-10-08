@@ -119,7 +119,7 @@ Full spec: `design/IA-SCHEMA.md`. Summary:
 - **One listing page:** `/archive` — all published content, filterable by tag
 - **Breadcrumb (every content page):** `rowbyroh / all work` → `/` and `/archive`
 - **Keep Reading (every content page):** `#keep-reading` deep-dive module — next-in-series, related-by-tag, recent, and "See all work". No leaf is a dead end.
-- **Redirects (`vercel.json`):** `/writing → /archive`, `/chair-roundtable →` first episode, `/drafts/* → 404`
+- **Redirects (`vercel.json`):** `/field-notes → /archive?tag=field-notes` (resumes link it), `/writing → /archive`, `/chair-roundtable →` first episode, `/drafts/* → 404`
 - **Homepage tag filters:** `field-notes`, `infrastructure`, `AI`, `design`
 
 ## Testing — the Ship Gate

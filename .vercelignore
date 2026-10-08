@@ -1,0 +1,15 @@
+# Repo-internal files: never deploy. Pages only reference design/screenshots/.
+CLAUDE.md
+README.md
+package.json
+package-lock.json
+node_modules
+.claude
+.github
+source-content
+scripts
+tests
+test-results
+design/*.md
+design/*.js
+assets/data/graph-data.js

@@ -124,6 +124,19 @@ check_redirect() {
 
 check_redirect "/writing" "/archive"
 check_redirect "/chair-roundtable" "/chair-roundtable/ergonomic-intent"
+# Resumes in circulation link /field-notes — it must keep resolving.
+check_redirect "/field-notes" "/archive?tag=field-notes"
+
+# Repo-internal files must stay out of the deploy (.vercelignore).
+for path in /CLAUDE.md /README.md /source-content/draft-deadweight.md /design/VOICE-FINGERPRINT.md \
+            /scripts/verify.sh /tests/gate-a.mjs /.github/workflows/ship-gate.yml /assets/data/graph-data.js; do
+    status=$(curl -s -o /dev/null -w "%{http_code}" "${SITE}${path}")
+    if [[ "$status" == "404" ]]; then
+        pass "$path not served ($status)"
+    else
+        fail "$path is publicly served ($status)"
+    fi
+done
 
 # --- 5. Internal links (content.json) ---
 echo ""
