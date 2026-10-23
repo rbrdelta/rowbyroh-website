@@ -48,6 +48,14 @@ PAGES=(
     "/field-notes/headless-parity"
     "/field-notes/batch-approval"
     "/field-notes/memory-and-the-live-channel"
+    "/blog/depth-not-breadth"
+    "/blog/emotional-resonance-intro"
+    "/blog/hearing-test"
+    "/lab/scratch-paper"
+    "/assets/audio/sound-ep1/chord-major.wav"
+    "/assets/audio/sound-ep1/chord-minor.wav"
+    "/assets/audio/sound-ep1/flutter-slow.wav"
+    "/assets/audio/sound-ep1/flutter-fast.wav"
 )
 
 for page in "${PAGES[@]}"; do
@@ -91,6 +99,12 @@ check_title "/blog/cost-of-verification" "blog/cost-of-verification.html"
 check_title "/chair-roundtable/ergonomic-intent" "chair-roundtable/ergonomic-intent.html"
 check_title "/chair-roundtable/material-values" "chair-roundtable/material-values.html"
 check_title "/chair-roundtable/build-process" "chair-roundtable/build-process.html"
+check_title "/blog/depth-not-breadth" "blog/depth-not-breadth.html"
+check_title "/blog/emotional-resonance-intro" "blog/emotional-resonance-intro.html"
+check_title "/blog/hearing-test" "blog/hearing-test.html"
+check_title "/lab/scratch-paper" "lab/scratch-paper.html"
+check_title "/archive" "archive.html"
+check_title "/colophon" "colophon.html"
 
 # --- 3. Deploy commit matches origin/main ---
 echo ""
@@ -183,6 +197,10 @@ for link in $ext_links; do
     elif [[ "$status" == "999" ]]; then
         # LinkedIn blocks automated requests
         warn "$link ($status — likely bot-blocked, manual check needed)"
+    elif [[ "$status" == "403" && "$link" == https://doi.org/* ]] && \
+         [[ "$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 "$link")" == 30* ]]; then
+        # The DOI resolves; the publisher's page refuses automated requests.
+        warn "$link (DOI resolves; publisher blocks automated requests — manual check needed)"
     elif [[ "$status" == "timeout" ]]; then
         warn "$link (timeout)"
     else

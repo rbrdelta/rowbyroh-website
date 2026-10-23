@@ -3,6 +3,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
+import { readFileSync } from 'node:fs';
 const require = createRequire(import.meta.url);
 const R = require('../assets/js/related.js');
 
@@ -113,5 +114,44 @@ test('shared-tag picks still come before unrelated ones', () => {
     for (let s = 1; s <= 20; s++) {
         const picks = R.pickRelated(FIXTURE, '/field-notes/headless-parity', 3, seeded(s));
         assert.equal(picks[0].url, '/blog/ai-pricing-market-maker');
+    }
+});
+
+test('a status:draft entry is left out even if it is not marked unpublished', () => {
+    const all = [...FIXTURE, { id: 'd2', title: 'Half-done', type: 'essay', url: '/blog/half', tags: ['AI'], status: 'draft' }];
+    for (const item of FIXTURE.filter(i => i.published)) {
+        assert.ok(!R.pickRelated(all, item.url, 10).some(p => p.url === '/blog/half'), item.url);
+    }
+});
+
+test('itemTime uses the last event date, then falls back to the display date', () => {
+    assert.equal(R.itemTime({ events: [{ date: '2026-01-01' }, { date: '2026-02-01' }] }), Date.parse('2026-02-01'));
+    assert.equal(R.itemTime({ date: 'Mar 2026' }), Date.parse('Mar 2026'));
+    assert.equal(R.itemTime({ date: 'someday' }), 0);
+});
+
+test('a trailing slash on the current url still finds the page', () => {
+    const picks = R.pickRelated(FIXTURE, '/chair-roundtable/ergonomic-intent/', 3);
+    assert.equal(picks[0].url, '/chair-roundtable/material-values');
+});
+
+// The real data: every series reads forward, episode by episode.
+const REAL = JSON.parse(readFileSync(new URL('../assets/data/content.json', import.meta.url), 'utf8'));
+
+test('real content.json: each episode in every series offers the next episode first', () => {
+    const live = REAL.filter(i => i.published && i.status !== 'draft' && i.series);
+    const bySeries = {};
+    for (const i of live) (bySeries[i.series] = bySeries[i.series] || []).push(i);
+    assert.ok(Object.keys(bySeries).length >= 4, 'expected the four series');
+    for (const [series, eps] of Object.entries(bySeries)) {
+        // Episode order = the number in the title (EP00, 01, 02 ...).
+        eps.sort((a, b) => Number(a.title.match(/(\d+) —/)[1]) - Number(b.title.match(/(\d+) —/)[1]));
+        for (let n = 0; n < eps.length - 1; n++) {
+            const first = R.pickRelated(REAL, eps[n].url, 3)[0];
+            assert.equal(first.url, eps[n + 1].url, `${series}: after ${eps[n].title}`);
+            assert.equal(first._label, 'next in this series');
+        }
+        const last = R.pickRelated(REAL, eps[eps.length - 1].url, 3);
+        assert.ok(!last.some(p => p._label === 'next in this series'), `${series}: last episode has no next`);
     }
 });

@@ -94,6 +94,7 @@ for (const rel of pages) {
         ...attrs(html, /<link[^>]+href="([^"]+)"/g),
         ...attrs(html, /<script[^>]+src="([^"]+)"/g),
         ...attrs(html, /<img[^>]+src="([^"]+)"/g),
+        ...attrs(html, /<button[^>]+data-src="([^"]+)"/g), // audio clips played by listen.js
     ].filter(u => !/^https?:|^mailto:|^data:|^#/.test(u));
     for (const u of refs) {
         const target = u.startsWith('/') ? join(ROOT, u) : resolve(dir, u);

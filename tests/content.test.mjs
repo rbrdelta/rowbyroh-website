@@ -2,7 +2,7 @@
 // Run: node --test tests/content.test.mjs
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -63,5 +63,47 @@ test('highlights, when present, are a non-empty string array', () => {
             assert.ok(Array.isArray(e.highlights) && e.highlights.length > 0, `${e.id} bad highlights`);
             for (const h of e.highlights) assert.equal(typeof h, 'string');
         }
+    }
+});
+
+// Series slot rules (design/IA-SCHEMA.md 2.1): the tab title is the content.json
+// title + " | rowbyroh", and the post-meta series label links to its body of work.
+const SERIES_ROUTE = {
+    'model-behavior': '/research',
+    'emotional-resonance': '/research',
+    'field-notes': '/archive?tag=field-notes',
+    'chair-roundtable': '/archive?tag=roundtable',
+};
+const pageFile = (url) => join(ROOT, url.slice(1) + '.html');
+
+test('every series member: tab title matches content.json, post-meta links to its body of work', () => {
+    for (const e of content.filter(e => e.published && e.series)) {
+        assert.ok(SERIES_ROUTE[e.series], `${e.id}: series "${e.series}" has no body-of-work route`);
+        const html = readFileSync(pageFile(e.url), 'utf8');
+        assert.equal(html.match(/<title>([^<]+)<\/title>/)[1], `${e.title} | rowbyroh`, `${e.id} tab title`);
+        const meta = html.match(/class="post-meta"><a href="([^"]+)">([^<]+)<\/a>/);
+        assert.ok(meta, `${e.id} has no series label in post-meta`);
+        assert.equal(meta[1], SERIES_ROUTE[e.series], `${e.id} post-meta link`);
+        assert.ok(e.title.startsWith(meta[2] + ' — '), `${e.id}: post-meta "${meta[2]}" does not lead the title`);
+    }
+});
+
+test('exactly one published entry is the default homepage feature', () => {
+    const defaults = content.filter(e => e.published && (e.featured_for || []).includes('default'));
+    assert.equal(defaults.length, 1, defaults.map(e => e.id).join(', '));
+});
+
+test('every homepage tag filter matches at least one published entry', () => {
+    const home = readFileSync(join(ROOT, 'index.html'), 'utf8');
+    const tags = [...home.matchAll(/class="tag-filter" data-tag="([^"]+)"/g)].map(m => m[1]);
+    assert.ok(tags.length > 0);
+    for (const t of tags) {
+        assert.ok(content.some(e => e.published && e.tags.includes(t)), `filter "${t}" would show nothing`);
+    }
+});
+
+test('an unpublished entry has no page at a live path (it lives under drafts/)', () => {
+    for (const e of content.filter(e => !e.published)) {
+        assert.ok(!existsSync(pageFile(e.url)), `${e.url} is unpublished but ${e.url}.html would be served`);
     }
 });

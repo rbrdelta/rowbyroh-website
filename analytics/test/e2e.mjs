@@ -64,6 +64,55 @@ const c = await newContext(browser);
 const pc = await c.newPage();
 await pc.goto(`${SITE}/`);
 await sleep(1000);
+
+// Visitor D: link and button kinds, an audio play, and a new session after a 30-minute gap.
+const d = await newContext(browser);
+const pd = await d.newPage();
+await pd.goto(`${SITE}/about`);
+await sleep(300);
+await pd.evaluate(() => {
+  for (const sel of ['.contact-list a[href*="github.com"]', '.contact-list a[href*="linkedin.com"]', 'footer a[href="/colophon"], a[href^="/"]']) {
+    const l = document.querySelector(sel);
+    l.addEventListener('click', (e) => e.preventDefault(), { once: true });
+    l.click();
+  }
+});
+await pd.goto(`${SITE}/blog/hearing-test`);
+await sleep(300);
+await pd.locator('button.play[data-src]').first().click();
+// The EP01 buttons play through a detached Audio object, which the tracker's play listener
+// can't hear (see Gaps in the capabilities file); an <audio> element in the page is heard.
+await pd.evaluate(() => {
+  const el = document.createElement('audio');
+  el.src = '/assets/audio/sound-ep1/flutter-slow.wav';
+  document.querySelector('article').appendChild(el);
+  return el.play().catch(() => {});
+});
+await sleep(500);
+const vidD = await pd.evaluate(() => localStorage.getItem('rbr_vid'));
+const sessD = await pd.evaluate(() => JSON.parse(localStorage.getItem('rbr_sess')).id);
+await pd.evaluate(() => { const s = JSON.parse(localStorage.getItem('rbr_sess')); s.last -= 31 * 60 * 1000; localStorage.setItem('rbr_sess', JSON.stringify(s)); });
+await pd.goto(`${SITE}/archive`);
+await sleep(800);
+
+// Visitor E: opts out, then back in with ?notrack=0.
+const e = await newContext(browser);
+const pe = await e.newPage();
+await pe.goto(`${SITE}/?notrack=1`);
+await pe.goto(`${SITE}/?notrack=0`);
+await sleep(300);
+check(!pe.url().includes('notrack'), 'notrack flag removed from the address bar');
+await pe.goto(`${SITE}/archive`);
+await sleep(800);
+const vidE = await pe.evaluate(() => localStorage.getItem('rbr_vid'));
+
+// Visitor F: a localhost visit without the test override sends nothing (Daniel's own local runs stay out).
+const f = await browser.newContext();
+const pf = await f.newPage();
+await pf.goto(`${SITE}/`);
+await sleep(500);
+const vidF = await pf.evaluate(() => localStorage.getItem('rbr_vid'));
+
 await browser.close();
 await sleep(500);
 
@@ -91,8 +140,27 @@ check(!!leave && leave.depth === 100 && leave.active_ms > 0, `leave event with d
 
 console.log('\nOther visitors');
 check(!rows.some((r) => r.visitor_id === vidB) && vidB === null, 'opted-out browser sent nothing');
-const C = rows.filter((r) => r.visitor_id !== vid && r.type === 'pageview');
+const C = rows.filter((r) => ![vid, vidD, vidE].includes(r.visitor_id) && r.type === 'pageview');
 check(C.length === 1 && C[0].new_visitor === 1 && C[0].path === '/', 'second browser counted as a separate new visitor');
+
+const E = rows.filter((r) => r.visitor_id === vidE && r.type === 'pageview');
+check(E.map((r) => r.path).join(',') === '/,/archive', `opting back in with ?notrack=0 resumes tracking from that page on (${E.map((r) => r.path).join(',')})`);
+check(vidF === null, 'a local visit without the test override sends nothing');
+
+console.log('\nLink kinds, buttons, plays, sessions');
+const D = rows.filter((r) => r.visitor_id === vidD);
+const labels = D.filter((r) => r.type === 'click').map((r) => r.label);
+check(['github', 'linkedin', 'internal'].every((l) => labels.includes(l)), `click labels: ${labels.join(',')}`);
+const internal = D.find((r) => r.type === 'click' && r.label === 'internal');
+check(!!internal && internal.target.startsWith('/'), `internal click keeps only the path (${internal && internal.target})`);
+const btn = D.find((r) => r.type === 'action' && r.label === 'button');
+check(!!btn && btn.path === '/blog/hearing-test' && btn.target === 'major', `button press recorded with its text (${btn && btn.target})`);
+const play = D.find((r) => r.type === 'action' && r.label === 'play');
+check(!!play && play.target === 'flutter-slow.wav' && play.area === 'article', `audio element play recorded with file name and area (${play && play.target})`);
+const dViews = D.filter((r) => r.type === 'pageview');
+const after = dViews[dViews.length - 1];
+check(after && after.path === '/archive' && after.session_id !== sessD && after.seq === 1 && after.prev_path === null,
+  'after 30 minutes idle the next page view starts a new session at step 1');
 
 console.log(fails ? `\nE2E FAILED (${fails})` : '\nE2E PASSED');
 process.exit(fails ? 1 : 0);

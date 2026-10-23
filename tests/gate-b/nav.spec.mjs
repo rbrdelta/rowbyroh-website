@@ -1,17 +1,12 @@
 // Gate B — functional / e2e. Navigation integrity, no dead ends, JS rendering.
 import { test, expect } from '@playwright/test';
+import { readFileSync } from 'node:fs';
 
-const CONTENT_PAGES = [
-    '/field-notes/conversation-sync',
-    '/field-notes/headless-parity',
-    '/field-notes/batch-approval',
-    '/field-notes/memory-and-the-live-channel',
-    '/blog/an-earned-null',
-    '/blog/cost-of-verification',
-    '/chair-roundtable/ergonomic-intent',
-    '/chair-roundtable/material-values',
-    '/chair-roundtable/build-process',
-];
+// Every published content page, read from content.json so a new page is covered
+// the day it is registered (the list used to be typed out and fell behind).
+const CONTENT_PAGES = JSON.parse(readFileSync(new URL('../../assets/data/content.json', import.meta.url), 'utf8'))
+    .filter((e) => e.published)
+    .map((e) => e.url);
 
 test('homepage renders aperture + logbook from content.json with no console errors', async ({ page }) => {
     const errors = [];
