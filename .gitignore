@@ -37,4 +37,4 @@ Thumbs.db
 test-results/
 playwright-report/
 tests/gate-c/.audit-input.txt
-tests/gate-c/runs.jsonl
+tests/gate-c/runs.jsonl.wrangler/
