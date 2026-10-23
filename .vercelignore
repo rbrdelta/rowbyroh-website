@@ -13,3 +13,4 @@ test-results
 design/*.md
 design/*.js
 assets/data/graph-data.js
+analytics

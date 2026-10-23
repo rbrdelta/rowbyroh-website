@@ -13,13 +13,19 @@
     "gate:b:update": "playwright test --config tests/gate-b/playwright.config.mjs --update-snapshots",
     "gate:c": "node tests/gate-c/run-gate-c.mjs",
     "ship": "bash scripts/ship.sh",
-    "verify": "bash scripts/verify.sh"
+    "verify": "bash scripts/verify.sh",
+    "analytics:verify": "bash analytics/verify.sh",
+    "analytics:report": "node analytics/scripts/report.mjs"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:rbrdelta/rowbyroh-website.git"
   },
-  "keywords": ["portfolio", "website", "personal"],
+  "keywords": [
+    "portfolio",
+    "website",
+    "personal"
+  ],
   "author": "rowbyroh",
   "license": "MIT",
   "devDependencies": {}

@@ -153,6 +153,13 @@ for (const rel of pages) {
         ? pass(`${rel} has <title>`) : fail(`${rel} missing <title>`);
 }
 
+// ---- 8. Every page loads the visit tracker -----------------------------
+head('8. Visit tracker present (assets/js/track.js)');
+for (const rel of pages) {
+    /<script src="\/assets\/js\/track\.js" defer><\/script>/.test(readFileSync(join(ROOT, rel), 'utf8'))
+        ? pass(`${rel} loads track.js`) : fail(`${rel} missing track.js (visits to it go unrecorded)`);
+}
+
 // ---- Summary -----------------------------------------------------------
 console.log(`\n${'='.repeat(40)}`);
 console.log(`Gate A: ${PASS} ok, ${WARN} warn, ${FAIL} fail   (${pages.length} pages)`);

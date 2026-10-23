@@ -1,0 +1,11 @@
+{
+  "name": "rowbyroh-analytics",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-10-01",
+  "account_id": "47c2b77ffaacdc3fd03bf41c8248bd20",
+  "workers_dev": true,
+  "d1_databases": [
+    { "binding": "DB", "database_name": "rowbyroh-analytics", "database_id": "9b73c340-ae4b-469a-a0ff-3bec6bddf768" }
+  ],
+  "vars": { "ALLOW_LOCAL": "false" }
+}

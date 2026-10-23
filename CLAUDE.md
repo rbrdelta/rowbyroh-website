@@ -143,6 +143,10 @@ After the push lands, run `./scripts/verify.sh` (or `npm run verify`) — checks
 content.json URLs, external links, clean working tree. (Gates A/B/C are
 pre-deploy; verify.sh is post-deploy.)
 
+## Visit Analytics
+
+Every live page loads `assets/js/track.js` (Gate A section 8 enforces it). Events go to a Cloudflare Worker + D1 database in `analytics/` (excluded from the Vercel deploy). Report: `npm run analytics:report`. Verify after changing the tracker or collector: `npm run analytics:verify`. Details: `analytics/README.md`.
+
 ## Known Gaps
 
 - **Phase D pending:** SVG diagram sprints (D1-D4). Sprint script at `~/.claude/hooks/sprint-d1.sh`. Full spec in vault note `rowbyroh — Homepage Redesign Plan (Aperture + Logbook)`.
