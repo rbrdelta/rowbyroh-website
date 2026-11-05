@@ -80,14 +80,7 @@ await pd.evaluate(() => {
 await pd.goto(`${SITE}/blog/hearing-test`);
 await sleep(300);
 await pd.locator('button.play[data-src]').first().click();
-// The EP01 buttons play through a detached Audio object, which the tracker's play listener
-// can't hear (see Gaps in the capabilities file); an <audio> element in the page is heard.
-await pd.evaluate(() => {
-  const el = document.createElement('audio');
-  el.src = '/assets/audio/sound-ep1/flutter-slow.wav';
-  document.querySelector('article').appendChild(el);
-  return el.play().catch(() => {});
-});
+// The EP01 button plays through an <audio> element kept in the page, so the tracker hears it.
 await sleep(500);
 const vidD = await pd.evaluate(() => localStorage.getItem('rbr_vid'));
 const sessD = await pd.evaluate(() => JSON.parse(localStorage.getItem('rbr_sess')).id);
@@ -156,7 +149,7 @@ check(!!internal && internal.target.startsWith('/'), `internal click keeps only 
 const btn = D.find((r) => r.type === 'action' && r.label === 'button');
 check(!!btn && btn.path === '/blog/hearing-test' && btn.target === 'major', `button press recorded with its text (${btn && btn.target})`);
 const play = D.find((r) => r.type === 'action' && r.label === 'play');
-check(!!play && play.target === 'flutter-slow.wav' && play.area === 'article', `audio element play recorded with file name and area (${play && play.target})`);
+check(!!play && play.target === 'chord-major.wav' && play.area === 'article', `EP01 clip play recorded with file name and area (${play && play.target}, ${play && play.area})`);
 const dViews = D.filter((r) => r.type === 'pageview');
 const after = dViews[dViews.length - 1];
 check(after && after.path === '/archive' && after.session_id !== sessD && after.seq === 1 && after.prev_path === null,

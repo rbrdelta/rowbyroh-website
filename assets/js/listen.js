@@ -15,6 +15,8 @@
     document.querySelectorAll('button.play[data-src]').forEach(function (button) {
         var audio = new Audio();
         audio.preload = 'none';
+        // Kept in the page (no controls, so nothing shows) so the analytics tracker's play listener hears it.
+        button.parentNode.insertBefore(audio, button.nextSibling);
         button.setAttribute('aria-pressed', 'false');
         audio.addEventListener('ended', function () { if (current && current.audio === audio) stop(); });
         button.addEventListener('click', function () {
