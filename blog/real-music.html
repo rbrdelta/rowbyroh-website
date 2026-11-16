@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/assets/css/base.css">
     <link rel="stylesheet" href="/assets/css/writing.css">
     <link rel="stylesheet" href="/assets/css/listen.css">
+    <link rel="stylesheet" href="/assets/css/ep02.css">
     <script src="/assets/js/track.js" defer></script>
 </head>
 <body class="writing-page zone-research">
@@ -53,6 +54,10 @@
 
     <p>My prediction going in: over half right, because &ldquo;I assume the model understands fear as a concept already&rdquo;, and at least 70% if these models had Claude-like training.</p>
 
+    <figure class="chart" data-ep02="clip">
+        <figcaption><span class="claude-text">One clip through the model. Left: how listeners in the study rated it on each emotion. Right: how strongly the model&rsquo;s internal numbers line up with each of the five emotion arrows over the whole clip; the strongest is the model&rsquo;s pick (the model itself never answers). Below: the same reading, half a second at a time, shown as each emotion against the average of the five at that moment, so a red cell means that emotion leads there. The clips themselves can&rsquo;t be played here; the film audio isn&rsquo;t ours to share.</span></figcaption>
+    </figure>
+
     <div class="section-header"><span class="section-number zone-writing">03</span><h2>Can it tell the emotions apart?</h2></div>
     <div class="section-underline zone-writing"></div>
 
@@ -73,11 +78,19 @@
 
     <p><span class="claude-text">Happy vs sad: Qwen made the mark, Audio Flamingo missed it by one clip. Loudness alone scored 30, as well as either model, so this check on its own cannot separate emotion from volume. Happy vs fear: both models beat loudness alone by three to five clips, and scrambled labels did as well only 0.3% (Qwen) and 0.8% (Audio Flamingo) of the time. Tender vs sad, the quiet pair, was the hardest for both.</span></p>
 
+    <figure class="chart" data-ep02="luck">
+        <figcaption><span class="claude-text">What luck looks like. Each gray bar counts how many of 1,000 runs with the emotion labels scrambled got that many clips right (best layer picked again each time, as in the real test). The red line is the model&rsquo;s real score, the dashed line what loudness alone scores, the dotted line the pass mark set in advance. A real score far to the right of the gray is hard to get by luck.</span></figcaption>
+    </figure>
+
     <p>I&rsquo;m good with the results, and with saying Audio Flamingo missed it by a clip, because the other readings will be more telling. Not enough reason to dismiss Audio Flamingo yet. Over all these steps, the larger takeaway is that we need more samples. 40 clips are a starting point, not a definitive readout of what these models can do. Tender vs sad is more subtle and seems harder for the models to distinguish.</p>
 
     <p>On all five: if the randomness test says the top 5% reached 32, then near 50 is a significant improvement, even if it&rsquo;s below my optimistic mark. And if loudness alone is at 32, that gives confidence that it&rsquo;s carrying something beyond that, which we can pull apart more.</p>
 
     <p><span class="claude-text">Most of the mistakes were swaps inside a pair: fear and anger traded places 11 times, sad and tender 13 times (Qwen). Happy was the hardest to pick out: 6 of 20 happy clips were read as sad.</span> Sad was never confused for happy, but happy was confused for sad, so happy needs more teasing out, because content and excitement could both be related to happy, but at different loudness values. <span class="gap">Claude&rsquo;s flag: Qwen read 1 sad clip as happy, so &ldquo;almost never&rdquo; is the accurate word; your call on wording</span></p>
+
+    <figure class="chart" data-ep02="mixups">
+        <figcaption><span class="claude-text">Where the mistakes go. Each row is 20 clips of one emotion; each column is what the model&rsquo;s numbers picked. The outlined diagonal is right. Most misses land next door: anger and fear, sad and tender.</span></figcaption>
+    </figure>
 
     <p>We should say the sound features and the emotion may not split cleanly. <span class="claude-text">The arrow for &ldquo;happy&rdquo; holds whatever the happy clips have in common, loudness and tempo included; these results show the models&rsquo; readings sort emotions better than chance, not that the model has a separate signal for emotion.</span></p>
 
@@ -103,6 +116,10 @@
     <div class="section-underline zone-writing"></div>
 
     <p><span class="claude-text">The third prediction: built separately, happy and sad would point in opposite directions, &ldquo;the same concept going in opposite directions.&rdquo; On a scale from &minus;1 (opposite) through 0 (unrelated) to +1 (same direction), they didn&rsquo;t: happy vs sad scored +0.58 (Qwen) and +0.61 (Audio Flamingo). But every arrow leans the same way, because every clip is music: arrows built from random groups of 20 clips score about +0.7 against each other. Random groups fall below +0.49 only 1% of the time, so pairs under that line are more different than chance groupings would make them. The pairs that share an energy level sit closest (anger&ndash;fear +0.69, sad&ndash;tender +0.65, Qwen), and the furthest apart is the loudest against the quietest, anger&ndash;tender (+0.17). The rest sit between +0.32 and +0.59.</span></p>
+
+    <figure class="chart" data-ep02="opposites">
+        <figcaption><span class="claude-text">No pair points in opposite directions. Each dot compares two emotion arrows (&minus;1 opposite, 0 unrelated, +1 same direction). The shaded band is where arrows built from random groups of clips land 98% of the time, the dashed line their middle: because every clip is music, even random arrows point mostly the same way.</span></figcaption>
+    </figure>
 
     <p><span class="gap">optional: your read on opposites. In the readout you asked: &ldquo;if you start at 0.7, then isn&rsquo;t a value below that technically an opposite or negative directionally?&rdquo;</span></p>
 
@@ -134,6 +151,7 @@
         <div style="margin-top: 0.5rem;">&copy; 2026 rowbyroh.com</div>
     </footer>
 
+    <script src="/assets/js/ep02.js"></script>
     <script src="/assets/js/related.js"></script>
     <script src="/assets/js/scroll.js"></script>
 </body>

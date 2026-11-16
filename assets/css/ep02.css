@@ -1,0 +1,42 @@
+/* Emotional Resonance EP02 figures (assets/js/ep02.js). Site tokens from base.css. */
+figure[data-ep02] svg { display: block; width: 100%; height: auto; margin: 0.4rem 0 0.2rem; }
+
+.ep02-switch { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0 0 0.45rem; }
+.ep02-switch button {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: #555;
+    background: var(--bg-light);
+    border: 1px solid var(--light);
+    border-radius: 3px;
+    padding: 0.25rem 0.55rem;
+    cursor: pointer;
+}
+.ep02-switch button[aria-pressed="true"] { color: var(--text); border-color: var(--text); font-weight: 500; }
+.ep02-switch button:focus-visible { outline: 2px solid var(--zone-research); outline-offset: 1px; }
+
+.ep02-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.5rem; }
+@media (max-width: 560px) { .ep02-grid { grid-template-columns: 1fr; } }
+
+figure[data-ep02] svg .hot { stroke: var(--text); stroke-width: 1.5; }
+figure[data-ep02] svg [tabindex]:focus { outline: none; stroke: var(--text); stroke-width: 1.5; }
+
+.ep02-tip {
+    position: fixed;
+    display: none;
+    z-index: 20;
+    pointer-events: none;
+    max-width: 260px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    line-height: 1.45;
+    color: var(--text);
+    background: var(--bg-light);
+    border: 1px solid var(--light);
+    border-radius: 3px;
+    padding: 0.35rem 0.55rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+figure[data-ep02] details.fig-data table caption { text-align: left; color: #555; padding-bottom: 0.3rem; }
+figure[data-ep02="mixups"] svg { max-width: 420px; }
