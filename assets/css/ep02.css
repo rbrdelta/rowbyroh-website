@@ -40,3 +40,13 @@ figure[data-ep02] svg [tabindex]:focus { outline: none; stroke: var(--text); str
 
 figure[data-ep02] details.fig-data table caption { text-align: left; color: #555; padding-bottom: 0.3rem; }
 figure[data-ep02="mixups"] svg { max-width: 420px; }
+
+.ep02-fans { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.6rem 1rem; margin: 0.4rem 0; }
+.ep02-fans svg { margin: 0; }
+.ep02-fans svg:focus { outline: 2px solid var(--zone-research); outline-offset: 2px; }
+/* Draft-only review marks (removed before publishing). */
+.chat-text { background: #dbe8f7; }
+@media (max-width: 480px) {
+    article figure.chart table.data { font-size: 0.72rem; }
+    article figure.chart table.data th, article figure.chart table.data td { padding-right: 0.6rem; }
+}

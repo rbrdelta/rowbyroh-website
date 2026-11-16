@@ -219,38 +219,58 @@
             E.map(function (a, i) { return [a].concat(M[i].map(String)); }));
     }
 
-    // ---- figure: opposites against random groups -------------------------------------------
+    // ---- figure: opposites, drawn as the angle between each pair of arrows -----------------
+    function deg(v) { return Math.acos(Math.max(-1, Math.min(1, v))) * 180 / Math.PI; }
+    function fan(label, aLo, aMid, aHi, draw) {
+        var W = 170, H = 112, cx = 85, cy = 92, R = 66;
+        var pt = function (a, r) { var t = a * Math.PI / 180; r = r == null ? R : r; return [cx + r * Math.cos(t), cy - r * Math.sin(t)]; };
+        var s = svg(W, H, label);
+        el('path', { d: 'M ' + (cx + R) + ' ' + cy + ' A ' + R + ' ' + R + ' 0 0 0 ' + (cx - R) + ' ' + cy, fill: 'none', stroke: C.grid }, s);
+        el('line', { x1: cx - R, x2: cx + R, y1: cy, y2: cy, stroke: C.grid }, s);
+        var lo = pt(aLo), hi = pt(aHi);
+        el('path', { d: 'M ' + cx + ' ' + cy + ' L ' + lo[0] + ' ' + lo[1] + ' A ' + R + ' ' + R + ' 0 0 0 ' + hi[0] + ' ' + hi[1] + ' Z', fill: C.mid }, s);
+        var m = pt(aMid);
+        el('line', { x1: cx, y1: cy, x2: m[0], y2: m[1], stroke: C.muted, 'stroke-dasharray': '3 3' }, s);
+        draw(s, pt, cx, cy, R);
+        return s;
+    }
+    function arrow(s, cx, cy, p, color) {
+        el('line', { x1: cx, y1: cy, x2: p[0], y2: p[1], stroke: color, 'stroke-width': 2, 'stroke-linecap': 'round' }, s);
+        el('circle', { cx: p[0], cy: p[1], r: 3, fill: color }, s);
+    }
     function drawOpposites(fig) {
         modelSwitch(fig);
         var O = D.opposites[state.model], P = O.pairs, L = O.luck;
+        var aLo = deg(L.p99), aMid = deg(L.p50), aHi = deg(L.p01);
         var pairs = Object.keys(P).sort(function (a, b) { return P[a] - P[b]; });
-        var W = Math.max(320, Math.round(fig.clientWidth || 680)), x0 = W < 560 ? 104 : 124, x1 = W - 14, lo = -1, hi = 1, y0 = 14, rh = 22;
-        var sx = function (v) { return x0 + (v - lo) / (hi - lo) * (x1 - x0); };
-        var s = svg(W, y0 + pairs.length * rh + 62, 'Comparison score for each pair of emotion arrows');
-        var bot = y0 + pairs.length * rh;
-        // Where 98% of random-group pairs land: the luck band.
-        el('rect', { x: sx(L.p01), y: y0 - 8, width: sx(L.p99) - sx(L.p01), height: bot - y0 + 8, fill: C.mid }, s);
-        el('line', { x1: sx(L.p50), x2: sx(L.p50), y1: y0 - 8, y2: bot, stroke: C.muted, 'stroke-dasharray': '4 3' }, s);
-        [-1, -0.5, 0, 0.5, 1].forEach(function (t) {
-            el('line', { x1: sx(t), x2: sx(t), y1: bot, y2: bot + 4, stroke: C.muted }, s);
-            txt(s, sx(t), bot + 16, (t > 0 ? '+' : t < 0 ? '−' : '') + Math.abs(t), { anchor: 'middle' });
+        var grid = document.createElement('div');
+        grid.className = 'ep02-fans';
+        fig.appendChild(grid);
+        // Key panel: what the angles mean.
+        grid.appendChild(fan('Key: 0 degrees same direction, 90 unrelated, 180 opposite', aLo, aMid, aHi, function (s, pt, cx, cy, R) {
+            txt(s, cx + R, cy + 14, '0° same', { anchor: 'end', size: 10 });
+            txt(s, cx, cy - R - 6, '90° unrelated', { anchor: 'middle', size: 10 });
+            txt(s, cx - R, cy + 14, '180° opposite', { size: 10 });
+            var w = pt(aMid, R + 8);
+            txt(s, w[0] + 2, w[1], 'random groups', { size: 9 });
+        }));
+        pairs.forEach(function (p) {
+            var v = P[p], a = deg(v), n = p.split('_vs_'), out = v < L.p01, col = out ? C.warm : C.muted;
+            var s = fan(n[0] + ' and ' + n[1] + ': ' + Math.round(a) + ' degrees apart', aLo, aMid, aHi, function (s, pt, cx, cy, R) {
+                arrow(s, cx, cy, pt(0, R - 4), C.ink);
+                arrow(s, cx, cy, pt(a, R - 4), col);
+                txt(s, cx + R, cy + 14, NAMES[n[0]], { anchor: 'end', size: 10, fill: C.ink });
+                var q = pt(a, R + 8);
+                txt(s, q[0], q[1], NAMES[n[1]], { anchor: a > 100 ? 'end' : 'middle', size: 10, fill: C.ink });
+                txt(s, cx - R, cy + 14, Math.round(a) + '°', { size: 12, weight: 600, fill: C.ink });
+            });
+            grid.appendChild(s);
+            s.setAttribute('tabindex', '0');
+            hover(s, function () { return [NAMES[n[0]] + ' and ' + NAMES[n[1]] + ': ' + Math.round(a) + '° apart (score ' + fmt(v) + ')', D.models[state.model],
+                out ? 'further apart than 99% of random groups' : 'within the random-group range']; });
         });
-        txt(s, sx(-1), bot + 32, 'opposite', {});
-        txt(s, sx(0), bot + 32, 'unrelated', { anchor: 'middle' });
-        txt(s, sx(1), bot + 32, W < 560 ? 'same' : 'same direction', { anchor: 'end' });
-        el('rect', { x: x0, y: bot + 42, width: 14, height: 10, fill: C.mid }, s);
-        txt(s, x0 + 20, bot + 51, W < 560 ? 'random groups land here (98%)' : 'where random groups of clips land (98%)', {});
-        pairs.forEach(function (p, i) {
-            var y = y0 + i * rh + rh / 2, v = P[p], name = p.replace('_vs_', '–');
-            txt(s, 0, y + 4, name, { fill: C.ink });
-            el('line', { x1: sx(0), x2: sx(v), y1: y, y2: y, stroke: C.grid }, s);
-            var dot = el('circle', { cx: sx(v), cy: y, r: 5, fill: C.warm, stroke: C.bg, 'stroke-width': 2 }, s);
-            txt(s, sx(v) - 10, y + 4, fmt(v), { fill: C.ink, anchor: 'end' });
-            hover(dot, function () { return [fmt(v), name + ' (' + D.models[state.model] + ')', v < L.p01 ? 'further apart than 99% of random groups' : 'within the random-group range']; });
-        });
-        fig.appendChild(s);
-        table(fig, 'Pairs of emotion arrows, ' + D.models[state.model] + '; random groups: 1% ' + fmt(L.p01) + ', middle ' + fmt(L.p50) + ', 99% ' + fmt(L.p99),
-            ['pair', 'comparison score'], pairs.map(function (p) { return [p.replace('_vs_', '–'), fmt(P[p])]; }));
+        table(fig, 'Pairs of emotion arrows, ' + D.models[state.model] + '; random groups of clips: middle ' + Math.round(aMid) + '° (' + fmt(L.p50) + '), 98% between ' + Math.round(aLo) + '° and ' + Math.round(aHi) + '°',
+            ['pair', 'angle', 'comparison score'], pairs.map(function (p) { return [p.replace('_vs_', '–'), Math.round(deg(P[p])) + '°', fmt(P[p])]; }));
     }
 
     var DRAW = { clip: drawClip, luck: drawLuck, mixups: drawMixups, opposites: drawOpposites };
