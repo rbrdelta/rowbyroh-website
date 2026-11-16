@@ -48,6 +48,28 @@
         "description": "Can you hear me now?"
     },
     {
+        "date": "Nov 2026",
+        "events": [
+            {
+                "date": "2026-11-15",
+                "action": "drafted"
+            }
+        ],
+        "published": false,
+        "series": "emotional-resonance",
+        "status": "draft",
+        "tags": [
+            "essay",
+            "AI",
+            "interpretability"
+        ],
+        "type": "essay",
+        "id": "essay-real-music",
+        "title": "Emotional Resonance EP02 — Real Music",
+        "url": "/blog/real-music",
+        "description": "Draft. Can a model's inside tell which emotion a piece of film music carries?"
+    },
+    {
         "id": "essay-depth-not-breadth",
         "title": "Model Behavior EP03 — Depth, Not Breadth",
         "type": "essay",

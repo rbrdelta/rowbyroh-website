@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotional Resonance EP02 — Real Music | rowbyroh</title>
+    <meta name="description" content="Draft. Can a model's inside tell which emotion a piece of film music carries?">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/writing.css">
+    <link rel="stylesheet" href="/assets/css/listen.css">
+    <script src="/assets/js/track.js" defer></script>
+</head>
+<body class="writing-page zone-research">
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="scroll-progress-inner" id="scrollProgressInner"></div>
+
+    <nav class="breadcrumb"><a href="/">rowbyroh</a><span class="sep">/</span><a href="/archive">all work</a></nav>
+
+    <div class="post-header">
+        <div class="post-meta"><a href="/research">Emotional Resonance EP02</a> &middot; November 2026</div>
+        <h1>Real Music</h1>
+        <p class="post-subtitle"><span class="gap">subtitle (EP01's was &ldquo;Can you hear me now?&rdquo;); &ldquo;Real Music&rdquo; is a working title</span></p>
+    </div>
+
+    <article>
+
+    <p class="draft-legend">Draft review key: <span class="claude-text">highlighted text</span> was written by Claude, objectively, for you to keep, tweak or replace. Everything else is your own words from the 11-15 readout, put in order, with grammar fixed; nothing was added to them. <span class="gap">gap</span> = a line only you can write. Source for every quote: <code>REAL-MUSIC-READOUT.md</code> (laptop, private notebook).</p>
+
+    <p><em>Emotional Resonance asks whether sound can reach a model&rsquo;s &ldquo;functional emotions&rdquo;: patterns of behavior modeled on human emotions, driven by the model&rsquo;s internal representations of emotions like fear, as described in <a href="https://transformer-circuits.pub/2026/emotions/index.html">Anthropic&rsquo;s research</a>. The term does not imply that the model experiences emotions.</em></p>
+
+    <div class="section-header"><span class="section-number zone-writing">01</span><h2>Intro</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>To learn about this experiment series, <a href="/blog/emotional-resonance-intro">start here</a>. <span class="gap">one line on where EP01 left off, in your words (EP01 ended: &ldquo;the next tests will show us what a fear register looks like in real life&rdquo;)</span></p>
+
+    <p><span class="claude-text">The <a href="/blog/hearing-test">hearing test</a> showed that both models&rsquo; ears pick up volume, tempo and roughness almost perfectly, and miss the half-step between major and minor. This step asks whether emotion itself survives the trip from sound into the model&rsquo;s numbers: played a real piece of film music, can a readout of the model&rsquo;s inside tell which of five emotions listeners heard in it? The first goal was simple, to start with the obvious emotions &ldquo;to see if it can even detect the emotion first.&rdquo;</span></p>
+
+    <div class="section-header"><span class="section-number zone-writing">02</span><h2>The experiment</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p><span class="gap">your framing of the setup, if you want one; the list below is Claude&rsquo;s plain account of what was run</span></p>
+
+    <ul class="claude-text">
+        <li>100 excerpts of film soundtracks from a published listening study (<a href="https://doi.org/10.1177/0305735610362821">Eerola &amp; Vuoskoski, 2011</a>), 20 for each of five emotions listeners rated them on: anger, fear, happiness, sadness and tenderness. Mostly clear examples, with some unclear ones mixed in.</li>
+        <li>The same two open models as the hearing test, Qwen2-Audio and Audio Flamingo. Each clip played once with the prompt &ldquo;Listen to this audio clip.&rdquo;; the model never answered, and its internal numbers were recorded at the ears and every layer after them.</li>
+        <li>An &ldquo;emotion arrow&rdquo; for each emotion: the average of that emotion&rsquo;s clips minus the average of silence, the same recipe as Anthropic&rsquo;s paper with sound in place of text. Each clip was then scored on all five arrows, built without that clip, and the strongest arrow was the model&rsquo;s pick.</li>
+        <li>Loudness was left as recorded: happy and angry clips are louder on average than sad and tender ones. That makes loudness a possible stand-in for emotion, so every result below is shown next to what loudness alone would score.</li>
+        <li>Pass marks and predictions were written down before any reading was opened: two of three right on each two-emotion check, 55% on all five.</li>
+    </ul>
+
+    <p>My prediction going in: over half right, because &ldquo;I assume the model understands fear as a concept already&rdquo;, and at least 70% if these models had Claude-like training.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">03</span><h2>Can it tell the emotions apart?</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <figure class="chart listen">
+        <table class="data">
+            <thead>
+                <tr><th>Check</th><th>Luck</th><th>Loud&shy;ness alone</th><th>Qwen</th><th>Audio Fla&shy;mingo</th><th>Mark</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Happy vs sad</td><td>20/40</td><td>30</td><td>29</td><td>26</td><td>27</td></tr>
+                <tr><td>Happy vs fear</td><td>20/40</td><td>26</td><td>31</td><td>29</td><td>27</td></tr>
+                <tr><td>Tender vs sad</td><td>20/40</td><td>19</td><td>25</td><td>24</td><td>27</td></tr>
+                <tr><td>All five</td><td>20/100</td><td>32</td><td>48</td><td>50</td><td>55</td></tr>
+            </tbody>
+        </table>
+        <figcaption class="listen-note"><span class="claude-text">Clips sorted into the right emotion, read at the models&rsquo; ears, the layer that scored best for both. &ldquo;Luck&rdquo; is guessing; &ldquo;scrambled labels&rdquo; repeats the whole test with the emotion labels shuffled, to see how well luck alone can do; on all five, scrambled labels typically got 24 right and reached 32 only 5% of the time. &ldquo;Loudness alone&rdquo; sorts each clip by which emotion&rsquo;s average loudness it sits closest to.</span></figcaption>
+    </figure>
+
+    <p><span class="claude-text">Happy vs sad: Qwen made the mark, Audio Flamingo missed it by one clip. Loudness alone scored 30, as well as either model, so this check on its own cannot separate emotion from volume. Happy vs fear: both models beat loudness alone by three to five clips, and scrambled labels did as well only 0.3% (Qwen) and 0.8% (Audio Flamingo) of the time. Tender vs sad, the quiet pair, was the hardest for both.</span></p>
+
+    <p>I&rsquo;m good with the results, and with saying Audio Flamingo missed it by a clip, because the other readings will be more telling. Not enough reason to dismiss Audio Flamingo yet. Over all these steps, the larger takeaway is that we need more samples. 40 clips are a starting point, not a definitive readout of what these models can do. Tender vs sad is more subtle and seems harder for the models to distinguish.</p>
+
+    <p>On all five: if the randomness test says the top 5% reached 32, then near 50 is a significant improvement, even if it&rsquo;s below my optimistic mark. And if loudness alone is at 32, that gives confidence that it&rsquo;s carrying something beyond that, which we can pull apart more.</p>
+
+    <p><span class="claude-text">Most of the mistakes were swaps inside a pair: fear and anger traded places 11 times, sad and tender 13 times (Qwen). Happy was the hardest to pick out: 6 of 20 happy clips were read as sad.</span> Sad was never confused for happy, but happy was confused for sad, so happy needs more teasing out, because content and excitement could both be related to happy, but at different loudness values. <span class="gap">Claude&rsquo;s flag: Qwen read 1 sad clip as happy, so &ldquo;almost never&rdquo; is the accurate word; your call on wording</span></p>
+
+    <p>We should say the sound features and the emotion may not split cleanly. <span class="claude-text">The arrow for &ldquo;happy&rdquo; holds whatever the happy clips have in common, loudness and tempo included; these results show the models&rsquo; readings sort emotions better than chance, not that the model has a separate signal for emotion.</span></p>
+
+    <div class="section-header"><span class="section-number zone-writing">04</span><h2>When and where</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p><span class="claude-text">The second prediction was that the emotional takeaway lands &ldquo;after climax, after everything has revealed itself&rdquo;, so the model&rsquo;s positions after the clip should carry the emotion more clearly than the average over the whole clip. They didn&rsquo;t, by the bar set in advance (10 more clips right): Qwen 53 vs 48, Audio Flamingo 49 vs 50. Moment by moment, half a second at a time, almost every clip showed a rise and fall on some emotion (92 of 100), but so did the comparison clips (14 of 15), so the waves alone do not mark emotion.</span> <span class="gap">&ldquo;Comparison clips&rdquo; = the clips section 05 is about; pick the name once you&rsquo;ve settled section 05</span></p>
+
+    <p>Music has an elevation: build-up, peak, hold, fall. That may encapsulate an emotion, but emotion can&rsquo;t be constructed that cleanly. It comes in suddenly, but either builds, changes or fades.</p>
+
+    <p><span class="claude-text">One surprise: in Qwen&rsquo;s middle layers, a few giant readings at fixed positions fire in the first three seconds of almost every clip, including silence. It was seen before scoring, and left in.</span> I am not ready to rule it out. It&rsquo;s the first signal we received, and we don&rsquo;t know enough to say it&rsquo;s not important. <span class="claude-text">An exploratory re-score with the spike zeroed out (not part of the plan) brought the middle layers from 30&ndash;34 up to 38&ndash;46 of 100: the emotion was still there, the spike was hiding it from the measurement. What the model does with the spike while it runs is still open.</span></p>
+
+    <div class="section-header"><span class="section-number zone-writing">05</span><h2>The &ldquo;neutral&rdquo; clips weren&rsquo;t neutral</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p><span class="claude-text">The recipe removed one more thing from every arrow: a &ldquo;this is music&rdquo; part, taken from 15 clips listeners had rated low on all five emotions, meant to stand for music with no emotion in it.</span></p>
+
+    <p>My bigger question was what a neutral clip sounds like. If there&rsquo;s sound, it evokes something. Even a neutral clip is music, so of course there&rsquo;s composition. <span class="gap">optional: a line on what you heard in 246, 151, 153, 163 (your readout notes have it)</span> By no means can these be neutral clips. They&rsquo;re very evocative. They&rsquo;re the compound-emotion test: more than two clear emotions are present.</p>
+
+    <p><span class="claude-text">Scored again with silence as the only zero and nothing removed (exploratory, after the fact), the picks barely moved (Qwen 46 of 100 on all five, Audio Flamingo 49). So what was removed was mostly &ldquo;music&rdquo;, not emotion. A second exploratory look compared the model&rsquo;s five numbers for each clip with the listeners&rsquo; five ratings, emotion by emotion: did the model rate it above or below its own average where listeners did? Qwen agreed with listeners 71% of the time and Audio Flamingo 69%, against about 50% when a clip was paired with a random other clip&rsquo;s ratings. On clip 163, listeners rated happy, sad and tender above their average, and both models did the same.</span></p>
+
+    <div class="section-header"><span class="section-number zone-writing">06</span><h2>Opposites</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p><span class="claude-text">The third prediction: built separately, happy and sad would point in opposite directions, &ldquo;the same concept going in opposite directions.&rdquo; On a scale from &minus;1 (opposite) through 0 (unrelated) to +1 (same direction), they didn&rsquo;t: happy vs sad scored +0.58 (Qwen) and +0.61 (Audio Flamingo). But every arrow leans the same way, because every clip is music: arrows built from random groups of 20 clips score about +0.7 against each other. Random groups fall below +0.49 only 1% of the time, so pairs under that line are more different than chance groupings would make them. The pairs that share an energy level sit closest (anger&ndash;fear +0.69, sad&ndash;tender +0.65, Qwen), and the furthest apart is the loudest against the quietest, anger&ndash;tender (+0.17). The rest sit between +0.32 and +0.59.</span></p>
+
+    <p><span class="gap">optional: your read on opposites. In the readout you asked: &ldquo;if you start at 0.7, then isn&rsquo;t a value below that technically an opposite or negative directionally?&rdquo;</span></p>
+
+    <div class="section-header"><span class="section-number zone-writing">07</span><h2>Takeaways</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>It can identify emotion and music more clearly than chance, so it&rsquo;s detecting something resembling that, and represents something resembling them in its own way. But the baseline was not the right starting point: we removed &ldquo;neutral&rdquo; clips, but these were multi-dimensional, not neutral. They didn&rsquo;t have a clear primary emotion, so a clip with a value of 1 for each emotion was as neutral as a clip with fear, anger and happy at 4 and tender and sad at 2. It&rsquo;s not a clear baseline to define the emotion vectors. So we&rsquo;re starting with silence, and seeing if there are other neutral factors we can remove as we learn more.</p>
+
+    <p>The emotions sit together with music and other key axes we don&rsquo;t know yet; the results point to energy as the main divide. We haven&rsquo;t pulled apart energy or loudness, so that&rsquo;s a consideration again, to see if it measures better. If all five emotions are relative to one another, there is a direction and relationship to the other four points, whatever it may be. The differences in magnitude and direction between our inferred emotion vectors will tell us a lot about where these emotions are represented.</p>
+
+    <p>Next: the trig approach. Map the five emotions in space, see whether energy, pleasantness or other primary axes emerge, and where each emotion lands, primary, secondary or otherwise. Then tease out the music primitives, pitch, volume, timbre, attack, decay, timing, and begin to peel these elements away.</p>
+
+    <p><span class="claude-text">Limitations: 20 clips per emotion is small, and the 40-clip checks can swing by a few clips either way. Loudness alone matched the models on happy vs sad. The excerpts come from films, so a model that recognized a film could read its emotion from what it learned in text rather than from the sound; that was not tested. Everything in sections 04 to 06 marked exploratory was run after the planned analysis, not registered before it. The film audio is not ours to share, so no clips are playable on this page; the code is public at <a href="https://github.com/rbrdelta/sound-lab">github.com/rbrdelta/sound-lab</a>.</span></p>
+
+    </article>
+
+    <section id="keep-reading" class="keep-reading" aria-label="Keep reading"></section>
+
+    <div class="post-footer">
+        <p>Built with Claude.</p>
+    </div>
+
+    <footer>
+        <a href="mailto:daniel@rowbyroh.com">email</a> &middot;
+        <a href="https://discord.com/users/rbrdelta">discord</a> &middot;
+        <a href="https://github.com/rbrdelta">github</a> &middot;
+        <a href="https://linkedin.com/in/drohh">linkedin</a>
+        <a class="footer-colophon" href="/colophon">Colophon &mdash; how this site is built &rarr;</a>
+        <div style="margin-top: 0.5rem;">&copy; 2026 rowbyroh.com</div>
+    </footer>
+
+    <script src="/assets/js/related.js"></script>
+    <script src="/assets/js/scroll.js"></script>
+</body>
+</html>
