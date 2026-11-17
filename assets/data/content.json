@@ -53,11 +53,15 @@
             {
                 "date": "2026-11-15",
                 "action": "drafted"
+            },
+            {
+                "date": "2026-11-17",
+                "action": "published"
             }
         ],
-        "published": false,
+        "published": true,
         "series": "emotional-resonance",
-        "status": "draft",
+        "status": "live",
         "tags": [
             "essay",
             "AI",
@@ -65,9 +69,9 @@
         ],
         "type": "essay",
         "id": "essay-real-music",
-        "title": "Emotional Resonance EP02 — Real Music",
+        "title": "Emotional Resonance EP02 — Music or Emotion?",
         "url": "/blog/real-music",
-        "description": "Draft. Can a model's inside tell which emotion a piece of film music carries?"
+        "description": "Can audio models detect emotions from music?"
     },
     {
         "id": "essay-depth-not-breadth",
