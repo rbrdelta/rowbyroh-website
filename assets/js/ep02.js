@@ -195,7 +195,7 @@
         });
         fig.appendChild(grid);
         table(fig, 'Scrambled-label runs, ' + D.models[state.model] + ' (1,000 per check)',
-            ['check', 'typical', 'top 5%', 'loudness alone', 'model', 'mark', 'runs as good as the model'], rows);
+            ['check', 'median', '95th percentile', 'loudness alone', 'model', 'mark', 'runs as good as the model'], rows);
     }
 
     // ---- figure: the mix-up grid -------------------------------------------------------------

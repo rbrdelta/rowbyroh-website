@@ -50,3 +50,6 @@ figure[data-ep02="mixups"] svg { max-width: 420px; }
     article figure.chart table.data { font-size: 0.72rem; }
     article figure.chart table.data th, article figure.chart table.data td { padding-right: 0.6rem; }
 }
+
+/* Footnotes at the end of the post */
+.ep02-footnote { font-size: 0.85em; color: #555; margin: 0.4rem 0; }
