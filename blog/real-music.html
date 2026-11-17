@@ -37,7 +37,7 @@
 
     <ul>
         <li>We can&rsquo;t yet separate sound from emotion precisely, but we have a directional idea of what emotions look like inside the models.</li>
-        <li>The models identified the primary emotion (out of five) about half the time (Qwen 48%, Audio Flamingo 50%), well above the best of 1,000 random guessing runs (40%).</li>
+        <li>The models identified the primary emotion (out of five) about half the time (Qwen 48%, Audio Flamingo 50%), well above the 95th percentile of 1,000 random guessing runs (32%).</li>
         <li>The audio encoder, the model&rsquo;s ears, reads emotion best, before the adapter hands its output to the language model.</li>
         <li>We incorrectly used music clips with multiple mixed emotions (no primary) as a &ldquo;neutral&rdquo; baseline.</li>
         <li>Emotion vectors carry several related concepts at once, so opposite emotions don&rsquo;t necessarily have opposite values (happy +1 vs sad -1).</li>
@@ -103,7 +103,7 @@
     <p>Across all 100 clips, both models detected the primary emotion more accurately than just luck or based on the clip&rsquo;s loudness. When comparing one emotion to another, the results are not as conclusive. For example, in happy vs sad, each clip&rsquo;s loudness alone (30) did as well as the models&rsquo; internal readings (Qwen 29, Audio Flamingo 26). That means while we can measure something approximating the emotion, it&rsquo;s not clear if what we&rsquo;re measuring is the sound elements themselves or the actual emotion vector.</p>
 
     <figure class="chart" data-ep02="luck">
-        <figcaption><span class="claude-text">All 1,000 random guessing runs, lowest to highest. Each gray bar counts how many runs got that many clips right. The red line is the model&rsquo;s score, the dashed line loudness alone, the dotted line the pass mark.</span></figcaption>
+        <figcaption><span class="claude-text">One panel per check. The bars show all 1,000 random guessing runs, lowest score to highest; the taller the bar, the more runs got that score.</span></figcaption>
     </figure>
 
     <p><strong>2. Not &ldquo;neutral&rdquo;</strong></p>
@@ -145,14 +145,14 @@
 
     <ul>
         <li>The test sample size is not large enough to statistically represent subtle differences (e.g. tender vs sad).</li>
-        <li><span class="claude-text">Loudness and energy aren&rsquo;t yet pulled apart from emotion.</span></li>
-        <li><span class="claude-text">Does an emotion build, or arrive? The models&rsquo; readings rose and fell with the music, but listeners rated each clip only once.</span></li>
-        <li><span class="claude-text">How do we represent compound emotions, several at once with no primary?</span></li>
-        <li><span class="claude-text">Both models spike at fixed moments in some clips. We don&rsquo;t know why.</span></li>
+        <li>Loudness and energy aren&rsquo;t yet pulled apart from emotion.</li>
+        <li>Does an emotion build, or arrive? The models&rsquo; readings rose and fell with the music, but listeners rated each clip only once.</li>
+        <li>How do we represent compound emotions, several at once with no primary?</li>
+        <li>Both models spike at fixed moments in some clips. We don&rsquo;t know why.</li>
     </ul>
 
-    <p class="ep02-footnote" id="fn1"><span class="claude-text"><a href="#fnref1">1</a> Film soundtrack excerpts. The audio isn&rsquo;t ours to share, so no clips play here.</span></p>
-    <p class="ep02-footnote" id="fn2"><span class="claude-text"><a href="#fnref2">2</a> Added after the planned analysis.</span></p>
+    <p class="ep02-footnote" id="fn1"><a href="#fnref1">1</a> Film soundtrack excerpts. The audio isn&rsquo;t ours to share, so no clips play here.</p>
+    <p class="ep02-footnote" id="fn2"><a href="#fnref2">2</a> Added after the planned analysis.</p>
 
     </article>
 

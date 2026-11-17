@@ -156,8 +156,27 @@
     }
 
     // ---- figure: the luck curve per check -----------------------------------------------
+    function legend(fig, items) {
+        var row = document.createElement('div');
+        row.className = 'ep02-legend';
+        items.forEach(function (it) {
+            var item = document.createElement('span');
+            var s = el('svg', { viewBox: '0 0 24 12', width: 24, height: 12, 'aria-hidden': 'true' }, item);
+            if (it.bar) el('rect', { x: 6, y: 1, width: 12, height: 11, rx: 1, fill: it.color }, s);
+            else el('line', { x1: 12, x2: 12, y1: 0, y2: 12, stroke: it.color, 'stroke-width': 2, 'stroke-dasharray': it.dash || '' }, s);
+            item.appendChild(document.createTextNode(it.label));
+            row.appendChild(item);
+        });
+        fig.appendChild(row);
+    }
     function drawLuck(fig) {
         modelSwitch(fig);
+        legend(fig, [
+            { bar: true, color: C.bar, label: 'random guessing runs (count per score)' },
+            { color: C.warm, label: D.models[state.model] + '\u2019s score' },
+            { color: C.ink, dash: '4 3', label: 'loudness alone' },
+            { color: C.mark, dash: '1 3', label: 'pass mark set before the test' }
+        ]);
         var grid = document.createElement('div');
         grid.className = 'ep02-grid';
         var rows = [];

@@ -23,7 +23,7 @@ figure.chart.listen {{ overflow-x: auto; }}
 </style>
 <script>document.body.className = 'writing-page zone-research';</script>
 <div class="preview-wrap">
-<p class="draft-legend"><b>Preview for review on your phone, updated 2026-11-17.</b> Text copied from the Notion page as of 11-17, with the luck and angles figures. The Notion page stays the place to edit the text. Not public: private to your account.</p>
+<p class="draft-legend"><b>Preview for review on your phone, updated 2026-11-17 (v4).</b> Text copied from the Notion page as of 11-17, with the luck and angles figures. The Notion page stays the place to edit the text. Not public: private to your account.</p>
 {body}
 </div>
 <script>window.EP02_DATA = {data};</script>

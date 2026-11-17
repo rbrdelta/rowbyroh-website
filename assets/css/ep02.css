@@ -53,3 +53,8 @@ figure[data-ep02="mixups"] svg { max-width: 420px; }
 
 /* Footnotes at the end of the post */
 .ep02-footnote { font-size: 0.85em; color: #555; margin: 0.4rem 0; }
+
+/* Figure legend (luck figure) */
+.ep02-legend { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; margin: 0 0 0.5rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: #555; }
+.ep02-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
+figure[data-ep02] .ep02-legend svg { display: inline-block; width: 24px; height: 12px; margin: 0; }
