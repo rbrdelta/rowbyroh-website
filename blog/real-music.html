@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotional Resonance EP02 — Music or Emotion? | rowbyroh</title>
+    <meta name="description" content="Can audio models detect emotions from music?">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/writing.css">
+    <link rel="stylesheet" href="/assets/css/listen.css">
+    <link rel="stylesheet" href="/assets/css/ep02.css">
+    <script src="/assets/js/track.js" defer></script>
+</head>
+<body class="writing-page zone-research">
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="scroll-progress-inner" id="scrollProgressInner"></div>
+
+    <nav class="breadcrumb"><a href="/">rowbyroh</a><span class="sep">/</span><a href="/archive">all work</a></nav>
+
+    <div class="post-header">
+        <div class="post-meta"><a href="/research">Emotional Resonance EP02</a> &middot; November 2026</div>
+        <h1>Music or Emotion?</h1>
+        <p class="post-subtitle">Can audio models detect emotions from music?</p>
+    </div>
+
+    <article>
+
+    <p><em>Emotional Resonance asks whether sound can reach a model&rsquo;s &ldquo;functional emotions&rdquo;, and tests how these &ldquo;emotional concepts&rdquo; impact model alignment. Per <a href="https://transformer-circuits.pub/2026/emotions/index.html">Anthropic</a>, emotion as a concept is not a claim about the ability to sense or have consciousness. New to the series? <a href="/blog/emotional-resonance-intro">Start here</a>.</em></p>
+
+    <div class="section-header"><span class="section-number zone-writing">00</span><h2>Takeaway</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>There are signs the models can detect emotion in music better than luck or loudness alone, but it&rsquo;s not definitive: music is multifaceted and hard to pull apart. So the question is whether we keep digging deeper to find a clear thread, or step back to find an easier path.</p>
+
+    <ul>
+        <li>The models identified the primary emotion (out of five) about half the time (Qwen 48%, Audio Flamingo 50%), well above the 95th percentile of 1,000 random guessing runs (32%).</li>
+        <li>One against one, the results are weaker: on happy vs sad, loudness alone did as well as the models.</li>
+        <li>The audio encoder, the model&rsquo;s ears, reads emotion best, before the adapter hands its output to the language model.</li>
+        <li>We incorrectly used music clips with multiple mixed emotions (no primary) as a &ldquo;neutral&rdquo; baseline.</li>
+        <li>Emotion vectors carry several related concepts at once, so opposite emotions don&rsquo;t necessarily have opposite values (happy +1 vs sad -1).</li>
+    </ul>
+
+    <div class="section-header"><span class="section-number zone-writing">01</span><h2>Intro</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>EP01 gave us enough confidence that Qwen2-Audio and Audio Flamingo can both detect sound elements like volume, roughness and tempo. In this next step, we played the models music clips from a published listening study (<a href="https://doi.org/10.1177/0305735610362821">Eerola &amp; Vuoskoski, 2011</a>), then compared the models&rsquo; emotion readings with how the study&rsquo;s listeners rated each clip across five emotions: anger, fear, happiness, sadness and tenderness.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">02</span><h2>Test Design</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <ul>
+        <li>For the actual test, Claude selected 100 clips from this study where listeners marked a clear primary emotion.<sup><a href="#fn1" id="fnref1">1</a></sup></li>
+        <li>We ran the test on the same two open-weight audio models as the hearing test, Qwen2-Audio and Audio Flamingo.</li>
+        <li>The prompt was &ldquo;Listen to this audio clip,&rdquo; and we captured readings only up to the last layer before the language model&rsquo;s output.</li>
+    </ul>
+
+    <p>For each emotion, the vector is drawn from silence (0) to the average of that emotion&rsquo;s clips. Each clip checks its readings against all five arrows, and the closest is the model&rsquo;s pick. A clip that sets the emotion arrow is not part of the test. Full method and code: <a href="https://github.com/rbrdelta/sound-lab">github.com/rbrdelta/sound-lab</a>.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">03</span><h2>My Assumptions</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>An open-weight audio transformer is not optimized for music and emotion detection. Therefore, results should be better than random, but not necessarily highly precise (95%, or 2+ standard deviations above mean).</p>
+
+    <ul>
+        <li>One against one (e.g. happy vs sad): better than a coin flip; predicted 67% (2/3) correct.</li>
+        <li>All five emotions: better than chance (20%); guessed 55%, which turned out to be overly optimistic (see the results table).</li>
+    </ul>
+
+    <p>Other considerations:</p>
+
+    <ul>
+        <li>Emotion readings will rise, peak and tail off across the layers, like a wave, peaking in the middle layers before the response layers.</li>
+        <li>Loudness and other intensity measures can be read as emotion, so we compare each result against loudness alone.</li>
+        <li>Opposing emotions like happy and sad will have opposite values (+1 vs -1).</li>
+        <li>Completely unrelated emotions will be &ldquo;perpendicular,&rdquo; with no correlation (approaching 0).</li>
+    </ul>
+
+    <div class="section-header"><span class="section-number zone-writing">04</span><h2>Lessons Learned</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p><strong>1. Emotion in the music (somewhere)</strong></p>
+
+    <figure class="chart listen">
+        <table class="data">
+            <thead>
+                <tr><th>Check</th><th>Luck (5th &middot; median &middot; 95th percentile)</th><th>Loud&shy;ness alone</th><th>Qwen</th><th>Audio Fla&shy;mingo</th><th>Mark</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Happy vs sad (of 40)</td><td>13 &middot; 21 &middot; 27</td><td>30</td><td>29</td><td>26</td><td>27</td></tr>
+                <tr><td>Happy vs fear (of 40)</td><td>13 &middot; 21 &middot; 27</td><td>26</td><td>31</td><td>29</td><td>27</td></tr>
+                <tr><td>Tender vs sad (of 40)</td><td>13 &middot; 21 &middot; 27</td><td>19</td><td>25</td><td>24</td><td>27</td></tr>
+                <tr><td>All five (of 100)</td><td>17 &middot; 24 &middot; 32</td><td>32</td><td>48</td><td>50</td><td>55</td></tr>
+            </tbody>
+        </table>
+        <figcaption class="listen-note">The number of clips each reading sorted into the right emotion. Luck is random guessing on the same test, run 1,000 times: the 5th percentile, median and 95th percentile of those runs (Qwen&rsquo;s; Audio Flamingo&rsquo;s are within one clip). Loudness alone is each clip&rsquo;s volume, with no model. Mark is the pass mark set before the test.</figcaption>
+    </figure>
+
+    <p>Across all 100 clips, both models detected the primary emotion more accurately than just luck or based on the clip&rsquo;s loudness. When comparing one emotion to another, the results are not as conclusive. For example, in happy vs sad, each clip&rsquo;s loudness alone (30) did as well as the models&rsquo; internal readings (Qwen 29, Audio Flamingo 26). That means while we can measure something approximating the emotion, it&rsquo;s not clear if what we&rsquo;re measuring is the sound elements themselves or the actual emotion vector.</p>
+
+    <figure class="chart" data-ep02="luck">
+        <figcaption>One panel per check. The bars show all 1,000 random guessing runs, lowest score to highest; the taller the bar, the more runs got that score. The real test reported its best layer, so each random run also picked its best layer: the comparison with luck includes that advantage.</figcaption>
+    </figure>
+
+    <p><strong>2. Not &ldquo;neutral&rdquo;</strong></p>
+
+    <p>My bigger question after reviewing these results was what &ldquo;neutral&rdquo; music sounds like. All sound has elements and composition, and evokes something. After listening closely to all fifteen &ldquo;neutral&rdquo; clips, it was clear they were multi-dimensional: each carried several emotions with no dominant one, not zero emotion. In the study&rsquo;s ratings, a clip at 1 for every emotion counted as just as neutral as a clip with fear, anger and happy at 4 and tender and sad at 2. So subtracting these clips was the wrong baseline for this test.</p>
+
+    <p>Re-scoring the test with silence as the zero barely changed the results (Qwen 46, Audio Flamingo 49, against 48 and 50), so the &ldquo;neutral&rdquo; baseline had no real impact.<sup><a href="#fn2" id="fnref2">2</a></sup></p>
+
+    <p><strong>3. Opposites aren&rsquo;t opposite</strong></p>
+
+    <p>Now we know emotions live in a general &ldquo;music&rdquo; area. That means the differences and the relevant factors between each emotion require closer study. What this test can measure is the angle between one emotion vector and another. Conceptually, 0&deg; = same direction, 90&deg; = unrelated, and 180&deg; = opposite.</p>
+
+    <ul>
+        <li>No value exceeded 90&deg;. The widest observed angle is anger and tender, sitting 80&deg; apart.</li>
+        <li>Happy and sad sit 54&deg; apart. And the closest pairs are anger and fear (47&deg;) and sad and tender (49&deg;).</li>
+    </ul>
+
+    <p>The takeaway is that while <em><strong>any two emotions may be opposites purely from an emotional perspective, these vectors have many other variables that pull them in other directions.</strong></em> These variables contribute to bringing all emotion vectors within a general vicinity of each other, most likely some sound element from each clip.</p>
+
+    <figure class="chart" data-ep02="opposites">
+        <figcaption>The angle between emotion pairs, read where the audio encoder hands off. Arrows built from random groups of 20 clips sit about 46&deg; apart, so a pair has to pass about 61&deg;, wider than 99 of 100 random groups, to count as pointing a different way.</figcaption>
+    </figure>
+
+    <p><strong>4. At the source</strong></p>
+
+    <p>Reading layer by layer, the models&rsquo; ears identified the emotion most accurately. The later layers, carried into the language model, still identified the primary emotion well, but never as well as the ears. Inside the language model, the network has to attend to many other factors.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">05</span><h2>What&rsquo;s Next</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <p>At the depths we&rsquo;ve explored, we were not able to identify the emotions confidently enough to test our hypothesis and activate the models to check their behavior. So we have two options.</p>
+
+    <p>We can either zoom into the emotion space inside these audio models to see what elements pull on each emotion like loud vs quiet or positivity vs negativity. Secondary emotions such as contentment and excitement can help us build the different dimensions of happiness. Testing the relationships between these primitives can help us more accurately represent these emotions inside the model.</p>
+
+    <p>Or we can pivot and take a step back. The objective of this experiment series is to test the impact of emotions on model alignment. And many other methods exist to capture emotions, as music has proven to be very complex and multifaceted. With simpler inputs, perhaps we can test the end-to-end chain faster, and identify the gaps to devote our resources. One potential approach is to elicit emotions from text as a control, then compare that to an emotionally heightened voice prompt or a similarly toned piece of music.</p>
+
+    <div class="section-header"><span class="section-number zone-writing">06</span><h2>Open Questions &amp; Notes</h2></div>
+    <div class="section-underline zone-writing"></div>
+
+    <ul>
+        <li>The test sample size is not large enough to statistically represent subtle differences (e.g. tender vs sad).</li>
+        <li>Loudness and energy aren&rsquo;t yet pulled apart from emotion.</li>
+        <li>Does an emotion build, or arrive? The models&rsquo; readings rose and fell with the music, but listeners rated each clip only once.</li>
+        <li>How do we represent compound emotions, several at once with no primary?</li>
+        <li>Both models spike at fixed moments in some clips. We don&rsquo;t know why.</li>
+    </ul>
+
+    <p class="ep02-footnote" id="fn1"><a href="#fnref1">1</a> Film soundtrack excerpts. The audio isn&rsquo;t ours to share, so no clips play here. A model that recognized a film could read its mood from what it learned in text rather than from the sound; we named this risk before the run and didn&rsquo;t test it.</p>
+    <p class="ep02-footnote" id="fn2"><a href="#fnref2">2</a> Added after the planned analysis.</p>
+
+    </article>
+
+    <section id="keep-reading" class="keep-reading" aria-label="Keep reading"></section>
+
+    <div class="post-footer">
+        <p>Built with Claude.</p>
+    </div>
+
+    <footer>
+        <a href="mailto:daniel@rowbyroh.com">email</a> &middot;
+        <a href="https://discord.com/users/rbrdelta">discord</a> &middot;
+        <a href="https://github.com/rbrdelta">github</a> &middot;
+        <a href="https://linkedin.com/in/drohh">linkedin</a>
+        <a class="footer-colophon" href="/colophon">Colophon &mdash; how this site is built &rarr;</a>
+        <div style="margin-top: 0.5rem;">&copy; 2026 rowbyroh.com</div>
+    </footer>
+
+    <script src="/assets/js/ep02.js"></script>
+    <script src="/assets/js/related.js"></script>
+    <script src="/assets/js/scroll.js"></script>
+</body>
+</html>
