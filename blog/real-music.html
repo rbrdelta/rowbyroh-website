@@ -32,18 +32,18 @@
 
     <p><em>Emotional Resonance asks whether sound can reach a model&rsquo;s &ldquo;functional emotions&rdquo;, and tests how these &ldquo;emotional concepts&rdquo; impact model alignment. Per <a href="https://transformer-circuits.pub/2026/emotions/index.html">Anthropic</a>, emotion as a concept is not a claim about the ability to sense or have consciousness. New to the series? <a href="/blog/emotional-resonance-intro">Start here</a>.</em></p>
 
-    <div class="section-header"><span class="section-number zone-writing">00</span><h2>TL;DR</h2></div>
+    <div class="section-header"><span class="section-number zone-writing">00</span><h2>Takeaway</h2></div>
     <div class="section-underline zone-writing"></div>
 
+    <p>There are signs the models can detect emotion in music better than luck or loudness alone, but it&rsquo;s not definitive: music is multifaceted and hard to pull apart. So the question is whether we keep digging deeper to find a clear thread, or step back to find an easier path.</p>
+
     <ul>
-        <li>We can&rsquo;t yet separate sound from emotion precisely, but we have a directional idea of what emotions look like inside the models.</li>
         <li>The models identified the primary emotion (out of five) about half the time (Qwen 48%, Audio Flamingo 50%), well above the 95th percentile of 1,000 random guessing runs (32%).</li>
+        <li><span class="claude-text">One against one, the results are weaker: on happy vs sad, loudness alone did as well as the models.</span></li>
         <li>The audio encoder, the model&rsquo;s ears, reads emotion best, before the adapter hands its output to the language model.</li>
         <li>We incorrectly used music clips with multiple mixed emotions (no primary) as a &ldquo;neutral&rdquo; baseline.</li>
         <li>Emotion vectors carry several related concepts at once, so opposite emotions don&rsquo;t necessarily have opposite values (happy +1 vs sad -1).</li>
     </ul>
-
-    <p>The key question for the next step: do we spend more time modeling the sound elements or step back and consider a pivot?</p>
 
     <div class="section-header"><span class="section-number zone-writing">01</span><h2>Intro</h2></div>
     <div class="section-underline zone-writing"></div>
@@ -103,7 +103,7 @@
     <p>Across all 100 clips, both models detected the primary emotion more accurately than just luck or based on the clip&rsquo;s loudness. When comparing one emotion to another, the results are not as conclusive. For example, in happy vs sad, each clip&rsquo;s loudness alone (30) did as well as the models&rsquo; internal readings (Qwen 29, Audio Flamingo 26). That means while we can measure something approximating the emotion, it&rsquo;s not clear if what we&rsquo;re measuring is the sound elements themselves or the actual emotion vector.</p>
 
     <figure class="chart" data-ep02="luck">
-        <figcaption><span class="claude-text">One panel per check. The bars show all 1,000 random guessing runs, lowest score to highest; the taller the bar, the more runs got that score.</span></figcaption>
+        <figcaption><span class="claude-text">One panel per check. The bars show all 1,000 random guessing runs, lowest score to highest; the taller the bar, the more runs got that score. The real test reported its best layer, so each random run also picked its best layer: the comparison with luck includes that advantage.</span></figcaption>
     </figure>
 
     <p><strong>2. Not &ldquo;neutral&rdquo;</strong></p>
@@ -151,7 +151,7 @@
         <li>Both models spike at fixed moments in some clips. We don&rsquo;t know why.</li>
     </ul>
 
-    <p class="ep02-footnote" id="fn1"><a href="#fnref1">1</a> Film soundtrack excerpts. The audio isn&rsquo;t ours to share, so no clips play here.</p>
+    <p class="ep02-footnote" id="fn1"><a href="#fnref1">1</a> Film soundtrack excerpts. The audio isn&rsquo;t ours to share, so no clips play here. A model that recognized a film could read its mood from what it learned in text rather than from the sound; we named this risk before the run and didn&rsquo;t test it.</p>
     <p class="ep02-footnote" id="fn2"><a href="#fnref2">2</a> Added after the planned analysis.</p>
 
     </article>
