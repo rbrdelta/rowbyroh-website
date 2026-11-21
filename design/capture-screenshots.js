@@ -19,14 +19,9 @@ const PAGES = [
   ['homepage', '/'],
   ['archive', '/archive'],
   ['obsidian-mcp', '/obsidian-mcp'],
-  ['agentic-stack', '/agentic-stack'],
-  ['portfolio-analysis', '/portfolio-analysis'],
-  ['deadweight', '/deadweight'],
   ['chair-roundtable', '/chair-roundtable'],
   ['about', '/about'],
   ['blog-vault-vs-memory', '/blog/vault-vs-memory'],
-  ['blog-ai-pricing-market-maker', '/blog/ai-pricing-market-maker'],
-  ['blog-reverse-engineering-claude-api', '/blog/reverse-engineering-claude-api'],
 ];
 
 const VIEWPORTS = [

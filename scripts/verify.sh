@@ -169,13 +169,14 @@ for url in $urls; do
     fi
 done
 
-# Unpublished entries must NOT be reachable — parked means dark.
-dark_urls=$(node -e '
+# Unpublished entries and parked pieces must NOT be reachable — parked means dark.
+# Parked pieces stay out of content.json (it is public); scripts/parked-urls.txt lists them.
+dark_urls=$( { node -e '
     const c = require(process.argv[1]);
     for (const e of c.filter(e => !e.published)) console.log(e.url);
-' "$REPO_ROOT/assets/data/content.json")
+' "$REPO_ROOT/assets/data/content.json"; grep -v '^#' "$REPO_ROOT/scripts/parked-urls.txt" | grep -v '^$'; } )
 for url in $dark_urls; do
-    status=$(curl -s -o /dev/null -w "%{http_code}" "${SITE}${url}")
+    status=$(curl -s -o /dev/null -L -w "%{http_code}" "${SITE}${url}")
     if [[ "$status" == "404" ]]; then
         pass "$url stays dark ($status)"
     else

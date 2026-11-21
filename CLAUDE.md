@@ -108,8 +108,11 @@ Shared vocabulary, composed per page:
 **Cancelled (in `drafts/cancelled/`, rewritten to `/404`, NOT live):** `obsidian-mcp`,
 `agentic-stack`, `portfolio-analysis`, `deadweight` (portfolio — return as Demos),
 `blog/reverse-engineering-claude-api`, `blog/vault-vs-memory` (essays), and
-`blog/ai-pricing-market-maker` (parked for Daniel's rewrite — stays registered
-in content.json as `published: false`; verify.sh asserts its URL stays dark).
+`blog/ai-pricing-market-maker` (parked for Daniel's rewrite). Parked pieces stay OUT of
+content.json, which is public (removed 2026-11-21, Daniel: "remove it from the site");
+the entry is kept in the vault rewrite-seed note, and `scripts/parked-urls.txt` lists
+the paths verify.sh asserts stay dark. Screenshots of cut pages are not kept in
+`design/screenshots/` unless the colophon shows them.
 The content model is About / Field Notes / Essays / Roundtables; portfolio
 pieces return as interactive Demos, not static pages.
 

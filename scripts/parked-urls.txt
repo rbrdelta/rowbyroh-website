@@ -1,0 +1,12 @@
+# Parked or cut pieces: these paths must stay dark (404) on rowbyroh.com.
+# scripts/verify.sh section 5 checks every line. Parked pieces are kept out of
+# assets/data/content.json entirely (it is public); their entries live in the vault
+# (Inbox/AI Pricing Essay — Rewrite Seed (2026-06-20).md) and the pages in drafts/.
+/blog/ai-pricing-market-maker
+/drafts/cancelled/blog/ai-pricing-market-maker.html
+/design/screenshots/v1/blog-ai-pricing-market-maker-desktop.png
+/design/screenshots/v2/blog-ai-pricing-market-maker-desktop.png
+/design/screenshots/v2/deadweight-desktop.png
+/design/screenshots/v2/agentic-stack-desktop.png
+/design/screenshots/v2/portfolio-analysis-desktop.png
+/design/screenshots/v2/blog-reverse-engineering-claude-api-desktop.png

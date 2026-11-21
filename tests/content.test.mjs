@@ -42,14 +42,20 @@ test('every published entry has a parseable event date', () => {
     }
 });
 
-test('the AI-pricing essay is registered as a draft (tracked, not surfaced)', () => {
-    // It is intentionally NOT published — parked for Daniel's own rewrite.
-    // Registered (so it is tracked, not a silent orphan) but published:false so
-    // it never surfaces in stream/archive/keep-reading.
-    const essay = content.find(e => e.url === '/blog/ai-pricing-market-maker');
-    assert.ok(essay, 'ai-pricing essay must be registered in content.json');
-    assert.equal(essay.type, 'essay');
-    assert.equal(essay.published, false, 'essay must stay unpublished until Daniel finishes it');
+test('the parked AI-pricing essay is kept out of the public data file and listed as dark', () => {
+    // content.json is served publicly, so a parked entry's title, summary and highlights
+    // were readable there (Daniel, 2026-11-21: remove it from the site). The page is kept
+    // under drafts/ and the entry in the vault; scripts/verify.sh checks the paths stay dark.
+    assert.ok(!content.some(e => e.url === '/blog/ai-pricing-market-maker'), 'parked essay must not be in content.json');
+    assert.ok(existsSync(join(ROOT, 'drafts/cancelled/blog/ai-pricing-market-maker.html')), 'the parked page is kept under drafts/');
+    const parked = readFileSync(join(ROOT, 'scripts/parked-urls.txt'), 'utf8').split('\n');
+    assert.ok(parked.includes('/blog/ai-pricing-market-maker'), 'its URL is on the dark list');
+});
+
+test('no screenshot of a parked page is kept in the served design folder', () => {
+    const parked = readFileSync(join(ROOT, 'scripts/parked-urls.txt'), 'utf8').split('\n')
+        .filter(l => l.startsWith('/design/'));
+    for (const p of parked) assert.ok(!existsSync(join(ROOT, p)), `${p} is parked but still in the repo, so it deploys`);
 });
 
 test('the roundtable series has three published episodes', () => {

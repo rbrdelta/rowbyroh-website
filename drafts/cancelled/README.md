@@ -21,5 +21,5 @@ Vercel `vercel.json` rewrites `/drafts/:path*` to `/404` — these files exist o
 
 These remain at their original paths but were dropped from `content.json`:
 
-- `blog/ai-pricing-market-maker.html` — strongest idea, weakest execution; Daniel-rewrite session deferred
+- `blog/ai-pricing-market-maker.html` — strongest idea, weakest execution; Daniel-rewrite session deferred. Its content.json entry was removed 2026-11-21 (the data file is public); the entry is in the vault rewrite-seed note
 - `chair-roundtable.html` — reframe deferred to a separate session
